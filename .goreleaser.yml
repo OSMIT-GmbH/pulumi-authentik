@@ -1,0 +1,34 @@
+archives:
+- id: archive
+  name_template: "{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}"
+before:
+  hooks:
+  - make tfgen
+builds:
+- binary: pulumi-resource-authentik
+  dir: provider
+  goarch:
+  - amd64
+  - arm64
+  goos:
+  - darwin
+  - windows
+  - linux
+  ignore: []
+  ldflags:
+  - -X github.com/OSMIT-GmbH/pulumi-authentik/provider/pkg/version.Version={{.Tag}}
+  main: ./cmd/pulumi-resource-authentik/
+changelog:
+  filters:
+    exclude:
+    - Merge branch
+    - Merge pull request
+    - \Winternal\W
+    - \Wci\W
+    - \Wchore\W
+  sort: asc
+  use: git
+release:
+  disable: false
+snapshot:
+  name_template: "{{ .Tag }}-SNAPSHOT"
