@@ -7,6 +7,8 @@ before:
 builds:
 - binary: pulumi-resource-authentik
   dir: provider
+  env:
+    - CGO_ENABLED=0
   goarch:
   - amd64
   - arm64
@@ -30,5 +32,6 @@ changelog:
   use: git
 release:
   disable: false
+  prerelease: auto
 snapshot:
   name_template: "{{ .Tag }}-SNAPSHOT"
