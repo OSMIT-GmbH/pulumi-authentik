@@ -4,6 +4,16 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.StageAuthenticatorTotp("name", {});
+ * ```
+ */
 export class StageAuthenticatorTotp extends pulumi.CustomResource {
     /**
      * Get an existing StageAuthenticatorTotp resource's state with the given name, ID, and optional extra
@@ -33,6 +43,9 @@ export class StageAuthenticatorTotp extends pulumi.CustomResource {
     }
 
     public readonly configureFlow!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `6`.
+     */
     public readonly digits!: pulumi.Output<number | undefined>;
     public readonly friendlyName!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
@@ -71,6 +84,9 @@ export class StageAuthenticatorTotp extends pulumi.CustomResource {
  */
 export interface StageAuthenticatorTotpState {
     configureFlow?: pulumi.Input<string>;
+    /**
+     * Defaults to `6`.
+     */
     digits?: pulumi.Input<number>;
     friendlyName?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
@@ -81,6 +97,9 @@ export interface StageAuthenticatorTotpState {
  */
 export interface StageAuthenticatorTotpArgs {
     configureFlow?: pulumi.Input<string>;
+    /**
+     * Defaults to `6`.
+     */
     digits?: pulumi.Input<number>;
     friendlyName?: pulumi.Input<string>;
     name?: pulumi.Input<string>;

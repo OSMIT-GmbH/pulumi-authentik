@@ -10,22 +10,26 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 type StageAuthenticatorSms struct {
 	pulumi.CustomResourceState
 
-	AccountSid    pulumi.StringOutput    `pulumi:"accountSid"`
-	Auth          pulumi.StringOutput    `pulumi:"auth"`
-	AuthPassword  pulumi.StringPtrOutput `pulumi:"authPassword"`
+	AccountSid   pulumi.StringOutput    `pulumi:"accountSid"`
+	Auth         pulumi.StringOutput    `pulumi:"auth"`
+	AuthPassword pulumi.StringPtrOutput `pulumi:"authPassword"`
+	// Defaults to `basic`.
 	AuthType      pulumi.StringPtrOutput `pulumi:"authType"`
 	ConfigureFlow pulumi.StringPtrOutput `pulumi:"configureFlow"`
 	FriendlyName  pulumi.StringPtrOutput `pulumi:"friendlyName"`
 	FromNumber    pulumi.StringOutput    `pulumi:"fromNumber"`
 	Mapping       pulumi.StringPtrOutput `pulumi:"mapping"`
 	Name          pulumi.StringOutput    `pulumi:"name"`
-	SmsProvider   pulumi.StringPtrOutput `pulumi:"smsProvider"`
-	VerifyOnly    pulumi.BoolPtrOutput   `pulumi:"verifyOnly"`
+	// Defaults to `twilio`.
+	SmsProvider pulumi.StringPtrOutput `pulumi:"smsProvider"`
+	// Defaults to `false`.
+	VerifyOnly pulumi.BoolPtrOutput `pulumi:"verifyOnly"`
 }
 
 // NewStageAuthenticatorSms registers a new resource with the given unique name, arguments, and options.
@@ -82,31 +86,37 @@ func GetStageAuthenticatorSms(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering StageAuthenticatorSms resources.
 type stageAuthenticatorSmsState struct {
-	AccountSid    *string `pulumi:"accountSid"`
-	Auth          *string `pulumi:"auth"`
-	AuthPassword  *string `pulumi:"authPassword"`
+	AccountSid   *string `pulumi:"accountSid"`
+	Auth         *string `pulumi:"auth"`
+	AuthPassword *string `pulumi:"authPassword"`
+	// Defaults to `basic`.
 	AuthType      *string `pulumi:"authType"`
 	ConfigureFlow *string `pulumi:"configureFlow"`
 	FriendlyName  *string `pulumi:"friendlyName"`
 	FromNumber    *string `pulumi:"fromNumber"`
 	Mapping       *string `pulumi:"mapping"`
 	Name          *string `pulumi:"name"`
-	SmsProvider   *string `pulumi:"smsProvider"`
-	VerifyOnly    *bool   `pulumi:"verifyOnly"`
+	// Defaults to `twilio`.
+	SmsProvider *string `pulumi:"smsProvider"`
+	// Defaults to `false`.
+	VerifyOnly *bool `pulumi:"verifyOnly"`
 }
 
 type StageAuthenticatorSmsState struct {
-	AccountSid    pulumi.StringPtrInput
-	Auth          pulumi.StringPtrInput
-	AuthPassword  pulumi.StringPtrInput
+	AccountSid   pulumi.StringPtrInput
+	Auth         pulumi.StringPtrInput
+	AuthPassword pulumi.StringPtrInput
+	// Defaults to `basic`.
 	AuthType      pulumi.StringPtrInput
 	ConfigureFlow pulumi.StringPtrInput
 	FriendlyName  pulumi.StringPtrInput
 	FromNumber    pulumi.StringPtrInput
 	Mapping       pulumi.StringPtrInput
 	Name          pulumi.StringPtrInput
-	SmsProvider   pulumi.StringPtrInput
-	VerifyOnly    pulumi.BoolPtrInput
+	// Defaults to `twilio`.
+	SmsProvider pulumi.StringPtrInput
+	// Defaults to `false`.
+	VerifyOnly pulumi.BoolPtrInput
 }
 
 func (StageAuthenticatorSmsState) ElementType() reflect.Type {
@@ -114,32 +124,38 @@ func (StageAuthenticatorSmsState) ElementType() reflect.Type {
 }
 
 type stageAuthenticatorSmsArgs struct {
-	AccountSid    string  `pulumi:"accountSid"`
-	Auth          string  `pulumi:"auth"`
-	AuthPassword  *string `pulumi:"authPassword"`
+	AccountSid   string  `pulumi:"accountSid"`
+	Auth         string  `pulumi:"auth"`
+	AuthPassword *string `pulumi:"authPassword"`
+	// Defaults to `basic`.
 	AuthType      *string `pulumi:"authType"`
 	ConfigureFlow *string `pulumi:"configureFlow"`
 	FriendlyName  *string `pulumi:"friendlyName"`
 	FromNumber    string  `pulumi:"fromNumber"`
 	Mapping       *string `pulumi:"mapping"`
 	Name          *string `pulumi:"name"`
-	SmsProvider   *string `pulumi:"smsProvider"`
-	VerifyOnly    *bool   `pulumi:"verifyOnly"`
+	// Defaults to `twilio`.
+	SmsProvider *string `pulumi:"smsProvider"`
+	// Defaults to `false`.
+	VerifyOnly *bool `pulumi:"verifyOnly"`
 }
 
 // The set of arguments for constructing a StageAuthenticatorSms resource.
 type StageAuthenticatorSmsArgs struct {
-	AccountSid    pulumi.StringInput
-	Auth          pulumi.StringInput
-	AuthPassword  pulumi.StringPtrInput
+	AccountSid   pulumi.StringInput
+	Auth         pulumi.StringInput
+	AuthPassword pulumi.StringPtrInput
+	// Defaults to `basic`.
 	AuthType      pulumi.StringPtrInput
 	ConfigureFlow pulumi.StringPtrInput
 	FriendlyName  pulumi.StringPtrInput
 	FromNumber    pulumi.StringInput
 	Mapping       pulumi.StringPtrInput
 	Name          pulumi.StringPtrInput
-	SmsProvider   pulumi.StringPtrInput
-	VerifyOnly    pulumi.BoolPtrInput
+	// Defaults to `twilio`.
+	SmsProvider pulumi.StringPtrInput
+	// Defaults to `false`.
+	VerifyOnly pulumi.BoolPtrInput
 }
 
 func (StageAuthenticatorSmsArgs) ElementType() reflect.Type {
@@ -163,6 +179,12 @@ func (i *StageAuthenticatorSms) ToStageAuthenticatorSmsOutput() StageAuthenticat
 
 func (i *StageAuthenticatorSms) ToStageAuthenticatorSmsOutputWithContext(ctx context.Context) StageAuthenticatorSmsOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorSmsOutput)
+}
+
+func (i *StageAuthenticatorSms) ToOutput(ctx context.Context) pulumix.Output[*StageAuthenticatorSms] {
+	return pulumix.Output[*StageAuthenticatorSms]{
+		OutputState: i.ToStageAuthenticatorSmsOutputWithContext(ctx).OutputState,
+	}
 }
 
 // StageAuthenticatorSmsArrayInput is an input type that accepts StageAuthenticatorSmsArray and StageAuthenticatorSmsArrayOutput values.
@@ -190,6 +212,12 @@ func (i StageAuthenticatorSmsArray) ToStageAuthenticatorSmsArrayOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorSmsArrayOutput)
 }
 
+func (i StageAuthenticatorSmsArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageAuthenticatorSms] {
+	return pulumix.Output[[]*StageAuthenticatorSms]{
+		OutputState: i.ToStageAuthenticatorSmsArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // StageAuthenticatorSmsMapInput is an input type that accepts StageAuthenticatorSmsMap and StageAuthenticatorSmsMapOutput values.
 // You can construct a concrete instance of `StageAuthenticatorSmsMapInput` via:
 //
@@ -215,6 +243,12 @@ func (i StageAuthenticatorSmsMap) ToStageAuthenticatorSmsMapOutputWithContext(ct
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorSmsMapOutput)
 }
 
+func (i StageAuthenticatorSmsMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageAuthenticatorSms] {
+	return pulumix.Output[map[string]*StageAuthenticatorSms]{
+		OutputState: i.ToStageAuthenticatorSmsMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type StageAuthenticatorSmsOutput struct{ *pulumi.OutputState }
 
 func (StageAuthenticatorSmsOutput) ElementType() reflect.Type {
@@ -229,6 +263,12 @@ func (o StageAuthenticatorSmsOutput) ToStageAuthenticatorSmsOutputWithContext(ct
 	return o
 }
 
+func (o StageAuthenticatorSmsOutput) ToOutput(ctx context.Context) pulumix.Output[*StageAuthenticatorSms] {
+	return pulumix.Output[*StageAuthenticatorSms]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o StageAuthenticatorSmsOutput) AccountSid() pulumi.StringOutput {
 	return o.ApplyT(func(v *StageAuthenticatorSms) pulumi.StringOutput { return v.AccountSid }).(pulumi.StringOutput)
 }
@@ -241,6 +281,7 @@ func (o StageAuthenticatorSmsOutput) AuthPassword() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageAuthenticatorSms) pulumi.StringPtrOutput { return v.AuthPassword }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `basic`.
 func (o StageAuthenticatorSmsOutput) AuthType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageAuthenticatorSms) pulumi.StringPtrOutput { return v.AuthType }).(pulumi.StringPtrOutput)
 }
@@ -265,10 +306,12 @@ func (o StageAuthenticatorSmsOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *StageAuthenticatorSms) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// Defaults to `twilio`.
 func (o StageAuthenticatorSmsOutput) SmsProvider() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageAuthenticatorSms) pulumi.StringPtrOutput { return v.SmsProvider }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `false`.
 func (o StageAuthenticatorSmsOutput) VerifyOnly() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *StageAuthenticatorSms) pulumi.BoolPtrOutput { return v.VerifyOnly }).(pulumi.BoolPtrOutput)
 }
@@ -285,6 +328,12 @@ func (o StageAuthenticatorSmsArrayOutput) ToStageAuthenticatorSmsArrayOutput() S
 
 func (o StageAuthenticatorSmsArrayOutput) ToStageAuthenticatorSmsArrayOutputWithContext(ctx context.Context) StageAuthenticatorSmsArrayOutput {
 	return o
+}
+
+func (o StageAuthenticatorSmsArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageAuthenticatorSms] {
+	return pulumix.Output[[]*StageAuthenticatorSms]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o StageAuthenticatorSmsArrayOutput) Index(i pulumi.IntInput) StageAuthenticatorSmsOutput {
@@ -305,6 +354,12 @@ func (o StageAuthenticatorSmsMapOutput) ToStageAuthenticatorSmsMapOutput() Stage
 
 func (o StageAuthenticatorSmsMapOutput) ToStageAuthenticatorSmsMapOutputWithContext(ctx context.Context) StageAuthenticatorSmsMapOutput {
 	return o
+}
+
+func (o StageAuthenticatorSmsMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageAuthenticatorSms] {
+	return pulumix.Output[map[string]*StageAuthenticatorSms]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o StageAuthenticatorSmsMapOutput) MapIndex(k pulumi.StringInput) StageAuthenticatorSmsOutput {

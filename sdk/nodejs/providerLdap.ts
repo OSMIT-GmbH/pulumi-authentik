@@ -4,6 +4,27 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const default-authentication-flow = authentik.getFlow({
+ *     slug: "default-authentication-flow",
+ * });
+ * const nameProviderLdap = new authentik.ProviderLdap("nameProviderLdap", {
+ *     baseDn: "dc=ldap,dc=goauthentik,dc=io",
+ *     bindFlow: default_authentication_flow.then(default_authentication_flow => default_authentication_flow.id),
+ * });
+ * const nameApplication = new authentik.Application("nameApplication", {
+ *     slug: "ldap-app",
+ *     protocolProvider: nameProviderLdap.id,
+ * });
+ * ```
+ */
 export class ProviderLdap extends pulumi.CustomResource {
     /**
      * Get an existing ProviderLdap resource's state with the given name, ID, and optional extra
@@ -34,14 +55,29 @@ export class ProviderLdap extends pulumi.CustomResource {
 
     public readonly baseDn!: pulumi.Output<string>;
     public readonly bindFlow!: pulumi.Output<string>;
+    /**
+     * Defaults to `direct`.
+     */
     public readonly bindMode!: pulumi.Output<string | undefined>;
     public readonly certificate!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `4000`.
+     */
     public readonly gidStartNumber!: pulumi.Output<number | undefined>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly mfaSupport!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly searchGroup!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `direct`.
+     */
     public readonly searchMode!: pulumi.Output<string | undefined>;
     public readonly tlsServerName!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `2000`.
+     */
     public readonly uidStartNumber!: pulumi.Output<number | undefined>;
 
     /**
@@ -99,14 +135,29 @@ export class ProviderLdap extends pulumi.CustomResource {
 export interface ProviderLdapState {
     baseDn?: pulumi.Input<string>;
     bindFlow?: pulumi.Input<string>;
+    /**
+     * Defaults to `direct`.
+     */
     bindMode?: pulumi.Input<string>;
     certificate?: pulumi.Input<string>;
+    /**
+     * Defaults to `4000`.
+     */
     gidStartNumber?: pulumi.Input<number>;
+    /**
+     * Defaults to `true`.
+     */
     mfaSupport?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
     searchGroup?: pulumi.Input<string>;
+    /**
+     * Defaults to `direct`.
+     */
     searchMode?: pulumi.Input<string>;
     tlsServerName?: pulumi.Input<string>;
+    /**
+     * Defaults to `2000`.
+     */
     uidStartNumber?: pulumi.Input<number>;
 }
 
@@ -116,13 +167,28 @@ export interface ProviderLdapState {
 export interface ProviderLdapArgs {
     baseDn: pulumi.Input<string>;
     bindFlow: pulumi.Input<string>;
+    /**
+     * Defaults to `direct`.
+     */
     bindMode?: pulumi.Input<string>;
     certificate?: pulumi.Input<string>;
+    /**
+     * Defaults to `4000`.
+     */
     gidStartNumber?: pulumi.Input<number>;
+    /**
+     * Defaults to `true`.
+     */
     mfaSupport?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
     searchGroup?: pulumi.Input<string>;
+    /**
+     * Defaults to `direct`.
+     */
     searchMode?: pulumi.Input<string>;
     tlsServerName?: pulumi.Input<string>;
+    /**
+     * Defaults to `2000`.
+     */
     uidStartNumber?: pulumi.Input<number>;
 }

@@ -9,11 +9,36 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewStageInvitation(ctx, "name", nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type StageInvitation struct {
 	pulumi.CustomResourceState
 
+	// Defaults to `true`.
 	ContinueFlowWithoutInvitation pulumi.BoolPtrOutput `pulumi:"continueFlowWithoutInvitation"`
 	Name                          pulumi.StringOutput  `pulumi:"name"`
 }
@@ -48,11 +73,13 @@ func GetStageInvitation(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering StageInvitation resources.
 type stageInvitationState struct {
+	// Defaults to `true`.
 	ContinueFlowWithoutInvitation *bool   `pulumi:"continueFlowWithoutInvitation"`
 	Name                          *string `pulumi:"name"`
 }
 
 type StageInvitationState struct {
+	// Defaults to `true`.
 	ContinueFlowWithoutInvitation pulumi.BoolPtrInput
 	Name                          pulumi.StringPtrInput
 }
@@ -62,12 +89,14 @@ func (StageInvitationState) ElementType() reflect.Type {
 }
 
 type stageInvitationArgs struct {
+	// Defaults to `true`.
 	ContinueFlowWithoutInvitation *bool   `pulumi:"continueFlowWithoutInvitation"`
 	Name                          *string `pulumi:"name"`
 }
 
 // The set of arguments for constructing a StageInvitation resource.
 type StageInvitationArgs struct {
+	// Defaults to `true`.
 	ContinueFlowWithoutInvitation pulumi.BoolPtrInput
 	Name                          pulumi.StringPtrInput
 }
@@ -95,6 +124,12 @@ func (i *StageInvitation) ToStageInvitationOutputWithContext(ctx context.Context
 	return pulumi.ToOutputWithContext(ctx, i).(StageInvitationOutput)
 }
 
+func (i *StageInvitation) ToOutput(ctx context.Context) pulumix.Output[*StageInvitation] {
+	return pulumix.Output[*StageInvitation]{
+		OutputState: i.ToStageInvitationOutputWithContext(ctx).OutputState,
+	}
+}
+
 // StageInvitationArrayInput is an input type that accepts StageInvitationArray and StageInvitationArrayOutput values.
 // You can construct a concrete instance of `StageInvitationArrayInput` via:
 //
@@ -118,6 +153,12 @@ func (i StageInvitationArray) ToStageInvitationArrayOutput() StageInvitationArra
 
 func (i StageInvitationArray) ToStageInvitationArrayOutputWithContext(ctx context.Context) StageInvitationArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageInvitationArrayOutput)
+}
+
+func (i StageInvitationArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageInvitation] {
+	return pulumix.Output[[]*StageInvitation]{
+		OutputState: i.ToStageInvitationArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // StageInvitationMapInput is an input type that accepts StageInvitationMap and StageInvitationMapOutput values.
@@ -145,6 +186,12 @@ func (i StageInvitationMap) ToStageInvitationMapOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(StageInvitationMapOutput)
 }
 
+func (i StageInvitationMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageInvitation] {
+	return pulumix.Output[map[string]*StageInvitation]{
+		OutputState: i.ToStageInvitationMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type StageInvitationOutput struct{ *pulumi.OutputState }
 
 func (StageInvitationOutput) ElementType() reflect.Type {
@@ -159,6 +206,13 @@ func (o StageInvitationOutput) ToStageInvitationOutputWithContext(ctx context.Co
 	return o
 }
 
+func (o StageInvitationOutput) ToOutput(ctx context.Context) pulumix.Output[*StageInvitation] {
+	return pulumix.Output[*StageInvitation]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Defaults to `true`.
 func (o StageInvitationOutput) ContinueFlowWithoutInvitation() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *StageInvitation) pulumi.BoolPtrOutput { return v.ContinueFlowWithoutInvitation }).(pulumi.BoolPtrOutput)
 }
@@ -181,6 +235,12 @@ func (o StageInvitationArrayOutput) ToStageInvitationArrayOutputWithContext(ctx 
 	return o
 }
 
+func (o StageInvitationArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageInvitation] {
+	return pulumix.Output[[]*StageInvitation]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o StageInvitationArrayOutput) Index(i pulumi.IntInput) StageInvitationOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StageInvitation {
 		return vs[0].([]*StageInvitation)[vs[1].(int)]
@@ -199,6 +259,12 @@ func (o StageInvitationMapOutput) ToStageInvitationMapOutput() StageInvitationMa
 
 func (o StageInvitationMapOutput) ToStageInvitationMapOutputWithContext(ctx context.Context) StageInvitationMapOutput {
 	return o
+}
+
+func (o StageInvitationMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageInvitation] {
+	return pulumix.Output[map[string]*StageInvitation]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o StageInvitationMapOutput) MapIndex(k pulumi.StringInput) StageInvitationOutput {

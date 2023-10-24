@@ -4,6 +4,23 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * // Create a user
+ * const nameUser = new authentik.User("nameUser", {username: "user"});
+ * // Create a user that is member of a group
+ * const group = new authentik.Group("group", {});
+ * const nameIndex_userUser = new authentik.User("nameIndex/userUser", {
+ *     username: "user",
+ *     groups: [group.id],
+ * });
+ * ```
+ */
 export class User extends pulumi.CustomResource {
     /**
      * Get an existing User resource's state with the given name, ID, and optional extra
@@ -33,14 +50,29 @@ export class User extends pulumi.CustomResource {
     }
 
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     public readonly attributes!: pulumi.Output<string | undefined>;
     public readonly email!: pulumi.Output<string | undefined>;
+    /**
+     * Generated.
+     */
     public readonly groups!: pulumi.Output<string[]>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly isActive!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to ``.
+     */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Defaults to `users`.
+     */
     public readonly path!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `internal`.
+     */
     public readonly type!: pulumi.Output<string | undefined>;
     public readonly username!: pulumi.Output<string>;
 
@@ -89,14 +121,29 @@ export class User extends pulumi.CustomResource {
  */
 export interface UserState {
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     attributes?: pulumi.Input<string>;
     email?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     groups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Defaults to `true`.
+     */
     isActive?: pulumi.Input<boolean>;
+    /**
+     * Defaults to ``.
+     */
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `users`.
+     */
     path?: pulumi.Input<string>;
+    /**
+     * Defaults to `internal`.
+     */
     type?: pulumi.Input<string>;
     username?: pulumi.Input<string>;
 }
@@ -106,14 +153,29 @@ export interface UserState {
  */
 export interface UserArgs {
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     attributes?: pulumi.Input<string>;
     email?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     groups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Defaults to `true`.
+     */
     isActive?: pulumi.Input<boolean>;
+    /**
+     * Defaults to ``.
+     */
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `users`.
+     */
     path?: pulumi.Input<string>;
+    /**
+     * Defaults to `internal`.
+     */
     type?: pulumi.Input<string>;
     username: pulumi.Input<string>;
 }

@@ -4,6 +4,20 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Get flows by Slug and/or designation
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const default-authorization-flow = authentik.getFlow({
+ *     slug: "default-provider-authorization-implicit-consent",
+ * });
+ * ```
+ */
 export function getFlow(args?: GetFlowArgs, opts?: pulumi.InvokeOptions): Promise<GetFlowResult> {
     args = args || {};
 
@@ -19,8 +33,17 @@ export function getFlow(args?: GetFlowArgs, opts?: pulumi.InvokeOptions): Promis
  * A collection of arguments for invoking getFlow.
  */
 export interface GetFlowArgs {
+    /**
+     * Generated.
+     */
     authentication?: string;
+    /**
+     * Generated.
+     */
     designation?: string;
+    /**
+     * Generated.
+     */
     slug?: string;
 }
 
@@ -28,16 +51,45 @@ export interface GetFlowArgs {
  * A collection of values returned by getFlow.
  */
 export interface GetFlowResult {
+    /**
+     * Generated.
+     */
     readonly authentication: string;
+    /**
+     * Generated.
+     */
     readonly designation: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * Generated.
+     */
     readonly name: string;
+    /**
+     * Generated.
+     */
     readonly slug: string;
+    /**
+     * Generated.
+     */
     readonly title: string;
 }
+/**
+ * Get flows by Slug and/or designation
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const default-authorization-flow = authentik.getFlow({
+ *     slug: "default-provider-authorization-implicit-consent",
+ * });
+ * ```
+ */
 export function getFlowOutput(args?: GetFlowOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetFlowResult> {
     return pulumi.output(args).apply((a: any) => getFlow(a, opts))
 }
@@ -46,7 +98,16 @@ export function getFlowOutput(args?: GetFlowOutputArgs, opts?: pulumi.InvokeOpti
  * A collection of arguments for invoking getFlow.
  */
 export interface GetFlowOutputArgs {
+    /**
+     * Generated.
+     */
     authentication?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     designation?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     slug?: pulumi.Input<string>;
 }

@@ -4,6 +4,16 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.StageAuthenticatorStatic("name", {});
+ * ```
+ */
 export class StageAuthenticatorStatic extends pulumi.CustomResource {
     /**
      * Get an existing StageAuthenticatorStatic resource's state with the given name, ID, and optional extra
@@ -35,7 +45,13 @@ export class StageAuthenticatorStatic extends pulumi.CustomResource {
     public readonly configureFlow!: pulumi.Output<string | undefined>;
     public readonly friendlyName!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Defaults to `6`.
+     */
     public readonly tokenCount!: pulumi.Output<number | undefined>;
+    /**
+     * Defaults to `12`.
+     */
     public readonly tokenLength!: pulumi.Output<number | undefined>;
 
     /**
@@ -76,7 +92,13 @@ export interface StageAuthenticatorStaticState {
     configureFlow?: pulumi.Input<string>;
     friendlyName?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `6`.
+     */
     tokenCount?: pulumi.Input<number>;
+    /**
+     * Defaults to `12`.
+     */
     tokenLength?: pulumi.Input<number>;
 }
 
@@ -87,6 +109,12 @@ export interface StageAuthenticatorStaticArgs {
     configureFlow?: pulumi.Input<string>;
     friendlyName?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `6`.
+     */
     tokenCount?: pulumi.Input<number>;
+    /**
+     * Defaults to `12`.
+     */
     tokenLength?: pulumi.Input<number>;
 }

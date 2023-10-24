@@ -4,6 +4,16 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.StageUserLogin("name", {});
+ * ```
+ */
 export class StageUserLogin extends pulumi.CustomResource {
     /**
      * Get an existing StageUserLogin resource's state with the given name, ID, and optional extra
@@ -33,8 +43,17 @@ export class StageUserLogin extends pulumi.CustomResource {
     }
 
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Defaults to `seconds=0`.
+     */
     public readonly rememberMeOffset!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `seconds=0`.
+     */
     public readonly sessionDuration!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly terminateOtherSessions!: pulumi.Output<boolean | undefined>;
 
     /**
@@ -71,8 +90,17 @@ export class StageUserLogin extends pulumi.CustomResource {
  */
 export interface StageUserLoginState {
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `seconds=0`.
+     */
     rememberMeOffset?: pulumi.Input<string>;
+    /**
+     * Defaults to `seconds=0`.
+     */
     sessionDuration?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     terminateOtherSessions?: pulumi.Input<boolean>;
 }
 
@@ -81,7 +109,16 @@ export interface StageUserLoginState {
  */
 export interface StageUserLoginArgs {
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `seconds=0`.
+     */
     rememberMeOffset?: pulumi.Input<string>;
+    /**
+     * Defaults to `seconds=0`.
+     */
     sessionDuration?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     terminateOtherSessions?: pulumi.Input<boolean>;
 }

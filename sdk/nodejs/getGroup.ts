@@ -6,6 +6,20 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Get groups by pk or name
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const admins = authentik.getGroup({
+ *     name: "authentik Admins",
+ * });
+ * ```
+ */
 export function getGroup(args?: GetGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupResult> {
     args = args || {};
 
@@ -28,20 +42,55 @@ export interface GetGroupArgs {
  * A collection of values returned by getGroup.
  */
 export interface GetGroupResult {
+    /**
+     * Generated.
+     */
     readonly attributes: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * Generated.
+     */
     readonly isSuperuser: boolean;
     readonly name?: string;
+    /**
+     * Generated.
+     */
     readonly numPk: number;
+    /**
+     * Generated.
+     */
     readonly parent: string;
+    /**
+     * Generated.
+     */
     readonly parentName: string;
     readonly pk?: string;
+    /**
+     * Generated.
+     */
     readonly users: number[];
+    /**
+     * Generated.
+     */
     readonly usersObjs: outputs.GetGroupUsersObj[];
 }
+/**
+ * Get groups by pk or name
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const admins = authentik.getGroup({
+ *     name: "authentik Admins",
+ * });
+ * ```
+ */
 export function getGroupOutput(args?: GetGroupOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGroupResult> {
     return pulumi.output(args).apply((a: any) => getGroup(a, opts))
 }

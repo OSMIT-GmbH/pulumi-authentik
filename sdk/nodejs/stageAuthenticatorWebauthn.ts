@@ -4,6 +4,16 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.StageAuthenticatorWebauthn("name", {});
+ * ```
+ */
 export class StageAuthenticatorWebauthn extends pulumi.CustomResource {
     /**
      * Get an existing StageAuthenticatorWebauthn resource's state with the given name, ID, and optional extra
@@ -36,7 +46,13 @@ export class StageAuthenticatorWebauthn extends pulumi.CustomResource {
     public readonly configureFlow!: pulumi.Output<string | undefined>;
     public readonly friendlyName!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Defaults to `preferred`.
+     */
     public readonly residentKeyRequirement!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `preferred`.
+     */
     public readonly userVerification!: pulumi.Output<string | undefined>;
 
     /**
@@ -80,7 +96,13 @@ export interface StageAuthenticatorWebauthnState {
     configureFlow?: pulumi.Input<string>;
     friendlyName?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `preferred`.
+     */
     residentKeyRequirement?: pulumi.Input<string>;
+    /**
+     * Defaults to `preferred`.
+     */
     userVerification?: pulumi.Input<string>;
 }
 
@@ -92,6 +114,12 @@ export interface StageAuthenticatorWebauthnArgs {
     configureFlow?: pulumi.Input<string>;
     friendlyName?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `preferred`.
+     */
     residentKeyRequirement?: pulumi.Input<string>;
+    /**
+     * Defaults to `preferred`.
+     */
     userVerification?: pulumi.Input<string>;
 }

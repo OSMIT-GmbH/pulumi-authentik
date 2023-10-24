@@ -4,6 +4,16 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.PolicyExpression("name", {expression: "return True"});
+ * ```
+ */
 export class PolicyExpression extends pulumi.CustomResource {
     /**
      * Get an existing PolicyExpression resource's state with the given name, ID, and optional extra
@@ -32,6 +42,9 @@ export class PolicyExpression extends pulumi.CustomResource {
         return obj['__pulumiType'] === PolicyExpression.__pulumiType;
     }
 
+    /**
+     * Defaults to `false`.
+     */
     public readonly executionLogging!: pulumi.Output<boolean | undefined>;
     public readonly expression!: pulumi.Output<string>;
     public readonly name!: pulumi.Output<string>;
@@ -70,6 +83,9 @@ export class PolicyExpression extends pulumi.CustomResource {
  * Input properties used for looking up and filtering PolicyExpression resources.
  */
 export interface PolicyExpressionState {
+    /**
+     * Defaults to `false`.
+     */
     executionLogging?: pulumi.Input<boolean>;
     expression?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
@@ -79,6 +95,9 @@ export interface PolicyExpressionState {
  * The set of arguments for constructing a PolicyExpression resource.
  */
 export interface PolicyExpressionArgs {
+    /**
+     * Defaults to `false`.
+     */
     executionLogging?: pulumi.Input<boolean>;
     expression: pulumi.Input<string>;
     name?: pulumi.Input<string>;

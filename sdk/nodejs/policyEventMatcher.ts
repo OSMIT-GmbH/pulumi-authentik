@@ -4,6 +4,20 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.PolicyEventMatcher("name", {
+ *     action: "login",
+ *     app: "authentik.events",
+ *     clientIp: "1.2.3.4",
+ * });
+ * ```
+ */
 export class PolicyEventMatcher extends pulumi.CustomResource {
     /**
      * Get an existing PolicyEventMatcher resource's state with the given name, ID, and optional extra
@@ -35,6 +49,9 @@ export class PolicyEventMatcher extends pulumi.CustomResource {
     public readonly action!: pulumi.Output<string | undefined>;
     public readonly app!: pulumi.Output<string | undefined>;
     public readonly clientIp!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly executionLogging!: pulumi.Output<boolean | undefined>;
     public readonly model!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
@@ -79,6 +96,9 @@ export interface PolicyEventMatcherState {
     action?: pulumi.Input<string>;
     app?: pulumi.Input<string>;
     clientIp?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     executionLogging?: pulumi.Input<boolean>;
     model?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
@@ -91,6 +111,9 @@ export interface PolicyEventMatcherArgs {
     action?: pulumi.Input<string>;
     app?: pulumi.Input<string>;
     clientIp?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     executionLogging?: pulumi.Input<boolean>;
     model?: pulumi.Input<string>;
     name?: pulumi.Input<string>;

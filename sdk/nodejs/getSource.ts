@@ -4,6 +4,20 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Get Source by name, slug or managed
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const inbuilt = authentik.getSource({
+ *     managed: "goauthentik.io/sources/inbuilt",
+ * });
+ * ```
+ */
 export function getSource(args?: GetSourceArgs, opts?: pulumi.InvokeOptions): Promise<GetSourceResult> {
     args = args || {};
 
@@ -18,7 +32,13 @@ export function getSource(args?: GetSourceArgs, opts?: pulumi.InvokeOptions): Pr
  * A collection of arguments for invoking getSource.
  */
 export interface GetSourceArgs {
+    /**
+     * Generated.
+     */
     managed?: string;
+    /**
+     * Generated.
+     */
     slug?: string;
 }
 
@@ -30,11 +50,37 @@ export interface GetSourceResult {
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * Generated.
+     */
     readonly managed: string;
+    /**
+     * Generated.
+     */
     readonly name: string;
+    /**
+     * Generated.
+     */
     readonly slug: string;
+    /**
+     * Generated.
+     */
     readonly uuid: string;
 }
+/**
+ * Get Source by name, slug or managed
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const inbuilt = authentik.getSource({
+ *     managed: "goauthentik.io/sources/inbuilt",
+ * });
+ * ```
+ */
 export function getSourceOutput(args?: GetSourceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSourceResult> {
     return pulumi.output(args).apply((a: any) => getSource(a, opts))
 }
@@ -43,6 +89,12 @@ export function getSourceOutput(args?: GetSourceOutputArgs, opts?: pulumi.Invoke
  * A collection of arguments for invoking getSource.
  */
 export interface GetSourceOutputArgs {
+    /**
+     * Generated.
+     */
     managed?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     slug?: pulumi.Input<string>;
 }

@@ -4,6 +4,21 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * // Create an OAuth2 Provider
+ * const nameProviderOauth2 = new authentik.ProviderOauth2("nameProviderOauth2", {clientId: "grafana"});
+ * const nameApplication = new authentik.Application("nameApplication", {
+ *     slug: "test-app",
+ *     protocolProvider: nameProviderOauth2.id,
+ * });
+ * ```
+ */
 export class ProviderOauth2 extends pulumi.CustomResource {
     /**
      * Get an existing ProviderOauth2 resource's state with the given name, ID, and optional extra
@@ -32,14 +47,32 @@ export class ProviderOauth2 extends pulumi.CustomResource {
         return obj['__pulumiType'] === ProviderOauth2.__pulumiType;
     }
 
+    /**
+     * Defaults to `minutes=1`.
+     */
     public readonly accessCodeValidity!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `minutes=10`.
+     */
     public readonly accessTokenValidity!: pulumi.Output<string | undefined>;
     public readonly authenticationFlow!: pulumi.Output<string | undefined>;
     public readonly authorizationFlow!: pulumi.Output<string>;
     public readonly clientId!: pulumi.Output<string>;
+    /**
+     * Generated.
+     */
     public readonly clientSecret!: pulumi.Output<string>;
+    /**
+     * Defaults to `confidential`.
+     */
     public readonly clientType!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly includeClaimsInIdToken!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `perProvider`.
+     */
     public readonly issuerMode!: pulumi.Output<string | undefined>;
     /**
      * JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
@@ -48,8 +81,14 @@ export class ProviderOauth2 extends pulumi.CustomResource {
     public readonly name!: pulumi.Output<string>;
     public readonly propertyMappings!: pulumi.Output<string[] | undefined>;
     public readonly redirectUris!: pulumi.Output<string[] | undefined>;
+    /**
+     * Defaults to `days=30`.
+     */
     public readonly refreshTokenValidity!: pulumi.Output<string | undefined>;
     public readonly signingKey!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `hashedUserId`.
+     */
     public readonly subMode!: pulumi.Output<string | undefined>;
 
     /**
@@ -117,14 +156,32 @@ export class ProviderOauth2 extends pulumi.CustomResource {
  * Input properties used for looking up and filtering ProviderOauth2 resources.
  */
 export interface ProviderOauth2State {
+    /**
+     * Defaults to `minutes=1`.
+     */
     accessCodeValidity?: pulumi.Input<string>;
+    /**
+     * Defaults to `minutes=10`.
+     */
     accessTokenValidity?: pulumi.Input<string>;
     authenticationFlow?: pulumi.Input<string>;
     authorizationFlow?: pulumi.Input<string>;
     clientId?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     clientSecret?: pulumi.Input<string>;
+    /**
+     * Defaults to `confidential`.
+     */
     clientType?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     includeClaimsInIdToken?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `perProvider`.
+     */
     issuerMode?: pulumi.Input<string>;
     /**
      * JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
@@ -133,8 +190,14 @@ export interface ProviderOauth2State {
     name?: pulumi.Input<string>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
     redirectUris?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Defaults to `days=30`.
+     */
     refreshTokenValidity?: pulumi.Input<string>;
     signingKey?: pulumi.Input<string>;
+    /**
+     * Defaults to `hashedUserId`.
+     */
     subMode?: pulumi.Input<string>;
 }
 
@@ -142,14 +205,32 @@ export interface ProviderOauth2State {
  * The set of arguments for constructing a ProviderOauth2 resource.
  */
 export interface ProviderOauth2Args {
+    /**
+     * Defaults to `minutes=1`.
+     */
     accessCodeValidity?: pulumi.Input<string>;
+    /**
+     * Defaults to `minutes=10`.
+     */
     accessTokenValidity?: pulumi.Input<string>;
     authenticationFlow?: pulumi.Input<string>;
     authorizationFlow: pulumi.Input<string>;
     clientId: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     clientSecret?: pulumi.Input<string>;
+    /**
+     * Defaults to `confidential`.
+     */
     clientType?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     includeClaimsInIdToken?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `perProvider`.
+     */
     issuerMode?: pulumi.Input<string>;
     /**
      * JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
@@ -158,7 +239,13 @@ export interface ProviderOauth2Args {
     name?: pulumi.Input<string>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
     redirectUris?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Defaults to `days=30`.
+     */
     refreshTokenValidity?: pulumi.Input<string>;
     signingKey?: pulumi.Input<string>;
+    /**
+     * Defaults to `hashedUserId`.
+     */
     subMode?: pulumi.Input<string>;
 }

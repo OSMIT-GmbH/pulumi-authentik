@@ -9,14 +9,43 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewPolicyEventMatcher(ctx, "name", &authentik.PolicyEventMatcherArgs{
+//				Action:   pulumi.String("login"),
+//				App:      pulumi.String("authentik.events"),
+//				ClientIp: pulumi.String("1.2.3.4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type PolicyEventMatcher struct {
 	pulumi.CustomResourceState
 
-	Action           pulumi.StringPtrOutput `pulumi:"action"`
-	App              pulumi.StringPtrOutput `pulumi:"app"`
-	ClientIp         pulumi.StringPtrOutput `pulumi:"clientIp"`
+	Action   pulumi.StringPtrOutput `pulumi:"action"`
+	App      pulumi.StringPtrOutput `pulumi:"app"`
+	ClientIp pulumi.StringPtrOutput `pulumi:"clientIp"`
+	// Defaults to `false`.
 	ExecutionLogging pulumi.BoolPtrOutput   `pulumi:"executionLogging"`
 	Model            pulumi.StringPtrOutput `pulumi:"model"`
 	Name             pulumi.StringOutput    `pulumi:"name"`
@@ -52,18 +81,20 @@ func GetPolicyEventMatcher(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering PolicyEventMatcher resources.
 type policyEventMatcherState struct {
-	Action           *string `pulumi:"action"`
-	App              *string `pulumi:"app"`
-	ClientIp         *string `pulumi:"clientIp"`
+	Action   *string `pulumi:"action"`
+	App      *string `pulumi:"app"`
+	ClientIp *string `pulumi:"clientIp"`
+	// Defaults to `false`.
 	ExecutionLogging *bool   `pulumi:"executionLogging"`
 	Model            *string `pulumi:"model"`
 	Name             *string `pulumi:"name"`
 }
 
 type PolicyEventMatcherState struct {
-	Action           pulumi.StringPtrInput
-	App              pulumi.StringPtrInput
-	ClientIp         pulumi.StringPtrInput
+	Action   pulumi.StringPtrInput
+	App      pulumi.StringPtrInput
+	ClientIp pulumi.StringPtrInput
+	// Defaults to `false`.
 	ExecutionLogging pulumi.BoolPtrInput
 	Model            pulumi.StringPtrInput
 	Name             pulumi.StringPtrInput
@@ -74,9 +105,10 @@ func (PolicyEventMatcherState) ElementType() reflect.Type {
 }
 
 type policyEventMatcherArgs struct {
-	Action           *string `pulumi:"action"`
-	App              *string `pulumi:"app"`
-	ClientIp         *string `pulumi:"clientIp"`
+	Action   *string `pulumi:"action"`
+	App      *string `pulumi:"app"`
+	ClientIp *string `pulumi:"clientIp"`
+	// Defaults to `false`.
 	ExecutionLogging *bool   `pulumi:"executionLogging"`
 	Model            *string `pulumi:"model"`
 	Name             *string `pulumi:"name"`
@@ -84,9 +116,10 @@ type policyEventMatcherArgs struct {
 
 // The set of arguments for constructing a PolicyEventMatcher resource.
 type PolicyEventMatcherArgs struct {
-	Action           pulumi.StringPtrInput
-	App              pulumi.StringPtrInput
-	ClientIp         pulumi.StringPtrInput
+	Action   pulumi.StringPtrInput
+	App      pulumi.StringPtrInput
+	ClientIp pulumi.StringPtrInput
+	// Defaults to `false`.
 	ExecutionLogging pulumi.BoolPtrInput
 	Model            pulumi.StringPtrInput
 	Name             pulumi.StringPtrInput
@@ -115,6 +148,12 @@ func (i *PolicyEventMatcher) ToPolicyEventMatcherOutputWithContext(ctx context.C
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyEventMatcherOutput)
 }
 
+func (i *PolicyEventMatcher) ToOutput(ctx context.Context) pulumix.Output[*PolicyEventMatcher] {
+	return pulumix.Output[*PolicyEventMatcher]{
+		OutputState: i.ToPolicyEventMatcherOutputWithContext(ctx).OutputState,
+	}
+}
+
 // PolicyEventMatcherArrayInput is an input type that accepts PolicyEventMatcherArray and PolicyEventMatcherArrayOutput values.
 // You can construct a concrete instance of `PolicyEventMatcherArrayInput` via:
 //
@@ -138,6 +177,12 @@ func (i PolicyEventMatcherArray) ToPolicyEventMatcherArrayOutput() PolicyEventMa
 
 func (i PolicyEventMatcherArray) ToPolicyEventMatcherArrayOutputWithContext(ctx context.Context) PolicyEventMatcherArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyEventMatcherArrayOutput)
+}
+
+func (i PolicyEventMatcherArray) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyEventMatcher] {
+	return pulumix.Output[[]*PolicyEventMatcher]{
+		OutputState: i.ToPolicyEventMatcherArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // PolicyEventMatcherMapInput is an input type that accepts PolicyEventMatcherMap and PolicyEventMatcherMapOutput values.
@@ -165,6 +210,12 @@ func (i PolicyEventMatcherMap) ToPolicyEventMatcherMapOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyEventMatcherMapOutput)
 }
 
+func (i PolicyEventMatcherMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyEventMatcher] {
+	return pulumix.Output[map[string]*PolicyEventMatcher]{
+		OutputState: i.ToPolicyEventMatcherMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type PolicyEventMatcherOutput struct{ *pulumi.OutputState }
 
 func (PolicyEventMatcherOutput) ElementType() reflect.Type {
@@ -179,6 +230,12 @@ func (o PolicyEventMatcherOutput) ToPolicyEventMatcherOutputWithContext(ctx cont
 	return o
 }
 
+func (o PolicyEventMatcherOutput) ToOutput(ctx context.Context) pulumix.Output[*PolicyEventMatcher] {
+	return pulumix.Output[*PolicyEventMatcher]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o PolicyEventMatcherOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PolicyEventMatcher) pulumi.StringPtrOutput { return v.Action }).(pulumi.StringPtrOutput)
 }
@@ -191,6 +248,7 @@ func (o PolicyEventMatcherOutput) ClientIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PolicyEventMatcher) pulumi.StringPtrOutput { return v.ClientIp }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `false`.
 func (o PolicyEventMatcherOutput) ExecutionLogging() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PolicyEventMatcher) pulumi.BoolPtrOutput { return v.ExecutionLogging }).(pulumi.BoolPtrOutput)
 }
@@ -217,6 +275,12 @@ func (o PolicyEventMatcherArrayOutput) ToPolicyEventMatcherArrayOutputWithContex
 	return o
 }
 
+func (o PolicyEventMatcherArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyEventMatcher] {
+	return pulumix.Output[[]*PolicyEventMatcher]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o PolicyEventMatcherArrayOutput) Index(i pulumi.IntInput) PolicyEventMatcherOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PolicyEventMatcher {
 		return vs[0].([]*PolicyEventMatcher)[vs[1].(int)]
@@ -235,6 +299,12 @@ func (o PolicyEventMatcherMapOutput) ToPolicyEventMatcherMapOutput() PolicyEvent
 
 func (o PolicyEventMatcherMapOutput) ToPolicyEventMatcherMapOutputWithContext(ctx context.Context) PolicyEventMatcherMapOutput {
 	return o
+}
+
+func (o PolicyEventMatcherMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyEventMatcher] {
+	return pulumix.Output[map[string]*PolicyEventMatcher]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PolicyEventMatcherMapOutput) MapIndex(k pulumi.StringInput) PolicyEventMatcherOutput {

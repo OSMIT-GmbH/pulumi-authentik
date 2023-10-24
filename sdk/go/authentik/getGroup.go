@@ -9,8 +9,36 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Get groups by pk or name
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.LookupGroup(ctx, &authentik.LookupGroupArgs{
+//				Name: pulumi.StringRef("authentik Admins"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupGroup(ctx *pulumi.Context, args *LookupGroupArgs, opts ...pulumi.InvokeOption) (*LookupGroupResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupGroupResult
@@ -29,17 +57,24 @@ type LookupGroupArgs struct {
 
 // A collection of values returned by getGroup.
 type LookupGroupResult struct {
+	// Generated.
 	Attributes string `pulumi:"attributes"`
 	// The provider-assigned unique ID for this managed resource.
-	Id          string             `pulumi:"id"`
-	IsSuperuser bool               `pulumi:"isSuperuser"`
-	Name        *string            `pulumi:"name"`
-	NumPk       int                `pulumi:"numPk"`
-	Parent      string             `pulumi:"parent"`
-	ParentName  string             `pulumi:"parentName"`
-	Pk          *string            `pulumi:"pk"`
-	Users       []int              `pulumi:"users"`
-	UsersObjs   []GetGroupUsersObj `pulumi:"usersObjs"`
+	Id string `pulumi:"id"`
+	// Generated.
+	IsSuperuser bool    `pulumi:"isSuperuser"`
+	Name        *string `pulumi:"name"`
+	// Generated.
+	NumPk int `pulumi:"numPk"`
+	// Generated.
+	Parent string `pulumi:"parent"`
+	// Generated.
+	ParentName string  `pulumi:"parentName"`
+	Pk         *string `pulumi:"pk"`
+	// Generated.
+	Users []int `pulumi:"users"`
+	// Generated.
+	UsersObjs []GetGroupUsersObj `pulumi:"usersObjs"`
 }
 
 func LookupGroupOutput(ctx *pulumi.Context, args LookupGroupOutputArgs, opts ...pulumi.InvokeOption) LookupGroupResultOutput {
@@ -80,6 +115,13 @@ func (o LookupGroupResultOutput) ToLookupGroupResultOutputWithContext(ctx contex
 	return o
 }
 
+func (o LookupGroupResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupGroupResult] {
+	return pulumix.Output[LookupGroupResult]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Generated.
 func (o LookupGroupResultOutput) Attributes() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupGroupResult) string { return v.Attributes }).(pulumi.StringOutput)
 }
@@ -89,6 +131,7 @@ func (o LookupGroupResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupGroupResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupGroupResultOutput) IsSuperuser() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupGroupResult) bool { return v.IsSuperuser }).(pulumi.BoolOutput)
 }
@@ -97,14 +140,17 @@ func (o LookupGroupResultOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LookupGroupResult) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
+// Generated.
 func (o LookupGroupResultOutput) NumPk() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupGroupResult) int { return v.NumPk }).(pulumi.IntOutput)
 }
 
+// Generated.
 func (o LookupGroupResultOutput) Parent() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupGroupResult) string { return v.Parent }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupGroupResultOutput) ParentName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupGroupResult) string { return v.ParentName }).(pulumi.StringOutput)
 }
@@ -113,10 +159,12 @@ func (o LookupGroupResultOutput) Pk() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LookupGroupResult) *string { return v.Pk }).(pulumi.StringPtrOutput)
 }
 
+// Generated.
 func (o LookupGroupResultOutput) Users() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v LookupGroupResult) []int { return v.Users }).(pulumi.IntArrayOutput)
 }
 
+// Generated.
 func (o LookupGroupResultOutput) UsersObjs() GetGroupUsersObjArrayOutput {
 	return o.ApplyT(func(v LookupGroupResult) []GetGroupUsersObj { return v.UsersObjs }).(GetGroupUsersObjArrayOutput)
 }

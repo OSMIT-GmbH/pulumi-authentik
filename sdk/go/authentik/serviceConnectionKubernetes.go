@@ -9,15 +9,48 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewServiceConnectionKubernetes(ctx, "local", &authentik.ServiceConnectionKubernetesArgs{
+//				Local: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewServiceConnectionKubernetes(ctx, "remote-test-cluster", &authentik.ServiceConnectionKubernetesArgs{
+//				Kubeconfig: pulumi.String("kind: Config\nusers: [...]\n\n"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type ServiceConnectionKubernetes struct {
 	pulumi.CustomResourceState
 
-	// JSON format expected. Use jsonencode() to pass objects.
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Kubeconfig pulumi.StringPtrOutput `pulumi:"kubeconfig"`
-	Local      pulumi.BoolPtrOutput   `pulumi:"local"`
-	Name       pulumi.StringOutput    `pulumi:"name"`
+	// Defaults to `false`.
+	Local pulumi.BoolPtrOutput `pulumi:"local"`
+	Name  pulumi.StringOutput  `pulumi:"name"`
 }
 
 // NewServiceConnectionKubernetes registers a new resource with the given unique name, arguments, and options.
@@ -57,17 +90,19 @@ func GetServiceConnectionKubernetes(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ServiceConnectionKubernetes resources.
 type serviceConnectionKubernetesState struct {
-	// JSON format expected. Use jsonencode() to pass objects.
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Kubeconfig *string `pulumi:"kubeconfig"`
-	Local      *bool   `pulumi:"local"`
-	Name       *string `pulumi:"name"`
+	// Defaults to `false`.
+	Local *bool   `pulumi:"local"`
+	Name  *string `pulumi:"name"`
 }
 
 type ServiceConnectionKubernetesState struct {
-	// JSON format expected. Use jsonencode() to pass objects.
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Kubeconfig pulumi.StringPtrInput
-	Local      pulumi.BoolPtrInput
-	Name       pulumi.StringPtrInput
+	// Defaults to `false`.
+	Local pulumi.BoolPtrInput
+	Name  pulumi.StringPtrInput
 }
 
 func (ServiceConnectionKubernetesState) ElementType() reflect.Type {
@@ -75,18 +110,20 @@ func (ServiceConnectionKubernetesState) ElementType() reflect.Type {
 }
 
 type serviceConnectionKubernetesArgs struct {
-	// JSON format expected. Use jsonencode() to pass objects.
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Kubeconfig *string `pulumi:"kubeconfig"`
-	Local      *bool   `pulumi:"local"`
-	Name       *string `pulumi:"name"`
+	// Defaults to `false`.
+	Local *bool   `pulumi:"local"`
+	Name  *string `pulumi:"name"`
 }
 
 // The set of arguments for constructing a ServiceConnectionKubernetes resource.
 type ServiceConnectionKubernetesArgs struct {
-	// JSON format expected. Use jsonencode() to pass objects.
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Kubeconfig pulumi.StringPtrInput
-	Local      pulumi.BoolPtrInput
-	Name       pulumi.StringPtrInput
+	// Defaults to `false`.
+	Local pulumi.BoolPtrInput
+	Name  pulumi.StringPtrInput
 }
 
 func (ServiceConnectionKubernetesArgs) ElementType() reflect.Type {
@@ -110,6 +147,12 @@ func (i *ServiceConnectionKubernetes) ToServiceConnectionKubernetesOutput() Serv
 
 func (i *ServiceConnectionKubernetes) ToServiceConnectionKubernetesOutputWithContext(ctx context.Context) ServiceConnectionKubernetesOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceConnectionKubernetesOutput)
+}
+
+func (i *ServiceConnectionKubernetes) ToOutput(ctx context.Context) pulumix.Output[*ServiceConnectionKubernetes] {
+	return pulumix.Output[*ServiceConnectionKubernetes]{
+		OutputState: i.ToServiceConnectionKubernetesOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ServiceConnectionKubernetesArrayInput is an input type that accepts ServiceConnectionKubernetesArray and ServiceConnectionKubernetesArrayOutput values.
@@ -137,6 +180,12 @@ func (i ServiceConnectionKubernetesArray) ToServiceConnectionKubernetesArrayOutp
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceConnectionKubernetesArrayOutput)
 }
 
+func (i ServiceConnectionKubernetesArray) ToOutput(ctx context.Context) pulumix.Output[[]*ServiceConnectionKubernetes] {
+	return pulumix.Output[[]*ServiceConnectionKubernetes]{
+		OutputState: i.ToServiceConnectionKubernetesArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ServiceConnectionKubernetesMapInput is an input type that accepts ServiceConnectionKubernetesMap and ServiceConnectionKubernetesMapOutput values.
 // You can construct a concrete instance of `ServiceConnectionKubernetesMapInput` via:
 //
@@ -162,6 +211,12 @@ func (i ServiceConnectionKubernetesMap) ToServiceConnectionKubernetesMapOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceConnectionKubernetesMapOutput)
 }
 
+func (i ServiceConnectionKubernetesMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ServiceConnectionKubernetes] {
+	return pulumix.Output[map[string]*ServiceConnectionKubernetes]{
+		OutputState: i.ToServiceConnectionKubernetesMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ServiceConnectionKubernetesOutput struct{ *pulumi.OutputState }
 
 func (ServiceConnectionKubernetesOutput) ElementType() reflect.Type {
@@ -176,11 +231,18 @@ func (o ServiceConnectionKubernetesOutput) ToServiceConnectionKubernetesOutputWi
 	return o
 }
 
-// JSON format expected. Use jsonencode() to pass objects.
+func (o ServiceConnectionKubernetesOutput) ToOutput(ctx context.Context) pulumix.Output[*ServiceConnectionKubernetes] {
+	return pulumix.Output[*ServiceConnectionKubernetes]{
+		OutputState: o.OutputState,
+	}
+}
+
+// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 func (o ServiceConnectionKubernetesOutput) Kubeconfig() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ServiceConnectionKubernetes) pulumi.StringPtrOutput { return v.Kubeconfig }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `false`.
 func (o ServiceConnectionKubernetesOutput) Local() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ServiceConnectionKubernetes) pulumi.BoolPtrOutput { return v.Local }).(pulumi.BoolPtrOutput)
 }
@@ -203,6 +265,12 @@ func (o ServiceConnectionKubernetesArrayOutput) ToServiceConnectionKubernetesArr
 	return o
 }
 
+func (o ServiceConnectionKubernetesArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ServiceConnectionKubernetes] {
+	return pulumix.Output[[]*ServiceConnectionKubernetes]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ServiceConnectionKubernetesArrayOutput) Index(i pulumi.IntInput) ServiceConnectionKubernetesOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ServiceConnectionKubernetes {
 		return vs[0].([]*ServiceConnectionKubernetes)[vs[1].(int)]
@@ -221,6 +289,12 @@ func (o ServiceConnectionKubernetesMapOutput) ToServiceConnectionKubernetesMapOu
 
 func (o ServiceConnectionKubernetesMapOutput) ToServiceConnectionKubernetesMapOutputWithContext(ctx context.Context) ServiceConnectionKubernetesMapOutput {
 	return o
+}
+
+func (o ServiceConnectionKubernetesMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ServiceConnectionKubernetes] {
+	return pulumix.Output[map[string]*ServiceConnectionKubernetes]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ServiceConnectionKubernetesMapOutput) MapIndex(k pulumi.StringInput) ServiceConnectionKubernetesOutput {

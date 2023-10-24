@@ -4,6 +4,16 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.PolicyReputation("name", {});
+ * ```
+ */
 export class PolicyReputation extends pulumi.CustomResource {
     /**
      * Get an existing PolicyReputation resource's state with the given name, ID, and optional extra
@@ -32,10 +42,22 @@ export class PolicyReputation extends pulumi.CustomResource {
         return obj['__pulumiType'] === PolicyReputation.__pulumiType;
     }
 
+    /**
+     * Defaults to `true`.
+     */
     public readonly checkIp!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly checkUsername!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly executionLogging!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Defaults to `10`.
+     */
     public readonly threshold!: pulumi.Output<number | undefined>;
 
     /**
@@ -73,10 +95,22 @@ export class PolicyReputation extends pulumi.CustomResource {
  * Input properties used for looking up and filtering PolicyReputation resources.
  */
 export interface PolicyReputationState {
+    /**
+     * Defaults to `true`.
+     */
     checkIp?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `true`.
+     */
     checkUsername?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `false`.
+     */
     executionLogging?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `10`.
+     */
     threshold?: pulumi.Input<number>;
 }
 
@@ -84,9 +118,21 @@ export interface PolicyReputationState {
  * The set of arguments for constructing a PolicyReputation resource.
  */
 export interface PolicyReputationArgs {
+    /**
+     * Defaults to `true`.
+     */
     checkIp?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `true`.
+     */
     checkUsername?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `false`.
+     */
     executionLogging?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `10`.
+     */
     threshold?: pulumi.Input<number>;
 }

@@ -4,6 +4,16 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const test = new authentik.StagePassword("test", {backends: ["authentik.core.auth.InbuiltBackend"]});
+ * ```
+ */
 export class StagePassword extends pulumi.CustomResource {
     /**
      * Get an existing StagePassword resource's state with the given name, ID, and optional extra
@@ -34,6 +44,9 @@ export class StagePassword extends pulumi.CustomResource {
 
     public readonly backends!: pulumi.Output<string[]>;
     public readonly configureFlow!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `5`.
+     */
     public readonly failedAttemptsBeforeCancel!: pulumi.Output<number | undefined>;
     public readonly name!: pulumi.Output<string>;
 
@@ -75,6 +88,9 @@ export class StagePassword extends pulumi.CustomResource {
 export interface StagePasswordState {
     backends?: pulumi.Input<pulumi.Input<string>[]>;
     configureFlow?: pulumi.Input<string>;
+    /**
+     * Defaults to `5`.
+     */
     failedAttemptsBeforeCancel?: pulumi.Input<number>;
     name?: pulumi.Input<string>;
 }
@@ -85,6 +101,9 @@ export interface StagePasswordState {
 export interface StagePasswordArgs {
     backends: pulumi.Input<pulumi.Input<string>[]>;
     configureFlow?: pulumi.Input<string>;
+    /**
+     * Defaults to `5`.
+     */
     failedAttemptsBeforeCancel?: pulumi.Input<number>;
     name?: pulumi.Input<string>;
 }

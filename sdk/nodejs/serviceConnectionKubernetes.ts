@@ -4,6 +4,20 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const local = new authentik.ServiceConnectionKubernetes("local", {local: true});
+ * const remote_test_cluster = new authentik.ServiceConnectionKubernetes("remote-test-cluster", {kubeconfig: `kind: Config
+ * users: [...]
+ *
+ * `});
+ * ```
+ */
 export class ServiceConnectionKubernetes extends pulumi.CustomResource {
     /**
      * Get an existing ServiceConnectionKubernetes resource's state with the given name, ID, and optional extra
@@ -33,9 +47,12 @@ export class ServiceConnectionKubernetes extends pulumi.CustomResource {
     }
 
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     public readonly kubeconfig!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly local!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
 
@@ -73,9 +90,12 @@ export class ServiceConnectionKubernetes extends pulumi.CustomResource {
  */
 export interface ServiceConnectionKubernetesState {
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     kubeconfig?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     local?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
 }
@@ -85,9 +105,12 @@ export interface ServiceConnectionKubernetesState {
  */
 export interface ServiceConnectionKubernetesArgs {
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     kubeconfig?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     local?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
 }

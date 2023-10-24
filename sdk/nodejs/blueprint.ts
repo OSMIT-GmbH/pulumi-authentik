@@ -4,6 +4,21 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const instance = new authentik.Blueprint("instance", {
+ *     path: "default/flow-default-authentication-flow.yaml",
+ *     context: JSON.stringify({
+ *         foo: "bar",
+ *     }),
+ * });
+ * ```
+ */
 export class Blueprint extends pulumi.CustomResource {
     /**
      * Get an existing Blueprint resource's state with the given name, ID, and optional extra
@@ -34,9 +49,12 @@ export class Blueprint extends pulumi.CustomResource {
 
     public readonly content!: pulumi.Output<string | undefined>;
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     public readonly context!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly enabled!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly path!: pulumi.Output<string | undefined>;
@@ -78,9 +96,12 @@ export class Blueprint extends pulumi.CustomResource {
 export interface BlueprintState {
     content?: pulumi.Input<string>;
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     context?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     enabled?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
     path?: pulumi.Input<string>;
@@ -92,9 +113,12 @@ export interface BlueprintState {
 export interface BlueprintArgs {
     content?: pulumi.Input<string>;
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     context?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     enabled?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
     path?: pulumi.Input<string>;

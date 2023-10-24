@@ -4,6 +4,9 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Get SAML Provider metadata
+ */
 export function getProviderSamlMetadata(args?: GetProviderSamlMetadataArgs, opts?: pulumi.InvokeOptions): Promise<GetProviderSamlMetadataResult> {
     args = args || {};
 
@@ -18,7 +21,13 @@ export function getProviderSamlMetadata(args?: GetProviderSamlMetadataArgs, opts
  * A collection of arguments for invoking getProviderSamlMetadata.
  */
 export interface GetProviderSamlMetadataArgs {
+    /**
+     * Find provider by name
+     */
     name?: string;
+    /**
+     * Find provider by ID
+     */
     providerId?: number;
 }
 
@@ -30,10 +39,22 @@ export interface GetProviderSamlMetadataResult {
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * SAML Metadata Generated.
+     */
     readonly metadata: string;
+    /**
+     * Find provider by name
+     */
     readonly name?: string;
+    /**
+     * Find provider by ID
+     */
     readonly providerId?: number;
 }
+/**
+ * Get SAML Provider metadata
+ */
 export function getProviderSamlMetadataOutput(args?: GetProviderSamlMetadataOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProviderSamlMetadataResult> {
     return pulumi.output(args).apply((a: any) => getProviderSamlMetadata(a, opts))
 }
@@ -42,6 +63,12 @@ export function getProviderSamlMetadataOutput(args?: GetProviderSamlMetadataOutp
  * A collection of arguments for invoking getProviderSamlMetadata.
  */
 export interface GetProviderSamlMetadataOutputArgs {
+    /**
+     * Find provider by name
+     */
     name?: pulumi.Input<string>;
+    /**
+     * Find provider by ID
+     */
     providerId?: pulumi.Input<number>;
 }

@@ -10,24 +10,66 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			default_authorization_flow, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
+//				Slug: pulumi.StringRef("default-provider-authorization-implicit-consent"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewSourcePlex(ctx, "name", &authentik.SourcePlexArgs{
+//				Slug:               pulumi.String("plex"),
+//				AuthenticationFlow: *pulumi.String(default_authorization_flow.Id),
+//				EnrollmentFlow:     *pulumi.String(default_authorization_flow.Id),
+//				ClientId:           pulumi.String("foo-bar-baz"),
+//				PlexToken:          pulumi.String("foo"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type SourcePlex struct {
 	pulumi.CustomResourceState
 
+	// Defaults to `true`.
 	AllowFriends       pulumi.BoolPtrOutput     `pulumi:"allowFriends"`
 	AllowedServers     pulumi.StringArrayOutput `pulumi:"allowedServers"`
 	AuthenticationFlow pulumi.StringOutput      `pulumi:"authenticationFlow"`
 	ClientId           pulumi.StringOutput      `pulumi:"clientId"`
-	Enabled            pulumi.BoolPtrOutput     `pulumi:"enabled"`
-	EnrollmentFlow     pulumi.StringOutput      `pulumi:"enrollmentFlow"`
-	Name               pulumi.StringOutput      `pulumi:"name"`
-	PlexToken          pulumi.StringOutput      `pulumi:"plexToken"`
-	PolicyEngineMode   pulumi.StringPtrOutput   `pulumi:"policyEngineMode"`
-	Slug               pulumi.StringOutput      `pulumi:"slug"`
-	UserMatchingMode   pulumi.StringPtrOutput   `pulumi:"userMatchingMode"`
-	UserPathTemplate   pulumi.StringPtrOutput   `pulumi:"userPathTemplate"`
-	Uuid               pulumi.StringOutput      `pulumi:"uuid"`
+	// Defaults to `true`.
+	Enabled        pulumi.BoolPtrOutput `pulumi:"enabled"`
+	EnrollmentFlow pulumi.StringOutput  `pulumi:"enrollmentFlow"`
+	Name           pulumi.StringOutput  `pulumi:"name"`
+	PlexToken      pulumi.StringOutput  `pulumi:"plexToken"`
+	// Defaults to `any`.
+	PolicyEngineMode pulumi.StringPtrOutput `pulumi:"policyEngineMode"`
+	Slug             pulumi.StringOutput    `pulumi:"slug"`
+	// Defaults to `identifier`.
+	UserMatchingMode pulumi.StringPtrOutput `pulumi:"userMatchingMode"`
+	// Defaults to `goauthentik.io/sources/%(slug)s`.
+	UserPathTemplate pulumi.StringPtrOutput `pulumi:"userPathTemplate"`
+	// Generated.
+	Uuid pulumi.StringOutput `pulumi:"uuid"`
 }
 
 // NewSourcePlex registers a new resource with the given unique name, arguments, and options.
@@ -82,35 +124,47 @@ func GetSourcePlex(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering SourcePlex resources.
 type sourcePlexState struct {
+	// Defaults to `true`.
 	AllowFriends       *bool    `pulumi:"allowFriends"`
 	AllowedServers     []string `pulumi:"allowedServers"`
 	AuthenticationFlow *string  `pulumi:"authenticationFlow"`
 	ClientId           *string  `pulumi:"clientId"`
-	Enabled            *bool    `pulumi:"enabled"`
-	EnrollmentFlow     *string  `pulumi:"enrollmentFlow"`
-	Name               *string  `pulumi:"name"`
-	PlexToken          *string  `pulumi:"plexToken"`
-	PolicyEngineMode   *string  `pulumi:"policyEngineMode"`
-	Slug               *string  `pulumi:"slug"`
-	UserMatchingMode   *string  `pulumi:"userMatchingMode"`
-	UserPathTemplate   *string  `pulumi:"userPathTemplate"`
-	Uuid               *string  `pulumi:"uuid"`
+	// Defaults to `true`.
+	Enabled        *bool   `pulumi:"enabled"`
+	EnrollmentFlow *string `pulumi:"enrollmentFlow"`
+	Name           *string `pulumi:"name"`
+	PlexToken      *string `pulumi:"plexToken"`
+	// Defaults to `any`.
+	PolicyEngineMode *string `pulumi:"policyEngineMode"`
+	Slug             *string `pulumi:"slug"`
+	// Defaults to `identifier`.
+	UserMatchingMode *string `pulumi:"userMatchingMode"`
+	// Defaults to `goauthentik.io/sources/%(slug)s`.
+	UserPathTemplate *string `pulumi:"userPathTemplate"`
+	// Generated.
+	Uuid *string `pulumi:"uuid"`
 }
 
 type SourcePlexState struct {
+	// Defaults to `true`.
 	AllowFriends       pulumi.BoolPtrInput
 	AllowedServers     pulumi.StringArrayInput
 	AuthenticationFlow pulumi.StringPtrInput
 	ClientId           pulumi.StringPtrInput
-	Enabled            pulumi.BoolPtrInput
-	EnrollmentFlow     pulumi.StringPtrInput
-	Name               pulumi.StringPtrInput
-	PlexToken          pulumi.StringPtrInput
-	PolicyEngineMode   pulumi.StringPtrInput
-	Slug               pulumi.StringPtrInput
-	UserMatchingMode   pulumi.StringPtrInput
-	UserPathTemplate   pulumi.StringPtrInput
-	Uuid               pulumi.StringPtrInput
+	// Defaults to `true`.
+	Enabled        pulumi.BoolPtrInput
+	EnrollmentFlow pulumi.StringPtrInput
+	Name           pulumi.StringPtrInput
+	PlexToken      pulumi.StringPtrInput
+	// Defaults to `any`.
+	PolicyEngineMode pulumi.StringPtrInput
+	Slug             pulumi.StringPtrInput
+	// Defaults to `identifier`.
+	UserMatchingMode pulumi.StringPtrInput
+	// Defaults to `goauthentik.io/sources/%(slug)s`.
+	UserPathTemplate pulumi.StringPtrInput
+	// Generated.
+	Uuid pulumi.StringPtrInput
 }
 
 func (SourcePlexState) ElementType() reflect.Type {
@@ -118,36 +172,48 @@ func (SourcePlexState) ElementType() reflect.Type {
 }
 
 type sourcePlexArgs struct {
+	// Defaults to `true`.
 	AllowFriends       *bool    `pulumi:"allowFriends"`
 	AllowedServers     []string `pulumi:"allowedServers"`
 	AuthenticationFlow string   `pulumi:"authenticationFlow"`
 	ClientId           string   `pulumi:"clientId"`
-	Enabled            *bool    `pulumi:"enabled"`
-	EnrollmentFlow     string   `pulumi:"enrollmentFlow"`
-	Name               *string  `pulumi:"name"`
-	PlexToken          string   `pulumi:"plexToken"`
-	PolicyEngineMode   *string  `pulumi:"policyEngineMode"`
-	Slug               string   `pulumi:"slug"`
-	UserMatchingMode   *string  `pulumi:"userMatchingMode"`
-	UserPathTemplate   *string  `pulumi:"userPathTemplate"`
-	Uuid               *string  `pulumi:"uuid"`
+	// Defaults to `true`.
+	Enabled        *bool   `pulumi:"enabled"`
+	EnrollmentFlow string  `pulumi:"enrollmentFlow"`
+	Name           *string `pulumi:"name"`
+	PlexToken      string  `pulumi:"plexToken"`
+	// Defaults to `any`.
+	PolicyEngineMode *string `pulumi:"policyEngineMode"`
+	Slug             string  `pulumi:"slug"`
+	// Defaults to `identifier`.
+	UserMatchingMode *string `pulumi:"userMatchingMode"`
+	// Defaults to `goauthentik.io/sources/%(slug)s`.
+	UserPathTemplate *string `pulumi:"userPathTemplate"`
+	// Generated.
+	Uuid *string `pulumi:"uuid"`
 }
 
 // The set of arguments for constructing a SourcePlex resource.
 type SourcePlexArgs struct {
+	// Defaults to `true`.
 	AllowFriends       pulumi.BoolPtrInput
 	AllowedServers     pulumi.StringArrayInput
 	AuthenticationFlow pulumi.StringInput
 	ClientId           pulumi.StringInput
-	Enabled            pulumi.BoolPtrInput
-	EnrollmentFlow     pulumi.StringInput
-	Name               pulumi.StringPtrInput
-	PlexToken          pulumi.StringInput
-	PolicyEngineMode   pulumi.StringPtrInput
-	Slug               pulumi.StringInput
-	UserMatchingMode   pulumi.StringPtrInput
-	UserPathTemplate   pulumi.StringPtrInput
-	Uuid               pulumi.StringPtrInput
+	// Defaults to `true`.
+	Enabled        pulumi.BoolPtrInput
+	EnrollmentFlow pulumi.StringInput
+	Name           pulumi.StringPtrInput
+	PlexToken      pulumi.StringInput
+	// Defaults to `any`.
+	PolicyEngineMode pulumi.StringPtrInput
+	Slug             pulumi.StringInput
+	// Defaults to `identifier`.
+	UserMatchingMode pulumi.StringPtrInput
+	// Defaults to `goauthentik.io/sources/%(slug)s`.
+	UserPathTemplate pulumi.StringPtrInput
+	// Generated.
+	Uuid pulumi.StringPtrInput
 }
 
 func (SourcePlexArgs) ElementType() reflect.Type {
@@ -171,6 +237,12 @@ func (i *SourcePlex) ToSourcePlexOutput() SourcePlexOutput {
 
 func (i *SourcePlex) ToSourcePlexOutputWithContext(ctx context.Context) SourcePlexOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(SourcePlexOutput)
+}
+
+func (i *SourcePlex) ToOutput(ctx context.Context) pulumix.Output[*SourcePlex] {
+	return pulumix.Output[*SourcePlex]{
+		OutputState: i.ToSourcePlexOutputWithContext(ctx).OutputState,
+	}
 }
 
 // SourcePlexArrayInput is an input type that accepts SourcePlexArray and SourcePlexArrayOutput values.
@@ -198,6 +270,12 @@ func (i SourcePlexArray) ToSourcePlexArrayOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(SourcePlexArrayOutput)
 }
 
+func (i SourcePlexArray) ToOutput(ctx context.Context) pulumix.Output[[]*SourcePlex] {
+	return pulumix.Output[[]*SourcePlex]{
+		OutputState: i.ToSourcePlexArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // SourcePlexMapInput is an input type that accepts SourcePlexMap and SourcePlexMapOutput values.
 // You can construct a concrete instance of `SourcePlexMapInput` via:
 //
@@ -223,6 +301,12 @@ func (i SourcePlexMap) ToSourcePlexMapOutputWithContext(ctx context.Context) Sou
 	return pulumi.ToOutputWithContext(ctx, i).(SourcePlexMapOutput)
 }
 
+func (i SourcePlexMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*SourcePlex] {
+	return pulumix.Output[map[string]*SourcePlex]{
+		OutputState: i.ToSourcePlexMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type SourcePlexOutput struct{ *pulumi.OutputState }
 
 func (SourcePlexOutput) ElementType() reflect.Type {
@@ -237,6 +321,13 @@ func (o SourcePlexOutput) ToSourcePlexOutputWithContext(ctx context.Context) Sou
 	return o
 }
 
+func (o SourcePlexOutput) ToOutput(ctx context.Context) pulumix.Output[*SourcePlex] {
+	return pulumix.Output[*SourcePlex]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Defaults to `true`.
 func (o SourcePlexOutput) AllowFriends() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *SourcePlex) pulumi.BoolPtrOutput { return v.AllowFriends }).(pulumi.BoolPtrOutput)
 }
@@ -253,6 +344,7 @@ func (o SourcePlexOutput) ClientId() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourcePlex) pulumi.StringOutput { return v.ClientId }).(pulumi.StringOutput)
 }
 
+// Defaults to `true`.
 func (o SourcePlexOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *SourcePlex) pulumi.BoolPtrOutput { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
@@ -269,6 +361,7 @@ func (o SourcePlexOutput) PlexToken() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourcePlex) pulumi.StringOutput { return v.PlexToken }).(pulumi.StringOutput)
 }
 
+// Defaults to `any`.
 func (o SourcePlexOutput) PolicyEngineMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourcePlex) pulumi.StringPtrOutput { return v.PolicyEngineMode }).(pulumi.StringPtrOutput)
 }
@@ -277,14 +370,17 @@ func (o SourcePlexOutput) Slug() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourcePlex) pulumi.StringOutput { return v.Slug }).(pulumi.StringOutput)
 }
 
+// Defaults to `identifier`.
 func (o SourcePlexOutput) UserMatchingMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourcePlex) pulumi.StringPtrOutput { return v.UserMatchingMode }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `goauthentik.io/sources/%(slug)s`.
 func (o SourcePlexOutput) UserPathTemplate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourcePlex) pulumi.StringPtrOutput { return v.UserPathTemplate }).(pulumi.StringPtrOutput)
 }
 
+// Generated.
 func (o SourcePlexOutput) Uuid() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourcePlex) pulumi.StringOutput { return v.Uuid }).(pulumi.StringOutput)
 }
@@ -301,6 +397,12 @@ func (o SourcePlexArrayOutput) ToSourcePlexArrayOutput() SourcePlexArrayOutput {
 
 func (o SourcePlexArrayOutput) ToSourcePlexArrayOutputWithContext(ctx context.Context) SourcePlexArrayOutput {
 	return o
+}
+
+func (o SourcePlexArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*SourcePlex] {
+	return pulumix.Output[[]*SourcePlex]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o SourcePlexArrayOutput) Index(i pulumi.IntInput) SourcePlexOutput {
@@ -321,6 +423,12 @@ func (o SourcePlexMapOutput) ToSourcePlexMapOutput() SourcePlexMapOutput {
 
 func (o SourcePlexMapOutput) ToSourcePlexMapOutputWithContext(ctx context.Context) SourcePlexMapOutput {
 	return o
+}
+
+func (o SourcePlexMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*SourcePlex] {
+	return pulumix.Output[map[string]*SourcePlex]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o SourcePlexMapOutput) MapIndex(k pulumi.StringInput) SourcePlexOutput {

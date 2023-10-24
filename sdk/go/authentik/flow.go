@@ -10,23 +10,69 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			name, err := authentik.NewStageDummy(ctx, "name", nil)
+//			if err != nil {
+//				return err
+//			}
+//			flow, err := authentik.NewFlow(ctx, "flow", &authentik.FlowArgs{
+//				Title:       pulumi.String("Test flow"),
+//				Slug:        pulumi.String("test-flow"),
+//				Designation: pulumi.String("authorization"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewFlowStageBinding(ctx, "dummy-flow", &authentik.FlowStageBindingArgs{
+//				Target: flow.Uuid,
+//				Stage:  name.ID(),
+//				Order:  pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type Flow struct {
 	pulumi.CustomResourceState
 
+	// Defaults to `none`.
 	Authentication pulumi.StringPtrOutput `pulumi:"authentication"`
 	// Optional URL to an image which will be used as the background during the flow.
-	Background        pulumi.StringPtrOutput `pulumi:"background"`
-	CompatibilityMode pulumi.BoolPtrOutput   `pulumi:"compatibilityMode"`
-	DeniedAction      pulumi.StringPtrOutput `pulumi:"deniedAction"`
-	Designation       pulumi.StringOutput    `pulumi:"designation"`
-	Layout            pulumi.StringPtrOutput `pulumi:"layout"`
-	Name              pulumi.StringOutput    `pulumi:"name"`
-	PolicyEngineMode  pulumi.StringPtrOutput `pulumi:"policyEngineMode"`
-	Slug              pulumi.StringOutput    `pulumi:"slug"`
-	Title             pulumi.StringOutput    `pulumi:"title"`
-	Uuid              pulumi.StringOutput    `pulumi:"uuid"`
+	Background pulumi.StringPtrOutput `pulumi:"background"`
+	// Defaults to `true`.
+	CompatibilityMode pulumi.BoolPtrOutput `pulumi:"compatibilityMode"`
+	// Defaults to `messageContinue`.
+	DeniedAction pulumi.StringPtrOutput `pulumi:"deniedAction"`
+	Designation  pulumi.StringOutput    `pulumi:"designation"`
+	// Defaults to `stacked`.
+	Layout pulumi.StringPtrOutput `pulumi:"layout"`
+	Name   pulumi.StringOutput    `pulumi:"name"`
+	// Defaults to `any`.
+	PolicyEngineMode pulumi.StringPtrOutput `pulumi:"policyEngineMode"`
+	Slug             pulumi.StringOutput    `pulumi:"slug"`
+	Title            pulumi.StringOutput    `pulumi:"title"`
+	// Generated.
+	Uuid pulumi.StringOutput `pulumi:"uuid"`
 }
 
 // NewFlow registers a new resource with the given unique name, arguments, and options.
@@ -68,33 +114,45 @@ func GetFlow(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Flow resources.
 type flowState struct {
+	// Defaults to `none`.
 	Authentication *string `pulumi:"authentication"`
 	// Optional URL to an image which will be used as the background during the flow.
-	Background        *string `pulumi:"background"`
-	CompatibilityMode *bool   `pulumi:"compatibilityMode"`
-	DeniedAction      *string `pulumi:"deniedAction"`
-	Designation       *string `pulumi:"designation"`
-	Layout            *string `pulumi:"layout"`
-	Name              *string `pulumi:"name"`
-	PolicyEngineMode  *string `pulumi:"policyEngineMode"`
-	Slug              *string `pulumi:"slug"`
-	Title             *string `pulumi:"title"`
-	Uuid              *string `pulumi:"uuid"`
+	Background *string `pulumi:"background"`
+	// Defaults to `true`.
+	CompatibilityMode *bool `pulumi:"compatibilityMode"`
+	// Defaults to `messageContinue`.
+	DeniedAction *string `pulumi:"deniedAction"`
+	Designation  *string `pulumi:"designation"`
+	// Defaults to `stacked`.
+	Layout *string `pulumi:"layout"`
+	Name   *string `pulumi:"name"`
+	// Defaults to `any`.
+	PolicyEngineMode *string `pulumi:"policyEngineMode"`
+	Slug             *string `pulumi:"slug"`
+	Title            *string `pulumi:"title"`
+	// Generated.
+	Uuid *string `pulumi:"uuid"`
 }
 
 type FlowState struct {
+	// Defaults to `none`.
 	Authentication pulumi.StringPtrInput
 	// Optional URL to an image which will be used as the background during the flow.
-	Background        pulumi.StringPtrInput
+	Background pulumi.StringPtrInput
+	// Defaults to `true`.
 	CompatibilityMode pulumi.BoolPtrInput
-	DeniedAction      pulumi.StringPtrInput
-	Designation       pulumi.StringPtrInput
-	Layout            pulumi.StringPtrInput
-	Name              pulumi.StringPtrInput
-	PolicyEngineMode  pulumi.StringPtrInput
-	Slug              pulumi.StringPtrInput
-	Title             pulumi.StringPtrInput
-	Uuid              pulumi.StringPtrInput
+	// Defaults to `messageContinue`.
+	DeniedAction pulumi.StringPtrInput
+	Designation  pulumi.StringPtrInput
+	// Defaults to `stacked`.
+	Layout pulumi.StringPtrInput
+	Name   pulumi.StringPtrInput
+	// Defaults to `any`.
+	PolicyEngineMode pulumi.StringPtrInput
+	Slug             pulumi.StringPtrInput
+	Title            pulumi.StringPtrInput
+	// Generated.
+	Uuid pulumi.StringPtrInput
 }
 
 func (FlowState) ElementType() reflect.Type {
@@ -102,32 +160,42 @@ func (FlowState) ElementType() reflect.Type {
 }
 
 type flowArgs struct {
+	// Defaults to `none`.
 	Authentication *string `pulumi:"authentication"`
 	// Optional URL to an image which will be used as the background during the flow.
-	Background        *string `pulumi:"background"`
-	CompatibilityMode *bool   `pulumi:"compatibilityMode"`
-	DeniedAction      *string `pulumi:"deniedAction"`
-	Designation       string  `pulumi:"designation"`
-	Layout            *string `pulumi:"layout"`
-	Name              *string `pulumi:"name"`
-	PolicyEngineMode  *string `pulumi:"policyEngineMode"`
-	Slug              string  `pulumi:"slug"`
-	Title             string  `pulumi:"title"`
+	Background *string `pulumi:"background"`
+	// Defaults to `true`.
+	CompatibilityMode *bool `pulumi:"compatibilityMode"`
+	// Defaults to `messageContinue`.
+	DeniedAction *string `pulumi:"deniedAction"`
+	Designation  string  `pulumi:"designation"`
+	// Defaults to `stacked`.
+	Layout *string `pulumi:"layout"`
+	Name   *string `pulumi:"name"`
+	// Defaults to `any`.
+	PolicyEngineMode *string `pulumi:"policyEngineMode"`
+	Slug             string  `pulumi:"slug"`
+	Title            string  `pulumi:"title"`
 }
 
 // The set of arguments for constructing a Flow resource.
 type FlowArgs struct {
+	// Defaults to `none`.
 	Authentication pulumi.StringPtrInput
 	// Optional URL to an image which will be used as the background during the flow.
-	Background        pulumi.StringPtrInput
+	Background pulumi.StringPtrInput
+	// Defaults to `true`.
 	CompatibilityMode pulumi.BoolPtrInput
-	DeniedAction      pulumi.StringPtrInput
-	Designation       pulumi.StringInput
-	Layout            pulumi.StringPtrInput
-	Name              pulumi.StringPtrInput
-	PolicyEngineMode  pulumi.StringPtrInput
-	Slug              pulumi.StringInput
-	Title             pulumi.StringInput
+	// Defaults to `messageContinue`.
+	DeniedAction pulumi.StringPtrInput
+	Designation  pulumi.StringInput
+	// Defaults to `stacked`.
+	Layout pulumi.StringPtrInput
+	Name   pulumi.StringPtrInput
+	// Defaults to `any`.
+	PolicyEngineMode pulumi.StringPtrInput
+	Slug             pulumi.StringInput
+	Title            pulumi.StringInput
 }
 
 func (FlowArgs) ElementType() reflect.Type {
@@ -151,6 +219,12 @@ func (i *Flow) ToFlowOutput() FlowOutput {
 
 func (i *Flow) ToFlowOutputWithContext(ctx context.Context) FlowOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(FlowOutput)
+}
+
+func (i *Flow) ToOutput(ctx context.Context) pulumix.Output[*Flow] {
+	return pulumix.Output[*Flow]{
+		OutputState: i.ToFlowOutputWithContext(ctx).OutputState,
+	}
 }
 
 // FlowArrayInput is an input type that accepts FlowArray and FlowArrayOutput values.
@@ -178,6 +252,12 @@ func (i FlowArray) ToFlowArrayOutputWithContext(ctx context.Context) FlowArrayOu
 	return pulumi.ToOutputWithContext(ctx, i).(FlowArrayOutput)
 }
 
+func (i FlowArray) ToOutput(ctx context.Context) pulumix.Output[[]*Flow] {
+	return pulumix.Output[[]*Flow]{
+		OutputState: i.ToFlowArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // FlowMapInput is an input type that accepts FlowMap and FlowMapOutput values.
 // You can construct a concrete instance of `FlowMapInput` via:
 //
@@ -203,6 +283,12 @@ func (i FlowMap) ToFlowMapOutputWithContext(ctx context.Context) FlowMapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(FlowMapOutput)
 }
 
+func (i FlowMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Flow] {
+	return pulumix.Output[map[string]*Flow]{
+		OutputState: i.ToFlowMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type FlowOutput struct{ *pulumi.OutputState }
 
 func (FlowOutput) ElementType() reflect.Type {
@@ -217,6 +303,13 @@ func (o FlowOutput) ToFlowOutputWithContext(ctx context.Context) FlowOutput {
 	return o
 }
 
+func (o FlowOutput) ToOutput(ctx context.Context) pulumix.Output[*Flow] {
+	return pulumix.Output[*Flow]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Defaults to `none`.
 func (o FlowOutput) Authentication() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Flow) pulumi.StringPtrOutput { return v.Authentication }).(pulumi.StringPtrOutput)
 }
@@ -226,10 +319,12 @@ func (o FlowOutput) Background() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Flow) pulumi.StringPtrOutput { return v.Background }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `true`.
 func (o FlowOutput) CompatibilityMode() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Flow) pulumi.BoolPtrOutput { return v.CompatibilityMode }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to `messageContinue`.
 func (o FlowOutput) DeniedAction() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Flow) pulumi.StringPtrOutput { return v.DeniedAction }).(pulumi.StringPtrOutput)
 }
@@ -238,6 +333,7 @@ func (o FlowOutput) Designation() pulumi.StringOutput {
 	return o.ApplyT(func(v *Flow) pulumi.StringOutput { return v.Designation }).(pulumi.StringOutput)
 }
 
+// Defaults to `stacked`.
 func (o FlowOutput) Layout() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Flow) pulumi.StringPtrOutput { return v.Layout }).(pulumi.StringPtrOutput)
 }
@@ -246,6 +342,7 @@ func (o FlowOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Flow) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// Defaults to `any`.
 func (o FlowOutput) PolicyEngineMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Flow) pulumi.StringPtrOutput { return v.PolicyEngineMode }).(pulumi.StringPtrOutput)
 }
@@ -258,6 +355,7 @@ func (o FlowOutput) Title() pulumi.StringOutput {
 	return o.ApplyT(func(v *Flow) pulumi.StringOutput { return v.Title }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o FlowOutput) Uuid() pulumi.StringOutput {
 	return o.ApplyT(func(v *Flow) pulumi.StringOutput { return v.Uuid }).(pulumi.StringOutput)
 }
@@ -274,6 +372,12 @@ func (o FlowArrayOutput) ToFlowArrayOutput() FlowArrayOutput {
 
 func (o FlowArrayOutput) ToFlowArrayOutputWithContext(ctx context.Context) FlowArrayOutput {
 	return o
+}
+
+func (o FlowArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Flow] {
+	return pulumix.Output[[]*Flow]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o FlowArrayOutput) Index(i pulumi.IntInput) FlowOutput {
@@ -294,6 +398,12 @@ func (o FlowMapOutput) ToFlowMapOutput() FlowMapOutput {
 
 func (o FlowMapOutput) ToFlowMapOutputWithContext(ctx context.Context) FlowMapOutput {
 	return o
+}
+
+func (o FlowMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Flow] {
+	return pulumix.Output[map[string]*Flow]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o FlowMapOutput) MapIndex(k pulumi.StringInput) FlowOutput {

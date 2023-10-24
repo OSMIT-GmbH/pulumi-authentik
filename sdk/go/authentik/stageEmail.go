@@ -9,25 +9,58 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewStageEmail(ctx, "name", nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type StageEmail struct {
 	pulumi.CustomResourceState
 
-	ActivateUserOnSuccess pulumi.BoolPtrOutput   `pulumi:"activateUserOnSuccess"`
-	FromAddress           pulumi.StringPtrOutput `pulumi:"fromAddress"`
-	Host                  pulumi.StringPtrOutput `pulumi:"host"`
-	Name                  pulumi.StringOutput    `pulumi:"name"`
-	Password              pulumi.StringPtrOutput `pulumi:"password"`
-	Port                  pulumi.IntPtrOutput    `pulumi:"port"`
-	Subject               pulumi.StringPtrOutput `pulumi:"subject"`
-	Template              pulumi.StringPtrOutput `pulumi:"template"`
-	Timeout               pulumi.IntPtrOutput    `pulumi:"timeout"`
-	TokenExpiry           pulumi.IntPtrOutput    `pulumi:"tokenExpiry"`
-	UseGlobalSettings     pulumi.BoolPtrOutput   `pulumi:"useGlobalSettings"`
-	UseSsl                pulumi.BoolPtrOutput   `pulumi:"useSsl"`
-	UseTls                pulumi.BoolPtrOutput   `pulumi:"useTls"`
-	Username              pulumi.StringPtrOutput `pulumi:"username"`
+	// Defaults to `false`.
+	ActivateUserOnSuccess pulumi.BoolPtrOutput `pulumi:"activateUserOnSuccess"`
+	// Defaults to `system@authentik.local`.
+	FromAddress pulumi.StringPtrOutput `pulumi:"fromAddress"`
+	// Defaults to `localhost`.
+	Host     pulumi.StringPtrOutput `pulumi:"host"`
+	Name     pulumi.StringOutput    `pulumi:"name"`
+	Password pulumi.StringPtrOutput `pulumi:"password"`
+	// Defaults to `25`.
+	Port pulumi.IntPtrOutput `pulumi:"port"`
+	// Defaults to `authentik`.
+	Subject pulumi.StringPtrOutput `pulumi:"subject"`
+	// Defaults to `email/password_reset.html`.
+	Template pulumi.StringPtrOutput `pulumi:"template"`
+	// Defaults to `30`.
+	Timeout pulumi.IntPtrOutput `pulumi:"timeout"`
+	// Defaults to `30`.
+	TokenExpiry pulumi.IntPtrOutput `pulumi:"tokenExpiry"`
+	// Defaults to `true`.
+	UseGlobalSettings pulumi.BoolPtrOutput   `pulumi:"useGlobalSettings"`
+	UseSsl            pulumi.BoolPtrOutput   `pulumi:"useSsl"`
+	UseTls            pulumi.BoolPtrOutput   `pulumi:"useTls"`
+	Username          pulumi.StringPtrOutput `pulumi:"username"`
 }
 
 // NewStageEmail registers a new resource with the given unique name, arguments, and options.
@@ -67,37 +100,55 @@ func GetStageEmail(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering StageEmail resources.
 type stageEmailState struct {
-	ActivateUserOnSuccess *bool   `pulumi:"activateUserOnSuccess"`
-	FromAddress           *string `pulumi:"fromAddress"`
-	Host                  *string `pulumi:"host"`
-	Name                  *string `pulumi:"name"`
-	Password              *string `pulumi:"password"`
-	Port                  *int    `pulumi:"port"`
-	Subject               *string `pulumi:"subject"`
-	Template              *string `pulumi:"template"`
-	Timeout               *int    `pulumi:"timeout"`
-	TokenExpiry           *int    `pulumi:"tokenExpiry"`
-	UseGlobalSettings     *bool   `pulumi:"useGlobalSettings"`
-	UseSsl                *bool   `pulumi:"useSsl"`
-	UseTls                *bool   `pulumi:"useTls"`
-	Username              *string `pulumi:"username"`
+	// Defaults to `false`.
+	ActivateUserOnSuccess *bool `pulumi:"activateUserOnSuccess"`
+	// Defaults to `system@authentik.local`.
+	FromAddress *string `pulumi:"fromAddress"`
+	// Defaults to `localhost`.
+	Host     *string `pulumi:"host"`
+	Name     *string `pulumi:"name"`
+	Password *string `pulumi:"password"`
+	// Defaults to `25`.
+	Port *int `pulumi:"port"`
+	// Defaults to `authentik`.
+	Subject *string `pulumi:"subject"`
+	// Defaults to `email/password_reset.html`.
+	Template *string `pulumi:"template"`
+	// Defaults to `30`.
+	Timeout *int `pulumi:"timeout"`
+	// Defaults to `30`.
+	TokenExpiry *int `pulumi:"tokenExpiry"`
+	// Defaults to `true`.
+	UseGlobalSettings *bool   `pulumi:"useGlobalSettings"`
+	UseSsl            *bool   `pulumi:"useSsl"`
+	UseTls            *bool   `pulumi:"useTls"`
+	Username          *string `pulumi:"username"`
 }
 
 type StageEmailState struct {
+	// Defaults to `false`.
 	ActivateUserOnSuccess pulumi.BoolPtrInput
-	FromAddress           pulumi.StringPtrInput
-	Host                  pulumi.StringPtrInput
-	Name                  pulumi.StringPtrInput
-	Password              pulumi.StringPtrInput
-	Port                  pulumi.IntPtrInput
-	Subject               pulumi.StringPtrInput
-	Template              pulumi.StringPtrInput
-	Timeout               pulumi.IntPtrInput
-	TokenExpiry           pulumi.IntPtrInput
-	UseGlobalSettings     pulumi.BoolPtrInput
-	UseSsl                pulumi.BoolPtrInput
-	UseTls                pulumi.BoolPtrInput
-	Username              pulumi.StringPtrInput
+	// Defaults to `system@authentik.local`.
+	FromAddress pulumi.StringPtrInput
+	// Defaults to `localhost`.
+	Host     pulumi.StringPtrInput
+	Name     pulumi.StringPtrInput
+	Password pulumi.StringPtrInput
+	// Defaults to `25`.
+	Port pulumi.IntPtrInput
+	// Defaults to `authentik`.
+	Subject pulumi.StringPtrInput
+	// Defaults to `email/password_reset.html`.
+	Template pulumi.StringPtrInput
+	// Defaults to `30`.
+	Timeout pulumi.IntPtrInput
+	// Defaults to `30`.
+	TokenExpiry pulumi.IntPtrInput
+	// Defaults to `true`.
+	UseGlobalSettings pulumi.BoolPtrInput
+	UseSsl            pulumi.BoolPtrInput
+	UseTls            pulumi.BoolPtrInput
+	Username          pulumi.StringPtrInput
 }
 
 func (StageEmailState) ElementType() reflect.Type {
@@ -105,38 +156,56 @@ func (StageEmailState) ElementType() reflect.Type {
 }
 
 type stageEmailArgs struct {
-	ActivateUserOnSuccess *bool   `pulumi:"activateUserOnSuccess"`
-	FromAddress           *string `pulumi:"fromAddress"`
-	Host                  *string `pulumi:"host"`
-	Name                  *string `pulumi:"name"`
-	Password              *string `pulumi:"password"`
-	Port                  *int    `pulumi:"port"`
-	Subject               *string `pulumi:"subject"`
-	Template              *string `pulumi:"template"`
-	Timeout               *int    `pulumi:"timeout"`
-	TokenExpiry           *int    `pulumi:"tokenExpiry"`
-	UseGlobalSettings     *bool   `pulumi:"useGlobalSettings"`
-	UseSsl                *bool   `pulumi:"useSsl"`
-	UseTls                *bool   `pulumi:"useTls"`
-	Username              *string `pulumi:"username"`
+	// Defaults to `false`.
+	ActivateUserOnSuccess *bool `pulumi:"activateUserOnSuccess"`
+	// Defaults to `system@authentik.local`.
+	FromAddress *string `pulumi:"fromAddress"`
+	// Defaults to `localhost`.
+	Host     *string `pulumi:"host"`
+	Name     *string `pulumi:"name"`
+	Password *string `pulumi:"password"`
+	// Defaults to `25`.
+	Port *int `pulumi:"port"`
+	// Defaults to `authentik`.
+	Subject *string `pulumi:"subject"`
+	// Defaults to `email/password_reset.html`.
+	Template *string `pulumi:"template"`
+	// Defaults to `30`.
+	Timeout *int `pulumi:"timeout"`
+	// Defaults to `30`.
+	TokenExpiry *int `pulumi:"tokenExpiry"`
+	// Defaults to `true`.
+	UseGlobalSettings *bool   `pulumi:"useGlobalSettings"`
+	UseSsl            *bool   `pulumi:"useSsl"`
+	UseTls            *bool   `pulumi:"useTls"`
+	Username          *string `pulumi:"username"`
 }
 
 // The set of arguments for constructing a StageEmail resource.
 type StageEmailArgs struct {
+	// Defaults to `false`.
 	ActivateUserOnSuccess pulumi.BoolPtrInput
-	FromAddress           pulumi.StringPtrInput
-	Host                  pulumi.StringPtrInput
-	Name                  pulumi.StringPtrInput
-	Password              pulumi.StringPtrInput
-	Port                  pulumi.IntPtrInput
-	Subject               pulumi.StringPtrInput
-	Template              pulumi.StringPtrInput
-	Timeout               pulumi.IntPtrInput
-	TokenExpiry           pulumi.IntPtrInput
-	UseGlobalSettings     pulumi.BoolPtrInput
-	UseSsl                pulumi.BoolPtrInput
-	UseTls                pulumi.BoolPtrInput
-	Username              pulumi.StringPtrInput
+	// Defaults to `system@authentik.local`.
+	FromAddress pulumi.StringPtrInput
+	// Defaults to `localhost`.
+	Host     pulumi.StringPtrInput
+	Name     pulumi.StringPtrInput
+	Password pulumi.StringPtrInput
+	// Defaults to `25`.
+	Port pulumi.IntPtrInput
+	// Defaults to `authentik`.
+	Subject pulumi.StringPtrInput
+	// Defaults to `email/password_reset.html`.
+	Template pulumi.StringPtrInput
+	// Defaults to `30`.
+	Timeout pulumi.IntPtrInput
+	// Defaults to `30`.
+	TokenExpiry pulumi.IntPtrInput
+	// Defaults to `true`.
+	UseGlobalSettings pulumi.BoolPtrInput
+	UseSsl            pulumi.BoolPtrInput
+	UseTls            pulumi.BoolPtrInput
+	Username          pulumi.StringPtrInput
 }
 
 func (StageEmailArgs) ElementType() reflect.Type {
@@ -160,6 +229,12 @@ func (i *StageEmail) ToStageEmailOutput() StageEmailOutput {
 
 func (i *StageEmail) ToStageEmailOutputWithContext(ctx context.Context) StageEmailOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageEmailOutput)
+}
+
+func (i *StageEmail) ToOutput(ctx context.Context) pulumix.Output[*StageEmail] {
+	return pulumix.Output[*StageEmail]{
+		OutputState: i.ToStageEmailOutputWithContext(ctx).OutputState,
+	}
 }
 
 // StageEmailArrayInput is an input type that accepts StageEmailArray and StageEmailArrayOutput values.
@@ -187,6 +262,12 @@ func (i StageEmailArray) ToStageEmailArrayOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(StageEmailArrayOutput)
 }
 
+func (i StageEmailArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageEmail] {
+	return pulumix.Output[[]*StageEmail]{
+		OutputState: i.ToStageEmailArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // StageEmailMapInput is an input type that accepts StageEmailMap and StageEmailMapOutput values.
 // You can construct a concrete instance of `StageEmailMapInput` via:
 //
@@ -212,6 +293,12 @@ func (i StageEmailMap) ToStageEmailMapOutputWithContext(ctx context.Context) Sta
 	return pulumi.ToOutputWithContext(ctx, i).(StageEmailMapOutput)
 }
 
+func (i StageEmailMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageEmail] {
+	return pulumix.Output[map[string]*StageEmail]{
+		OutputState: i.ToStageEmailMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type StageEmailOutput struct{ *pulumi.OutputState }
 
 func (StageEmailOutput) ElementType() reflect.Type {
@@ -226,14 +313,23 @@ func (o StageEmailOutput) ToStageEmailOutputWithContext(ctx context.Context) Sta
 	return o
 }
 
+func (o StageEmailOutput) ToOutput(ctx context.Context) pulumix.Output[*StageEmail] {
+	return pulumix.Output[*StageEmail]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Defaults to `false`.
 func (o StageEmailOutput) ActivateUserOnSuccess() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *StageEmail) pulumi.BoolPtrOutput { return v.ActivateUserOnSuccess }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to `system@authentik.local`.
 func (o StageEmailOutput) FromAddress() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageEmail) pulumi.StringPtrOutput { return v.FromAddress }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `localhost`.
 func (o StageEmailOutput) Host() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageEmail) pulumi.StringPtrOutput { return v.Host }).(pulumi.StringPtrOutput)
 }
@@ -246,26 +342,32 @@ func (o StageEmailOutput) Password() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageEmail) pulumi.StringPtrOutput { return v.Password }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `25`.
 func (o StageEmailOutput) Port() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *StageEmail) pulumi.IntPtrOutput { return v.Port }).(pulumi.IntPtrOutput)
 }
 
+// Defaults to `authentik`.
 func (o StageEmailOutput) Subject() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageEmail) pulumi.StringPtrOutput { return v.Subject }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `email/password_reset.html`.
 func (o StageEmailOutput) Template() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageEmail) pulumi.StringPtrOutput { return v.Template }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `30`.
 func (o StageEmailOutput) Timeout() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *StageEmail) pulumi.IntPtrOutput { return v.Timeout }).(pulumi.IntPtrOutput)
 }
 
+// Defaults to `30`.
 func (o StageEmailOutput) TokenExpiry() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *StageEmail) pulumi.IntPtrOutput { return v.TokenExpiry }).(pulumi.IntPtrOutput)
 }
 
+// Defaults to `true`.
 func (o StageEmailOutput) UseGlobalSettings() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *StageEmail) pulumi.BoolPtrOutput { return v.UseGlobalSettings }).(pulumi.BoolPtrOutput)
 }
@@ -296,6 +398,12 @@ func (o StageEmailArrayOutput) ToStageEmailArrayOutputWithContext(ctx context.Co
 	return o
 }
 
+func (o StageEmailArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageEmail] {
+	return pulumix.Output[[]*StageEmail]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o StageEmailArrayOutput) Index(i pulumi.IntInput) StageEmailOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StageEmail {
 		return vs[0].([]*StageEmail)[vs[1].(int)]
@@ -314,6 +422,12 @@ func (o StageEmailMapOutput) ToStageEmailMapOutput() StageEmailMapOutput {
 
 func (o StageEmailMapOutput) ToStageEmailMapOutputWithContext(ctx context.Context) StageEmailMapOutput {
 	return o
+}
+
+func (o StageEmailMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageEmail] {
+	return pulumix.Output[map[string]*StageEmail]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o StageEmailMapOutput) MapIndex(k pulumi.StringInput) StageEmailOutput {

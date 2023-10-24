@@ -10,22 +10,54 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewStagePromptField(ctx, "field", &authentik.StagePromptFieldArgs{
+//				FieldKey: pulumi.String("username"),
+//				Label:    pulumi.String("Username"),
+//				Type:     pulumi.String("username"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type StagePromptField struct {
 	pulumi.CustomResourceState
 
-	FieldKey               pulumi.StringOutput    `pulumi:"fieldKey"`
-	InitialValue           pulumi.StringPtrOutput `pulumi:"initialValue"`
+	FieldKey     pulumi.StringOutput    `pulumi:"fieldKey"`
+	InitialValue pulumi.StringPtrOutput `pulumi:"initialValue"`
+	// Defaults to `false`.
 	InitialValueExpression pulumi.BoolPtrOutput   `pulumi:"initialValueExpression"`
 	Label                  pulumi.StringOutput    `pulumi:"label"`
 	Name                   pulumi.StringOutput    `pulumi:"name"`
 	Order                  pulumi.IntPtrOutput    `pulumi:"order"`
 	Placeholder            pulumi.StringPtrOutput `pulumi:"placeholder"`
-	PlaceholderExpression  pulumi.BoolPtrOutput   `pulumi:"placeholderExpression"`
-	Required               pulumi.BoolPtrOutput   `pulumi:"required"`
-	SubText                pulumi.StringPtrOutput `pulumi:"subText"`
-	Type                   pulumi.StringOutput    `pulumi:"type"`
+	// Defaults to `false`.
+	PlaceholderExpression pulumi.BoolPtrOutput `pulumi:"placeholderExpression"`
+	// Defaults to `false`.
+	Required pulumi.BoolPtrOutput `pulumi:"required"`
+	// Defaults to ``.
+	SubText pulumi.StringPtrOutput `pulumi:"subText"`
+	Type    pulumi.StringOutput    `pulumi:"type"`
 }
 
 // NewStagePromptField registers a new resource with the given unique name, arguments, and options.
@@ -67,31 +99,39 @@ func GetStagePromptField(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering StagePromptField resources.
 type stagePromptFieldState struct {
-	FieldKey               *string `pulumi:"fieldKey"`
-	InitialValue           *string `pulumi:"initialValue"`
+	FieldKey     *string `pulumi:"fieldKey"`
+	InitialValue *string `pulumi:"initialValue"`
+	// Defaults to `false`.
 	InitialValueExpression *bool   `pulumi:"initialValueExpression"`
 	Label                  *string `pulumi:"label"`
 	Name                   *string `pulumi:"name"`
 	Order                  *int    `pulumi:"order"`
 	Placeholder            *string `pulumi:"placeholder"`
-	PlaceholderExpression  *bool   `pulumi:"placeholderExpression"`
-	Required               *bool   `pulumi:"required"`
-	SubText                *string `pulumi:"subText"`
-	Type                   *string `pulumi:"type"`
+	// Defaults to `false`.
+	PlaceholderExpression *bool `pulumi:"placeholderExpression"`
+	// Defaults to `false`.
+	Required *bool `pulumi:"required"`
+	// Defaults to ``.
+	SubText *string `pulumi:"subText"`
+	Type    *string `pulumi:"type"`
 }
 
 type StagePromptFieldState struct {
-	FieldKey               pulumi.StringPtrInput
-	InitialValue           pulumi.StringPtrInput
+	FieldKey     pulumi.StringPtrInput
+	InitialValue pulumi.StringPtrInput
+	// Defaults to `false`.
 	InitialValueExpression pulumi.BoolPtrInput
 	Label                  pulumi.StringPtrInput
 	Name                   pulumi.StringPtrInput
 	Order                  pulumi.IntPtrInput
 	Placeholder            pulumi.StringPtrInput
-	PlaceholderExpression  pulumi.BoolPtrInput
-	Required               pulumi.BoolPtrInput
-	SubText                pulumi.StringPtrInput
-	Type                   pulumi.StringPtrInput
+	// Defaults to `false`.
+	PlaceholderExpression pulumi.BoolPtrInput
+	// Defaults to `false`.
+	Required pulumi.BoolPtrInput
+	// Defaults to ``.
+	SubText pulumi.StringPtrInput
+	Type    pulumi.StringPtrInput
 }
 
 func (StagePromptFieldState) ElementType() reflect.Type {
@@ -99,32 +139,40 @@ func (StagePromptFieldState) ElementType() reflect.Type {
 }
 
 type stagePromptFieldArgs struct {
-	FieldKey               string  `pulumi:"fieldKey"`
-	InitialValue           *string `pulumi:"initialValue"`
+	FieldKey     string  `pulumi:"fieldKey"`
+	InitialValue *string `pulumi:"initialValue"`
+	// Defaults to `false`.
 	InitialValueExpression *bool   `pulumi:"initialValueExpression"`
 	Label                  string  `pulumi:"label"`
 	Name                   *string `pulumi:"name"`
 	Order                  *int    `pulumi:"order"`
 	Placeholder            *string `pulumi:"placeholder"`
-	PlaceholderExpression  *bool   `pulumi:"placeholderExpression"`
-	Required               *bool   `pulumi:"required"`
-	SubText                *string `pulumi:"subText"`
-	Type                   string  `pulumi:"type"`
+	// Defaults to `false`.
+	PlaceholderExpression *bool `pulumi:"placeholderExpression"`
+	// Defaults to `false`.
+	Required *bool `pulumi:"required"`
+	// Defaults to ``.
+	SubText *string `pulumi:"subText"`
+	Type    string  `pulumi:"type"`
 }
 
 // The set of arguments for constructing a StagePromptField resource.
 type StagePromptFieldArgs struct {
-	FieldKey               pulumi.StringInput
-	InitialValue           pulumi.StringPtrInput
+	FieldKey     pulumi.StringInput
+	InitialValue pulumi.StringPtrInput
+	// Defaults to `false`.
 	InitialValueExpression pulumi.BoolPtrInput
 	Label                  pulumi.StringInput
 	Name                   pulumi.StringPtrInput
 	Order                  pulumi.IntPtrInput
 	Placeholder            pulumi.StringPtrInput
-	PlaceholderExpression  pulumi.BoolPtrInput
-	Required               pulumi.BoolPtrInput
-	SubText                pulumi.StringPtrInput
-	Type                   pulumi.StringInput
+	// Defaults to `false`.
+	PlaceholderExpression pulumi.BoolPtrInput
+	// Defaults to `false`.
+	Required pulumi.BoolPtrInput
+	// Defaults to ``.
+	SubText pulumi.StringPtrInput
+	Type    pulumi.StringInput
 }
 
 func (StagePromptFieldArgs) ElementType() reflect.Type {
@@ -148,6 +196,12 @@ func (i *StagePromptField) ToStagePromptFieldOutput() StagePromptFieldOutput {
 
 func (i *StagePromptField) ToStagePromptFieldOutputWithContext(ctx context.Context) StagePromptFieldOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StagePromptFieldOutput)
+}
+
+func (i *StagePromptField) ToOutput(ctx context.Context) pulumix.Output[*StagePromptField] {
+	return pulumix.Output[*StagePromptField]{
+		OutputState: i.ToStagePromptFieldOutputWithContext(ctx).OutputState,
+	}
 }
 
 // StagePromptFieldArrayInput is an input type that accepts StagePromptFieldArray and StagePromptFieldArrayOutput values.
@@ -175,6 +229,12 @@ func (i StagePromptFieldArray) ToStagePromptFieldArrayOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(StagePromptFieldArrayOutput)
 }
 
+func (i StagePromptFieldArray) ToOutput(ctx context.Context) pulumix.Output[[]*StagePromptField] {
+	return pulumix.Output[[]*StagePromptField]{
+		OutputState: i.ToStagePromptFieldArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // StagePromptFieldMapInput is an input type that accepts StagePromptFieldMap and StagePromptFieldMapOutput values.
 // You can construct a concrete instance of `StagePromptFieldMapInput` via:
 //
@@ -200,6 +260,12 @@ func (i StagePromptFieldMap) ToStagePromptFieldMapOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(StagePromptFieldMapOutput)
 }
 
+func (i StagePromptFieldMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StagePromptField] {
+	return pulumix.Output[map[string]*StagePromptField]{
+		OutputState: i.ToStagePromptFieldMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type StagePromptFieldOutput struct{ *pulumi.OutputState }
 
 func (StagePromptFieldOutput) ElementType() reflect.Type {
@@ -214,6 +280,12 @@ func (o StagePromptFieldOutput) ToStagePromptFieldOutputWithContext(ctx context.
 	return o
 }
 
+func (o StagePromptFieldOutput) ToOutput(ctx context.Context) pulumix.Output[*StagePromptField] {
+	return pulumix.Output[*StagePromptField]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o StagePromptFieldOutput) FieldKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *StagePromptField) pulumi.StringOutput { return v.FieldKey }).(pulumi.StringOutput)
 }
@@ -222,6 +294,7 @@ func (o StagePromptFieldOutput) InitialValue() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StagePromptField) pulumi.StringPtrOutput { return v.InitialValue }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `false`.
 func (o StagePromptFieldOutput) InitialValueExpression() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *StagePromptField) pulumi.BoolPtrOutput { return v.InitialValueExpression }).(pulumi.BoolPtrOutput)
 }
@@ -242,14 +315,17 @@ func (o StagePromptFieldOutput) Placeholder() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StagePromptField) pulumi.StringPtrOutput { return v.Placeholder }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `false`.
 func (o StagePromptFieldOutput) PlaceholderExpression() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *StagePromptField) pulumi.BoolPtrOutput { return v.PlaceholderExpression }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to `false`.
 func (o StagePromptFieldOutput) Required() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *StagePromptField) pulumi.BoolPtrOutput { return v.Required }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to “.
 func (o StagePromptFieldOutput) SubText() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StagePromptField) pulumi.StringPtrOutput { return v.SubText }).(pulumi.StringPtrOutput)
 }
@@ -272,6 +348,12 @@ func (o StagePromptFieldArrayOutput) ToStagePromptFieldArrayOutputWithContext(ct
 	return o
 }
 
+func (o StagePromptFieldArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StagePromptField] {
+	return pulumix.Output[[]*StagePromptField]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o StagePromptFieldArrayOutput) Index(i pulumi.IntInput) StagePromptFieldOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StagePromptField {
 		return vs[0].([]*StagePromptField)[vs[1].(int)]
@@ -290,6 +372,12 @@ func (o StagePromptFieldMapOutput) ToStagePromptFieldMapOutput() StagePromptFiel
 
 func (o StagePromptFieldMapOutput) ToStagePromptFieldMapOutputWithContext(ctx context.Context) StagePromptFieldMapOutput {
 	return o
+}
+
+func (o StagePromptFieldMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StagePromptField] {
+	return pulumix.Output[map[string]*StagePromptField]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o StagePromptFieldMapOutput) MapIndex(k pulumi.StringInput) StagePromptFieldOutput {

@@ -4,6 +4,20 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Get users by pk or username
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const akadmin = authentik.getUser({
+ *     username: "akadmin",
+ * });
+ * ```
+ */
 export function getUser(args?: GetUserArgs, opts?: pulumi.InvokeOptions): Promise<GetUserResult> {
     args = args || {};
 
@@ -18,7 +32,13 @@ export function getUser(args?: GetUserArgs, opts?: pulumi.InvokeOptions): Promis
  * A collection of arguments for invoking getUser.
  */
 export interface GetUserArgs {
+    /**
+     * Generated.
+     */
     pk?: number;
+    /**
+     * Generated.
+     */
     username?: string;
 }
 
@@ -26,24 +46,77 @@ export interface GetUserArgs {
  * A collection of values returned by getUser.
  */
 export interface GetUserResult {
+    /**
+     * Generated.
+     */
     readonly attributes: string;
+    /**
+     * Generated.
+     */
     readonly avatar: string;
+    /**
+     * Generated.
+     */
     readonly email: string;
+    /**
+     * Generated.
+     */
     readonly groups: string[];
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * Generated.
+     */
     readonly isActive: boolean;
+    /**
+     * Generated.
+     */
     readonly isSuperuser: boolean;
+    /**
+     * Generated.
+     */
     readonly lastLogin: string;
+    /**
+     * Generated.
+     */
     readonly name: string;
+    /**
+     * Generated.
+     */
     readonly path: string;
+    /**
+     * Generated.
+     */
     readonly pk: number;
+    /**
+     * Generated.
+     */
     readonly type: string;
+    /**
+     * Generated.
+     */
     readonly uid: string;
+    /**
+     * Generated.
+     */
     readonly username: string;
 }
+/**
+ * Get users by pk or username
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const akadmin = authentik.getUser({
+ *     username: "akadmin",
+ * });
+ * ```
+ */
 export function getUserOutput(args?: GetUserOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetUserResult> {
     return pulumi.output(args).apply((a: any) => getUser(a, opts))
 }
@@ -52,6 +125,12 @@ export function getUserOutput(args?: GetUserOutputArgs, opts?: pulumi.InvokeOpti
  * A collection of arguments for invoking getUser.
  */
 export interface GetUserOutputArgs {
+    /**
+     * Generated.
+     */
     pk?: pulumi.Input<number>;
+    /**
+     * Generated.
+     */
     username?: pulumi.Input<string>;
 }

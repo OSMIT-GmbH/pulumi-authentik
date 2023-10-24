@@ -6,6 +6,21 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Get groups list
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const all = authentik.getGroups({});
+ * const admins = authentik.getGroups({
+ *     isSuperuser: true,
+ * });
+ * ```
+ */
 export function getGroups(args?: GetGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupsResult> {
     args = args || {};
 
@@ -39,6 +54,9 @@ export interface GetGroupsArgs {
  */
 export interface GetGroupsResult {
     readonly attributes?: string;
+    /**
+     * Generated.
+     */
     readonly groups: outputs.GetGroupsGroup[];
     /**
      * The provider-assigned unique ID for this managed resource.
@@ -51,6 +69,21 @@ export interface GetGroupsResult {
     readonly ordering?: string;
     readonly search?: string;
 }
+/**
+ * Get groups list
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const all = authentik.getGroups({});
+ * const admins = authentik.getGroups({
+ *     isSuperuser: true,
+ * });
+ * ```
+ */
 export function getGroupsOutput(args?: GetGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGroupsResult> {
     return pulumi.output(args).apply((a: any) => getGroups(a, opts))
 }

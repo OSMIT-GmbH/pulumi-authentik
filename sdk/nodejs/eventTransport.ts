@@ -4,6 +4,21 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * // Create a notification transport to slack/discord
+ * const transport = new authentik.EventTransport("transport", {
+ *     mode: "webhook_slack",
+ *     sendOnce: true,
+ *     webhookUrl: "https://discord.com/....",
+ * });
+ * ```
+ */
 export class EventTransport extends pulumi.CustomResource {
     /**
      * Get an existing EventTransport resource's state with the given name, ID, and optional extra
@@ -34,6 +49,9 @@ export class EventTransport extends pulumi.CustomResource {
 
     public readonly mode!: pulumi.Output<string>;
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly sendOnce!: pulumi.Output<boolean | undefined>;
     public readonly webhookMapping!: pulumi.Output<string | undefined>;
     public readonly webhookUrl!: pulumi.Output<string | undefined>;
@@ -78,6 +96,9 @@ export class EventTransport extends pulumi.CustomResource {
 export interface EventTransportState {
     mode?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     sendOnce?: pulumi.Input<boolean>;
     webhookMapping?: pulumi.Input<string>;
     webhookUrl?: pulumi.Input<string>;
@@ -89,6 +110,9 @@ export interface EventTransportState {
 export interface EventTransportArgs {
     mode: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     sendOnce?: pulumi.Input<boolean>;
     webhookMapping?: pulumi.Input<string>;
     webhookUrl?: pulumi.Input<string>;

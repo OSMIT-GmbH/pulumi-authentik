@@ -4,6 +4,19 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.PolicyPassword("name", {
+ *     errorMessage: "foo",
+ *     lengthMin: 8,
+ * });
+ * ```
+ */
 export class PolicyPassword extends pulumi.CustomResource {
     /**
      * Get an existing PolicyPassword resource's state with the given name, ID, and optional extra
@@ -36,16 +49,40 @@ export class PolicyPassword extends pulumi.CustomResource {
     public readonly amountLowercase!: pulumi.Output<number | undefined>;
     public readonly amountSymbols!: pulumi.Output<number | undefined>;
     public readonly amountUppercase!: pulumi.Output<number | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly checkHaveIBeenPwned!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly checkStaticRules!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly checkZxcvbn!: pulumi.Output<boolean | undefined>;
     public readonly errorMessage!: pulumi.Output<string>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly executionLogging!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `1`.
+     */
     public readonly hibpAllowedCount!: pulumi.Output<number | undefined>;
     public readonly lengthMin!: pulumi.Output<number | undefined>;
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Defaults to `password`.
+     */
     public readonly passwordField!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`.
+     */
     public readonly symbolCharset!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `2`.
+     */
     public readonly zxcvbnScoreThreshold!: pulumi.Output<number | undefined>;
 
     /**
@@ -110,16 +147,40 @@ export interface PolicyPasswordState {
     amountLowercase?: pulumi.Input<number>;
     amountSymbols?: pulumi.Input<number>;
     amountUppercase?: pulumi.Input<number>;
+    /**
+     * Defaults to `false`.
+     */
     checkHaveIBeenPwned?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `true`.
+     */
     checkStaticRules?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `false`.
+     */
     checkZxcvbn?: pulumi.Input<boolean>;
     errorMessage?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     executionLogging?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `1`.
+     */
     hibpAllowedCount?: pulumi.Input<number>;
     lengthMin?: pulumi.Input<number>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `password`.
+     */
     passwordField?: pulumi.Input<string>;
+    /**
+     * Defaults to `!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`.
+     */
     symbolCharset?: pulumi.Input<string>;
+    /**
+     * Defaults to `2`.
+     */
     zxcvbnScoreThreshold?: pulumi.Input<number>;
 }
 
@@ -131,15 +192,39 @@ export interface PolicyPasswordArgs {
     amountLowercase?: pulumi.Input<number>;
     amountSymbols?: pulumi.Input<number>;
     amountUppercase?: pulumi.Input<number>;
+    /**
+     * Defaults to `false`.
+     */
     checkHaveIBeenPwned?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `true`.
+     */
     checkStaticRules?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `false`.
+     */
     checkZxcvbn?: pulumi.Input<boolean>;
     errorMessage: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     executionLogging?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `1`.
+     */
     hibpAllowedCount?: pulumi.Input<number>;
     lengthMin?: pulumi.Input<number>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `password`.
+     */
     passwordField?: pulumi.Input<string>;
+    /**
+     * Defaults to `!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`.
+     */
     symbolCharset?: pulumi.Input<string>;
+    /**
+     * Defaults to `2`.
+     */
     zxcvbnScoreThreshold?: pulumi.Input<number>;
 }

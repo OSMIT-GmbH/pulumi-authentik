@@ -4,6 +4,28 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * // Create a local docker connection
+ * const local = new authentik.ServiceConnectionDocker("local", {local: true});
+ * // Create a remote docker connection
+ * const tls_auth = new authentik.CertificateKeyPair("tls-auth", {
+ *     certificateData: "...",
+ *     keyData: "...",
+ * });
+ * const tls_verification = new authentik.CertificateKeyPair("tls-verification", {certificateData: "..."});
+ * const remote_host = new authentik.ServiceConnectionDocker("remote-host", {
+ *     url: "http://1.2.3.4:2368",
+ *     tlsVerification: tls_auth.id,
+ *     tlsAuthentication: tls_verification.id,
+ * });
+ * ```
+ */
 export class ServiceConnectionDocker extends pulumi.CustomResource {
     /**
      * Get an existing ServiceConnectionDocker resource's state with the given name, ID, and optional extra
@@ -32,10 +54,16 @@ export class ServiceConnectionDocker extends pulumi.CustomResource {
         return obj['__pulumiType'] === ServiceConnectionDocker.__pulumiType;
     }
 
+    /**
+     * Defaults to `false`.
+     */
     public readonly local!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly tlsAuthentication!: pulumi.Output<string | undefined>;
     public readonly tlsVerification!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `http+unix:///var/run/docker.sock`.
+     */
     public readonly url!: pulumi.Output<string | undefined>;
 
     /**
@@ -73,10 +101,16 @@ export class ServiceConnectionDocker extends pulumi.CustomResource {
  * Input properties used for looking up and filtering ServiceConnectionDocker resources.
  */
 export interface ServiceConnectionDockerState {
+    /**
+     * Defaults to `false`.
+     */
     local?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
     tlsAuthentication?: pulumi.Input<string>;
     tlsVerification?: pulumi.Input<string>;
+    /**
+     * Defaults to `http+unix:///var/run/docker.sock`.
+     */
     url?: pulumi.Input<string>;
 }
 
@@ -84,9 +118,15 @@ export interface ServiceConnectionDockerState {
  * The set of arguments for constructing a ServiceConnectionDocker resource.
  */
 export interface ServiceConnectionDockerArgs {
+    /**
+     * Defaults to `false`.
+     */
     local?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
     tlsAuthentication?: pulumi.Input<string>;
     tlsVerification?: pulumi.Input<string>;
+    /**
+     * Defaults to `http+unix:///var/run/docker.sock`.
+     */
     url?: pulumi.Input<string>;
 }

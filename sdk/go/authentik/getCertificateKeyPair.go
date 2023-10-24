@@ -9,8 +9,36 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Get certificate-key pairs by name
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.LookupCertificateKeyPair(ctx, &authentik.LookupCertificateKeyPairArgs{
+//				Name: "authentik Self-signed Certificate",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupCertificateKeyPair(ctx *pulumi.Context, args *LookupCertificateKeyPairArgs, opts ...pulumi.InvokeOption) (*LookupCertificateKeyPairResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupCertificateKeyPairResult
@@ -23,24 +51,36 @@ func LookupCertificateKeyPair(ctx *pulumi.Context, args *LookupCertificateKeyPai
 
 // A collection of arguments for invoking getCertificateKeyPair.
 type LookupCertificateKeyPairArgs struct {
-	FetchCertificate *bool   `pulumi:"fetchCertificate"`
-	FetchKey         *bool   `pulumi:"fetchKey"`
-	KeyData          *string `pulumi:"keyData"`
-	Name             string  `pulumi:"name"`
+	// If set to true, certificate data will be fetched. Defaults to `true`.
+	FetchCertificate *bool `pulumi:"fetchCertificate"`
+	// If set to true, private key data will be fetched. Defaults to `true`.
+	FetchKey *bool `pulumi:"fetchKey"`
+	// Generated.
+	KeyData *string `pulumi:"keyData"`
+	Name    string  `pulumi:"name"`
 }
 
 // A collection of values returned by getCertificateKeyPair.
 type LookupCertificateKeyPairResult struct {
-	CertificateData  string `pulumi:"certificateData"`
-	Expiry           string `pulumi:"expiry"`
-	FetchCertificate *bool  `pulumi:"fetchCertificate"`
-	FetchKey         *bool  `pulumi:"fetchKey"`
-	Fingerprint1     string `pulumi:"fingerprint1"`
-	Fingerprint256   string `pulumi:"fingerprint256"`
-	Id               string `pulumi:"id"`
-	KeyData          string `pulumi:"keyData"`
-	Name             string `pulumi:"name"`
-	Subject          string `pulumi:"subject"`
+	// Generated.
+	CertificateData string `pulumi:"certificateData"`
+	// Generated.
+	Expiry string `pulumi:"expiry"`
+	// If set to true, certificate data will be fetched. Defaults to `true`.
+	FetchCertificate *bool `pulumi:"fetchCertificate"`
+	// If set to true, private key data will be fetched. Defaults to `true`.
+	FetchKey *bool `pulumi:"fetchKey"`
+	// SHA1-hashed certificate fingerprint Generated.
+	Fingerprint1 string `pulumi:"fingerprint1"`
+	// SHA256-hashed certificate fingerprint Generated.
+	Fingerprint256 string `pulumi:"fingerprint256"`
+	// Generated.
+	Id string `pulumi:"id"`
+	// Generated.
+	KeyData string `pulumi:"keyData"`
+	Name    string `pulumi:"name"`
+	// Generated.
+	Subject string `pulumi:"subject"`
 }
 
 func LookupCertificateKeyPairOutput(ctx *pulumi.Context, args LookupCertificateKeyPairOutputArgs, opts ...pulumi.InvokeOption) LookupCertificateKeyPairResultOutput {
@@ -58,10 +98,13 @@ func LookupCertificateKeyPairOutput(ctx *pulumi.Context, args LookupCertificateK
 
 // A collection of arguments for invoking getCertificateKeyPair.
 type LookupCertificateKeyPairOutputArgs struct {
-	FetchCertificate pulumi.BoolPtrInput   `pulumi:"fetchCertificate"`
-	FetchKey         pulumi.BoolPtrInput   `pulumi:"fetchKey"`
-	KeyData          pulumi.StringPtrInput `pulumi:"keyData"`
-	Name             pulumi.StringInput    `pulumi:"name"`
+	// If set to true, certificate data will be fetched. Defaults to `true`.
+	FetchCertificate pulumi.BoolPtrInput `pulumi:"fetchCertificate"`
+	// If set to true, private key data will be fetched. Defaults to `true`.
+	FetchKey pulumi.BoolPtrInput `pulumi:"fetchKey"`
+	// Generated.
+	KeyData pulumi.StringPtrInput `pulumi:"keyData"`
+	Name    pulumi.StringInput    `pulumi:"name"`
 }
 
 func (LookupCertificateKeyPairOutputArgs) ElementType() reflect.Type {
@@ -83,34 +126,48 @@ func (o LookupCertificateKeyPairResultOutput) ToLookupCertificateKeyPairResultOu
 	return o
 }
 
+func (o LookupCertificateKeyPairResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupCertificateKeyPairResult] {
+	return pulumix.Output[LookupCertificateKeyPairResult]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Generated.
 func (o LookupCertificateKeyPairResultOutput) CertificateData() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupCertificateKeyPairResult) string { return v.CertificateData }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupCertificateKeyPairResultOutput) Expiry() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupCertificateKeyPairResult) string { return v.Expiry }).(pulumi.StringOutput)
 }
 
+// If set to true, certificate data will be fetched. Defaults to `true`.
 func (o LookupCertificateKeyPairResultOutput) FetchCertificate() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v LookupCertificateKeyPairResult) *bool { return v.FetchCertificate }).(pulumi.BoolPtrOutput)
 }
 
+// If set to true, private key data will be fetched. Defaults to `true`.
 func (o LookupCertificateKeyPairResultOutput) FetchKey() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v LookupCertificateKeyPairResult) *bool { return v.FetchKey }).(pulumi.BoolPtrOutput)
 }
 
+// SHA1-hashed certificate fingerprint Generated.
 func (o LookupCertificateKeyPairResultOutput) Fingerprint1() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupCertificateKeyPairResult) string { return v.Fingerprint1 }).(pulumi.StringOutput)
 }
 
+// SHA256-hashed certificate fingerprint Generated.
 func (o LookupCertificateKeyPairResultOutput) Fingerprint256() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupCertificateKeyPairResult) string { return v.Fingerprint256 }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupCertificateKeyPairResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupCertificateKeyPairResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupCertificateKeyPairResultOutput) KeyData() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupCertificateKeyPairResult) string { return v.KeyData }).(pulumi.StringOutput)
 }
@@ -119,6 +176,7 @@ func (o LookupCertificateKeyPairResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupCertificateKeyPairResult) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupCertificateKeyPairResultOutput) Subject() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupCertificateKeyPairResult) string { return v.Subject }).(pulumi.StringOutput)
 }

@@ -9,8 +9,39 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Get SCIM Property mappings
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.LookupPropertyMappingScim(ctx, &authentik.LookupPropertyMappingScimArgs{
+//				ManagedLists: []string{
+//					"goauthentik.io/providers/scim/user",
+//					"goauthentik.io/providers/scim/group",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupPropertyMappingScim(ctx *pulumi.Context, args *LookupPropertyMappingScimArgs, opts ...pulumi.InvokeOption) (*LookupPropertyMappingScimResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupPropertyMappingScimResult
@@ -23,19 +54,24 @@ func LookupPropertyMappingScim(ctx *pulumi.Context, args *LookupPropertyMappingS
 
 // A collection of arguments for invoking getPropertyMappingScim.
 type LookupPropertyMappingScimArgs struct {
-	Ids          []string `pulumi:"ids"`
-	Managed      *string  `pulumi:"managed"`
+	// List of ids when `managedList` is set. Generated.
+	Ids     []string `pulumi:"ids"`
+	Managed *string  `pulumi:"managed"`
+	// Retrive multiple property mappings
 	ManagedLists []string `pulumi:"managedLists"`
 	Name         *string  `pulumi:"name"`
 }
 
 // A collection of values returned by getPropertyMappingScim.
 type LookupPropertyMappingScimResult struct {
+	// Generated.
 	Expression string `pulumi:"expression"`
 	// The provider-assigned unique ID for this managed resource.
-	Id           string   `pulumi:"id"`
-	Ids          []string `pulumi:"ids"`
-	Managed      *string  `pulumi:"managed"`
+	Id string `pulumi:"id"`
+	// List of ids when `managedList` is set. Generated.
+	Ids     []string `pulumi:"ids"`
+	Managed *string  `pulumi:"managed"`
+	// Retrive multiple property mappings
 	ManagedLists []string `pulumi:"managedLists"`
 	Name         *string  `pulumi:"name"`
 }
@@ -55,8 +91,10 @@ func LookupPropertyMappingScimOutput(ctx *pulumi.Context, args LookupPropertyMap
 
 // A collection of arguments for invoking getPropertyMappingScim.
 type LookupPropertyMappingScimOutputArgs struct {
-	Ids          pulumi.StringArrayInput `pulumi:"ids"`
-	Managed      pulumi.StringPtrInput   `pulumi:"managed"`
+	// List of ids when `managedList` is set. Generated.
+	Ids     pulumi.StringArrayInput `pulumi:"ids"`
+	Managed pulumi.StringPtrInput   `pulumi:"managed"`
+	// Retrive multiple property mappings
 	ManagedLists pulumi.StringArrayInput `pulumi:"managedLists"`
 	Name         pulumi.StringPtrInput   `pulumi:"name"`
 }
@@ -80,6 +118,13 @@ func (o LookupPropertyMappingScimResultOutput) ToLookupPropertyMappingScimResult
 	return o
 }
 
+func (o LookupPropertyMappingScimResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupPropertyMappingScimResult] {
+	return pulumix.Output[LookupPropertyMappingScimResult]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Generated.
 func (o LookupPropertyMappingScimResultOutput) Expression() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPropertyMappingScimResult) string { return v.Expression }).(pulumi.StringOutput)
 }
@@ -89,6 +134,7 @@ func (o LookupPropertyMappingScimResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPropertyMappingScimResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// List of ids when `managedList` is set. Generated.
 func (o LookupPropertyMappingScimResultOutput) Ids() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LookupPropertyMappingScimResult) []string { return v.Ids }).(pulumi.StringArrayOutput)
 }
@@ -97,6 +143,7 @@ func (o LookupPropertyMappingScimResultOutput) Managed() pulumi.StringPtrOutput 
 	return o.ApplyT(func(v LookupPropertyMappingScimResult) *string { return v.Managed }).(pulumi.StringPtrOutput)
 }
 
+// Retrive multiple property mappings
 func (o LookupPropertyMappingScimResultOutput) ManagedLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LookupPropertyMappingScimResult) []string { return v.ManagedLists }).(pulumi.StringArrayOutput)
 }

@@ -10,8 +10,35 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewPropertyMappingSaml(ctx, "saml-aws-rolessessionname", &authentik.PropertyMappingSamlArgs{
+//				Expression: pulumi.String("return user.email"),
+//				SamlName:   pulumi.String("https://aws.amazon.com/SAML/Attributes/RoleSessionName"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type PropertyMappingSaml struct {
 	pulumi.CustomResourceState
 
@@ -112,6 +139,12 @@ func (i *PropertyMappingSaml) ToPropertyMappingSamlOutputWithContext(ctx context
 	return pulumi.ToOutputWithContext(ctx, i).(PropertyMappingSamlOutput)
 }
 
+func (i *PropertyMappingSaml) ToOutput(ctx context.Context) pulumix.Output[*PropertyMappingSaml] {
+	return pulumix.Output[*PropertyMappingSaml]{
+		OutputState: i.ToPropertyMappingSamlOutputWithContext(ctx).OutputState,
+	}
+}
+
 // PropertyMappingSamlArrayInput is an input type that accepts PropertyMappingSamlArray and PropertyMappingSamlArrayOutput values.
 // You can construct a concrete instance of `PropertyMappingSamlArrayInput` via:
 //
@@ -135,6 +168,12 @@ func (i PropertyMappingSamlArray) ToPropertyMappingSamlArrayOutput() PropertyMap
 
 func (i PropertyMappingSamlArray) ToPropertyMappingSamlArrayOutputWithContext(ctx context.Context) PropertyMappingSamlArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PropertyMappingSamlArrayOutput)
+}
+
+func (i PropertyMappingSamlArray) ToOutput(ctx context.Context) pulumix.Output[[]*PropertyMappingSaml] {
+	return pulumix.Output[[]*PropertyMappingSaml]{
+		OutputState: i.ToPropertyMappingSamlArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // PropertyMappingSamlMapInput is an input type that accepts PropertyMappingSamlMap and PropertyMappingSamlMapOutput values.
@@ -162,6 +201,12 @@ func (i PropertyMappingSamlMap) ToPropertyMappingSamlMapOutputWithContext(ctx co
 	return pulumi.ToOutputWithContext(ctx, i).(PropertyMappingSamlMapOutput)
 }
 
+func (i PropertyMappingSamlMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PropertyMappingSaml] {
+	return pulumix.Output[map[string]*PropertyMappingSaml]{
+		OutputState: i.ToPropertyMappingSamlMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type PropertyMappingSamlOutput struct{ *pulumi.OutputState }
 
 func (PropertyMappingSamlOutput) ElementType() reflect.Type {
@@ -174,6 +219,12 @@ func (o PropertyMappingSamlOutput) ToPropertyMappingSamlOutput() PropertyMapping
 
 func (o PropertyMappingSamlOutput) ToPropertyMappingSamlOutputWithContext(ctx context.Context) PropertyMappingSamlOutput {
 	return o
+}
+
+func (o PropertyMappingSamlOutput) ToOutput(ctx context.Context) pulumix.Output[*PropertyMappingSaml] {
+	return pulumix.Output[*PropertyMappingSaml]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PropertyMappingSamlOutput) Expression() pulumi.StringOutput {
@@ -206,6 +257,12 @@ func (o PropertyMappingSamlArrayOutput) ToPropertyMappingSamlArrayOutputWithCont
 	return o
 }
 
+func (o PropertyMappingSamlArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PropertyMappingSaml] {
+	return pulumix.Output[[]*PropertyMappingSaml]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o PropertyMappingSamlArrayOutput) Index(i pulumi.IntInput) PropertyMappingSamlOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PropertyMappingSaml {
 		return vs[0].([]*PropertyMappingSaml)[vs[1].(int)]
@@ -224,6 +281,12 @@ func (o PropertyMappingSamlMapOutput) ToPropertyMappingSamlMapOutput() PropertyM
 
 func (o PropertyMappingSamlMapOutput) ToPropertyMappingSamlMapOutputWithContext(ctx context.Context) PropertyMappingSamlMapOutput {
 	return o
+}
+
+func (o PropertyMappingSamlMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PropertyMappingSaml] {
+	return pulumix.Output[map[string]*PropertyMappingSaml]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PropertyMappingSamlMapOutput) MapIndex(k pulumi.StringInput) PropertyMappingSamlOutput {

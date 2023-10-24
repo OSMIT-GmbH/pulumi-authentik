@@ -9,16 +9,44 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewPolicyDummy(ctx, "name", nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type PolicyDummy struct {
 	pulumi.CustomResourceState
 
+	// Defaults to `false`.
 	ExecutionLogging pulumi.BoolPtrOutput `pulumi:"executionLogging"`
 	Name             pulumi.StringOutput  `pulumi:"name"`
-	Result           pulumi.BoolPtrOutput `pulumi:"result"`
-	WaitMax          pulumi.IntPtrOutput  `pulumi:"waitMax"`
-	WaitMin          pulumi.IntPtrOutput  `pulumi:"waitMin"`
+	// Defaults to `false`.
+	Result pulumi.BoolPtrOutput `pulumi:"result"`
+	// Defaults to `30`.
+	WaitMax pulumi.IntPtrOutput `pulumi:"waitMax"`
+	// Defaults to `5`.
+	WaitMin pulumi.IntPtrOutput `pulumi:"waitMin"`
 }
 
 // NewPolicyDummy registers a new resource with the given unique name, arguments, and options.
@@ -51,19 +79,27 @@ func GetPolicyDummy(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering PolicyDummy resources.
 type policyDummyState struct {
+	// Defaults to `false`.
 	ExecutionLogging *bool   `pulumi:"executionLogging"`
 	Name             *string `pulumi:"name"`
-	Result           *bool   `pulumi:"result"`
-	WaitMax          *int    `pulumi:"waitMax"`
-	WaitMin          *int    `pulumi:"waitMin"`
+	// Defaults to `false`.
+	Result *bool `pulumi:"result"`
+	// Defaults to `30`.
+	WaitMax *int `pulumi:"waitMax"`
+	// Defaults to `5`.
+	WaitMin *int `pulumi:"waitMin"`
 }
 
 type PolicyDummyState struct {
+	// Defaults to `false`.
 	ExecutionLogging pulumi.BoolPtrInput
 	Name             pulumi.StringPtrInput
-	Result           pulumi.BoolPtrInput
-	WaitMax          pulumi.IntPtrInput
-	WaitMin          pulumi.IntPtrInput
+	// Defaults to `false`.
+	Result pulumi.BoolPtrInput
+	// Defaults to `30`.
+	WaitMax pulumi.IntPtrInput
+	// Defaults to `5`.
+	WaitMin pulumi.IntPtrInput
 }
 
 func (PolicyDummyState) ElementType() reflect.Type {
@@ -71,20 +107,28 @@ func (PolicyDummyState) ElementType() reflect.Type {
 }
 
 type policyDummyArgs struct {
+	// Defaults to `false`.
 	ExecutionLogging *bool   `pulumi:"executionLogging"`
 	Name             *string `pulumi:"name"`
-	Result           *bool   `pulumi:"result"`
-	WaitMax          *int    `pulumi:"waitMax"`
-	WaitMin          *int    `pulumi:"waitMin"`
+	// Defaults to `false`.
+	Result *bool `pulumi:"result"`
+	// Defaults to `30`.
+	WaitMax *int `pulumi:"waitMax"`
+	// Defaults to `5`.
+	WaitMin *int `pulumi:"waitMin"`
 }
 
 // The set of arguments for constructing a PolicyDummy resource.
 type PolicyDummyArgs struct {
+	// Defaults to `false`.
 	ExecutionLogging pulumi.BoolPtrInput
 	Name             pulumi.StringPtrInput
-	Result           pulumi.BoolPtrInput
-	WaitMax          pulumi.IntPtrInput
-	WaitMin          pulumi.IntPtrInput
+	// Defaults to `false`.
+	Result pulumi.BoolPtrInput
+	// Defaults to `30`.
+	WaitMax pulumi.IntPtrInput
+	// Defaults to `5`.
+	WaitMin pulumi.IntPtrInput
 }
 
 func (PolicyDummyArgs) ElementType() reflect.Type {
@@ -108,6 +152,12 @@ func (i *PolicyDummy) ToPolicyDummyOutput() PolicyDummyOutput {
 
 func (i *PolicyDummy) ToPolicyDummyOutputWithContext(ctx context.Context) PolicyDummyOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyDummyOutput)
+}
+
+func (i *PolicyDummy) ToOutput(ctx context.Context) pulumix.Output[*PolicyDummy] {
+	return pulumix.Output[*PolicyDummy]{
+		OutputState: i.ToPolicyDummyOutputWithContext(ctx).OutputState,
+	}
 }
 
 // PolicyDummyArrayInput is an input type that accepts PolicyDummyArray and PolicyDummyArrayOutput values.
@@ -135,6 +185,12 @@ func (i PolicyDummyArray) ToPolicyDummyArrayOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyDummyArrayOutput)
 }
 
+func (i PolicyDummyArray) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyDummy] {
+	return pulumix.Output[[]*PolicyDummy]{
+		OutputState: i.ToPolicyDummyArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // PolicyDummyMapInput is an input type that accepts PolicyDummyMap and PolicyDummyMapOutput values.
 // You can construct a concrete instance of `PolicyDummyMapInput` via:
 //
@@ -160,6 +216,12 @@ func (i PolicyDummyMap) ToPolicyDummyMapOutputWithContext(ctx context.Context) P
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyDummyMapOutput)
 }
 
+func (i PolicyDummyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyDummy] {
+	return pulumix.Output[map[string]*PolicyDummy]{
+		OutputState: i.ToPolicyDummyMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type PolicyDummyOutput struct{ *pulumi.OutputState }
 
 func (PolicyDummyOutput) ElementType() reflect.Type {
@@ -174,6 +236,13 @@ func (o PolicyDummyOutput) ToPolicyDummyOutputWithContext(ctx context.Context) P
 	return o
 }
 
+func (o PolicyDummyOutput) ToOutput(ctx context.Context) pulumix.Output[*PolicyDummy] {
+	return pulumix.Output[*PolicyDummy]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Defaults to `false`.
 func (o PolicyDummyOutput) ExecutionLogging() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PolicyDummy) pulumi.BoolPtrOutput { return v.ExecutionLogging }).(pulumi.BoolPtrOutput)
 }
@@ -182,14 +251,17 @@ func (o PolicyDummyOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *PolicyDummy) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// Defaults to `false`.
 func (o PolicyDummyOutput) Result() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PolicyDummy) pulumi.BoolPtrOutput { return v.Result }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to `30`.
 func (o PolicyDummyOutput) WaitMax() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *PolicyDummy) pulumi.IntPtrOutput { return v.WaitMax }).(pulumi.IntPtrOutput)
 }
 
+// Defaults to `5`.
 func (o PolicyDummyOutput) WaitMin() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *PolicyDummy) pulumi.IntPtrOutput { return v.WaitMin }).(pulumi.IntPtrOutput)
 }
@@ -206,6 +278,12 @@ func (o PolicyDummyArrayOutput) ToPolicyDummyArrayOutput() PolicyDummyArrayOutpu
 
 func (o PolicyDummyArrayOutput) ToPolicyDummyArrayOutputWithContext(ctx context.Context) PolicyDummyArrayOutput {
 	return o
+}
+
+func (o PolicyDummyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyDummy] {
+	return pulumix.Output[[]*PolicyDummy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PolicyDummyArrayOutput) Index(i pulumi.IntInput) PolicyDummyOutput {
@@ -226,6 +304,12 @@ func (o PolicyDummyMapOutput) ToPolicyDummyMapOutput() PolicyDummyMapOutput {
 
 func (o PolicyDummyMapOutput) ToPolicyDummyMapOutputWithContext(ctx context.Context) PolicyDummyMapOutput {
 	return o
+}
+
+func (o PolicyDummyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyDummy] {
+	return pulumix.Output[map[string]*PolicyDummy]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PolicyDummyMapOutput) MapIndex(k pulumi.StringInput) PolicyDummyOutput {

@@ -9,8 +9,36 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Get stages by name
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.GetStage(ctx, &authentik.GetStageArgs{
+//				Name: pulumi.StringRef("default-authentication-identification"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetStage(ctx *pulumi.Context, args *GetStageArgs, opts ...pulumi.InvokeOption) (*GetStageResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetStageResult
@@ -23,13 +51,15 @@ func GetStage(ctx *pulumi.Context, args *GetStageArgs, opts ...pulumi.InvokeOpti
 
 // A collection of arguments for invoking getStage.
 type GetStageArgs struct {
+	// Generated.
 	Name *string `pulumi:"name"`
 }
 
 // A collection of values returned by getStage.
 type GetStageResult struct {
 	// The provider-assigned unique ID for this managed resource.
-	Id   string `pulumi:"id"`
+	Id string `pulumi:"id"`
+	// Generated.
 	Name string `pulumi:"name"`
 }
 
@@ -48,6 +78,7 @@ func GetStageOutput(ctx *pulumi.Context, args GetStageOutputArgs, opts ...pulumi
 
 // A collection of arguments for invoking getStage.
 type GetStageOutputArgs struct {
+	// Generated.
 	Name pulumi.StringPtrInput `pulumi:"name"`
 }
 
@@ -70,11 +101,18 @@ func (o GetStageResultOutput) ToGetStageResultOutputWithContext(ctx context.Cont
 	return o
 }
 
+func (o GetStageResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetStageResult] {
+	return pulumix.Output[GetStageResult]{
+		OutputState: o.OutputState,
+	}
+}
+
 // The provider-assigned unique ID for this managed resource.
 func (o GetStageResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetStageResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o GetStageResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetStageResult) string { return v.Name }).(pulumi.StringOutput)
 }

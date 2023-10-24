@@ -9,14 +9,51 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"encoding/json"
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"foo": "bar",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err = authentik.NewBlueprint(ctx, "instance", &authentik.BlueprintArgs{
+//				Path:    pulumi.String("default/flow-default-authentication-flow.yaml"),
+//				Context: pulumi.String(json0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type Blueprint struct {
 	pulumi.CustomResourceState
 
 	Content pulumi.StringPtrOutput `pulumi:"content"`
-	// JSON format expected. Use jsonencode() to pass objects.
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Context pulumi.StringPtrOutput `pulumi:"context"`
+	// Defaults to `true`.
 	Enabled pulumi.BoolPtrOutput   `pulumi:"enabled"`
 	Name    pulumi.StringOutput    `pulumi:"name"`
 	Path    pulumi.StringPtrOutput `pulumi:"path"`
@@ -53,8 +90,9 @@ func GetBlueprint(ctx *pulumi.Context,
 // Input properties used for looking up and filtering Blueprint resources.
 type blueprintState struct {
 	Content *string `pulumi:"content"`
-	// JSON format expected. Use jsonencode() to pass objects.
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Context *string `pulumi:"context"`
+	// Defaults to `true`.
 	Enabled *bool   `pulumi:"enabled"`
 	Name    *string `pulumi:"name"`
 	Path    *string `pulumi:"path"`
@@ -62,8 +100,9 @@ type blueprintState struct {
 
 type BlueprintState struct {
 	Content pulumi.StringPtrInput
-	// JSON format expected. Use jsonencode() to pass objects.
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Context pulumi.StringPtrInput
+	// Defaults to `true`.
 	Enabled pulumi.BoolPtrInput
 	Name    pulumi.StringPtrInput
 	Path    pulumi.StringPtrInput
@@ -75,8 +114,9 @@ func (BlueprintState) ElementType() reflect.Type {
 
 type blueprintArgs struct {
 	Content *string `pulumi:"content"`
-	// JSON format expected. Use jsonencode() to pass objects.
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Context *string `pulumi:"context"`
+	// Defaults to `true`.
 	Enabled *bool   `pulumi:"enabled"`
 	Name    *string `pulumi:"name"`
 	Path    *string `pulumi:"path"`
@@ -85,8 +125,9 @@ type blueprintArgs struct {
 // The set of arguments for constructing a Blueprint resource.
 type BlueprintArgs struct {
 	Content pulumi.StringPtrInput
-	// JSON format expected. Use jsonencode() to pass objects.
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Context pulumi.StringPtrInput
+	// Defaults to `true`.
 	Enabled pulumi.BoolPtrInput
 	Name    pulumi.StringPtrInput
 	Path    pulumi.StringPtrInput
@@ -115,6 +156,12 @@ func (i *Blueprint) ToBlueprintOutputWithContext(ctx context.Context) BlueprintO
 	return pulumi.ToOutputWithContext(ctx, i).(BlueprintOutput)
 }
 
+func (i *Blueprint) ToOutput(ctx context.Context) pulumix.Output[*Blueprint] {
+	return pulumix.Output[*Blueprint]{
+		OutputState: i.ToBlueprintOutputWithContext(ctx).OutputState,
+	}
+}
+
 // BlueprintArrayInput is an input type that accepts BlueprintArray and BlueprintArrayOutput values.
 // You can construct a concrete instance of `BlueprintArrayInput` via:
 //
@@ -138,6 +185,12 @@ func (i BlueprintArray) ToBlueprintArrayOutput() BlueprintArrayOutput {
 
 func (i BlueprintArray) ToBlueprintArrayOutputWithContext(ctx context.Context) BlueprintArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(BlueprintArrayOutput)
+}
+
+func (i BlueprintArray) ToOutput(ctx context.Context) pulumix.Output[[]*Blueprint] {
+	return pulumix.Output[[]*Blueprint]{
+		OutputState: i.ToBlueprintArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // BlueprintMapInput is an input type that accepts BlueprintMap and BlueprintMapOutput values.
@@ -165,6 +218,12 @@ func (i BlueprintMap) ToBlueprintMapOutputWithContext(ctx context.Context) Bluep
 	return pulumi.ToOutputWithContext(ctx, i).(BlueprintMapOutput)
 }
 
+func (i BlueprintMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Blueprint] {
+	return pulumix.Output[map[string]*Blueprint]{
+		OutputState: i.ToBlueprintMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type BlueprintOutput struct{ *pulumi.OutputState }
 
 func (BlueprintOutput) ElementType() reflect.Type {
@@ -179,15 +238,22 @@ func (o BlueprintOutput) ToBlueprintOutputWithContext(ctx context.Context) Bluep
 	return o
 }
 
+func (o BlueprintOutput) ToOutput(ctx context.Context) pulumix.Output[*Blueprint] {
+	return pulumix.Output[*Blueprint]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o BlueprintOutput) Content() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Blueprint) pulumi.StringPtrOutput { return v.Content }).(pulumi.StringPtrOutput)
 }
 
-// JSON format expected. Use jsonencode() to pass objects.
+// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 func (o BlueprintOutput) Context() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Blueprint) pulumi.StringPtrOutput { return v.Context }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `true`.
 func (o BlueprintOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Blueprint) pulumi.BoolPtrOutput { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
@@ -214,6 +280,12 @@ func (o BlueprintArrayOutput) ToBlueprintArrayOutputWithContext(ctx context.Cont
 	return o
 }
 
+func (o BlueprintArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Blueprint] {
+	return pulumix.Output[[]*Blueprint]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o BlueprintArrayOutput) Index(i pulumi.IntInput) BlueprintOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Blueprint {
 		return vs[0].([]*Blueprint)[vs[1].(int)]
@@ -232,6 +304,12 @@ func (o BlueprintMapOutput) ToBlueprintMapOutput() BlueprintMapOutput {
 
 func (o BlueprintMapOutput) ToBlueprintMapOutputWithContext(ctx context.Context) BlueprintMapOutput {
 	return o
+}
+
+func (o BlueprintMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Blueprint] {
+	return pulumix.Output[map[string]*Blueprint]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o BlueprintMapOutput) MapIndex(k pulumi.StringInput) BlueprintOutput {

@@ -4,6 +4,19 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.PropertyMappingLdap("name", {
+ *     expression: "return ldap.get('sAMAccountName')",
+ *     objectField: "username",
+ * });
+ * ```
+ */
 export class PropertyMappingLdap extends pulumi.CustomResource {
     /**
      * Get an existing PropertyMappingLdap resource's state with the given name, ID, and optional extra

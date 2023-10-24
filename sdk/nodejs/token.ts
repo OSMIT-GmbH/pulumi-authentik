@@ -34,11 +34,26 @@ export class Token extends pulumi.CustomResource {
 
     public readonly description!: pulumi.Output<string | undefined>;
     public readonly expires!: pulumi.Output<string | undefined>;
+    /**
+     * Generated.
+     */
     public /*out*/ readonly expiresIn!: pulumi.Output<number>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly expiring!: pulumi.Output<boolean | undefined>;
     public readonly identifier!: pulumi.Output<string>;
+    /**
+     * Defaults to `api`.
+     */
     public readonly intent!: pulumi.Output<string | undefined>;
+    /**
+     * Generated.
+     */
     public /*out*/ readonly key!: pulumi.Output<string>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly retrieveKey!: pulumi.Output<boolean | undefined>;
     public readonly user!: pulumi.Output<number>;
 
@@ -95,11 +110,26 @@ export class Token extends pulumi.CustomResource {
 export interface TokenState {
     description?: pulumi.Input<string>;
     expires?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     expiresIn?: pulumi.Input<number>;
+    /**
+     * Defaults to `true`.
+     */
     expiring?: pulumi.Input<boolean>;
     identifier?: pulumi.Input<string>;
+    /**
+     * Defaults to `api`.
+     */
     intent?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     key?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     retrieveKey?: pulumi.Input<boolean>;
     user?: pulumi.Input<number>;
 }
@@ -110,9 +140,18 @@ export interface TokenState {
 export interface TokenArgs {
     description?: pulumi.Input<string>;
     expires?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     expiring?: pulumi.Input<boolean>;
     identifier: pulumi.Input<string>;
+    /**
+     * Defaults to `api`.
+     */
     intent?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     retrieveKey?: pulumi.Input<boolean>;
     user: pulumi.Input<number>;
 }

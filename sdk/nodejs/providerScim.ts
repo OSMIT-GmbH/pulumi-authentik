@@ -4,6 +4,28 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const user = authentik.getPropertyMappingScim({
+ *     managed: "goauthentik.io/providers/scim/user",
+ * });
+ * const group = authentik.getPropertyMappingScim({
+ *     managed: "goauthentik.io/providers/scim/group",
+ * });
+ * const name = new authentik.ProviderScim("name", {
+ *     url: "http://localhost",
+ *     token: "foo",
+ *     propertyMappings: [user.then(user => user.id)],
+ *     propertyMappingsGroups: [group.then(group => group.id)],
+ * });
+ * ```
+ */
 export class ProviderScim extends pulumi.CustomResource {
     /**
      * Get an existing ProviderScim resource's state with the given name, ID, and optional extra

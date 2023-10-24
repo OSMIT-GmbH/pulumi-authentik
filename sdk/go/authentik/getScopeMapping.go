@@ -9,8 +9,39 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Get OAuth Scope mappings
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.LookupScopeMapping(ctx, &authentik.LookupScopeMappingArgs{
+//				ManagedLists: []string{
+//					"goauthentik.io/providers/oauth2/scope-email",
+//					"goauthentik.io/providers/oauth2/scope-openid",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupScopeMapping(ctx *pulumi.Context, args *LookupScopeMappingArgs, opts ...pulumi.InvokeOption) (*LookupScopeMappingResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupScopeMappingResult
@@ -23,24 +54,32 @@ func LookupScopeMapping(ctx *pulumi.Context, args *LookupScopeMappingArgs, opts 
 
 // A collection of arguments for invoking getScopeMapping.
 type LookupScopeMappingArgs struct {
-	Ids          []string `pulumi:"ids"`
-	Managed      *string  `pulumi:"managed"`
+	// List of ids when `managedList` is set. Generated.
+	Ids     []string `pulumi:"ids"`
+	Managed *string  `pulumi:"managed"`
+	// Retrive multiple property mappings
 	ManagedLists []string `pulumi:"managedLists"`
 	Name         *string  `pulumi:"name"`
-	ScopeName    *string  `pulumi:"scopeName"`
+	// Generated.
+	ScopeName *string `pulumi:"scopeName"`
 }
 
 // A collection of values returned by getScopeMapping.
 type LookupScopeMappingResult struct {
+	// Generated.
 	Description string `pulumi:"description"`
-	Expression  string `pulumi:"expression"`
+	// Generated.
+	Expression string `pulumi:"expression"`
 	// The provider-assigned unique ID for this managed resource.
-	Id           string   `pulumi:"id"`
-	Ids          []string `pulumi:"ids"`
-	Managed      *string  `pulumi:"managed"`
+	Id string `pulumi:"id"`
+	// List of ids when `managedList` is set. Generated.
+	Ids     []string `pulumi:"ids"`
+	Managed *string  `pulumi:"managed"`
+	// Retrive multiple property mappings
 	ManagedLists []string `pulumi:"managedLists"`
 	Name         *string  `pulumi:"name"`
-	ScopeName    string   `pulumi:"scopeName"`
+	// Generated.
+	ScopeName string `pulumi:"scopeName"`
 }
 
 func LookupScopeMappingOutput(ctx *pulumi.Context, args LookupScopeMappingOutputArgs, opts ...pulumi.InvokeOption) LookupScopeMappingResultOutput {
@@ -58,11 +97,14 @@ func LookupScopeMappingOutput(ctx *pulumi.Context, args LookupScopeMappingOutput
 
 // A collection of arguments for invoking getScopeMapping.
 type LookupScopeMappingOutputArgs struct {
-	Ids          pulumi.StringArrayInput `pulumi:"ids"`
-	Managed      pulumi.StringPtrInput   `pulumi:"managed"`
+	// List of ids when `managedList` is set. Generated.
+	Ids     pulumi.StringArrayInput `pulumi:"ids"`
+	Managed pulumi.StringPtrInput   `pulumi:"managed"`
+	// Retrive multiple property mappings
 	ManagedLists pulumi.StringArrayInput `pulumi:"managedLists"`
 	Name         pulumi.StringPtrInput   `pulumi:"name"`
-	ScopeName    pulumi.StringPtrInput   `pulumi:"scopeName"`
+	// Generated.
+	ScopeName pulumi.StringPtrInput `pulumi:"scopeName"`
 }
 
 func (LookupScopeMappingOutputArgs) ElementType() reflect.Type {
@@ -84,10 +126,18 @@ func (o LookupScopeMappingResultOutput) ToLookupScopeMappingResultOutputWithCont
 	return o
 }
 
+func (o LookupScopeMappingResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupScopeMappingResult] {
+	return pulumix.Output[LookupScopeMappingResult]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Generated.
 func (o LookupScopeMappingResultOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupScopeMappingResult) string { return v.Description }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupScopeMappingResultOutput) Expression() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupScopeMappingResult) string { return v.Expression }).(pulumi.StringOutput)
 }
@@ -97,6 +147,7 @@ func (o LookupScopeMappingResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupScopeMappingResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// List of ids when `managedList` is set. Generated.
 func (o LookupScopeMappingResultOutput) Ids() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LookupScopeMappingResult) []string { return v.Ids }).(pulumi.StringArrayOutput)
 }
@@ -105,6 +156,7 @@ func (o LookupScopeMappingResultOutput) Managed() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LookupScopeMappingResult) *string { return v.Managed }).(pulumi.StringPtrOutput)
 }
 
+// Retrive multiple property mappings
 func (o LookupScopeMappingResultOutput) ManagedLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LookupScopeMappingResult) []string { return v.ManagedLists }).(pulumi.StringArrayOutput)
 }
@@ -113,6 +165,7 @@ func (o LookupScopeMappingResultOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LookupScopeMappingResult) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
+// Generated.
 func (o LookupScopeMappingResultOutput) ScopeName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupScopeMappingResult) string { return v.ScopeName }).(pulumi.StringOutput)
 }

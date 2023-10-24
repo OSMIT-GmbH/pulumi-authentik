@@ -4,6 +4,21 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * // Create a super-user group with a user
+ * const name = new authentik.User("name", {username: "user"});
+ * const group = new authentik.Group("group", {
+ *     users: [name.id],
+ *     isSuperuser: true,
+ * });
+ * ```
+ */
 export class Group extends pulumi.CustomResource {
     /**
      * Get an existing Group resource's state with the given name, ID, and optional extra
@@ -33,12 +48,18 @@ export class Group extends pulumi.CustomResource {
     }
 
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     public readonly attributes!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly isSuperuser!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly parent!: pulumi.Output<string | undefined>;
+    /**
+     * Generated.
+     */
     public readonly users!: pulumi.Output<number[]>;
 
     /**
@@ -77,12 +98,18 @@ export class Group extends pulumi.CustomResource {
  */
 export interface GroupState {
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     attributes?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     isSuperuser?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
     parent?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     users?: pulumi.Input<pulumi.Input<number>[]>;
 }
 
@@ -91,11 +118,17 @@ export interface GroupState {
  */
 export interface GroupArgs {
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     attributes?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     isSuperuser?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
     parent?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     users?: pulumi.Input<pulumi.Input<number>[]>;
 }

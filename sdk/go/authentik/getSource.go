@@ -9,8 +9,36 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Get Source by name, slug or managed
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.GetSource(ctx, &authentik.GetSourceArgs{
+//				Managed: pulumi.StringRef("goauthentik.io/sources/inbuilt"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetSource(ctx *pulumi.Context, args *GetSourceArgs, opts ...pulumi.InvokeOption) (*GetSourceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSourceResult
@@ -23,18 +51,24 @@ func GetSource(ctx *pulumi.Context, args *GetSourceArgs, opts ...pulumi.InvokeOp
 
 // A collection of arguments for invoking getSource.
 type GetSourceArgs struct {
+	// Generated.
 	Managed *string `pulumi:"managed"`
-	Slug    *string `pulumi:"slug"`
+	// Generated.
+	Slug *string `pulumi:"slug"`
 }
 
 // A collection of values returned by getSource.
 type GetSourceResult struct {
 	// The provider-assigned unique ID for this managed resource.
-	Id      string `pulumi:"id"`
+	Id string `pulumi:"id"`
+	// Generated.
 	Managed string `pulumi:"managed"`
-	Name    string `pulumi:"name"`
-	Slug    string `pulumi:"slug"`
-	Uuid    string `pulumi:"uuid"`
+	// Generated.
+	Name string `pulumi:"name"`
+	// Generated.
+	Slug string `pulumi:"slug"`
+	// Generated.
+	Uuid string `pulumi:"uuid"`
 }
 
 func GetSourceOutput(ctx *pulumi.Context, args GetSourceOutputArgs, opts ...pulumi.InvokeOption) GetSourceResultOutput {
@@ -52,8 +86,10 @@ func GetSourceOutput(ctx *pulumi.Context, args GetSourceOutputArgs, opts ...pulu
 
 // A collection of arguments for invoking getSource.
 type GetSourceOutputArgs struct {
+	// Generated.
 	Managed pulumi.StringPtrInput `pulumi:"managed"`
-	Slug    pulumi.StringPtrInput `pulumi:"slug"`
+	// Generated.
+	Slug pulumi.StringPtrInput `pulumi:"slug"`
 }
 
 func (GetSourceOutputArgs) ElementType() reflect.Type {
@@ -75,23 +111,33 @@ func (o GetSourceResultOutput) ToGetSourceResultOutputWithContext(ctx context.Co
 	return o
 }
 
+func (o GetSourceResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetSourceResult] {
+	return pulumix.Output[GetSourceResult]{
+		OutputState: o.OutputState,
+	}
+}
+
 // The provider-assigned unique ID for this managed resource.
 func (o GetSourceResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSourceResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o GetSourceResultOutput) Managed() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSourceResult) string { return v.Managed }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o GetSourceResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSourceResult) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o GetSourceResultOutput) Slug() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSourceResult) string { return v.Slug }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o GetSourceResultOutput) Uuid() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSourceResult) string { return v.Uuid }).(pulumi.StringOutput)
 }

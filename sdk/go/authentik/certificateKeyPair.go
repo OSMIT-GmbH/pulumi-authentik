@@ -10,8 +10,60 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			examplePrivateKey, err := tls.NewPrivateKey(ctx, "examplePrivateKey", &tls.PrivateKeyArgs{
+//				Algorithm:  pulumi.String("ECDSA"),
+//				EcdsaCurve: pulumi.String("P384"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleSelfSignedCert, err := tls.NewSelfSignedCert(ctx, "exampleSelfSignedCert", &tls.SelfSignedCertArgs{
+//				KeyAlgorithm:  pulumi.String("ECDSA"),
+//				PrivateKeyPem: examplePrivateKey.PrivateKeyPem,
+//				Subject: &tls.SelfSignedCertSubjectArgs{
+//					CommonName:   pulumi.String("example.com"),
+//					Organization: pulumi.String("ACME Examples, Inc"),
+//				},
+//				ValidityPeriodHours: pulumi.Int(12),
+//				AllowedUses: pulumi.StringArray{
+//					pulumi.String("key_encipherment"),
+//					pulumi.String("digital_signature"),
+//					pulumi.String("server_auth"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewCertificateKeyPair(ctx, "name", &authentik.CertificateKeyPairArgs{
+//				CertificateData: exampleSelfSignedCert.CertPem,
+//				KeyData:         examplePrivateKey.PrivateKeyPem,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type CertificateKeyPair struct {
 	pulumi.CustomResourceState
 
@@ -111,6 +163,12 @@ func (i *CertificateKeyPair) ToCertificateKeyPairOutputWithContext(ctx context.C
 	return pulumi.ToOutputWithContext(ctx, i).(CertificateKeyPairOutput)
 }
 
+func (i *CertificateKeyPair) ToOutput(ctx context.Context) pulumix.Output[*CertificateKeyPair] {
+	return pulumix.Output[*CertificateKeyPair]{
+		OutputState: i.ToCertificateKeyPairOutputWithContext(ctx).OutputState,
+	}
+}
+
 // CertificateKeyPairArrayInput is an input type that accepts CertificateKeyPairArray and CertificateKeyPairArrayOutput values.
 // You can construct a concrete instance of `CertificateKeyPairArrayInput` via:
 //
@@ -134,6 +192,12 @@ func (i CertificateKeyPairArray) ToCertificateKeyPairArrayOutput() CertificateKe
 
 func (i CertificateKeyPairArray) ToCertificateKeyPairArrayOutputWithContext(ctx context.Context) CertificateKeyPairArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(CertificateKeyPairArrayOutput)
+}
+
+func (i CertificateKeyPairArray) ToOutput(ctx context.Context) pulumix.Output[[]*CertificateKeyPair] {
+	return pulumix.Output[[]*CertificateKeyPair]{
+		OutputState: i.ToCertificateKeyPairArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // CertificateKeyPairMapInput is an input type that accepts CertificateKeyPairMap and CertificateKeyPairMapOutput values.
@@ -161,6 +225,12 @@ func (i CertificateKeyPairMap) ToCertificateKeyPairMapOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(CertificateKeyPairMapOutput)
 }
 
+func (i CertificateKeyPairMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*CertificateKeyPair] {
+	return pulumix.Output[map[string]*CertificateKeyPair]{
+		OutputState: i.ToCertificateKeyPairMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type CertificateKeyPairOutput struct{ *pulumi.OutputState }
 
 func (CertificateKeyPairOutput) ElementType() reflect.Type {
@@ -173,6 +243,12 @@ func (o CertificateKeyPairOutput) ToCertificateKeyPairOutput() CertificateKeyPai
 
 func (o CertificateKeyPairOutput) ToCertificateKeyPairOutputWithContext(ctx context.Context) CertificateKeyPairOutput {
 	return o
+}
+
+func (o CertificateKeyPairOutput) ToOutput(ctx context.Context) pulumix.Output[*CertificateKeyPair] {
+	return pulumix.Output[*CertificateKeyPair]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o CertificateKeyPairOutput) CertificateData() pulumi.StringOutput {
@@ -201,6 +277,12 @@ func (o CertificateKeyPairArrayOutput) ToCertificateKeyPairArrayOutputWithContex
 	return o
 }
 
+func (o CertificateKeyPairArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*CertificateKeyPair] {
+	return pulumix.Output[[]*CertificateKeyPair]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o CertificateKeyPairArrayOutput) Index(i pulumi.IntInput) CertificateKeyPairOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *CertificateKeyPair {
 		return vs[0].([]*CertificateKeyPair)[vs[1].(int)]
@@ -219,6 +301,12 @@ func (o CertificateKeyPairMapOutput) ToCertificateKeyPairMapOutput() Certificate
 
 func (o CertificateKeyPairMapOutput) ToCertificateKeyPairMapOutputWithContext(ctx context.Context) CertificateKeyPairMapOutput {
 	return o
+}
+
+func (o CertificateKeyPairMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*CertificateKeyPair] {
+	return pulumix.Output[map[string]*CertificateKeyPair]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o CertificateKeyPairMapOutput) MapIndex(k pulumi.StringInput) CertificateKeyPairOutput {

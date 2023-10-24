@@ -4,6 +4,23 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Get SAML Property mappings
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const test = authentik.getPropertyMappingSaml({
+ *     managedLists: [
+ *         "goauthentik.io/providers/saml/upn",
+ *         "goauthentik.io/providers/saml/name",
+ *     ],
+ * });
+ * ```
+ */
 export function getPropertyMappingSaml(args?: GetPropertyMappingSamlArgs, opts?: pulumi.InvokeOptions): Promise<GetPropertyMappingSamlResult> {
     args = args || {};
 
@@ -23,12 +40,27 @@ export function getPropertyMappingSaml(args?: GetPropertyMappingSamlArgs, opts?:
  * A collection of arguments for invoking getPropertyMappingSaml.
  */
 export interface GetPropertyMappingSamlArgs {
+    /**
+     * Generated.
+     */
     expression?: string;
+    /**
+     * Generated.
+     */
     friendlyName?: string;
+    /**
+     * List of ids when `managedList` is set. Generated.
+     */
     ids?: string[];
     managed?: string;
+    /**
+     * Retrive multiple property mappings
+     */
     managedLists?: string[];
     name?: string;
+    /**
+     * Generated.
+     */
     samlName?: string;
 }
 
@@ -36,18 +68,50 @@ export interface GetPropertyMappingSamlArgs {
  * A collection of values returned by getPropertyMappingSaml.
  */
 export interface GetPropertyMappingSamlResult {
+    /**
+     * Generated.
+     */
     readonly expression: string;
+    /**
+     * Generated.
+     */
     readonly friendlyName: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * List of ids when `managedList` is set. Generated.
+     */
     readonly ids: string[];
     readonly managed?: string;
+    /**
+     * Retrive multiple property mappings
+     */
     readonly managedLists?: string[];
     readonly name?: string;
+    /**
+     * Generated.
+     */
     readonly samlName: string;
 }
+/**
+ * Get SAML Property mappings
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const test = authentik.getPropertyMappingSaml({
+ *     managedLists: [
+ *         "goauthentik.io/providers/saml/upn",
+ *         "goauthentik.io/providers/saml/name",
+ *     ],
+ * });
+ * ```
+ */
 export function getPropertyMappingSamlOutput(args?: GetPropertyMappingSamlOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPropertyMappingSamlResult> {
     return pulumi.output(args).apply((a: any) => getPropertyMappingSaml(a, opts))
 }
@@ -56,11 +120,26 @@ export function getPropertyMappingSamlOutput(args?: GetPropertyMappingSamlOutput
  * A collection of arguments for invoking getPropertyMappingSaml.
  */
 export interface GetPropertyMappingSamlOutputArgs {
+    /**
+     * Generated.
+     */
     expression?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     friendlyName?: pulumi.Input<string>;
+    /**
+     * List of ids when `managedList` is set. Generated.
+     */
     ids?: pulumi.Input<pulumi.Input<string>[]>;
     managed?: pulumi.Input<string>;
+    /**
+     * Retrive multiple property mappings
+     */
     managedLists?: pulumi.Input<pulumi.Input<string>[]>;
     name?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     samlName?: pulumi.Input<string>;
 }

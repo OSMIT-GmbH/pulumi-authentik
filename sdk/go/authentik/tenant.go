@@ -10,18 +10,49 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewTenant(ctx, "default", &authentik.TenantArgs{
+//				BrandingTitle: pulumi.String("test"),
+//				Default:       pulumi.Bool(true),
+//				Domain:        pulumi.String("."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type Tenant struct {
 	pulumi.CustomResourceState
 
-	// JSON format expected. Use jsonencode() to pass objects.
-	Attributes         pulumi.StringPtrOutput `pulumi:"attributes"`
-	BrandingFavicon    pulumi.StringPtrOutput `pulumi:"brandingFavicon"`
-	BrandingLogo       pulumi.StringPtrOutput `pulumi:"brandingLogo"`
-	BrandingTitle      pulumi.StringPtrOutput `pulumi:"brandingTitle"`
-	Default            pulumi.BoolPtrOutput   `pulumi:"default"`
-	Domain             pulumi.StringOutput    `pulumi:"domain"`
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
+	Attributes      pulumi.StringPtrOutput `pulumi:"attributes"`
+	BrandingFavicon pulumi.StringPtrOutput `pulumi:"brandingFavicon"`
+	BrandingLogo    pulumi.StringPtrOutput `pulumi:"brandingLogo"`
+	// Defaults to `authentik`.
+	BrandingTitle pulumi.StringPtrOutput `pulumi:"brandingTitle"`
+	// Defaults to `false`.
+	Default pulumi.BoolPtrOutput `pulumi:"default"`
+	Domain  pulumi.StringOutput  `pulumi:"domain"`
+	// Defaults to `days=365`.
 	EventRetention     pulumi.StringPtrOutput `pulumi:"eventRetention"`
 	FlowAuthentication pulumi.StringPtrOutput `pulumi:"flowAuthentication"`
 	FlowDeviceCode     pulumi.StringPtrOutput `pulumi:"flowDeviceCode"`
@@ -65,13 +96,16 @@ func GetTenant(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Tenant resources.
 type tenantState struct {
-	// JSON format expected. Use jsonencode() to pass objects.
-	Attributes         *string `pulumi:"attributes"`
-	BrandingFavicon    *string `pulumi:"brandingFavicon"`
-	BrandingLogo       *string `pulumi:"brandingLogo"`
-	BrandingTitle      *string `pulumi:"brandingTitle"`
-	Default            *bool   `pulumi:"default"`
-	Domain             *string `pulumi:"domain"`
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
+	Attributes      *string `pulumi:"attributes"`
+	BrandingFavicon *string `pulumi:"brandingFavicon"`
+	BrandingLogo    *string `pulumi:"brandingLogo"`
+	// Defaults to `authentik`.
+	BrandingTitle *string `pulumi:"brandingTitle"`
+	// Defaults to `false`.
+	Default *bool   `pulumi:"default"`
+	Domain  *string `pulumi:"domain"`
+	// Defaults to `days=365`.
 	EventRetention     *string `pulumi:"eventRetention"`
 	FlowAuthentication *string `pulumi:"flowAuthentication"`
 	FlowDeviceCode     *string `pulumi:"flowDeviceCode"`
@@ -83,13 +117,16 @@ type tenantState struct {
 }
 
 type TenantState struct {
-	// JSON format expected. Use jsonencode() to pass objects.
-	Attributes         pulumi.StringPtrInput
-	BrandingFavicon    pulumi.StringPtrInput
-	BrandingLogo       pulumi.StringPtrInput
-	BrandingTitle      pulumi.StringPtrInput
-	Default            pulumi.BoolPtrInput
-	Domain             pulumi.StringPtrInput
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
+	Attributes      pulumi.StringPtrInput
+	BrandingFavicon pulumi.StringPtrInput
+	BrandingLogo    pulumi.StringPtrInput
+	// Defaults to `authentik`.
+	BrandingTitle pulumi.StringPtrInput
+	// Defaults to `false`.
+	Default pulumi.BoolPtrInput
+	Domain  pulumi.StringPtrInput
+	// Defaults to `days=365`.
 	EventRetention     pulumi.StringPtrInput
 	FlowAuthentication pulumi.StringPtrInput
 	FlowDeviceCode     pulumi.StringPtrInput
@@ -105,13 +142,16 @@ func (TenantState) ElementType() reflect.Type {
 }
 
 type tenantArgs struct {
-	// JSON format expected. Use jsonencode() to pass objects.
-	Attributes         *string `pulumi:"attributes"`
-	BrandingFavicon    *string `pulumi:"brandingFavicon"`
-	BrandingLogo       *string `pulumi:"brandingLogo"`
-	BrandingTitle      *string `pulumi:"brandingTitle"`
-	Default            *bool   `pulumi:"default"`
-	Domain             string  `pulumi:"domain"`
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
+	Attributes      *string `pulumi:"attributes"`
+	BrandingFavicon *string `pulumi:"brandingFavicon"`
+	BrandingLogo    *string `pulumi:"brandingLogo"`
+	// Defaults to `authentik`.
+	BrandingTitle *string `pulumi:"brandingTitle"`
+	// Defaults to `false`.
+	Default *bool  `pulumi:"default"`
+	Domain  string `pulumi:"domain"`
+	// Defaults to `days=365`.
 	EventRetention     *string `pulumi:"eventRetention"`
 	FlowAuthentication *string `pulumi:"flowAuthentication"`
 	FlowDeviceCode     *string `pulumi:"flowDeviceCode"`
@@ -124,13 +164,16 @@ type tenantArgs struct {
 
 // The set of arguments for constructing a Tenant resource.
 type TenantArgs struct {
-	// JSON format expected. Use jsonencode() to pass objects.
-	Attributes         pulumi.StringPtrInput
-	BrandingFavicon    pulumi.StringPtrInput
-	BrandingLogo       pulumi.StringPtrInput
-	BrandingTitle      pulumi.StringPtrInput
-	Default            pulumi.BoolPtrInput
-	Domain             pulumi.StringInput
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
+	Attributes      pulumi.StringPtrInput
+	BrandingFavicon pulumi.StringPtrInput
+	BrandingLogo    pulumi.StringPtrInput
+	// Defaults to `authentik`.
+	BrandingTitle pulumi.StringPtrInput
+	// Defaults to `false`.
+	Default pulumi.BoolPtrInput
+	Domain  pulumi.StringInput
+	// Defaults to `days=365`.
 	EventRetention     pulumi.StringPtrInput
 	FlowAuthentication pulumi.StringPtrInput
 	FlowDeviceCode     pulumi.StringPtrInput
@@ -164,6 +207,12 @@ func (i *Tenant) ToTenantOutputWithContext(ctx context.Context) TenantOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(TenantOutput)
 }
 
+func (i *Tenant) ToOutput(ctx context.Context) pulumix.Output[*Tenant] {
+	return pulumix.Output[*Tenant]{
+		OutputState: i.ToTenantOutputWithContext(ctx).OutputState,
+	}
+}
+
 // TenantArrayInput is an input type that accepts TenantArray and TenantArrayOutput values.
 // You can construct a concrete instance of `TenantArrayInput` via:
 //
@@ -187,6 +236,12 @@ func (i TenantArray) ToTenantArrayOutput() TenantArrayOutput {
 
 func (i TenantArray) ToTenantArrayOutputWithContext(ctx context.Context) TenantArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(TenantArrayOutput)
+}
+
+func (i TenantArray) ToOutput(ctx context.Context) pulumix.Output[[]*Tenant] {
+	return pulumix.Output[[]*Tenant]{
+		OutputState: i.ToTenantArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // TenantMapInput is an input type that accepts TenantMap and TenantMapOutput values.
@@ -214,6 +269,12 @@ func (i TenantMap) ToTenantMapOutputWithContext(ctx context.Context) TenantMapOu
 	return pulumi.ToOutputWithContext(ctx, i).(TenantMapOutput)
 }
 
+func (i TenantMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Tenant] {
+	return pulumix.Output[map[string]*Tenant]{
+		OutputState: i.ToTenantMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type TenantOutput struct{ *pulumi.OutputState }
 
 func (TenantOutput) ElementType() reflect.Type {
@@ -228,7 +289,13 @@ func (o TenantOutput) ToTenantOutputWithContext(ctx context.Context) TenantOutpu
 	return o
 }
 
-// JSON format expected. Use jsonencode() to pass objects.
+func (o TenantOutput) ToOutput(ctx context.Context) pulumix.Output[*Tenant] {
+	return pulumix.Output[*Tenant]{
+		OutputState: o.OutputState,
+	}
+}
+
+// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 func (o TenantOutput) Attributes() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Tenant) pulumi.StringPtrOutput { return v.Attributes }).(pulumi.StringPtrOutput)
 }
@@ -241,10 +308,12 @@ func (o TenantOutput) BrandingLogo() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Tenant) pulumi.StringPtrOutput { return v.BrandingLogo }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `authentik`.
 func (o TenantOutput) BrandingTitle() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Tenant) pulumi.StringPtrOutput { return v.BrandingTitle }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `false`.
 func (o TenantOutput) Default() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Tenant) pulumi.BoolPtrOutput { return v.Default }).(pulumi.BoolPtrOutput)
 }
@@ -253,6 +322,7 @@ func (o TenantOutput) Domain() pulumi.StringOutput {
 	return o.ApplyT(func(v *Tenant) pulumi.StringOutput { return v.Domain }).(pulumi.StringOutput)
 }
 
+// Defaults to `days=365`.
 func (o TenantOutput) EventRetention() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Tenant) pulumi.StringPtrOutput { return v.EventRetention }).(pulumi.StringPtrOutput)
 }
@@ -299,6 +369,12 @@ func (o TenantArrayOutput) ToTenantArrayOutputWithContext(ctx context.Context) T
 	return o
 }
 
+func (o TenantArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Tenant] {
+	return pulumix.Output[[]*Tenant]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o TenantArrayOutput) Index(i pulumi.IntInput) TenantOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Tenant {
 		return vs[0].([]*Tenant)[vs[1].(int)]
@@ -317,6 +393,12 @@ func (o TenantMapOutput) ToTenantMapOutput() TenantMapOutput {
 
 func (o TenantMapOutput) ToTenantMapOutputWithContext(ctx context.Context) TenantMapOutput {
 	return o
+}
+
+func (o TenantMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Tenant] {
+	return pulumix.Output[map[string]*Tenant]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o TenantMapOutput) MapIndex(k pulumi.StringInput) TenantOutput {

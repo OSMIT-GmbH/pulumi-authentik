@@ -4,6 +4,25 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const default-authorization-flow = authentik.getFlow({
+ *     slug: "default-provider-authorization-implicit-consent",
+ * });
+ * const proxy = new authentik.ProviderProxy("proxy", {
+ *     authorizationFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
+ *     externalHost: "http://foo.bar.baz",
+ *     internalHost: "http://internal.local",
+ * });
+ * const outpost = new authentik.Outpost("outpost", {protocolProviders: [proxy.id]});
+ * ```
+ */
 export class Outpost extends pulumi.CustomResource {
     /**
      * Get an existing Outpost resource's state with the given name, ID, and optional extra
@@ -33,12 +52,15 @@ export class Outpost extends pulumi.CustomResource {
     }
 
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Generated.
      */
     public readonly config!: pulumi.Output<string>;
     public readonly name!: pulumi.Output<string>;
     public readonly protocolProviders!: pulumi.Output<number[]>;
     public readonly serviceConnection!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `proxy`.
+     */
     public readonly type!: pulumi.Output<string | undefined>;
 
     /**
@@ -80,12 +102,15 @@ export class Outpost extends pulumi.CustomResource {
  */
 export interface OutpostState {
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Generated.
      */
     config?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     protocolProviders?: pulumi.Input<pulumi.Input<number>[]>;
     serviceConnection?: pulumi.Input<string>;
+    /**
+     * Defaults to `proxy`.
+     */
     type?: pulumi.Input<string>;
 }
 
@@ -94,11 +119,14 @@ export interface OutpostState {
  */
 export interface OutpostArgs {
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Generated.
      */
     config?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     protocolProviders: pulumi.Input<pulumi.Input<number>[]>;
     serviceConnection?: pulumi.Input<string>;
+    /**
+     * Defaults to `proxy`.
+     */
     type?: pulumi.Input<string>;
 }

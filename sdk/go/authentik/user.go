@@ -10,20 +10,64 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewUser(ctx, "nameUser", &authentik.UserArgs{
+//				Username: pulumi.String("user"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			group, err := authentik.NewGroup(ctx, "group", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewUser(ctx, "nameIndex/userUser", &authentik.UserArgs{
+//				Username: pulumi.String("user"),
+//				Groups: pulumi.StringArray{
+//					group.ID(),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type User struct {
 	pulumi.CustomResourceState
 
-	// JSON format expected. Use jsonencode() to pass objects.
-	Attributes pulumi.StringPtrOutput   `pulumi:"attributes"`
-	Email      pulumi.StringPtrOutput   `pulumi:"email"`
-	Groups     pulumi.StringArrayOutput `pulumi:"groups"`
-	IsActive   pulumi.BoolPtrOutput     `pulumi:"isActive"`
-	Name       pulumi.StringOutput      `pulumi:"name"`
-	Path       pulumi.StringPtrOutput   `pulumi:"path"`
-	Type       pulumi.StringPtrOutput   `pulumi:"type"`
-	Username   pulumi.StringOutput      `pulumi:"username"`
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
+	Attributes pulumi.StringPtrOutput `pulumi:"attributes"`
+	Email      pulumi.StringPtrOutput `pulumi:"email"`
+	// Generated.
+	Groups pulumi.StringArrayOutput `pulumi:"groups"`
+	// Defaults to `true`.
+	IsActive pulumi.BoolPtrOutput `pulumi:"isActive"`
+	// Defaults to ``.
+	Name pulumi.StringOutput `pulumi:"name"`
+	// Defaults to `users`.
+	Path pulumi.StringPtrOutput `pulumi:"path"`
+	// Defaults to `internal`.
+	Type     pulumi.StringPtrOutput `pulumi:"type"`
+	Username pulumi.StringOutput    `pulumi:"username"`
 }
 
 // NewUser registers a new resource with the given unique name, arguments, and options.
@@ -59,27 +103,37 @@ func GetUser(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering User resources.
 type userState struct {
-	// JSON format expected. Use jsonencode() to pass objects.
-	Attributes *string  `pulumi:"attributes"`
-	Email      *string  `pulumi:"email"`
-	Groups     []string `pulumi:"groups"`
-	IsActive   *bool    `pulumi:"isActive"`
-	Name       *string  `pulumi:"name"`
-	Path       *string  `pulumi:"path"`
-	Type       *string  `pulumi:"type"`
-	Username   *string  `pulumi:"username"`
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
+	Attributes *string `pulumi:"attributes"`
+	Email      *string `pulumi:"email"`
+	// Generated.
+	Groups []string `pulumi:"groups"`
+	// Defaults to `true`.
+	IsActive *bool `pulumi:"isActive"`
+	// Defaults to ``.
+	Name *string `pulumi:"name"`
+	// Defaults to `users`.
+	Path *string `pulumi:"path"`
+	// Defaults to `internal`.
+	Type     *string `pulumi:"type"`
+	Username *string `pulumi:"username"`
 }
 
 type UserState struct {
-	// JSON format expected. Use jsonencode() to pass objects.
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Attributes pulumi.StringPtrInput
 	Email      pulumi.StringPtrInput
-	Groups     pulumi.StringArrayInput
-	IsActive   pulumi.BoolPtrInput
-	Name       pulumi.StringPtrInput
-	Path       pulumi.StringPtrInput
-	Type       pulumi.StringPtrInput
-	Username   pulumi.StringPtrInput
+	// Generated.
+	Groups pulumi.StringArrayInput
+	// Defaults to `true`.
+	IsActive pulumi.BoolPtrInput
+	// Defaults to ``.
+	Name pulumi.StringPtrInput
+	// Defaults to `users`.
+	Path pulumi.StringPtrInput
+	// Defaults to `internal`.
+	Type     pulumi.StringPtrInput
+	Username pulumi.StringPtrInput
 }
 
 func (UserState) ElementType() reflect.Type {
@@ -87,28 +141,38 @@ func (UserState) ElementType() reflect.Type {
 }
 
 type userArgs struct {
-	// JSON format expected. Use jsonencode() to pass objects.
-	Attributes *string  `pulumi:"attributes"`
-	Email      *string  `pulumi:"email"`
-	Groups     []string `pulumi:"groups"`
-	IsActive   *bool    `pulumi:"isActive"`
-	Name       *string  `pulumi:"name"`
-	Path       *string  `pulumi:"path"`
-	Type       *string  `pulumi:"type"`
-	Username   string   `pulumi:"username"`
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
+	Attributes *string `pulumi:"attributes"`
+	Email      *string `pulumi:"email"`
+	// Generated.
+	Groups []string `pulumi:"groups"`
+	// Defaults to `true`.
+	IsActive *bool `pulumi:"isActive"`
+	// Defaults to ``.
+	Name *string `pulumi:"name"`
+	// Defaults to `users`.
+	Path *string `pulumi:"path"`
+	// Defaults to `internal`.
+	Type     *string `pulumi:"type"`
+	Username string  `pulumi:"username"`
 }
 
 // The set of arguments for constructing a User resource.
 type UserArgs struct {
-	// JSON format expected. Use jsonencode() to pass objects.
+	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Attributes pulumi.StringPtrInput
 	Email      pulumi.StringPtrInput
-	Groups     pulumi.StringArrayInput
-	IsActive   pulumi.BoolPtrInput
-	Name       pulumi.StringPtrInput
-	Path       pulumi.StringPtrInput
-	Type       pulumi.StringPtrInput
-	Username   pulumi.StringInput
+	// Generated.
+	Groups pulumi.StringArrayInput
+	// Defaults to `true`.
+	IsActive pulumi.BoolPtrInput
+	// Defaults to ``.
+	Name pulumi.StringPtrInput
+	// Defaults to `users`.
+	Path pulumi.StringPtrInput
+	// Defaults to `internal`.
+	Type     pulumi.StringPtrInput
+	Username pulumi.StringInput
 }
 
 func (UserArgs) ElementType() reflect.Type {
@@ -132,6 +196,12 @@ func (i *User) ToUserOutput() UserOutput {
 
 func (i *User) ToUserOutputWithContext(ctx context.Context) UserOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(UserOutput)
+}
+
+func (i *User) ToOutput(ctx context.Context) pulumix.Output[*User] {
+	return pulumix.Output[*User]{
+		OutputState: i.ToUserOutputWithContext(ctx).OutputState,
+	}
 }
 
 // UserArrayInput is an input type that accepts UserArray and UserArrayOutput values.
@@ -159,6 +229,12 @@ func (i UserArray) ToUserArrayOutputWithContext(ctx context.Context) UserArrayOu
 	return pulumi.ToOutputWithContext(ctx, i).(UserArrayOutput)
 }
 
+func (i UserArray) ToOutput(ctx context.Context) pulumix.Output[[]*User] {
+	return pulumix.Output[[]*User]{
+		OutputState: i.ToUserArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // UserMapInput is an input type that accepts UserMap and UserMapOutput values.
 // You can construct a concrete instance of `UserMapInput` via:
 //
@@ -184,6 +260,12 @@ func (i UserMap) ToUserMapOutputWithContext(ctx context.Context) UserMapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(UserMapOutput)
 }
 
+func (i UserMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*User] {
+	return pulumix.Output[map[string]*User]{
+		OutputState: i.ToUserMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type UserOutput struct{ *pulumi.OutputState }
 
 func (UserOutput) ElementType() reflect.Type {
@@ -198,7 +280,13 @@ func (o UserOutput) ToUserOutputWithContext(ctx context.Context) UserOutput {
 	return o
 }
 
-// JSON format expected. Use jsonencode() to pass objects.
+func (o UserOutput) ToOutput(ctx context.Context) pulumix.Output[*User] {
+	return pulumix.Output[*User]{
+		OutputState: o.OutputState,
+	}
+}
+
+// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 func (o UserOutput) Attributes() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.Attributes }).(pulumi.StringPtrOutput)
 }
@@ -207,22 +295,27 @@ func (o UserOutput) Email() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.Email }).(pulumi.StringPtrOutput)
 }
 
+// Generated.
 func (o UserOutput) Groups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *User) pulumi.StringArrayOutput { return v.Groups }).(pulumi.StringArrayOutput)
 }
 
+// Defaults to `true`.
 func (o UserOutput) IsActive() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.BoolPtrOutput { return v.IsActive }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to “.
 func (o UserOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *User) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// Defaults to `users`.
 func (o UserOutput) Path() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.Path }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `internal`.
 func (o UserOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -245,6 +338,12 @@ func (o UserArrayOutput) ToUserArrayOutputWithContext(ctx context.Context) UserA
 	return o
 }
 
+func (o UserArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*User] {
+	return pulumix.Output[[]*User]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o UserArrayOutput) Index(i pulumi.IntInput) UserOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *User {
 		return vs[0].([]*User)[vs[1].(int)]
@@ -263,6 +362,12 @@ func (o UserMapOutput) ToUserMapOutput() UserMapOutput {
 
 func (o UserMapOutput) ToUserMapOutputWithContext(ctx context.Context) UserMapOutput {
 	return o
+}
+
+func (o UserMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*User] {
+	return pulumix.Output[map[string]*User]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o UserMapOutput) MapIndex(k pulumi.StringInput) UserOutput {

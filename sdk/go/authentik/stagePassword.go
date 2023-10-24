@@ -10,15 +10,44 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewStagePassword(ctx, "test", &authentik.StagePasswordArgs{
+//				Backends: pulumi.StringArray{
+//					pulumi.String("authentik.core.auth.InbuiltBackend"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type StagePassword struct {
 	pulumi.CustomResourceState
 
-	Backends                   pulumi.StringArrayOutput `pulumi:"backends"`
-	ConfigureFlow              pulumi.StringPtrOutput   `pulumi:"configureFlow"`
-	FailedAttemptsBeforeCancel pulumi.IntPtrOutput      `pulumi:"failedAttemptsBeforeCancel"`
-	Name                       pulumi.StringOutput      `pulumi:"name"`
+	Backends      pulumi.StringArrayOutput `pulumi:"backends"`
+	ConfigureFlow pulumi.StringPtrOutput   `pulumi:"configureFlow"`
+	// Defaults to `5`.
+	FailedAttemptsBeforeCancel pulumi.IntPtrOutput `pulumi:"failedAttemptsBeforeCancel"`
+	Name                       pulumi.StringOutput `pulumi:"name"`
 }
 
 // NewStagePassword registers a new resource with the given unique name, arguments, and options.
@@ -54,15 +83,17 @@ func GetStagePassword(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering StagePassword resources.
 type stagePasswordState struct {
-	Backends                   []string `pulumi:"backends"`
-	ConfigureFlow              *string  `pulumi:"configureFlow"`
-	FailedAttemptsBeforeCancel *int     `pulumi:"failedAttemptsBeforeCancel"`
-	Name                       *string  `pulumi:"name"`
+	Backends      []string `pulumi:"backends"`
+	ConfigureFlow *string  `pulumi:"configureFlow"`
+	// Defaults to `5`.
+	FailedAttemptsBeforeCancel *int    `pulumi:"failedAttemptsBeforeCancel"`
+	Name                       *string `pulumi:"name"`
 }
 
 type StagePasswordState struct {
-	Backends                   pulumi.StringArrayInput
-	ConfigureFlow              pulumi.StringPtrInput
+	Backends      pulumi.StringArrayInput
+	ConfigureFlow pulumi.StringPtrInput
+	// Defaults to `5`.
 	FailedAttemptsBeforeCancel pulumi.IntPtrInput
 	Name                       pulumi.StringPtrInput
 }
@@ -72,16 +103,18 @@ func (StagePasswordState) ElementType() reflect.Type {
 }
 
 type stagePasswordArgs struct {
-	Backends                   []string `pulumi:"backends"`
-	ConfigureFlow              *string  `pulumi:"configureFlow"`
-	FailedAttemptsBeforeCancel *int     `pulumi:"failedAttemptsBeforeCancel"`
-	Name                       *string  `pulumi:"name"`
+	Backends      []string `pulumi:"backends"`
+	ConfigureFlow *string  `pulumi:"configureFlow"`
+	// Defaults to `5`.
+	FailedAttemptsBeforeCancel *int    `pulumi:"failedAttemptsBeforeCancel"`
+	Name                       *string `pulumi:"name"`
 }
 
 // The set of arguments for constructing a StagePassword resource.
 type StagePasswordArgs struct {
-	Backends                   pulumi.StringArrayInput
-	ConfigureFlow              pulumi.StringPtrInput
+	Backends      pulumi.StringArrayInput
+	ConfigureFlow pulumi.StringPtrInput
+	// Defaults to `5`.
 	FailedAttemptsBeforeCancel pulumi.IntPtrInput
 	Name                       pulumi.StringPtrInput
 }
@@ -109,6 +142,12 @@ func (i *StagePassword) ToStagePasswordOutputWithContext(ctx context.Context) St
 	return pulumi.ToOutputWithContext(ctx, i).(StagePasswordOutput)
 }
 
+func (i *StagePassword) ToOutput(ctx context.Context) pulumix.Output[*StagePassword] {
+	return pulumix.Output[*StagePassword]{
+		OutputState: i.ToStagePasswordOutputWithContext(ctx).OutputState,
+	}
+}
+
 // StagePasswordArrayInput is an input type that accepts StagePasswordArray and StagePasswordArrayOutput values.
 // You can construct a concrete instance of `StagePasswordArrayInput` via:
 //
@@ -132,6 +171,12 @@ func (i StagePasswordArray) ToStagePasswordArrayOutput() StagePasswordArrayOutpu
 
 func (i StagePasswordArray) ToStagePasswordArrayOutputWithContext(ctx context.Context) StagePasswordArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StagePasswordArrayOutput)
+}
+
+func (i StagePasswordArray) ToOutput(ctx context.Context) pulumix.Output[[]*StagePassword] {
+	return pulumix.Output[[]*StagePassword]{
+		OutputState: i.ToStagePasswordArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // StagePasswordMapInput is an input type that accepts StagePasswordMap and StagePasswordMapOutput values.
@@ -159,6 +204,12 @@ func (i StagePasswordMap) ToStagePasswordMapOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(StagePasswordMapOutput)
 }
 
+func (i StagePasswordMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StagePassword] {
+	return pulumix.Output[map[string]*StagePassword]{
+		OutputState: i.ToStagePasswordMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type StagePasswordOutput struct{ *pulumi.OutputState }
 
 func (StagePasswordOutput) ElementType() reflect.Type {
@@ -173,6 +224,12 @@ func (o StagePasswordOutput) ToStagePasswordOutputWithContext(ctx context.Contex
 	return o
 }
 
+func (o StagePasswordOutput) ToOutput(ctx context.Context) pulumix.Output[*StagePassword] {
+	return pulumix.Output[*StagePassword]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o StagePasswordOutput) Backends() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *StagePassword) pulumi.StringArrayOutput { return v.Backends }).(pulumi.StringArrayOutput)
 }
@@ -181,6 +238,7 @@ func (o StagePasswordOutput) ConfigureFlow() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StagePassword) pulumi.StringPtrOutput { return v.ConfigureFlow }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `5`.
 func (o StagePasswordOutput) FailedAttemptsBeforeCancel() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *StagePassword) pulumi.IntPtrOutput { return v.FailedAttemptsBeforeCancel }).(pulumi.IntPtrOutput)
 }
@@ -203,6 +261,12 @@ func (o StagePasswordArrayOutput) ToStagePasswordArrayOutputWithContext(ctx cont
 	return o
 }
 
+func (o StagePasswordArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StagePassword] {
+	return pulumix.Output[[]*StagePassword]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o StagePasswordArrayOutput) Index(i pulumi.IntInput) StagePasswordOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StagePassword {
 		return vs[0].([]*StagePassword)[vs[1].(int)]
@@ -221,6 +285,12 @@ func (o StagePasswordMapOutput) ToStagePasswordMapOutput() StagePasswordMapOutpu
 
 func (o StagePasswordMapOutput) ToStagePasswordMapOutputWithContext(ctx context.Context) StagePasswordMapOutput {
 	return o
+}
+
+func (o StagePasswordMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StagePassword] {
+	return pulumix.Output[map[string]*StagePassword]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o StagePasswordMapOutput) MapIndex(k pulumi.StringInput) StagePasswordOutput {

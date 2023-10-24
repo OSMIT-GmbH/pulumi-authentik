@@ -4,6 +4,20 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Get tenants by domain
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const authentik-default = authentik.getTenant({
+ *     domain: "authentik-default",
+ * });
+ * ```
+ */
 export function getTenant(args?: GetTenantArgs, opts?: pulumi.InvokeOptions): Promise<GetTenantResult> {
     args = args || {};
 
@@ -29,18 +43,57 @@ export function getTenant(args?: GetTenantArgs, opts?: pulumi.InvokeOptions): Pr
  * A collection of arguments for invoking getTenant.
  */
 export interface GetTenantArgs {
+    /**
+     * Generated.
+     */
     brandingFavicon?: string;
+    /**
+     * Generated.
+     */
     brandingLogo?: string;
+    /**
+     * Generated.
+     */
     brandingTitle?: string;
+    /**
+     * Generated.
+     */
     default?: boolean;
+    /**
+     * Generated.
+     */
     domain?: string;
+    /**
+     * Generated.
+     */
     eventRetention?: string;
+    /**
+     * Generated.
+     */
     flowAuthentication?: string;
+    /**
+     * Generated.
+     */
     flowDeviceCode?: string;
+    /**
+     * Generated.
+     */
     flowInvalidation?: string;
+    /**
+     * Generated.
+     */
     flowRecovery?: string;
+    /**
+     * Generated.
+     */
     flowUnenrollment?: string;
+    /**
+     * Generated.
+     */
     flowUserSettings?: string;
+    /**
+     * Generated.
+     */
     webCertificate?: string;
 }
 
@@ -48,24 +101,77 @@ export interface GetTenantArgs {
  * A collection of values returned by getTenant.
  */
 export interface GetTenantResult {
+    /**
+     * Generated.
+     */
     readonly brandingFavicon: string;
+    /**
+     * Generated.
+     */
     readonly brandingLogo: string;
+    /**
+     * Generated.
+     */
     readonly brandingTitle: string;
+    /**
+     * Generated.
+     */
     readonly default: boolean;
+    /**
+     * Generated.
+     */
     readonly domain: string;
+    /**
+     * Generated.
+     */
     readonly eventRetention: string;
+    /**
+     * Generated.
+     */
     readonly flowAuthentication: string;
+    /**
+     * Generated.
+     */
     readonly flowDeviceCode: string;
+    /**
+     * Generated.
+     */
     readonly flowInvalidation: string;
+    /**
+     * Generated.
+     */
     readonly flowRecovery: string;
+    /**
+     * Generated.
+     */
     readonly flowUnenrollment: string;
+    /**
+     * Generated.
+     */
     readonly flowUserSettings: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * Generated.
+     */
     readonly webCertificate: string;
 }
+/**
+ * Get tenants by domain
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const authentik-default = authentik.getTenant({
+ *     domain: "authentik-default",
+ * });
+ * ```
+ */
 export function getTenantOutput(args?: GetTenantOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTenantResult> {
     return pulumi.output(args).apply((a: any) => getTenant(a, opts))
 }
@@ -74,17 +180,56 @@ export function getTenantOutput(args?: GetTenantOutputArgs, opts?: pulumi.Invoke
  * A collection of arguments for invoking getTenant.
  */
 export interface GetTenantOutputArgs {
+    /**
+     * Generated.
+     */
     brandingFavicon?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     brandingLogo?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     brandingTitle?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     default?: pulumi.Input<boolean>;
+    /**
+     * Generated.
+     */
     domain?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     eventRetention?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     flowAuthentication?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     flowDeviceCode?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     flowInvalidation?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     flowRecovery?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     flowUnenrollment?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     flowUserSettings?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     webCertificate?: pulumi.Input<string>;
 }

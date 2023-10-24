@@ -9,8 +9,32 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewStageAuthenticatorWebauthn(ctx, "name", nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type StageAuthenticatorWebauthn struct {
 	pulumi.CustomResourceState
 
@@ -18,8 +42,10 @@ type StageAuthenticatorWebauthn struct {
 	ConfigureFlow           pulumi.StringPtrOutput `pulumi:"configureFlow"`
 	FriendlyName            pulumi.StringPtrOutput `pulumi:"friendlyName"`
 	Name                    pulumi.StringOutput    `pulumi:"name"`
-	ResidentKeyRequirement  pulumi.StringPtrOutput `pulumi:"residentKeyRequirement"`
-	UserVerification        pulumi.StringPtrOutput `pulumi:"userVerification"`
+	// Defaults to `preferred`.
+	ResidentKeyRequirement pulumi.StringPtrOutput `pulumi:"residentKeyRequirement"`
+	// Defaults to `preferred`.
+	UserVerification pulumi.StringPtrOutput `pulumi:"userVerification"`
 }
 
 // NewStageAuthenticatorWebauthn registers a new resource with the given unique name, arguments, and options.
@@ -56,8 +82,10 @@ type stageAuthenticatorWebauthnState struct {
 	ConfigureFlow           *string `pulumi:"configureFlow"`
 	FriendlyName            *string `pulumi:"friendlyName"`
 	Name                    *string `pulumi:"name"`
-	ResidentKeyRequirement  *string `pulumi:"residentKeyRequirement"`
-	UserVerification        *string `pulumi:"userVerification"`
+	// Defaults to `preferred`.
+	ResidentKeyRequirement *string `pulumi:"residentKeyRequirement"`
+	// Defaults to `preferred`.
+	UserVerification *string `pulumi:"userVerification"`
 }
 
 type StageAuthenticatorWebauthnState struct {
@@ -65,8 +93,10 @@ type StageAuthenticatorWebauthnState struct {
 	ConfigureFlow           pulumi.StringPtrInput
 	FriendlyName            pulumi.StringPtrInput
 	Name                    pulumi.StringPtrInput
-	ResidentKeyRequirement  pulumi.StringPtrInput
-	UserVerification        pulumi.StringPtrInput
+	// Defaults to `preferred`.
+	ResidentKeyRequirement pulumi.StringPtrInput
+	// Defaults to `preferred`.
+	UserVerification pulumi.StringPtrInput
 }
 
 func (StageAuthenticatorWebauthnState) ElementType() reflect.Type {
@@ -78,8 +108,10 @@ type stageAuthenticatorWebauthnArgs struct {
 	ConfigureFlow           *string `pulumi:"configureFlow"`
 	FriendlyName            *string `pulumi:"friendlyName"`
 	Name                    *string `pulumi:"name"`
-	ResidentKeyRequirement  *string `pulumi:"residentKeyRequirement"`
-	UserVerification        *string `pulumi:"userVerification"`
+	// Defaults to `preferred`.
+	ResidentKeyRequirement *string `pulumi:"residentKeyRequirement"`
+	// Defaults to `preferred`.
+	UserVerification *string `pulumi:"userVerification"`
 }
 
 // The set of arguments for constructing a StageAuthenticatorWebauthn resource.
@@ -88,8 +120,10 @@ type StageAuthenticatorWebauthnArgs struct {
 	ConfigureFlow           pulumi.StringPtrInput
 	FriendlyName            pulumi.StringPtrInput
 	Name                    pulumi.StringPtrInput
-	ResidentKeyRequirement  pulumi.StringPtrInput
-	UserVerification        pulumi.StringPtrInput
+	// Defaults to `preferred`.
+	ResidentKeyRequirement pulumi.StringPtrInput
+	// Defaults to `preferred`.
+	UserVerification pulumi.StringPtrInput
 }
 
 func (StageAuthenticatorWebauthnArgs) ElementType() reflect.Type {
@@ -113,6 +147,12 @@ func (i *StageAuthenticatorWebauthn) ToStageAuthenticatorWebauthnOutput() StageA
 
 func (i *StageAuthenticatorWebauthn) ToStageAuthenticatorWebauthnOutputWithContext(ctx context.Context) StageAuthenticatorWebauthnOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorWebauthnOutput)
+}
+
+func (i *StageAuthenticatorWebauthn) ToOutput(ctx context.Context) pulumix.Output[*StageAuthenticatorWebauthn] {
+	return pulumix.Output[*StageAuthenticatorWebauthn]{
+		OutputState: i.ToStageAuthenticatorWebauthnOutputWithContext(ctx).OutputState,
+	}
 }
 
 // StageAuthenticatorWebauthnArrayInput is an input type that accepts StageAuthenticatorWebauthnArray and StageAuthenticatorWebauthnArrayOutput values.
@@ -140,6 +180,12 @@ func (i StageAuthenticatorWebauthnArray) ToStageAuthenticatorWebauthnArrayOutput
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorWebauthnArrayOutput)
 }
 
+func (i StageAuthenticatorWebauthnArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageAuthenticatorWebauthn] {
+	return pulumix.Output[[]*StageAuthenticatorWebauthn]{
+		OutputState: i.ToStageAuthenticatorWebauthnArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // StageAuthenticatorWebauthnMapInput is an input type that accepts StageAuthenticatorWebauthnMap and StageAuthenticatorWebauthnMapOutput values.
 // You can construct a concrete instance of `StageAuthenticatorWebauthnMapInput` via:
 //
@@ -165,6 +211,12 @@ func (i StageAuthenticatorWebauthnMap) ToStageAuthenticatorWebauthnMapOutputWith
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorWebauthnMapOutput)
 }
 
+func (i StageAuthenticatorWebauthnMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageAuthenticatorWebauthn] {
+	return pulumix.Output[map[string]*StageAuthenticatorWebauthn]{
+		OutputState: i.ToStageAuthenticatorWebauthnMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type StageAuthenticatorWebauthnOutput struct{ *pulumi.OutputState }
 
 func (StageAuthenticatorWebauthnOutput) ElementType() reflect.Type {
@@ -177,6 +229,12 @@ func (o StageAuthenticatorWebauthnOutput) ToStageAuthenticatorWebauthnOutput() S
 
 func (o StageAuthenticatorWebauthnOutput) ToStageAuthenticatorWebauthnOutputWithContext(ctx context.Context) StageAuthenticatorWebauthnOutput {
 	return o
+}
+
+func (o StageAuthenticatorWebauthnOutput) ToOutput(ctx context.Context) pulumix.Output[*StageAuthenticatorWebauthn] {
+	return pulumix.Output[*StageAuthenticatorWebauthn]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o StageAuthenticatorWebauthnOutput) AuthenticatorAttachment() pulumi.StringPtrOutput {
@@ -195,10 +253,12 @@ func (o StageAuthenticatorWebauthnOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *StageAuthenticatorWebauthn) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// Defaults to `preferred`.
 func (o StageAuthenticatorWebauthnOutput) ResidentKeyRequirement() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageAuthenticatorWebauthn) pulumi.StringPtrOutput { return v.ResidentKeyRequirement }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `preferred`.
 func (o StageAuthenticatorWebauthnOutput) UserVerification() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageAuthenticatorWebauthn) pulumi.StringPtrOutput { return v.UserVerification }).(pulumi.StringPtrOutput)
 }
@@ -215,6 +275,12 @@ func (o StageAuthenticatorWebauthnArrayOutput) ToStageAuthenticatorWebauthnArray
 
 func (o StageAuthenticatorWebauthnArrayOutput) ToStageAuthenticatorWebauthnArrayOutputWithContext(ctx context.Context) StageAuthenticatorWebauthnArrayOutput {
 	return o
+}
+
+func (o StageAuthenticatorWebauthnArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageAuthenticatorWebauthn] {
+	return pulumix.Output[[]*StageAuthenticatorWebauthn]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o StageAuthenticatorWebauthnArrayOutput) Index(i pulumi.IntInput) StageAuthenticatorWebauthnOutput {
@@ -235,6 +301,12 @@ func (o StageAuthenticatorWebauthnMapOutput) ToStageAuthenticatorWebauthnMapOutp
 
 func (o StageAuthenticatorWebauthnMapOutput) ToStageAuthenticatorWebauthnMapOutputWithContext(ctx context.Context) StageAuthenticatorWebauthnMapOutput {
 	return o
+}
+
+func (o StageAuthenticatorWebauthnMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageAuthenticatorWebauthn] {
+	return pulumix.Output[map[string]*StageAuthenticatorWebauthn]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o StageAuthenticatorWebauthnMapOutput) MapIndex(k pulumi.StringInput) StageAuthenticatorWebauthnOutput {

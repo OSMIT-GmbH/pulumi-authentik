@@ -9,8 +9,32 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewStageUserLogout(ctx, "name", nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type StageUserLogout struct {
 	pulumi.CustomResourceState
 
@@ -90,6 +114,12 @@ func (i *StageUserLogout) ToStageUserLogoutOutputWithContext(ctx context.Context
 	return pulumi.ToOutputWithContext(ctx, i).(StageUserLogoutOutput)
 }
 
+func (i *StageUserLogout) ToOutput(ctx context.Context) pulumix.Output[*StageUserLogout] {
+	return pulumix.Output[*StageUserLogout]{
+		OutputState: i.ToStageUserLogoutOutputWithContext(ctx).OutputState,
+	}
+}
+
 // StageUserLogoutArrayInput is an input type that accepts StageUserLogoutArray and StageUserLogoutArrayOutput values.
 // You can construct a concrete instance of `StageUserLogoutArrayInput` via:
 //
@@ -113,6 +143,12 @@ func (i StageUserLogoutArray) ToStageUserLogoutArrayOutput() StageUserLogoutArra
 
 func (i StageUserLogoutArray) ToStageUserLogoutArrayOutputWithContext(ctx context.Context) StageUserLogoutArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageUserLogoutArrayOutput)
+}
+
+func (i StageUserLogoutArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageUserLogout] {
+	return pulumix.Output[[]*StageUserLogout]{
+		OutputState: i.ToStageUserLogoutArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // StageUserLogoutMapInput is an input type that accepts StageUserLogoutMap and StageUserLogoutMapOutput values.
@@ -140,6 +176,12 @@ func (i StageUserLogoutMap) ToStageUserLogoutMapOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(StageUserLogoutMapOutput)
 }
 
+func (i StageUserLogoutMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageUserLogout] {
+	return pulumix.Output[map[string]*StageUserLogout]{
+		OutputState: i.ToStageUserLogoutMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type StageUserLogoutOutput struct{ *pulumi.OutputState }
 
 func (StageUserLogoutOutput) ElementType() reflect.Type {
@@ -152,6 +194,12 @@ func (o StageUserLogoutOutput) ToStageUserLogoutOutput() StageUserLogoutOutput {
 
 func (o StageUserLogoutOutput) ToStageUserLogoutOutputWithContext(ctx context.Context) StageUserLogoutOutput {
 	return o
+}
+
+func (o StageUserLogoutOutput) ToOutput(ctx context.Context) pulumix.Output[*StageUserLogout] {
+	return pulumix.Output[*StageUserLogout]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o StageUserLogoutOutput) Name() pulumi.StringOutput {
@@ -172,6 +220,12 @@ func (o StageUserLogoutArrayOutput) ToStageUserLogoutArrayOutputWithContext(ctx 
 	return o
 }
 
+func (o StageUserLogoutArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageUserLogout] {
+	return pulumix.Output[[]*StageUserLogout]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o StageUserLogoutArrayOutput) Index(i pulumi.IntInput) StageUserLogoutOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StageUserLogout {
 		return vs[0].([]*StageUserLogout)[vs[1].(int)]
@@ -190,6 +244,12 @@ func (o StageUserLogoutMapOutput) ToStageUserLogoutMapOutput() StageUserLogoutMa
 
 func (o StageUserLogoutMapOutput) ToStageUserLogoutMapOutputWithContext(ctx context.Context) StageUserLogoutMapOutput {
 	return o
+}
+
+func (o StageUserLogoutMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageUserLogout] {
+	return pulumix.Output[map[string]*StageUserLogout]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o StageUserLogoutMapOutput) MapIndex(k pulumi.StringInput) StageUserLogoutOutput {

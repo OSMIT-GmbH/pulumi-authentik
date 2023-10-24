@@ -4,6 +4,16 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.PolicyExpiry("name", {days: 3});
+ * ```
+ */
 export class PolicyExpiry extends pulumi.CustomResource {
     /**
      * Get an existing PolicyExpiry resource's state with the given name, ID, and optional extra
@@ -33,7 +43,13 @@ export class PolicyExpiry extends pulumi.CustomResource {
     }
 
     public readonly days!: pulumi.Output<number>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly denyOnly!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly executionLogging!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
 
@@ -74,7 +90,13 @@ export class PolicyExpiry extends pulumi.CustomResource {
  */
 export interface PolicyExpiryState {
     days?: pulumi.Input<number>;
+    /**
+     * Defaults to `false`.
+     */
     denyOnly?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `false`.
+     */
     executionLogging?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
 }
@@ -84,7 +106,13 @@ export interface PolicyExpiryState {
  */
 export interface PolicyExpiryArgs {
     days: pulumi.Input<number>;
+    /**
+     * Defaults to `false`.
+     */
     denyOnly?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `false`.
+     */
     executionLogging?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
 }

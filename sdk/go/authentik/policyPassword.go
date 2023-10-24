@@ -10,26 +10,61 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewPolicyPassword(ctx, "name", &authentik.PolicyPasswordArgs{
+//				ErrorMessage: pulumi.String("foo"),
+//				LengthMin:    pulumi.Int(8),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type PolicyPassword struct {
 	pulumi.CustomResourceState
 
-	AmountDigits         pulumi.IntPtrOutput    `pulumi:"amountDigits"`
-	AmountLowercase      pulumi.IntPtrOutput    `pulumi:"amountLowercase"`
-	AmountSymbols        pulumi.IntPtrOutput    `pulumi:"amountSymbols"`
-	AmountUppercase      pulumi.IntPtrOutput    `pulumi:"amountUppercase"`
-	CheckHaveIBeenPwned  pulumi.BoolPtrOutput   `pulumi:"checkHaveIBeenPwned"`
-	CheckStaticRules     pulumi.BoolPtrOutput   `pulumi:"checkStaticRules"`
-	CheckZxcvbn          pulumi.BoolPtrOutput   `pulumi:"checkZxcvbn"`
-	ErrorMessage         pulumi.StringOutput    `pulumi:"errorMessage"`
-	ExecutionLogging     pulumi.BoolPtrOutput   `pulumi:"executionLogging"`
-	HibpAllowedCount     pulumi.IntPtrOutput    `pulumi:"hibpAllowedCount"`
-	LengthMin            pulumi.IntPtrOutput    `pulumi:"lengthMin"`
-	Name                 pulumi.StringOutput    `pulumi:"name"`
-	PasswordField        pulumi.StringPtrOutput `pulumi:"passwordField"`
-	SymbolCharset        pulumi.StringPtrOutput `pulumi:"symbolCharset"`
-	ZxcvbnScoreThreshold pulumi.IntPtrOutput    `pulumi:"zxcvbnScoreThreshold"`
+	AmountDigits    pulumi.IntPtrOutput `pulumi:"amountDigits"`
+	AmountLowercase pulumi.IntPtrOutput `pulumi:"amountLowercase"`
+	AmountSymbols   pulumi.IntPtrOutput `pulumi:"amountSymbols"`
+	AmountUppercase pulumi.IntPtrOutput `pulumi:"amountUppercase"`
+	// Defaults to `false`.
+	CheckHaveIBeenPwned pulumi.BoolPtrOutput `pulumi:"checkHaveIBeenPwned"`
+	// Defaults to `true`.
+	CheckStaticRules pulumi.BoolPtrOutput `pulumi:"checkStaticRules"`
+	// Defaults to `false`.
+	CheckZxcvbn  pulumi.BoolPtrOutput `pulumi:"checkZxcvbn"`
+	ErrorMessage pulumi.StringOutput  `pulumi:"errorMessage"`
+	// Defaults to `false`.
+	ExecutionLogging pulumi.BoolPtrOutput `pulumi:"executionLogging"`
+	// Defaults to `1`.
+	HibpAllowedCount pulumi.IntPtrOutput `pulumi:"hibpAllowedCount"`
+	LengthMin        pulumi.IntPtrOutput `pulumi:"lengthMin"`
+	Name             pulumi.StringOutput `pulumi:"name"`
+	// Defaults to `password`.
+	PasswordField pulumi.StringPtrOutput `pulumi:"passwordField"`
+	// Defaults to `!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`.
+	SymbolCharset pulumi.StringPtrOutput `pulumi:"symbolCharset"`
+	// Defaults to `2`.
+	ZxcvbnScoreThreshold pulumi.IntPtrOutput `pulumi:"zxcvbnScoreThreshold"`
 }
 
 // NewPolicyPassword registers a new resource with the given unique name, arguments, and options.
@@ -65,38 +100,54 @@ func GetPolicyPassword(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering PolicyPassword resources.
 type policyPasswordState struct {
-	AmountDigits         *int    `pulumi:"amountDigits"`
-	AmountLowercase      *int    `pulumi:"amountLowercase"`
-	AmountSymbols        *int    `pulumi:"amountSymbols"`
-	AmountUppercase      *int    `pulumi:"amountUppercase"`
-	CheckHaveIBeenPwned  *bool   `pulumi:"checkHaveIBeenPwned"`
-	CheckStaticRules     *bool   `pulumi:"checkStaticRules"`
-	CheckZxcvbn          *bool   `pulumi:"checkZxcvbn"`
-	ErrorMessage         *string `pulumi:"errorMessage"`
-	ExecutionLogging     *bool   `pulumi:"executionLogging"`
-	HibpAllowedCount     *int    `pulumi:"hibpAllowedCount"`
-	LengthMin            *int    `pulumi:"lengthMin"`
-	Name                 *string `pulumi:"name"`
-	PasswordField        *string `pulumi:"passwordField"`
-	SymbolCharset        *string `pulumi:"symbolCharset"`
-	ZxcvbnScoreThreshold *int    `pulumi:"zxcvbnScoreThreshold"`
+	AmountDigits    *int `pulumi:"amountDigits"`
+	AmountLowercase *int `pulumi:"amountLowercase"`
+	AmountSymbols   *int `pulumi:"amountSymbols"`
+	AmountUppercase *int `pulumi:"amountUppercase"`
+	// Defaults to `false`.
+	CheckHaveIBeenPwned *bool `pulumi:"checkHaveIBeenPwned"`
+	// Defaults to `true`.
+	CheckStaticRules *bool `pulumi:"checkStaticRules"`
+	// Defaults to `false`.
+	CheckZxcvbn  *bool   `pulumi:"checkZxcvbn"`
+	ErrorMessage *string `pulumi:"errorMessage"`
+	// Defaults to `false`.
+	ExecutionLogging *bool `pulumi:"executionLogging"`
+	// Defaults to `1`.
+	HibpAllowedCount *int    `pulumi:"hibpAllowedCount"`
+	LengthMin        *int    `pulumi:"lengthMin"`
+	Name             *string `pulumi:"name"`
+	// Defaults to `password`.
+	PasswordField *string `pulumi:"passwordField"`
+	// Defaults to `!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`.
+	SymbolCharset *string `pulumi:"symbolCharset"`
+	// Defaults to `2`.
+	ZxcvbnScoreThreshold *int `pulumi:"zxcvbnScoreThreshold"`
 }
 
 type PolicyPasswordState struct {
-	AmountDigits         pulumi.IntPtrInput
-	AmountLowercase      pulumi.IntPtrInput
-	AmountSymbols        pulumi.IntPtrInput
-	AmountUppercase      pulumi.IntPtrInput
-	CheckHaveIBeenPwned  pulumi.BoolPtrInput
-	CheckStaticRules     pulumi.BoolPtrInput
-	CheckZxcvbn          pulumi.BoolPtrInput
-	ErrorMessage         pulumi.StringPtrInput
-	ExecutionLogging     pulumi.BoolPtrInput
-	HibpAllowedCount     pulumi.IntPtrInput
-	LengthMin            pulumi.IntPtrInput
-	Name                 pulumi.StringPtrInput
-	PasswordField        pulumi.StringPtrInput
-	SymbolCharset        pulumi.StringPtrInput
+	AmountDigits    pulumi.IntPtrInput
+	AmountLowercase pulumi.IntPtrInput
+	AmountSymbols   pulumi.IntPtrInput
+	AmountUppercase pulumi.IntPtrInput
+	// Defaults to `false`.
+	CheckHaveIBeenPwned pulumi.BoolPtrInput
+	// Defaults to `true`.
+	CheckStaticRules pulumi.BoolPtrInput
+	// Defaults to `false`.
+	CheckZxcvbn  pulumi.BoolPtrInput
+	ErrorMessage pulumi.StringPtrInput
+	// Defaults to `false`.
+	ExecutionLogging pulumi.BoolPtrInput
+	// Defaults to `1`.
+	HibpAllowedCount pulumi.IntPtrInput
+	LengthMin        pulumi.IntPtrInput
+	Name             pulumi.StringPtrInput
+	// Defaults to `password`.
+	PasswordField pulumi.StringPtrInput
+	// Defaults to `!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`.
+	SymbolCharset pulumi.StringPtrInput
+	// Defaults to `2`.
 	ZxcvbnScoreThreshold pulumi.IntPtrInput
 }
 
@@ -105,39 +156,55 @@ func (PolicyPasswordState) ElementType() reflect.Type {
 }
 
 type policyPasswordArgs struct {
-	AmountDigits         *int    `pulumi:"amountDigits"`
-	AmountLowercase      *int    `pulumi:"amountLowercase"`
-	AmountSymbols        *int    `pulumi:"amountSymbols"`
-	AmountUppercase      *int    `pulumi:"amountUppercase"`
-	CheckHaveIBeenPwned  *bool   `pulumi:"checkHaveIBeenPwned"`
-	CheckStaticRules     *bool   `pulumi:"checkStaticRules"`
-	CheckZxcvbn          *bool   `pulumi:"checkZxcvbn"`
-	ErrorMessage         string  `pulumi:"errorMessage"`
-	ExecutionLogging     *bool   `pulumi:"executionLogging"`
-	HibpAllowedCount     *int    `pulumi:"hibpAllowedCount"`
-	LengthMin            *int    `pulumi:"lengthMin"`
-	Name                 *string `pulumi:"name"`
-	PasswordField        *string `pulumi:"passwordField"`
-	SymbolCharset        *string `pulumi:"symbolCharset"`
-	ZxcvbnScoreThreshold *int    `pulumi:"zxcvbnScoreThreshold"`
+	AmountDigits    *int `pulumi:"amountDigits"`
+	AmountLowercase *int `pulumi:"amountLowercase"`
+	AmountSymbols   *int `pulumi:"amountSymbols"`
+	AmountUppercase *int `pulumi:"amountUppercase"`
+	// Defaults to `false`.
+	CheckHaveIBeenPwned *bool `pulumi:"checkHaveIBeenPwned"`
+	// Defaults to `true`.
+	CheckStaticRules *bool `pulumi:"checkStaticRules"`
+	// Defaults to `false`.
+	CheckZxcvbn  *bool  `pulumi:"checkZxcvbn"`
+	ErrorMessage string `pulumi:"errorMessage"`
+	// Defaults to `false`.
+	ExecutionLogging *bool `pulumi:"executionLogging"`
+	// Defaults to `1`.
+	HibpAllowedCount *int    `pulumi:"hibpAllowedCount"`
+	LengthMin        *int    `pulumi:"lengthMin"`
+	Name             *string `pulumi:"name"`
+	// Defaults to `password`.
+	PasswordField *string `pulumi:"passwordField"`
+	// Defaults to `!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`.
+	SymbolCharset *string `pulumi:"symbolCharset"`
+	// Defaults to `2`.
+	ZxcvbnScoreThreshold *int `pulumi:"zxcvbnScoreThreshold"`
 }
 
 // The set of arguments for constructing a PolicyPassword resource.
 type PolicyPasswordArgs struct {
-	AmountDigits         pulumi.IntPtrInput
-	AmountLowercase      pulumi.IntPtrInput
-	AmountSymbols        pulumi.IntPtrInput
-	AmountUppercase      pulumi.IntPtrInput
-	CheckHaveIBeenPwned  pulumi.BoolPtrInput
-	CheckStaticRules     pulumi.BoolPtrInput
-	CheckZxcvbn          pulumi.BoolPtrInput
-	ErrorMessage         pulumi.StringInput
-	ExecutionLogging     pulumi.BoolPtrInput
-	HibpAllowedCount     pulumi.IntPtrInput
-	LengthMin            pulumi.IntPtrInput
-	Name                 pulumi.StringPtrInput
-	PasswordField        pulumi.StringPtrInput
-	SymbolCharset        pulumi.StringPtrInput
+	AmountDigits    pulumi.IntPtrInput
+	AmountLowercase pulumi.IntPtrInput
+	AmountSymbols   pulumi.IntPtrInput
+	AmountUppercase pulumi.IntPtrInput
+	// Defaults to `false`.
+	CheckHaveIBeenPwned pulumi.BoolPtrInput
+	// Defaults to `true`.
+	CheckStaticRules pulumi.BoolPtrInput
+	// Defaults to `false`.
+	CheckZxcvbn  pulumi.BoolPtrInput
+	ErrorMessage pulumi.StringInput
+	// Defaults to `false`.
+	ExecutionLogging pulumi.BoolPtrInput
+	// Defaults to `1`.
+	HibpAllowedCount pulumi.IntPtrInput
+	LengthMin        pulumi.IntPtrInput
+	Name             pulumi.StringPtrInput
+	// Defaults to `password`.
+	PasswordField pulumi.StringPtrInput
+	// Defaults to `!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`.
+	SymbolCharset pulumi.StringPtrInput
+	// Defaults to `2`.
 	ZxcvbnScoreThreshold pulumi.IntPtrInput
 }
 
@@ -162,6 +229,12 @@ func (i *PolicyPassword) ToPolicyPasswordOutput() PolicyPasswordOutput {
 
 func (i *PolicyPassword) ToPolicyPasswordOutputWithContext(ctx context.Context) PolicyPasswordOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyPasswordOutput)
+}
+
+func (i *PolicyPassword) ToOutput(ctx context.Context) pulumix.Output[*PolicyPassword] {
+	return pulumix.Output[*PolicyPassword]{
+		OutputState: i.ToPolicyPasswordOutputWithContext(ctx).OutputState,
+	}
 }
 
 // PolicyPasswordArrayInput is an input type that accepts PolicyPasswordArray and PolicyPasswordArrayOutput values.
@@ -189,6 +262,12 @@ func (i PolicyPasswordArray) ToPolicyPasswordArrayOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyPasswordArrayOutput)
 }
 
+func (i PolicyPasswordArray) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyPassword] {
+	return pulumix.Output[[]*PolicyPassword]{
+		OutputState: i.ToPolicyPasswordArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // PolicyPasswordMapInput is an input type that accepts PolicyPasswordMap and PolicyPasswordMapOutput values.
 // You can construct a concrete instance of `PolicyPasswordMapInput` via:
 //
@@ -214,6 +293,12 @@ func (i PolicyPasswordMap) ToPolicyPasswordMapOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyPasswordMapOutput)
 }
 
+func (i PolicyPasswordMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyPassword] {
+	return pulumix.Output[map[string]*PolicyPassword]{
+		OutputState: i.ToPolicyPasswordMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type PolicyPasswordOutput struct{ *pulumi.OutputState }
 
 func (PolicyPasswordOutput) ElementType() reflect.Type {
@@ -226,6 +311,12 @@ func (o PolicyPasswordOutput) ToPolicyPasswordOutput() PolicyPasswordOutput {
 
 func (o PolicyPasswordOutput) ToPolicyPasswordOutputWithContext(ctx context.Context) PolicyPasswordOutput {
 	return o
+}
+
+func (o PolicyPasswordOutput) ToOutput(ctx context.Context) pulumix.Output[*PolicyPassword] {
+	return pulumix.Output[*PolicyPassword]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PolicyPasswordOutput) AmountDigits() pulumi.IntPtrOutput {
@@ -244,14 +335,17 @@ func (o PolicyPasswordOutput) AmountUppercase() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *PolicyPassword) pulumi.IntPtrOutput { return v.AmountUppercase }).(pulumi.IntPtrOutput)
 }
 
+// Defaults to `false`.
 func (o PolicyPasswordOutput) CheckHaveIBeenPwned() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PolicyPassword) pulumi.BoolPtrOutput { return v.CheckHaveIBeenPwned }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to `true`.
 func (o PolicyPasswordOutput) CheckStaticRules() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PolicyPassword) pulumi.BoolPtrOutput { return v.CheckStaticRules }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to `false`.
 func (o PolicyPasswordOutput) CheckZxcvbn() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PolicyPassword) pulumi.BoolPtrOutput { return v.CheckZxcvbn }).(pulumi.BoolPtrOutput)
 }
@@ -260,10 +354,12 @@ func (o PolicyPasswordOutput) ErrorMessage() pulumi.StringOutput {
 	return o.ApplyT(func(v *PolicyPassword) pulumi.StringOutput { return v.ErrorMessage }).(pulumi.StringOutput)
 }
 
+// Defaults to `false`.
 func (o PolicyPasswordOutput) ExecutionLogging() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PolicyPassword) pulumi.BoolPtrOutput { return v.ExecutionLogging }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to `1`.
 func (o PolicyPasswordOutput) HibpAllowedCount() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *PolicyPassword) pulumi.IntPtrOutput { return v.HibpAllowedCount }).(pulumi.IntPtrOutput)
 }
@@ -276,14 +372,17 @@ func (o PolicyPasswordOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *PolicyPassword) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// Defaults to `password`.
 func (o PolicyPasswordOutput) PasswordField() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PolicyPassword) pulumi.StringPtrOutput { return v.PasswordField }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`.
 func (o PolicyPasswordOutput) SymbolCharset() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PolicyPassword) pulumi.StringPtrOutput { return v.SymbolCharset }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `2`.
 func (o PolicyPasswordOutput) ZxcvbnScoreThreshold() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *PolicyPassword) pulumi.IntPtrOutput { return v.ZxcvbnScoreThreshold }).(pulumi.IntPtrOutput)
 }
@@ -300,6 +399,12 @@ func (o PolicyPasswordArrayOutput) ToPolicyPasswordArrayOutput() PolicyPasswordA
 
 func (o PolicyPasswordArrayOutput) ToPolicyPasswordArrayOutputWithContext(ctx context.Context) PolicyPasswordArrayOutput {
 	return o
+}
+
+func (o PolicyPasswordArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyPassword] {
+	return pulumix.Output[[]*PolicyPassword]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PolicyPasswordArrayOutput) Index(i pulumi.IntInput) PolicyPasswordOutput {
@@ -320,6 +425,12 @@ func (o PolicyPasswordMapOutput) ToPolicyPasswordMapOutput() PolicyPasswordMapOu
 
 func (o PolicyPasswordMapOutput) ToPolicyPasswordMapOutputWithContext(ctx context.Context) PolicyPasswordMapOutput {
 	return o
+}
+
+func (o PolicyPasswordMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyPassword] {
+	return pulumix.Output[map[string]*PolicyPassword]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PolicyPasswordMapOutput) MapIndex(k pulumi.StringInput) PolicyPasswordOutput {

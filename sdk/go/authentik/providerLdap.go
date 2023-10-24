@@ -10,22 +10,67 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			default_authentication_flow, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
+//				Slug: pulumi.StringRef("default-authentication-flow"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			nameProviderLdap, err := authentik.NewProviderLdap(ctx, "nameProviderLdap", &authentik.ProviderLdapArgs{
+//				BaseDn:   pulumi.String("dc=ldap,dc=goauthentik,dc=io"),
+//				BindFlow: *pulumi.String(default_authentication_flow.Id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewApplication(ctx, "nameApplication", &authentik.ApplicationArgs{
+//				Slug:             pulumi.String("ldap-app"),
+//				ProtocolProvider: nameProviderLdap.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type ProviderLdap struct {
 	pulumi.CustomResourceState
 
-	BaseDn         pulumi.StringOutput    `pulumi:"baseDn"`
-	BindFlow       pulumi.StringOutput    `pulumi:"bindFlow"`
-	BindMode       pulumi.StringPtrOutput `pulumi:"bindMode"`
-	Certificate    pulumi.StringPtrOutput `pulumi:"certificate"`
-	GidStartNumber pulumi.IntPtrOutput    `pulumi:"gidStartNumber"`
-	MfaSupport     pulumi.BoolPtrOutput   `pulumi:"mfaSupport"`
-	Name           pulumi.StringOutput    `pulumi:"name"`
-	SearchGroup    pulumi.StringPtrOutput `pulumi:"searchGroup"`
-	SearchMode     pulumi.StringPtrOutput `pulumi:"searchMode"`
-	TlsServerName  pulumi.StringPtrOutput `pulumi:"tlsServerName"`
-	UidStartNumber pulumi.IntPtrOutput    `pulumi:"uidStartNumber"`
+	BaseDn   pulumi.StringOutput `pulumi:"baseDn"`
+	BindFlow pulumi.StringOutput `pulumi:"bindFlow"`
+	// Defaults to `direct`.
+	BindMode    pulumi.StringPtrOutput `pulumi:"bindMode"`
+	Certificate pulumi.StringPtrOutput `pulumi:"certificate"`
+	// Defaults to `4000`.
+	GidStartNumber pulumi.IntPtrOutput `pulumi:"gidStartNumber"`
+	// Defaults to `true`.
+	MfaSupport  pulumi.BoolPtrOutput   `pulumi:"mfaSupport"`
+	Name        pulumi.StringOutput    `pulumi:"name"`
+	SearchGroup pulumi.StringPtrOutput `pulumi:"searchGroup"`
+	// Defaults to `direct`.
+	SearchMode    pulumi.StringPtrOutput `pulumi:"searchMode"`
+	TlsServerName pulumi.StringPtrOutput `pulumi:"tlsServerName"`
+	// Defaults to `2000`.
+	UidStartNumber pulumi.IntPtrOutput `pulumi:"uidStartNumber"`
 }
 
 // NewProviderLdap registers a new resource with the given unique name, arguments, and options.
@@ -64,30 +109,40 @@ func GetProviderLdap(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ProviderLdap resources.
 type providerLdapState struct {
-	BaseDn         *string `pulumi:"baseDn"`
-	BindFlow       *string `pulumi:"bindFlow"`
-	BindMode       *string `pulumi:"bindMode"`
-	Certificate    *string `pulumi:"certificate"`
-	GidStartNumber *int    `pulumi:"gidStartNumber"`
-	MfaSupport     *bool   `pulumi:"mfaSupport"`
-	Name           *string `pulumi:"name"`
-	SearchGroup    *string `pulumi:"searchGroup"`
-	SearchMode     *string `pulumi:"searchMode"`
-	TlsServerName  *string `pulumi:"tlsServerName"`
-	UidStartNumber *int    `pulumi:"uidStartNumber"`
+	BaseDn   *string `pulumi:"baseDn"`
+	BindFlow *string `pulumi:"bindFlow"`
+	// Defaults to `direct`.
+	BindMode    *string `pulumi:"bindMode"`
+	Certificate *string `pulumi:"certificate"`
+	// Defaults to `4000`.
+	GidStartNumber *int `pulumi:"gidStartNumber"`
+	// Defaults to `true`.
+	MfaSupport  *bool   `pulumi:"mfaSupport"`
+	Name        *string `pulumi:"name"`
+	SearchGroup *string `pulumi:"searchGroup"`
+	// Defaults to `direct`.
+	SearchMode    *string `pulumi:"searchMode"`
+	TlsServerName *string `pulumi:"tlsServerName"`
+	// Defaults to `2000`.
+	UidStartNumber *int `pulumi:"uidStartNumber"`
 }
 
 type ProviderLdapState struct {
-	BaseDn         pulumi.StringPtrInput
-	BindFlow       pulumi.StringPtrInput
-	BindMode       pulumi.StringPtrInput
-	Certificate    pulumi.StringPtrInput
+	BaseDn   pulumi.StringPtrInput
+	BindFlow pulumi.StringPtrInput
+	// Defaults to `direct`.
+	BindMode    pulumi.StringPtrInput
+	Certificate pulumi.StringPtrInput
+	// Defaults to `4000`.
 	GidStartNumber pulumi.IntPtrInput
-	MfaSupport     pulumi.BoolPtrInput
-	Name           pulumi.StringPtrInput
-	SearchGroup    pulumi.StringPtrInput
-	SearchMode     pulumi.StringPtrInput
-	TlsServerName  pulumi.StringPtrInput
+	// Defaults to `true`.
+	MfaSupport  pulumi.BoolPtrInput
+	Name        pulumi.StringPtrInput
+	SearchGroup pulumi.StringPtrInput
+	// Defaults to `direct`.
+	SearchMode    pulumi.StringPtrInput
+	TlsServerName pulumi.StringPtrInput
+	// Defaults to `2000`.
 	UidStartNumber pulumi.IntPtrInput
 }
 
@@ -96,31 +151,41 @@ func (ProviderLdapState) ElementType() reflect.Type {
 }
 
 type providerLdapArgs struct {
-	BaseDn         string  `pulumi:"baseDn"`
-	BindFlow       string  `pulumi:"bindFlow"`
-	BindMode       *string `pulumi:"bindMode"`
-	Certificate    *string `pulumi:"certificate"`
-	GidStartNumber *int    `pulumi:"gidStartNumber"`
-	MfaSupport     *bool   `pulumi:"mfaSupport"`
-	Name           *string `pulumi:"name"`
-	SearchGroup    *string `pulumi:"searchGroup"`
-	SearchMode     *string `pulumi:"searchMode"`
-	TlsServerName  *string `pulumi:"tlsServerName"`
-	UidStartNumber *int    `pulumi:"uidStartNumber"`
+	BaseDn   string `pulumi:"baseDn"`
+	BindFlow string `pulumi:"bindFlow"`
+	// Defaults to `direct`.
+	BindMode    *string `pulumi:"bindMode"`
+	Certificate *string `pulumi:"certificate"`
+	// Defaults to `4000`.
+	GidStartNumber *int `pulumi:"gidStartNumber"`
+	// Defaults to `true`.
+	MfaSupport  *bool   `pulumi:"mfaSupport"`
+	Name        *string `pulumi:"name"`
+	SearchGroup *string `pulumi:"searchGroup"`
+	// Defaults to `direct`.
+	SearchMode    *string `pulumi:"searchMode"`
+	TlsServerName *string `pulumi:"tlsServerName"`
+	// Defaults to `2000`.
+	UidStartNumber *int `pulumi:"uidStartNumber"`
 }
 
 // The set of arguments for constructing a ProviderLdap resource.
 type ProviderLdapArgs struct {
-	BaseDn         pulumi.StringInput
-	BindFlow       pulumi.StringInput
-	BindMode       pulumi.StringPtrInput
-	Certificate    pulumi.StringPtrInput
+	BaseDn   pulumi.StringInput
+	BindFlow pulumi.StringInput
+	// Defaults to `direct`.
+	BindMode    pulumi.StringPtrInput
+	Certificate pulumi.StringPtrInput
+	// Defaults to `4000`.
 	GidStartNumber pulumi.IntPtrInput
-	MfaSupport     pulumi.BoolPtrInput
-	Name           pulumi.StringPtrInput
-	SearchGroup    pulumi.StringPtrInput
-	SearchMode     pulumi.StringPtrInput
-	TlsServerName  pulumi.StringPtrInput
+	// Defaults to `true`.
+	MfaSupport  pulumi.BoolPtrInput
+	Name        pulumi.StringPtrInput
+	SearchGroup pulumi.StringPtrInput
+	// Defaults to `direct`.
+	SearchMode    pulumi.StringPtrInput
+	TlsServerName pulumi.StringPtrInput
+	// Defaults to `2000`.
 	UidStartNumber pulumi.IntPtrInput
 }
 
@@ -145,6 +210,12 @@ func (i *ProviderLdap) ToProviderLdapOutput() ProviderLdapOutput {
 
 func (i *ProviderLdap) ToProviderLdapOutputWithContext(ctx context.Context) ProviderLdapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderLdapOutput)
+}
+
+func (i *ProviderLdap) ToOutput(ctx context.Context) pulumix.Output[*ProviderLdap] {
+	return pulumix.Output[*ProviderLdap]{
+		OutputState: i.ToProviderLdapOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ProviderLdapArrayInput is an input type that accepts ProviderLdapArray and ProviderLdapArrayOutput values.
@@ -172,6 +243,12 @@ func (i ProviderLdapArray) ToProviderLdapArrayOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderLdapArrayOutput)
 }
 
+func (i ProviderLdapArray) ToOutput(ctx context.Context) pulumix.Output[[]*ProviderLdap] {
+	return pulumix.Output[[]*ProviderLdap]{
+		OutputState: i.ToProviderLdapArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ProviderLdapMapInput is an input type that accepts ProviderLdapMap and ProviderLdapMapOutput values.
 // You can construct a concrete instance of `ProviderLdapMapInput` via:
 //
@@ -197,6 +274,12 @@ func (i ProviderLdapMap) ToProviderLdapMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderLdapMapOutput)
 }
 
+func (i ProviderLdapMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProviderLdap] {
+	return pulumix.Output[map[string]*ProviderLdap]{
+		OutputState: i.ToProviderLdapMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ProviderLdapOutput struct{ *pulumi.OutputState }
 
 func (ProviderLdapOutput) ElementType() reflect.Type {
@@ -211,6 +294,12 @@ func (o ProviderLdapOutput) ToProviderLdapOutputWithContext(ctx context.Context)
 	return o
 }
 
+func (o ProviderLdapOutput) ToOutput(ctx context.Context) pulumix.Output[*ProviderLdap] {
+	return pulumix.Output[*ProviderLdap]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ProviderLdapOutput) BaseDn() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderLdap) pulumi.StringOutput { return v.BaseDn }).(pulumi.StringOutput)
 }
@@ -219,6 +308,7 @@ func (o ProviderLdapOutput) BindFlow() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderLdap) pulumi.StringOutput { return v.BindFlow }).(pulumi.StringOutput)
 }
 
+// Defaults to `direct`.
 func (o ProviderLdapOutput) BindMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderLdap) pulumi.StringPtrOutput { return v.BindMode }).(pulumi.StringPtrOutput)
 }
@@ -227,10 +317,12 @@ func (o ProviderLdapOutput) Certificate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderLdap) pulumi.StringPtrOutput { return v.Certificate }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `4000`.
 func (o ProviderLdapOutput) GidStartNumber() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ProviderLdap) pulumi.IntPtrOutput { return v.GidStartNumber }).(pulumi.IntPtrOutput)
 }
 
+// Defaults to `true`.
 func (o ProviderLdapOutput) MfaSupport() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProviderLdap) pulumi.BoolPtrOutput { return v.MfaSupport }).(pulumi.BoolPtrOutput)
 }
@@ -243,6 +335,7 @@ func (o ProviderLdapOutput) SearchGroup() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderLdap) pulumi.StringPtrOutput { return v.SearchGroup }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `direct`.
 func (o ProviderLdapOutput) SearchMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderLdap) pulumi.StringPtrOutput { return v.SearchMode }).(pulumi.StringPtrOutput)
 }
@@ -251,6 +344,7 @@ func (o ProviderLdapOutput) TlsServerName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderLdap) pulumi.StringPtrOutput { return v.TlsServerName }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `2000`.
 func (o ProviderLdapOutput) UidStartNumber() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ProviderLdap) pulumi.IntPtrOutput { return v.UidStartNumber }).(pulumi.IntPtrOutput)
 }
@@ -267,6 +361,12 @@ func (o ProviderLdapArrayOutput) ToProviderLdapArrayOutput() ProviderLdapArrayOu
 
 func (o ProviderLdapArrayOutput) ToProviderLdapArrayOutputWithContext(ctx context.Context) ProviderLdapArrayOutput {
 	return o
+}
+
+func (o ProviderLdapArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ProviderLdap] {
+	return pulumix.Output[[]*ProviderLdap]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ProviderLdapArrayOutput) Index(i pulumi.IntInput) ProviderLdapOutput {
@@ -287,6 +387,12 @@ func (o ProviderLdapMapOutput) ToProviderLdapMapOutput() ProviderLdapMapOutput {
 
 func (o ProviderLdapMapOutput) ToProviderLdapMapOutputWithContext(ctx context.Context) ProviderLdapMapOutput {
 	return o
+}
+
+func (o ProviderLdapMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProviderLdap] {
+	return pulumix.Output[map[string]*ProviderLdap]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ProviderLdapMapOutput) MapIndex(k pulumi.StringInput) ProviderLdapOutput {

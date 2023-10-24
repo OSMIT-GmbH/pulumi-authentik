@@ -10,33 +10,76 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewSourceLdap(ctx, "name", &authentik.SourceLdapArgs{
+//				BaseDn:       pulumi.String("dn=foo"),
+//				BindCn:       pulumi.String("foo"),
+//				BindPassword: pulumi.String("bar"),
+//				ServerUri:    pulumi.String("ldaps://1.2.3.4"),
+//				Slug:         pulumi.String("ldap-test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type SourceLdap struct {
 	pulumi.CustomResourceState
 
-	AdditionalGroupDn      pulumi.StringPtrOutput   `pulumi:"additionalGroupDn"`
-	AdditionalUserDn       pulumi.StringPtrOutput   `pulumi:"additionalUserDn"`
-	BaseDn                 pulumi.StringOutput      `pulumi:"baseDn"`
-	BindCn                 pulumi.StringOutput      `pulumi:"bindCn"`
-	BindPassword           pulumi.StringOutput      `pulumi:"bindPassword"`
-	Enabled                pulumi.BoolPtrOutput     `pulumi:"enabled"`
-	GroupMembershipField   pulumi.StringPtrOutput   `pulumi:"groupMembershipField"`
-	GroupObjectFilter      pulumi.StringPtrOutput   `pulumi:"groupObjectFilter"`
-	Name                   pulumi.StringOutput      `pulumi:"name"`
+	// Defaults to ``.
+	AdditionalGroupDn pulumi.StringPtrOutput `pulumi:"additionalGroupDn"`
+	// Defaults to ``.
+	AdditionalUserDn pulumi.StringPtrOutput `pulumi:"additionalUserDn"`
+	BaseDn           pulumi.StringOutput    `pulumi:"baseDn"`
+	BindCn           pulumi.StringOutput    `pulumi:"bindCn"`
+	BindPassword     pulumi.StringOutput    `pulumi:"bindPassword"`
+	// Defaults to `true`.
+	Enabled pulumi.BoolPtrOutput `pulumi:"enabled"`
+	// Defaults to `member`.
+	GroupMembershipField pulumi.StringPtrOutput `pulumi:"groupMembershipField"`
+	// Defaults to `(objectClass=group)`.
+	GroupObjectFilter pulumi.StringPtrOutput `pulumi:"groupObjectFilter"`
+	Name              pulumi.StringOutput    `pulumi:"name"`
+	// Defaults to `objectSid`.
 	ObjectUniquenessField  pulumi.StringPtrOutput   `pulumi:"objectUniquenessField"`
 	PropertyMappings       pulumi.StringArrayOutput `pulumi:"propertyMappings"`
 	PropertyMappingsGroups pulumi.StringArrayOutput `pulumi:"propertyMappingsGroups"`
 	ServerUri              pulumi.StringOutput      `pulumi:"serverUri"`
 	Slug                   pulumi.StringOutput      `pulumi:"slug"`
-	StartTls               pulumi.BoolPtrOutput     `pulumi:"startTls"`
-	SyncGroups             pulumi.BoolPtrOutput     `pulumi:"syncGroups"`
-	SyncParentGroup        pulumi.StringPtrOutput   `pulumi:"syncParentGroup"`
-	SyncUsers              pulumi.BoolPtrOutput     `pulumi:"syncUsers"`
-	SyncUsersPassword      pulumi.BoolPtrOutput     `pulumi:"syncUsersPassword"`
-	UserObjectFilter       pulumi.StringPtrOutput   `pulumi:"userObjectFilter"`
-	UserPathTemplate       pulumi.StringPtrOutput   `pulumi:"userPathTemplate"`
-	Uuid                   pulumi.StringOutput      `pulumi:"uuid"`
+	// Defaults to `true`.
+	StartTls pulumi.BoolPtrOutput `pulumi:"startTls"`
+	// Defaults to `true`.
+	SyncGroups      pulumi.BoolPtrOutput   `pulumi:"syncGroups"`
+	SyncParentGroup pulumi.StringPtrOutput `pulumi:"syncParentGroup"`
+	// Defaults to `true`.
+	SyncUsers pulumi.BoolPtrOutput `pulumi:"syncUsers"`
+	// Defaults to `true`.
+	SyncUsersPassword pulumi.BoolPtrOutput `pulumi:"syncUsersPassword"`
+	// Defaults to `(objectClass=person)`.
+	UserObjectFilter pulumi.StringPtrOutput `pulumi:"userObjectFilter"`
+	// Defaults to `goauthentik.io/sources/%(slug)s`.
+	UserPathTemplate pulumi.StringPtrOutput `pulumi:"userPathTemplate"`
+	// Generated.
+	Uuid pulumi.StringOutput `pulumi:"uuid"`
 }
 
 // NewSourceLdap registers a new resource with the given unique name, arguments, and options.
@@ -91,53 +134,79 @@ func GetSourceLdap(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering SourceLdap resources.
 type sourceLdapState struct {
-	AdditionalGroupDn      *string  `pulumi:"additionalGroupDn"`
-	AdditionalUserDn       *string  `pulumi:"additionalUserDn"`
-	BaseDn                 *string  `pulumi:"baseDn"`
-	BindCn                 *string  `pulumi:"bindCn"`
-	BindPassword           *string  `pulumi:"bindPassword"`
-	Enabled                *bool    `pulumi:"enabled"`
-	GroupMembershipField   *string  `pulumi:"groupMembershipField"`
-	GroupObjectFilter      *string  `pulumi:"groupObjectFilter"`
-	Name                   *string  `pulumi:"name"`
+	// Defaults to ``.
+	AdditionalGroupDn *string `pulumi:"additionalGroupDn"`
+	// Defaults to ``.
+	AdditionalUserDn *string `pulumi:"additionalUserDn"`
+	BaseDn           *string `pulumi:"baseDn"`
+	BindCn           *string `pulumi:"bindCn"`
+	BindPassword     *string `pulumi:"bindPassword"`
+	// Defaults to `true`.
+	Enabled *bool `pulumi:"enabled"`
+	// Defaults to `member`.
+	GroupMembershipField *string `pulumi:"groupMembershipField"`
+	// Defaults to `(objectClass=group)`.
+	GroupObjectFilter *string `pulumi:"groupObjectFilter"`
+	Name              *string `pulumi:"name"`
+	// Defaults to `objectSid`.
 	ObjectUniquenessField  *string  `pulumi:"objectUniquenessField"`
 	PropertyMappings       []string `pulumi:"propertyMappings"`
 	PropertyMappingsGroups []string `pulumi:"propertyMappingsGroups"`
 	ServerUri              *string  `pulumi:"serverUri"`
 	Slug                   *string  `pulumi:"slug"`
-	StartTls               *bool    `pulumi:"startTls"`
-	SyncGroups             *bool    `pulumi:"syncGroups"`
-	SyncParentGroup        *string  `pulumi:"syncParentGroup"`
-	SyncUsers              *bool    `pulumi:"syncUsers"`
-	SyncUsersPassword      *bool    `pulumi:"syncUsersPassword"`
-	UserObjectFilter       *string  `pulumi:"userObjectFilter"`
-	UserPathTemplate       *string  `pulumi:"userPathTemplate"`
-	Uuid                   *string  `pulumi:"uuid"`
+	// Defaults to `true`.
+	StartTls *bool `pulumi:"startTls"`
+	// Defaults to `true`.
+	SyncGroups      *bool   `pulumi:"syncGroups"`
+	SyncParentGroup *string `pulumi:"syncParentGroup"`
+	// Defaults to `true`.
+	SyncUsers *bool `pulumi:"syncUsers"`
+	// Defaults to `true`.
+	SyncUsersPassword *bool `pulumi:"syncUsersPassword"`
+	// Defaults to `(objectClass=person)`.
+	UserObjectFilter *string `pulumi:"userObjectFilter"`
+	// Defaults to `goauthentik.io/sources/%(slug)s`.
+	UserPathTemplate *string `pulumi:"userPathTemplate"`
+	// Generated.
+	Uuid *string `pulumi:"uuid"`
 }
 
 type SourceLdapState struct {
-	AdditionalGroupDn      pulumi.StringPtrInput
-	AdditionalUserDn       pulumi.StringPtrInput
-	BaseDn                 pulumi.StringPtrInput
-	BindCn                 pulumi.StringPtrInput
-	BindPassword           pulumi.StringPtrInput
-	Enabled                pulumi.BoolPtrInput
-	GroupMembershipField   pulumi.StringPtrInput
-	GroupObjectFilter      pulumi.StringPtrInput
-	Name                   pulumi.StringPtrInput
+	// Defaults to ``.
+	AdditionalGroupDn pulumi.StringPtrInput
+	// Defaults to ``.
+	AdditionalUserDn pulumi.StringPtrInput
+	BaseDn           pulumi.StringPtrInput
+	BindCn           pulumi.StringPtrInput
+	BindPassword     pulumi.StringPtrInput
+	// Defaults to `true`.
+	Enabled pulumi.BoolPtrInput
+	// Defaults to `member`.
+	GroupMembershipField pulumi.StringPtrInput
+	// Defaults to `(objectClass=group)`.
+	GroupObjectFilter pulumi.StringPtrInput
+	Name              pulumi.StringPtrInput
+	// Defaults to `objectSid`.
 	ObjectUniquenessField  pulumi.StringPtrInput
 	PropertyMappings       pulumi.StringArrayInput
 	PropertyMappingsGroups pulumi.StringArrayInput
 	ServerUri              pulumi.StringPtrInput
 	Slug                   pulumi.StringPtrInput
-	StartTls               pulumi.BoolPtrInput
-	SyncGroups             pulumi.BoolPtrInput
-	SyncParentGroup        pulumi.StringPtrInput
-	SyncUsers              pulumi.BoolPtrInput
-	SyncUsersPassword      pulumi.BoolPtrInput
-	UserObjectFilter       pulumi.StringPtrInput
-	UserPathTemplate       pulumi.StringPtrInput
-	Uuid                   pulumi.StringPtrInput
+	// Defaults to `true`.
+	StartTls pulumi.BoolPtrInput
+	// Defaults to `true`.
+	SyncGroups      pulumi.BoolPtrInput
+	SyncParentGroup pulumi.StringPtrInput
+	// Defaults to `true`.
+	SyncUsers pulumi.BoolPtrInput
+	// Defaults to `true`.
+	SyncUsersPassword pulumi.BoolPtrInput
+	// Defaults to `(objectClass=person)`.
+	UserObjectFilter pulumi.StringPtrInput
+	// Defaults to `goauthentik.io/sources/%(slug)s`.
+	UserPathTemplate pulumi.StringPtrInput
+	// Generated.
+	Uuid pulumi.StringPtrInput
 }
 
 func (SourceLdapState) ElementType() reflect.Type {
@@ -145,54 +214,80 @@ func (SourceLdapState) ElementType() reflect.Type {
 }
 
 type sourceLdapArgs struct {
-	AdditionalGroupDn      *string  `pulumi:"additionalGroupDn"`
-	AdditionalUserDn       *string  `pulumi:"additionalUserDn"`
-	BaseDn                 string   `pulumi:"baseDn"`
-	BindCn                 string   `pulumi:"bindCn"`
-	BindPassword           string   `pulumi:"bindPassword"`
-	Enabled                *bool    `pulumi:"enabled"`
-	GroupMembershipField   *string  `pulumi:"groupMembershipField"`
-	GroupObjectFilter      *string  `pulumi:"groupObjectFilter"`
-	Name                   *string  `pulumi:"name"`
+	// Defaults to ``.
+	AdditionalGroupDn *string `pulumi:"additionalGroupDn"`
+	// Defaults to ``.
+	AdditionalUserDn *string `pulumi:"additionalUserDn"`
+	BaseDn           string  `pulumi:"baseDn"`
+	BindCn           string  `pulumi:"bindCn"`
+	BindPassword     string  `pulumi:"bindPassword"`
+	// Defaults to `true`.
+	Enabled *bool `pulumi:"enabled"`
+	// Defaults to `member`.
+	GroupMembershipField *string `pulumi:"groupMembershipField"`
+	// Defaults to `(objectClass=group)`.
+	GroupObjectFilter *string `pulumi:"groupObjectFilter"`
+	Name              *string `pulumi:"name"`
+	// Defaults to `objectSid`.
 	ObjectUniquenessField  *string  `pulumi:"objectUniquenessField"`
 	PropertyMappings       []string `pulumi:"propertyMappings"`
 	PropertyMappingsGroups []string `pulumi:"propertyMappingsGroups"`
 	ServerUri              string   `pulumi:"serverUri"`
 	Slug                   string   `pulumi:"slug"`
-	StartTls               *bool    `pulumi:"startTls"`
-	SyncGroups             *bool    `pulumi:"syncGroups"`
-	SyncParentGroup        *string  `pulumi:"syncParentGroup"`
-	SyncUsers              *bool    `pulumi:"syncUsers"`
-	SyncUsersPassword      *bool    `pulumi:"syncUsersPassword"`
-	UserObjectFilter       *string  `pulumi:"userObjectFilter"`
-	UserPathTemplate       *string  `pulumi:"userPathTemplate"`
-	Uuid                   *string  `pulumi:"uuid"`
+	// Defaults to `true`.
+	StartTls *bool `pulumi:"startTls"`
+	// Defaults to `true`.
+	SyncGroups      *bool   `pulumi:"syncGroups"`
+	SyncParentGroup *string `pulumi:"syncParentGroup"`
+	// Defaults to `true`.
+	SyncUsers *bool `pulumi:"syncUsers"`
+	// Defaults to `true`.
+	SyncUsersPassword *bool `pulumi:"syncUsersPassword"`
+	// Defaults to `(objectClass=person)`.
+	UserObjectFilter *string `pulumi:"userObjectFilter"`
+	// Defaults to `goauthentik.io/sources/%(slug)s`.
+	UserPathTemplate *string `pulumi:"userPathTemplate"`
+	// Generated.
+	Uuid *string `pulumi:"uuid"`
 }
 
 // The set of arguments for constructing a SourceLdap resource.
 type SourceLdapArgs struct {
-	AdditionalGroupDn      pulumi.StringPtrInput
-	AdditionalUserDn       pulumi.StringPtrInput
-	BaseDn                 pulumi.StringInput
-	BindCn                 pulumi.StringInput
-	BindPassword           pulumi.StringInput
-	Enabled                pulumi.BoolPtrInput
-	GroupMembershipField   pulumi.StringPtrInput
-	GroupObjectFilter      pulumi.StringPtrInput
-	Name                   pulumi.StringPtrInput
+	// Defaults to ``.
+	AdditionalGroupDn pulumi.StringPtrInput
+	// Defaults to ``.
+	AdditionalUserDn pulumi.StringPtrInput
+	BaseDn           pulumi.StringInput
+	BindCn           pulumi.StringInput
+	BindPassword     pulumi.StringInput
+	// Defaults to `true`.
+	Enabled pulumi.BoolPtrInput
+	// Defaults to `member`.
+	GroupMembershipField pulumi.StringPtrInput
+	// Defaults to `(objectClass=group)`.
+	GroupObjectFilter pulumi.StringPtrInput
+	Name              pulumi.StringPtrInput
+	// Defaults to `objectSid`.
 	ObjectUniquenessField  pulumi.StringPtrInput
 	PropertyMappings       pulumi.StringArrayInput
 	PropertyMappingsGroups pulumi.StringArrayInput
 	ServerUri              pulumi.StringInput
 	Slug                   pulumi.StringInput
-	StartTls               pulumi.BoolPtrInput
-	SyncGroups             pulumi.BoolPtrInput
-	SyncParentGroup        pulumi.StringPtrInput
-	SyncUsers              pulumi.BoolPtrInput
-	SyncUsersPassword      pulumi.BoolPtrInput
-	UserObjectFilter       pulumi.StringPtrInput
-	UserPathTemplate       pulumi.StringPtrInput
-	Uuid                   pulumi.StringPtrInput
+	// Defaults to `true`.
+	StartTls pulumi.BoolPtrInput
+	// Defaults to `true`.
+	SyncGroups      pulumi.BoolPtrInput
+	SyncParentGroup pulumi.StringPtrInput
+	// Defaults to `true`.
+	SyncUsers pulumi.BoolPtrInput
+	// Defaults to `true`.
+	SyncUsersPassword pulumi.BoolPtrInput
+	// Defaults to `(objectClass=person)`.
+	UserObjectFilter pulumi.StringPtrInput
+	// Defaults to `goauthentik.io/sources/%(slug)s`.
+	UserPathTemplate pulumi.StringPtrInput
+	// Generated.
+	Uuid pulumi.StringPtrInput
 }
 
 func (SourceLdapArgs) ElementType() reflect.Type {
@@ -216,6 +311,12 @@ func (i *SourceLdap) ToSourceLdapOutput() SourceLdapOutput {
 
 func (i *SourceLdap) ToSourceLdapOutputWithContext(ctx context.Context) SourceLdapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(SourceLdapOutput)
+}
+
+func (i *SourceLdap) ToOutput(ctx context.Context) pulumix.Output[*SourceLdap] {
+	return pulumix.Output[*SourceLdap]{
+		OutputState: i.ToSourceLdapOutputWithContext(ctx).OutputState,
+	}
 }
 
 // SourceLdapArrayInput is an input type that accepts SourceLdapArray and SourceLdapArrayOutput values.
@@ -243,6 +344,12 @@ func (i SourceLdapArray) ToSourceLdapArrayOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(SourceLdapArrayOutput)
 }
 
+func (i SourceLdapArray) ToOutput(ctx context.Context) pulumix.Output[[]*SourceLdap] {
+	return pulumix.Output[[]*SourceLdap]{
+		OutputState: i.ToSourceLdapArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // SourceLdapMapInput is an input type that accepts SourceLdapMap and SourceLdapMapOutput values.
 // You can construct a concrete instance of `SourceLdapMapInput` via:
 //
@@ -268,6 +375,12 @@ func (i SourceLdapMap) ToSourceLdapMapOutputWithContext(ctx context.Context) Sou
 	return pulumi.ToOutputWithContext(ctx, i).(SourceLdapMapOutput)
 }
 
+func (i SourceLdapMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*SourceLdap] {
+	return pulumix.Output[map[string]*SourceLdap]{
+		OutputState: i.ToSourceLdapMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type SourceLdapOutput struct{ *pulumi.OutputState }
 
 func (SourceLdapOutput) ElementType() reflect.Type {
@@ -282,10 +395,18 @@ func (o SourceLdapOutput) ToSourceLdapOutputWithContext(ctx context.Context) Sou
 	return o
 }
 
+func (o SourceLdapOutput) ToOutput(ctx context.Context) pulumix.Output[*SourceLdap] {
+	return pulumix.Output[*SourceLdap]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Defaults to “.
 func (o SourceLdapOutput) AdditionalGroupDn() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringPtrOutput { return v.AdditionalGroupDn }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to “.
 func (o SourceLdapOutput) AdditionalUserDn() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringPtrOutput { return v.AdditionalUserDn }).(pulumi.StringPtrOutput)
 }
@@ -302,14 +423,17 @@ func (o SourceLdapOutput) BindPassword() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringOutput { return v.BindPassword }).(pulumi.StringOutput)
 }
 
+// Defaults to `true`.
 func (o SourceLdapOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.BoolPtrOutput { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to `member`.
 func (o SourceLdapOutput) GroupMembershipField() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringPtrOutput { return v.GroupMembershipField }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `(objectClass=group)`.
 func (o SourceLdapOutput) GroupObjectFilter() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringPtrOutput { return v.GroupObjectFilter }).(pulumi.StringPtrOutput)
 }
@@ -318,6 +442,7 @@ func (o SourceLdapOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// Defaults to `objectSid`.
 func (o SourceLdapOutput) ObjectUniquenessField() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringPtrOutput { return v.ObjectUniquenessField }).(pulumi.StringPtrOutput)
 }
@@ -338,10 +463,12 @@ func (o SourceLdapOutput) Slug() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringOutput { return v.Slug }).(pulumi.StringOutput)
 }
 
+// Defaults to `true`.
 func (o SourceLdapOutput) StartTls() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.BoolPtrOutput { return v.StartTls }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to `true`.
 func (o SourceLdapOutput) SyncGroups() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.BoolPtrOutput { return v.SyncGroups }).(pulumi.BoolPtrOutput)
 }
@@ -350,22 +477,27 @@ func (o SourceLdapOutput) SyncParentGroup() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringPtrOutput { return v.SyncParentGroup }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `true`.
 func (o SourceLdapOutput) SyncUsers() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.BoolPtrOutput { return v.SyncUsers }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to `true`.
 func (o SourceLdapOutput) SyncUsersPassword() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.BoolPtrOutput { return v.SyncUsersPassword }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to `(objectClass=person)`.
 func (o SourceLdapOutput) UserObjectFilter() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringPtrOutput { return v.UserObjectFilter }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `goauthentik.io/sources/%(slug)s`.
 func (o SourceLdapOutput) UserPathTemplate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringPtrOutput { return v.UserPathTemplate }).(pulumi.StringPtrOutput)
 }
 
+// Generated.
 func (o SourceLdapOutput) Uuid() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringOutput { return v.Uuid }).(pulumi.StringOutput)
 }
@@ -382,6 +514,12 @@ func (o SourceLdapArrayOutput) ToSourceLdapArrayOutput() SourceLdapArrayOutput {
 
 func (o SourceLdapArrayOutput) ToSourceLdapArrayOutputWithContext(ctx context.Context) SourceLdapArrayOutput {
 	return o
+}
+
+func (o SourceLdapArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*SourceLdap] {
+	return pulumix.Output[[]*SourceLdap]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o SourceLdapArrayOutput) Index(i pulumi.IntInput) SourceLdapOutput {
@@ -402,6 +540,12 @@ func (o SourceLdapMapOutput) ToSourceLdapMapOutput() SourceLdapMapOutput {
 
 func (o SourceLdapMapOutput) ToSourceLdapMapOutputWithContext(ctx context.Context) SourceLdapMapOutput {
 	return o
+}
+
+func (o SourceLdapMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*SourceLdap] {
+	return pulumix.Output[map[string]*SourceLdap]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o SourceLdapMapOutput) MapIndex(k pulumi.StringInput) SourceLdapOutput {

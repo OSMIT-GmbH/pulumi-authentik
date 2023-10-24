@@ -6,6 +6,21 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
+/**
+ * Get users list
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const all = authentik.getUsers({});
+ * const admins = authentik.getUsers({
+ *     isSuperuser: true,
+ * });
+ * ```
+ */
 export function getUsers(args?: GetUsersArgs, opts?: pulumi.InvokeOptions): Promise<GetUsersResult> {
     args = args || {};
 
@@ -66,9 +81,27 @@ export interface GetUsersResult {
     readonly pathStartswith?: string;
     readonly search?: string;
     readonly username?: string;
+    /**
+     * Generated.
+     */
     readonly users: outputs.GetUsersUser[];
     readonly uuid?: string;
 }
+/**
+ * Get users list
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const all = authentik.getUsers({});
+ * const admins = authentik.getUsers({
+ *     isSuperuser: true,
+ * });
+ * ```
+ */
 export function getUsersOutput(args?: GetUsersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetUsersResult> {
     return pulumi.output(args).apply((a: any) => getUsers(a, opts))
 }

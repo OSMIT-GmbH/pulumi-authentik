@@ -9,8 +9,10 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Get OAuth2 provider config
 func GetProviderOauth2Config(ctx *pulumi.Context, args *GetProviderOauth2ConfigArgs, opts ...pulumi.InvokeOption) (*GetProviderOauth2ConfigResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProviderOauth2ConfigResult
@@ -23,23 +25,34 @@ func GetProviderOauth2Config(ctx *pulumi.Context, args *GetProviderOauth2ConfigA
 
 // A collection of arguments for invoking getProviderOauth2Config.
 type GetProviderOauth2ConfigArgs struct {
-	Name       *string `pulumi:"name"`
-	ProviderId *int    `pulumi:"providerId"`
+	// Find provider by name
+	Name *string `pulumi:"name"`
+	// Find provider by ID
+	ProviderId *int `pulumi:"providerId"`
 }
 
 // A collection of values returned by getProviderOauth2Config.
 type GetProviderOauth2ConfigResult struct {
+	// Generated.
 	AuthorizeUrl string `pulumi:"authorizeUrl"`
 	// The provider-assigned unique ID for this managed resource.
-	Id              string  `pulumi:"id"`
-	IssuerUrl       string  `pulumi:"issuerUrl"`
-	JwksUrl         string  `pulumi:"jwksUrl"`
-	LogoutUrl       string  `pulumi:"logoutUrl"`
-	Name            *string `pulumi:"name"`
-	ProviderId      *int    `pulumi:"providerId"`
-	ProviderInfoUrl string  `pulumi:"providerInfoUrl"`
-	TokenUrl        string  `pulumi:"tokenUrl"`
-	UserInfoUrl     string  `pulumi:"userInfoUrl"`
+	Id string `pulumi:"id"`
+	// Generated.
+	IssuerUrl string `pulumi:"issuerUrl"`
+	// Generated.
+	JwksUrl string `pulumi:"jwksUrl"`
+	// Generated.
+	LogoutUrl string `pulumi:"logoutUrl"`
+	// Find provider by name
+	Name *string `pulumi:"name"`
+	// Find provider by ID
+	ProviderId *int `pulumi:"providerId"`
+	// Generated.
+	ProviderInfoUrl string `pulumi:"providerInfoUrl"`
+	// Generated.
+	TokenUrl string `pulumi:"tokenUrl"`
+	// Generated.
+	UserInfoUrl string `pulumi:"userInfoUrl"`
 }
 
 func GetProviderOauth2ConfigOutput(ctx *pulumi.Context, args GetProviderOauth2ConfigOutputArgs, opts ...pulumi.InvokeOption) GetProviderOauth2ConfigResultOutput {
@@ -57,8 +70,10 @@ func GetProviderOauth2ConfigOutput(ctx *pulumi.Context, args GetProviderOauth2Co
 
 // A collection of arguments for invoking getProviderOauth2Config.
 type GetProviderOauth2ConfigOutputArgs struct {
-	Name       pulumi.StringPtrInput `pulumi:"name"`
-	ProviderId pulumi.IntPtrInput    `pulumi:"providerId"`
+	// Find provider by name
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Find provider by ID
+	ProviderId pulumi.IntPtrInput `pulumi:"providerId"`
 }
 
 func (GetProviderOauth2ConfigOutputArgs) ElementType() reflect.Type {
@@ -80,6 +95,13 @@ func (o GetProviderOauth2ConfigResultOutput) ToGetProviderOauth2ConfigResultOutp
 	return o
 }
 
+func (o GetProviderOauth2ConfigResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetProviderOauth2ConfigResult] {
+	return pulumix.Output[GetProviderOauth2ConfigResult]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Generated.
 func (o GetProviderOauth2ConfigResultOutput) AuthorizeUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProviderOauth2ConfigResult) string { return v.AuthorizeUrl }).(pulumi.StringOutput)
 }
@@ -89,34 +111,42 @@ func (o GetProviderOauth2ConfigResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProviderOauth2ConfigResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o GetProviderOauth2ConfigResultOutput) IssuerUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProviderOauth2ConfigResult) string { return v.IssuerUrl }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o GetProviderOauth2ConfigResultOutput) JwksUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProviderOauth2ConfigResult) string { return v.JwksUrl }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o GetProviderOauth2ConfigResultOutput) LogoutUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProviderOauth2ConfigResult) string { return v.LogoutUrl }).(pulumi.StringOutput)
 }
 
+// Find provider by name
 func (o GetProviderOauth2ConfigResultOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetProviderOauth2ConfigResult) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
+// Find provider by ID
 func (o GetProviderOauth2ConfigResultOutput) ProviderId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v GetProviderOauth2ConfigResult) *int { return v.ProviderId }).(pulumi.IntPtrOutput)
 }
 
+// Generated.
 func (o GetProviderOauth2ConfigResultOutput) ProviderInfoUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProviderOauth2ConfigResult) string { return v.ProviderInfoUrl }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o GetProviderOauth2ConfigResultOutput) TokenUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProviderOauth2ConfigResult) string { return v.TokenUrl }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o GetProviderOauth2ConfigResultOutput) UserInfoUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProviderOauth2ConfigResult) string { return v.UserInfoUrl }).(pulumi.StringOutput)
 }

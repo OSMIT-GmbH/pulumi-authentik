@@ -4,6 +4,27 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * // Create a flow with a stage attached
+ * const name = new authentik.StageDummy("name", {});
+ * const flow = new authentik.Flow("flow", {
+ *     title: "Test flow",
+ *     slug: "test-flow",
+ *     designation: "authorization",
+ * });
+ * const dummy_flow = new authentik.FlowStageBinding("dummy-flow", {
+ *     target: flow.uuid,
+ *     stage: name.id,
+ *     order: 0,
+ * });
+ * ```
+ */
 export class FlowStageBinding extends pulumi.CustomResource {
     /**
      * Get an existing FlowStageBinding resource's state with the given name, ID, and optional extra
@@ -32,10 +53,22 @@ export class FlowStageBinding extends pulumi.CustomResource {
         return obj['__pulumiType'] === FlowStageBinding.__pulumiType;
     }
 
+    /**
+     * Defaults to `true`.
+     */
     public readonly evaluateOnPlan!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `retry`.
+     */
     public readonly invalidResponseAction!: pulumi.Output<string | undefined>;
     public readonly order!: pulumi.Output<number>;
+    /**
+     * Defaults to `any`.
+     */
     public readonly policyEngineMode!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly reEvaluatePolicies!: pulumi.Output<boolean | undefined>;
     public readonly stage!: pulumi.Output<string>;
     public readonly target!: pulumi.Output<string>;
@@ -88,10 +121,22 @@ export class FlowStageBinding extends pulumi.CustomResource {
  * Input properties used for looking up and filtering FlowStageBinding resources.
  */
 export interface FlowStageBindingState {
+    /**
+     * Defaults to `true`.
+     */
     evaluateOnPlan?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `retry`.
+     */
     invalidResponseAction?: pulumi.Input<string>;
     order?: pulumi.Input<number>;
+    /**
+     * Defaults to `any`.
+     */
     policyEngineMode?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     reEvaluatePolicies?: pulumi.Input<boolean>;
     stage?: pulumi.Input<string>;
     target?: pulumi.Input<string>;
@@ -101,10 +146,22 @@ export interface FlowStageBindingState {
  * The set of arguments for constructing a FlowStageBinding resource.
  */
 export interface FlowStageBindingArgs {
+    /**
+     * Defaults to `true`.
+     */
     evaluateOnPlan?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `retry`.
+     */
     invalidResponseAction?: pulumi.Input<string>;
     order: pulumi.Input<number>;
+    /**
+     * Defaults to `any`.
+     */
     policyEngineMode?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     reEvaluatePolicies?: pulumi.Input<boolean>;
     stage: pulumi.Input<string>;
     target: pulumi.Input<string>;

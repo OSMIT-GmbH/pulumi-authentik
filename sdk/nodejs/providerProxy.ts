@@ -4,6 +4,28 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const default-authorization-flow = authentik.getFlow({
+ *     slug: "default-provider-authorization-implicit-consent",
+ * });
+ * const nameProviderProxy = new authentik.ProviderProxy("nameProviderProxy", {
+ *     internalHost: "http://foo.bar.baz",
+ *     externalHost: "http://internal.service",
+ *     authorizationFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
+ * });
+ * const nameApplication = new authentik.Application("nameApplication", {
+ *     slug: "test-app",
+ *     protocolProvider: nameProviderProxy.id,
+ * });
+ * ```
+ */
 export class ProviderProxy extends pulumi.CustomResource {
     /**
      * Get an existing ProviderProxy resource's state with the given name, ID, and optional extra
@@ -32,25 +54,46 @@ export class ProviderProxy extends pulumi.CustomResource {
         return obj['__pulumiType'] === ProviderProxy.__pulumiType;
     }
 
+    /**
+     * Defaults to `minutes=10`.
+     */
     public readonly accessTokenValidity!: pulumi.Output<string | undefined>;
     public readonly authenticationFlow!: pulumi.Output<string | undefined>;
     public readonly authorizationFlow!: pulumi.Output<string>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly basicAuthEnabled!: pulumi.Output<boolean | undefined>;
     public readonly basicAuthPasswordAttribute!: pulumi.Output<string | undefined>;
     public readonly basicAuthUsernameAttribute!: pulumi.Output<string | undefined>;
+    /**
+     * Generated.
+     */
     public /*out*/ readonly clientId!: pulumi.Output<string>;
     public readonly cookieDomain!: pulumi.Output<string | undefined>;
     public readonly externalHost!: pulumi.Output<string>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly interceptHeaderAuth!: pulumi.Output<boolean | undefined>;
     public readonly internalHost!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly internalHostSslValidation!: pulumi.Output<boolean | undefined>;
     /**
      * JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
      */
     public readonly jwksSources!: pulumi.Output<string[] | undefined>;
+    /**
+     * Defaults to `proxy`.
+     */
     public readonly mode!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly propertyMappings!: pulumi.Output<string[] | undefined>;
+    /**
+     * Defaults to `days=30`.
+     */
     public readonly refreshTokenValidity!: pulumi.Output<string | undefined>;
     public readonly skipPathRegex!: pulumi.Output<string | undefined>;
 
@@ -121,25 +164,46 @@ export class ProviderProxy extends pulumi.CustomResource {
  * Input properties used for looking up and filtering ProviderProxy resources.
  */
 export interface ProviderProxyState {
+    /**
+     * Defaults to `minutes=10`.
+     */
     accessTokenValidity?: pulumi.Input<string>;
     authenticationFlow?: pulumi.Input<string>;
     authorizationFlow?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     basicAuthEnabled?: pulumi.Input<boolean>;
     basicAuthPasswordAttribute?: pulumi.Input<string>;
     basicAuthUsernameAttribute?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     clientId?: pulumi.Input<string>;
     cookieDomain?: pulumi.Input<string>;
     externalHost?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     interceptHeaderAuth?: pulumi.Input<boolean>;
     internalHost?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     internalHostSslValidation?: pulumi.Input<boolean>;
     /**
      * JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
      */
     jwksSources?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Defaults to `proxy`.
+     */
     mode?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Defaults to `days=30`.
+     */
     refreshTokenValidity?: pulumi.Input<string>;
     skipPathRegex?: pulumi.Input<string>;
 }
@@ -148,24 +212,42 @@ export interface ProviderProxyState {
  * The set of arguments for constructing a ProviderProxy resource.
  */
 export interface ProviderProxyArgs {
+    /**
+     * Defaults to `minutes=10`.
+     */
     accessTokenValidity?: pulumi.Input<string>;
     authenticationFlow?: pulumi.Input<string>;
     authorizationFlow: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     basicAuthEnabled?: pulumi.Input<boolean>;
     basicAuthPasswordAttribute?: pulumi.Input<string>;
     basicAuthUsernameAttribute?: pulumi.Input<string>;
     cookieDomain?: pulumi.Input<string>;
     externalHost: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     interceptHeaderAuth?: pulumi.Input<boolean>;
     internalHost?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     internalHostSslValidation?: pulumi.Input<boolean>;
     /**
      * JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
      */
     jwksSources?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Defaults to `proxy`.
+     */
     mode?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Defaults to `days=30`.
+     */
     refreshTokenValidity?: pulumi.Input<string>;
     skipPathRegex?: pulumi.Input<string>;
 }

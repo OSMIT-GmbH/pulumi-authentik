@@ -35,13 +35,22 @@ export class StageAuthenticatorSms extends pulumi.CustomResource {
     public readonly accountSid!: pulumi.Output<string>;
     public readonly auth!: pulumi.Output<string>;
     public readonly authPassword!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `basic`.
+     */
     public readonly authType!: pulumi.Output<string | undefined>;
     public readonly configureFlow!: pulumi.Output<string | undefined>;
     public readonly friendlyName!: pulumi.Output<string | undefined>;
     public readonly fromNumber!: pulumi.Output<string>;
     public readonly mapping!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Defaults to `twilio`.
+     */
     public readonly smsProvider!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly verifyOnly!: pulumi.Output<boolean | undefined>;
 
     /**
@@ -105,13 +114,22 @@ export interface StageAuthenticatorSmsState {
     accountSid?: pulumi.Input<string>;
     auth?: pulumi.Input<string>;
     authPassword?: pulumi.Input<string>;
+    /**
+     * Defaults to `basic`.
+     */
     authType?: pulumi.Input<string>;
     configureFlow?: pulumi.Input<string>;
     friendlyName?: pulumi.Input<string>;
     fromNumber?: pulumi.Input<string>;
     mapping?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `twilio`.
+     */
     smsProvider?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     verifyOnly?: pulumi.Input<boolean>;
 }
 
@@ -122,12 +140,21 @@ export interface StageAuthenticatorSmsArgs {
     accountSid: pulumi.Input<string>;
     auth: pulumi.Input<string>;
     authPassword?: pulumi.Input<string>;
+    /**
+     * Defaults to `basic`.
+     */
     authType?: pulumi.Input<string>;
     configureFlow?: pulumi.Input<string>;
     friendlyName?: pulumi.Input<string>;
     fromNumber: pulumi.Input<string>;
     mapping?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `twilio`.
+     */
     smsProvider?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     verifyOnly?: pulumi.Input<boolean>;
 }

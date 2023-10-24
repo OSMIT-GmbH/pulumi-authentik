@@ -4,6 +4,22 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.SourceLdap("name", {
+ *     baseDn: "dn=foo",
+ *     bindCn: "foo",
+ *     bindPassword: "bar",
+ *     serverUri: "ldaps://1.2.3.4",
+ *     slug: "ldap-test",
+ * });
+ * ```
+ */
 export class SourceLdap extends pulumi.CustomResource {
     /**
      * Get an existing SourceLdap resource's state with the given name, ID, and optional extra
@@ -32,27 +48,66 @@ export class SourceLdap extends pulumi.CustomResource {
         return obj['__pulumiType'] === SourceLdap.__pulumiType;
     }
 
+    /**
+     * Defaults to ``.
+     */
     public readonly additionalGroupDn!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to ``.
+     */
     public readonly additionalUserDn!: pulumi.Output<string | undefined>;
     public readonly baseDn!: pulumi.Output<string>;
     public readonly bindCn!: pulumi.Output<string>;
     public readonly bindPassword!: pulumi.Output<string>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly enabled!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `member`.
+     */
     public readonly groupMembershipField!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `(objectClass=group)`.
+     */
     public readonly groupObjectFilter!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Defaults to `objectSid`.
+     */
     public readonly objectUniquenessField!: pulumi.Output<string | undefined>;
     public readonly propertyMappings!: pulumi.Output<string[] | undefined>;
     public readonly propertyMappingsGroups!: pulumi.Output<string[] | undefined>;
     public readonly serverUri!: pulumi.Output<string>;
     public readonly slug!: pulumi.Output<string>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly startTls!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly syncGroups!: pulumi.Output<boolean | undefined>;
     public readonly syncParentGroup!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly syncUsers!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly syncUsersPassword!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `(objectClass=person)`.
+     */
     public readonly userObjectFilter!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `goauthentik.io/sources/%(slug)s`.
+     */
     public readonly userPathTemplate!: pulumi.Output<string | undefined>;
+    /**
+     * Generated.
+     */
     public readonly uuid!: pulumi.Output<string>;
 
     /**
@@ -141,27 +196,66 @@ export class SourceLdap extends pulumi.CustomResource {
  * Input properties used for looking up and filtering SourceLdap resources.
  */
 export interface SourceLdapState {
+    /**
+     * Defaults to ``.
+     */
     additionalGroupDn?: pulumi.Input<string>;
+    /**
+     * Defaults to ``.
+     */
     additionalUserDn?: pulumi.Input<string>;
     baseDn?: pulumi.Input<string>;
     bindCn?: pulumi.Input<string>;
     bindPassword?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     enabled?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `member`.
+     */
     groupMembershipField?: pulumi.Input<string>;
+    /**
+     * Defaults to `(objectClass=group)`.
+     */
     groupObjectFilter?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `objectSid`.
+     */
     objectUniquenessField?: pulumi.Input<string>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
     propertyMappingsGroups?: pulumi.Input<pulumi.Input<string>[]>;
     serverUri?: pulumi.Input<string>;
     slug?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     startTls?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `true`.
+     */
     syncGroups?: pulumi.Input<boolean>;
     syncParentGroup?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     syncUsers?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `true`.
+     */
     syncUsersPassword?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `(objectClass=person)`.
+     */
     userObjectFilter?: pulumi.Input<string>;
+    /**
+     * Defaults to `goauthentik.io/sources/%(slug)s`.
+     */
     userPathTemplate?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     uuid?: pulumi.Input<string>;
 }
 
@@ -169,26 +263,65 @@ export interface SourceLdapState {
  * The set of arguments for constructing a SourceLdap resource.
  */
 export interface SourceLdapArgs {
+    /**
+     * Defaults to ``.
+     */
     additionalGroupDn?: pulumi.Input<string>;
+    /**
+     * Defaults to ``.
+     */
     additionalUserDn?: pulumi.Input<string>;
     baseDn: pulumi.Input<string>;
     bindCn: pulumi.Input<string>;
     bindPassword: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     enabled?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `member`.
+     */
     groupMembershipField?: pulumi.Input<string>;
+    /**
+     * Defaults to `(objectClass=group)`.
+     */
     groupObjectFilter?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `objectSid`.
+     */
     objectUniquenessField?: pulumi.Input<string>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
     propertyMappingsGroups?: pulumi.Input<pulumi.Input<string>[]>;
     serverUri: pulumi.Input<string>;
     slug: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     startTls?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `true`.
+     */
     syncGroups?: pulumi.Input<boolean>;
     syncParentGroup?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     syncUsers?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `true`.
+     */
     syncUsersPassword?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `(objectClass=person)`.
+     */
     userObjectFilter?: pulumi.Input<string>;
+    /**
+     * Defaults to `goauthentik.io/sources/%(slug)s`.
+     */
     userPathTemplate?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     uuid?: pulumi.Input<string>;
 }

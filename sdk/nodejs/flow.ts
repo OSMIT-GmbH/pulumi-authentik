@@ -4,6 +4,27 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * // Create a flow with a stage attached
+ * const name = new authentik.StageDummy("name", {});
+ * const flow = new authentik.Flow("flow", {
+ *     title: "Test flow",
+ *     slug: "test-flow",
+ *     designation: "authorization",
+ * });
+ * const dummy_flow = new authentik.FlowStageBinding("dummy-flow", {
+ *     target: flow.uuid,
+ *     stage: name.id,
+ *     order: 0,
+ * });
+ * ```
+ */
 export class Flow extends pulumi.CustomResource {
     /**
      * Get an existing Flow resource's state with the given name, ID, and optional extra
@@ -32,19 +53,37 @@ export class Flow extends pulumi.CustomResource {
         return obj['__pulumiType'] === Flow.__pulumiType;
     }
 
+    /**
+     * Defaults to `none`.
+     */
     public readonly authentication!: pulumi.Output<string | undefined>;
     /**
      * Optional URL to an image which will be used as the background during the flow.
      */
     public readonly background!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly compatibilityMode!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `messageContinue`.
+     */
     public readonly deniedAction!: pulumi.Output<string | undefined>;
     public readonly designation!: pulumi.Output<string>;
+    /**
+     * Defaults to `stacked`.
+     */
     public readonly layout!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Defaults to `any`.
+     */
     public readonly policyEngineMode!: pulumi.Output<string | undefined>;
     public readonly slug!: pulumi.Output<string>;
     public readonly title!: pulumi.Output<string>;
+    /**
+     * Generated.
+     */
     public /*out*/ readonly uuid!: pulumi.Output<string>;
 
     /**
@@ -103,19 +142,37 @@ export class Flow extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Flow resources.
  */
 export interface FlowState {
+    /**
+     * Defaults to `none`.
+     */
     authentication?: pulumi.Input<string>;
     /**
      * Optional URL to an image which will be used as the background during the flow.
      */
     background?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     compatibilityMode?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `messageContinue`.
+     */
     deniedAction?: pulumi.Input<string>;
     designation?: pulumi.Input<string>;
+    /**
+     * Defaults to `stacked`.
+     */
     layout?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `any`.
+     */
     policyEngineMode?: pulumi.Input<string>;
     slug?: pulumi.Input<string>;
     title?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     uuid?: pulumi.Input<string>;
 }
 
@@ -123,16 +180,31 @@ export interface FlowState {
  * The set of arguments for constructing a Flow resource.
  */
 export interface FlowArgs {
+    /**
+     * Defaults to `none`.
+     */
     authentication?: pulumi.Input<string>;
     /**
      * Optional URL to an image which will be used as the background during the flow.
      */
     background?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     compatibilityMode?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `messageContinue`.
+     */
     deniedAction?: pulumi.Input<string>;
     designation: pulumi.Input<string>;
+    /**
+     * Defaults to `stacked`.
+     */
     layout?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `any`.
+     */
     policyEngineMode?: pulumi.Input<string>;
     slug: pulumi.Input<string>;
     title: pulumi.Input<string>;

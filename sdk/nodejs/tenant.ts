@@ -4,6 +4,20 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const _default = new authentik.Tenant("default", {
+ *     brandingTitle: "test",
+ *     "default": true,
+ *     domain: ".",
+ * });
+ * ```
+ */
 export class Tenant extends pulumi.CustomResource {
     /**
      * Get an existing Tenant resource's state with the given name, ID, and optional extra
@@ -33,14 +47,23 @@ export class Tenant extends pulumi.CustomResource {
     }
 
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     public readonly attributes!: pulumi.Output<string | undefined>;
     public readonly brandingFavicon!: pulumi.Output<string | undefined>;
     public readonly brandingLogo!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `authentik`.
+     */
     public readonly brandingTitle!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly default!: pulumi.Output<boolean | undefined>;
     public readonly domain!: pulumi.Output<string>;
+    /**
+     * Defaults to `days=365`.
+     */
     public readonly eventRetention!: pulumi.Output<string | undefined>;
     public readonly flowAuthentication!: pulumi.Output<string | undefined>;
     public readonly flowDeviceCode!: pulumi.Output<string | undefined>;
@@ -107,14 +130,23 @@ export class Tenant extends pulumi.CustomResource {
  */
 export interface TenantState {
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     attributes?: pulumi.Input<string>;
     brandingFavicon?: pulumi.Input<string>;
     brandingLogo?: pulumi.Input<string>;
+    /**
+     * Defaults to `authentik`.
+     */
     brandingTitle?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     default?: pulumi.Input<boolean>;
     domain?: pulumi.Input<string>;
+    /**
+     * Defaults to `days=365`.
+     */
     eventRetention?: pulumi.Input<string>;
     flowAuthentication?: pulumi.Input<string>;
     flowDeviceCode?: pulumi.Input<string>;
@@ -130,14 +162,23 @@ export interface TenantState {
  */
 export interface TenantArgs {
     /**
-     * JSON format expected. Use jsonencode() to pass objects.
+     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
      */
     attributes?: pulumi.Input<string>;
     brandingFavicon?: pulumi.Input<string>;
     brandingLogo?: pulumi.Input<string>;
+    /**
+     * Defaults to `authentik`.
+     */
     brandingTitle?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     default?: pulumi.Input<boolean>;
     domain: pulumi.Input<string>;
+    /**
+     * Defaults to `days=365`.
+     */
     eventRetention?: pulumi.Input<string>;
     flowAuthentication?: pulumi.Input<string>;
     flowDeviceCode?: pulumi.Input<string>;

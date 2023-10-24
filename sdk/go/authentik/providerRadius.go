@@ -10,15 +10,57 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			default_authentication_flow, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
+//				Slug: pulumi.StringRef("default-authentication-flow"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			nameProviderRadius, err := authentik.NewProviderRadius(ctx, "nameProviderRadius", &authentik.ProviderRadiusArgs{
+//				AuthorizationFlow: *pulumi.String(default_authentication_flow.Id),
+//				ClientNetworks:    pulumi.String("10.10.0.0/24"),
+//				SharedSecret:      pulumi.String("my-shared-secret"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewApplication(ctx, "nameApplication", &authentik.ApplicationArgs{
+//				Slug:             pulumi.String("radius-app"),
+//				ProtocolProvider: nameProviderRadius.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type ProviderRadius struct {
 	pulumi.CustomResourceState
 
-	AuthorizationFlow pulumi.StringOutput    `pulumi:"authorizationFlow"`
-	ClientNetworks    pulumi.StringPtrOutput `pulumi:"clientNetworks"`
-	Name              pulumi.StringOutput    `pulumi:"name"`
-	SharedSecret      pulumi.StringOutput    `pulumi:"sharedSecret"`
+	AuthorizationFlow pulumi.StringOutput `pulumi:"authorizationFlow"`
+	// Defaults to `0.0.0.0/0, ::/0`.
+	ClientNetworks pulumi.StringPtrOutput `pulumi:"clientNetworks"`
+	Name           pulumi.StringOutput    `pulumi:"name"`
+	SharedSecret   pulumi.StringOutput    `pulumi:"sharedSecret"`
 }
 
 // NewProviderRadius registers a new resource with the given unique name, arguments, and options.
@@ -65,16 +107,18 @@ func GetProviderRadius(ctx *pulumi.Context,
 // Input properties used for looking up and filtering ProviderRadius resources.
 type providerRadiusState struct {
 	AuthorizationFlow *string `pulumi:"authorizationFlow"`
-	ClientNetworks    *string `pulumi:"clientNetworks"`
-	Name              *string `pulumi:"name"`
-	SharedSecret      *string `pulumi:"sharedSecret"`
+	// Defaults to `0.0.0.0/0, ::/0`.
+	ClientNetworks *string `pulumi:"clientNetworks"`
+	Name           *string `pulumi:"name"`
+	SharedSecret   *string `pulumi:"sharedSecret"`
 }
 
 type ProviderRadiusState struct {
 	AuthorizationFlow pulumi.StringPtrInput
-	ClientNetworks    pulumi.StringPtrInput
-	Name              pulumi.StringPtrInput
-	SharedSecret      pulumi.StringPtrInput
+	// Defaults to `0.0.0.0/0, ::/0`.
+	ClientNetworks pulumi.StringPtrInput
+	Name           pulumi.StringPtrInput
+	SharedSecret   pulumi.StringPtrInput
 }
 
 func (ProviderRadiusState) ElementType() reflect.Type {
@@ -82,18 +126,20 @@ func (ProviderRadiusState) ElementType() reflect.Type {
 }
 
 type providerRadiusArgs struct {
-	AuthorizationFlow string  `pulumi:"authorizationFlow"`
-	ClientNetworks    *string `pulumi:"clientNetworks"`
-	Name              *string `pulumi:"name"`
-	SharedSecret      string  `pulumi:"sharedSecret"`
+	AuthorizationFlow string `pulumi:"authorizationFlow"`
+	// Defaults to `0.0.0.0/0, ::/0`.
+	ClientNetworks *string `pulumi:"clientNetworks"`
+	Name           *string `pulumi:"name"`
+	SharedSecret   string  `pulumi:"sharedSecret"`
 }
 
 // The set of arguments for constructing a ProviderRadius resource.
 type ProviderRadiusArgs struct {
 	AuthorizationFlow pulumi.StringInput
-	ClientNetworks    pulumi.StringPtrInput
-	Name              pulumi.StringPtrInput
-	SharedSecret      pulumi.StringInput
+	// Defaults to `0.0.0.0/0, ::/0`.
+	ClientNetworks pulumi.StringPtrInput
+	Name           pulumi.StringPtrInput
+	SharedSecret   pulumi.StringInput
 }
 
 func (ProviderRadiusArgs) ElementType() reflect.Type {
@@ -117,6 +163,12 @@ func (i *ProviderRadius) ToProviderRadiusOutput() ProviderRadiusOutput {
 
 func (i *ProviderRadius) ToProviderRadiusOutputWithContext(ctx context.Context) ProviderRadiusOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderRadiusOutput)
+}
+
+func (i *ProviderRadius) ToOutput(ctx context.Context) pulumix.Output[*ProviderRadius] {
+	return pulumix.Output[*ProviderRadius]{
+		OutputState: i.ToProviderRadiusOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ProviderRadiusArrayInput is an input type that accepts ProviderRadiusArray and ProviderRadiusArrayOutput values.
@@ -144,6 +196,12 @@ func (i ProviderRadiusArray) ToProviderRadiusArrayOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderRadiusArrayOutput)
 }
 
+func (i ProviderRadiusArray) ToOutput(ctx context.Context) pulumix.Output[[]*ProviderRadius] {
+	return pulumix.Output[[]*ProviderRadius]{
+		OutputState: i.ToProviderRadiusArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ProviderRadiusMapInput is an input type that accepts ProviderRadiusMap and ProviderRadiusMapOutput values.
 // You can construct a concrete instance of `ProviderRadiusMapInput` via:
 //
@@ -169,6 +227,12 @@ func (i ProviderRadiusMap) ToProviderRadiusMapOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderRadiusMapOutput)
 }
 
+func (i ProviderRadiusMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProviderRadius] {
+	return pulumix.Output[map[string]*ProviderRadius]{
+		OutputState: i.ToProviderRadiusMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ProviderRadiusOutput struct{ *pulumi.OutputState }
 
 func (ProviderRadiusOutput) ElementType() reflect.Type {
@@ -183,10 +247,17 @@ func (o ProviderRadiusOutput) ToProviderRadiusOutputWithContext(ctx context.Cont
 	return o
 }
 
+func (o ProviderRadiusOutput) ToOutput(ctx context.Context) pulumix.Output[*ProviderRadius] {
+	return pulumix.Output[*ProviderRadius]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ProviderRadiusOutput) AuthorizationFlow() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderRadius) pulumi.StringOutput { return v.AuthorizationFlow }).(pulumi.StringOutput)
 }
 
+// Defaults to `0.0.0.0/0, ::/0`.
 func (o ProviderRadiusOutput) ClientNetworks() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderRadius) pulumi.StringPtrOutput { return v.ClientNetworks }).(pulumi.StringPtrOutput)
 }
@@ -213,6 +284,12 @@ func (o ProviderRadiusArrayOutput) ToProviderRadiusArrayOutputWithContext(ctx co
 	return o
 }
 
+func (o ProviderRadiusArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ProviderRadius] {
+	return pulumix.Output[[]*ProviderRadius]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ProviderRadiusArrayOutput) Index(i pulumi.IntInput) ProviderRadiusOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ProviderRadius {
 		return vs[0].([]*ProviderRadius)[vs[1].(int)]
@@ -231,6 +308,12 @@ func (o ProviderRadiusMapOutput) ToProviderRadiusMapOutput() ProviderRadiusMapOu
 
 func (o ProviderRadiusMapOutput) ToProviderRadiusMapOutputWithContext(ctx context.Context) ProviderRadiusMapOutput {
 	return o
+}
+
+func (o ProviderRadiusMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProviderRadius] {
+	return pulumix.Output[map[string]*ProviderRadius]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ProviderRadiusMapOutput) MapIndex(k pulumi.StringInput) ProviderRadiusOutput {

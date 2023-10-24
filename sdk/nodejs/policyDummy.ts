@@ -4,6 +4,16 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.PolicyDummy("name", {});
+ * ```
+ */
 export class PolicyDummy extends pulumi.CustomResource {
     /**
      * Get an existing PolicyDummy resource's state with the given name, ID, and optional extra
@@ -32,10 +42,22 @@ export class PolicyDummy extends pulumi.CustomResource {
         return obj['__pulumiType'] === PolicyDummy.__pulumiType;
     }
 
+    /**
+     * Defaults to `false`.
+     */
     public readonly executionLogging!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly result!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `30`.
+     */
     public readonly waitMax!: pulumi.Output<number | undefined>;
+    /**
+     * Defaults to `5`.
+     */
     public readonly waitMin!: pulumi.Output<number | undefined>;
 
     /**
@@ -73,10 +95,22 @@ export class PolicyDummy extends pulumi.CustomResource {
  * Input properties used for looking up and filtering PolicyDummy resources.
  */
 export interface PolicyDummyState {
+    /**
+     * Defaults to `false`.
+     */
     executionLogging?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     result?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `30`.
+     */
     waitMax?: pulumi.Input<number>;
+    /**
+     * Defaults to `5`.
+     */
     waitMin?: pulumi.Input<number>;
 }
 
@@ -84,9 +118,21 @@ export interface PolicyDummyState {
  * The set of arguments for constructing a PolicyDummy resource.
  */
 export interface PolicyDummyArgs {
+    /**
+     * Defaults to `false`.
+     */
     executionLogging?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     result?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `30`.
+     */
     waitMax?: pulumi.Input<number>;
+    /**
+     * Defaults to `5`.
+     */
     waitMin?: pulumi.Input<number>;
 }

@@ -10,8 +10,53 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			user, err := authentik.LookupPropertyMappingScim(ctx, &authentik.LookupPropertyMappingScimArgs{
+//				Managed: pulumi.StringRef("goauthentik.io/providers/scim/user"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			group, err := authentik.LookupPropertyMappingScim(ctx, &authentik.LookupPropertyMappingScimArgs{
+//				Managed: pulumi.StringRef("goauthentik.io/providers/scim/group"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewProviderScim(ctx, "name", &authentik.ProviderScimArgs{
+//				Url:   pulumi.String("http://localhost"),
+//				Token: pulumi.String("foo"),
+//				PropertyMappings: pulumi.StringArray{
+//					*pulumi.String(user.Id),
+//				},
+//				PropertyMappingsGroups: pulumi.StringArray{
+//					*pulumi.String(group.Id),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type ProviderScim struct {
 	pulumi.CustomResourceState
 
@@ -124,6 +169,12 @@ func (i *ProviderScim) ToProviderScimOutputWithContext(ctx context.Context) Prov
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderScimOutput)
 }
 
+func (i *ProviderScim) ToOutput(ctx context.Context) pulumix.Output[*ProviderScim] {
+	return pulumix.Output[*ProviderScim]{
+		OutputState: i.ToProviderScimOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ProviderScimArrayInput is an input type that accepts ProviderScimArray and ProviderScimArrayOutput values.
 // You can construct a concrete instance of `ProviderScimArrayInput` via:
 //
@@ -147,6 +198,12 @@ func (i ProviderScimArray) ToProviderScimArrayOutput() ProviderScimArrayOutput {
 
 func (i ProviderScimArray) ToProviderScimArrayOutputWithContext(ctx context.Context) ProviderScimArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderScimArrayOutput)
+}
+
+func (i ProviderScimArray) ToOutput(ctx context.Context) pulumix.Output[[]*ProviderScim] {
+	return pulumix.Output[[]*ProviderScim]{
+		OutputState: i.ToProviderScimArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ProviderScimMapInput is an input type that accepts ProviderScimMap and ProviderScimMapOutput values.
@@ -174,6 +231,12 @@ func (i ProviderScimMap) ToProviderScimMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderScimMapOutput)
 }
 
+func (i ProviderScimMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProviderScim] {
+	return pulumix.Output[map[string]*ProviderScim]{
+		OutputState: i.ToProviderScimMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ProviderScimOutput struct{ *pulumi.OutputState }
 
 func (ProviderScimOutput) ElementType() reflect.Type {
@@ -186,6 +249,12 @@ func (o ProviderScimOutput) ToProviderScimOutput() ProviderScimOutput {
 
 func (o ProviderScimOutput) ToProviderScimOutputWithContext(ctx context.Context) ProviderScimOutput {
 	return o
+}
+
+func (o ProviderScimOutput) ToOutput(ctx context.Context) pulumix.Output[*ProviderScim] {
+	return pulumix.Output[*ProviderScim]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ProviderScimOutput) Name() pulumi.StringOutput {
@@ -222,6 +291,12 @@ func (o ProviderScimArrayOutput) ToProviderScimArrayOutputWithContext(ctx contex
 	return o
 }
 
+func (o ProviderScimArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ProviderScim] {
+	return pulumix.Output[[]*ProviderScim]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ProviderScimArrayOutput) Index(i pulumi.IntInput) ProviderScimOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ProviderScim {
 		return vs[0].([]*ProviderScim)[vs[1].(int)]
@@ -240,6 +315,12 @@ func (o ProviderScimMapOutput) ToProviderScimMapOutput() ProviderScimMapOutput {
 
 func (o ProviderScimMapOutput) ToProviderScimMapOutputWithContext(ctx context.Context) ProviderScimMapOutput {
 	return o
+}
+
+func (o ProviderScimMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProviderScim] {
+	return pulumix.Output[map[string]*ProviderScim]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ProviderScimMapOutput) MapIndex(k pulumi.StringInput) ProviderScimOutput {

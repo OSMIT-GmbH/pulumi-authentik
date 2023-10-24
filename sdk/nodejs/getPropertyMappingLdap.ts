@@ -4,6 +4,23 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Get LDAP Property mappings
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const test = authentik.getPropertyMappingLdap({
+ *     managedLists: [
+ *         "goauthentik.io/sources/ldap/default-name",
+ *         "goauthentik.io/sources/ldap/default-mail",
+ *     ],
+ * });
+ * ```
+ */
 export function getPropertyMappingLdap(args?: GetPropertyMappingLdapArgs, opts?: pulumi.InvokeOptions): Promise<GetPropertyMappingLdapResult> {
     args = args || {};
 
@@ -21,10 +38,19 @@ export function getPropertyMappingLdap(args?: GetPropertyMappingLdapArgs, opts?:
  * A collection of arguments for invoking getPropertyMappingLdap.
  */
 export interface GetPropertyMappingLdapArgs {
+    /**
+     * List of ids when `managedList` is set. Generated.
+     */
     ids?: string[];
     managed?: string;
+    /**
+     * Retrive multiple property mappings
+     */
     managedLists?: string[];
     name?: string;
+    /**
+     * Generated.
+     */
     objectField?: string;
 }
 
@@ -32,17 +58,46 @@ export interface GetPropertyMappingLdapArgs {
  * A collection of values returned by getPropertyMappingLdap.
  */
 export interface GetPropertyMappingLdapResult {
+    /**
+     * Generated.
+     */
     readonly expression: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * List of ids when `managedList` is set. Generated.
+     */
     readonly ids: string[];
     readonly managed?: string;
+    /**
+     * Retrive multiple property mappings
+     */
     readonly managedLists?: string[];
     readonly name?: string;
+    /**
+     * Generated.
+     */
     readonly objectField: string;
 }
+/**
+ * Get LDAP Property mappings
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const test = authentik.getPropertyMappingLdap({
+ *     managedLists: [
+ *         "goauthentik.io/sources/ldap/default-name",
+ *         "goauthentik.io/sources/ldap/default-mail",
+ *     ],
+ * });
+ * ```
+ */
 export function getPropertyMappingLdapOutput(args?: GetPropertyMappingLdapOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPropertyMappingLdapResult> {
     return pulumi.output(args).apply((a: any) => getPropertyMappingLdap(a, opts))
 }
@@ -51,9 +106,18 @@ export function getPropertyMappingLdapOutput(args?: GetPropertyMappingLdapOutput
  * A collection of arguments for invoking getPropertyMappingLdap.
  */
 export interface GetPropertyMappingLdapOutputArgs {
+    /**
+     * List of ids when `managedList` is set. Generated.
+     */
     ids?: pulumi.Input<pulumi.Input<string>[]>;
     managed?: pulumi.Input<string>;
+    /**
+     * Retrive multiple property mappings
+     */
     managedLists?: pulumi.Input<pulumi.Input<string>[]>;
     name?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     objectField?: pulumi.Input<string>;
 }

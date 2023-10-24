@@ -9,14 +9,40 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewStageConsent(ctx, "name", nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type StageConsent struct {
 	pulumi.CustomResourceState
 
+	// Defaults to `weeks=4`.
 	ConsentExpireIn pulumi.StringPtrOutput `pulumi:"consentExpireIn"`
-	Mode            pulumi.StringPtrOutput `pulumi:"mode"`
-	Name            pulumi.StringOutput    `pulumi:"name"`
+	// Defaults to `alwaysRequire`.
+	Mode pulumi.StringPtrOutput `pulumi:"mode"`
+	Name pulumi.StringOutput    `pulumi:"name"`
 }
 
 // NewStageConsent registers a new resource with the given unique name, arguments, and options.
@@ -49,15 +75,19 @@ func GetStageConsent(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering StageConsent resources.
 type stageConsentState struct {
+	// Defaults to `weeks=4`.
 	ConsentExpireIn *string `pulumi:"consentExpireIn"`
-	Mode            *string `pulumi:"mode"`
-	Name            *string `pulumi:"name"`
+	// Defaults to `alwaysRequire`.
+	Mode *string `pulumi:"mode"`
+	Name *string `pulumi:"name"`
 }
 
 type StageConsentState struct {
+	// Defaults to `weeks=4`.
 	ConsentExpireIn pulumi.StringPtrInput
-	Mode            pulumi.StringPtrInput
-	Name            pulumi.StringPtrInput
+	// Defaults to `alwaysRequire`.
+	Mode pulumi.StringPtrInput
+	Name pulumi.StringPtrInput
 }
 
 func (StageConsentState) ElementType() reflect.Type {
@@ -65,16 +95,20 @@ func (StageConsentState) ElementType() reflect.Type {
 }
 
 type stageConsentArgs struct {
+	// Defaults to `weeks=4`.
 	ConsentExpireIn *string `pulumi:"consentExpireIn"`
-	Mode            *string `pulumi:"mode"`
-	Name            *string `pulumi:"name"`
+	// Defaults to `alwaysRequire`.
+	Mode *string `pulumi:"mode"`
+	Name *string `pulumi:"name"`
 }
 
 // The set of arguments for constructing a StageConsent resource.
 type StageConsentArgs struct {
+	// Defaults to `weeks=4`.
 	ConsentExpireIn pulumi.StringPtrInput
-	Mode            pulumi.StringPtrInput
-	Name            pulumi.StringPtrInput
+	// Defaults to `alwaysRequire`.
+	Mode pulumi.StringPtrInput
+	Name pulumi.StringPtrInput
 }
 
 func (StageConsentArgs) ElementType() reflect.Type {
@@ -98,6 +132,12 @@ func (i *StageConsent) ToStageConsentOutput() StageConsentOutput {
 
 func (i *StageConsent) ToStageConsentOutputWithContext(ctx context.Context) StageConsentOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageConsentOutput)
+}
+
+func (i *StageConsent) ToOutput(ctx context.Context) pulumix.Output[*StageConsent] {
+	return pulumix.Output[*StageConsent]{
+		OutputState: i.ToStageConsentOutputWithContext(ctx).OutputState,
+	}
 }
 
 // StageConsentArrayInput is an input type that accepts StageConsentArray and StageConsentArrayOutput values.
@@ -125,6 +165,12 @@ func (i StageConsentArray) ToStageConsentArrayOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(StageConsentArrayOutput)
 }
 
+func (i StageConsentArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageConsent] {
+	return pulumix.Output[[]*StageConsent]{
+		OutputState: i.ToStageConsentArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // StageConsentMapInput is an input type that accepts StageConsentMap and StageConsentMapOutput values.
 // You can construct a concrete instance of `StageConsentMapInput` via:
 //
@@ -150,6 +196,12 @@ func (i StageConsentMap) ToStageConsentMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(StageConsentMapOutput)
 }
 
+func (i StageConsentMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageConsent] {
+	return pulumix.Output[map[string]*StageConsent]{
+		OutputState: i.ToStageConsentMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type StageConsentOutput struct{ *pulumi.OutputState }
 
 func (StageConsentOutput) ElementType() reflect.Type {
@@ -164,10 +216,18 @@ func (o StageConsentOutput) ToStageConsentOutputWithContext(ctx context.Context)
 	return o
 }
 
+func (o StageConsentOutput) ToOutput(ctx context.Context) pulumix.Output[*StageConsent] {
+	return pulumix.Output[*StageConsent]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Defaults to `weeks=4`.
 func (o StageConsentOutput) ConsentExpireIn() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageConsent) pulumi.StringPtrOutput { return v.ConsentExpireIn }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `alwaysRequire`.
 func (o StageConsentOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageConsent) pulumi.StringPtrOutput { return v.Mode }).(pulumi.StringPtrOutput)
 }
@@ -190,6 +250,12 @@ func (o StageConsentArrayOutput) ToStageConsentArrayOutputWithContext(ctx contex
 	return o
 }
 
+func (o StageConsentArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageConsent] {
+	return pulumix.Output[[]*StageConsent]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o StageConsentArrayOutput) Index(i pulumi.IntInput) StageConsentOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StageConsent {
 		return vs[0].([]*StageConsent)[vs[1].(int)]
@@ -208,6 +274,12 @@ func (o StageConsentMapOutput) ToStageConsentMapOutput() StageConsentMapOutput {
 
 func (o StageConsentMapOutput) ToStageConsentMapOutputWithContext(ctx context.Context) StageConsentMapOutput {
 	return o
+}
+
+func (o StageConsentMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageConsent] {
+	return pulumix.Output[map[string]*StageConsent]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o StageConsentMapOutput) MapIndex(k pulumi.StringInput) StageConsentOutput {

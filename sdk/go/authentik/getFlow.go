@@ -9,8 +9,36 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Get flows by Slug and/or designation
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
+//				Slug: pulumi.StringRef("default-provider-authorization-implicit-consent"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupFlow(ctx *pulumi.Context, args *LookupFlowArgs, opts ...pulumi.InvokeOption) (*LookupFlowResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupFlowResult
@@ -23,19 +51,27 @@ func LookupFlow(ctx *pulumi.Context, args *LookupFlowArgs, opts ...pulumi.Invoke
 
 // A collection of arguments for invoking getFlow.
 type LookupFlowArgs struct {
+	// Generated.
 	Authentication *string `pulumi:"authentication"`
-	Designation    *string `pulumi:"designation"`
-	Slug           *string `pulumi:"slug"`
+	// Generated.
+	Designation *string `pulumi:"designation"`
+	// Generated.
+	Slug *string `pulumi:"slug"`
 }
 
 // A collection of values returned by getFlow.
 type LookupFlowResult struct {
+	// Generated.
 	Authentication string `pulumi:"authentication"`
-	Designation    string `pulumi:"designation"`
+	// Generated.
+	Designation string `pulumi:"designation"`
 	// The provider-assigned unique ID for this managed resource.
-	Id    string `pulumi:"id"`
-	Name  string `pulumi:"name"`
-	Slug  string `pulumi:"slug"`
+	Id string `pulumi:"id"`
+	// Generated.
+	Name string `pulumi:"name"`
+	// Generated.
+	Slug string `pulumi:"slug"`
+	// Generated.
 	Title string `pulumi:"title"`
 }
 
@@ -54,9 +90,12 @@ func LookupFlowOutput(ctx *pulumi.Context, args LookupFlowOutputArgs, opts ...pu
 
 // A collection of arguments for invoking getFlow.
 type LookupFlowOutputArgs struct {
+	// Generated.
 	Authentication pulumi.StringPtrInput `pulumi:"authentication"`
-	Designation    pulumi.StringPtrInput `pulumi:"designation"`
-	Slug           pulumi.StringPtrInput `pulumi:"slug"`
+	// Generated.
+	Designation pulumi.StringPtrInput `pulumi:"designation"`
+	// Generated.
+	Slug pulumi.StringPtrInput `pulumi:"slug"`
 }
 
 func (LookupFlowOutputArgs) ElementType() reflect.Type {
@@ -78,10 +117,18 @@ func (o LookupFlowResultOutput) ToLookupFlowResultOutputWithContext(ctx context.
 	return o
 }
 
+func (o LookupFlowResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupFlowResult] {
+	return pulumix.Output[LookupFlowResult]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Generated.
 func (o LookupFlowResultOutput) Authentication() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupFlowResult) string { return v.Authentication }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupFlowResultOutput) Designation() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupFlowResult) string { return v.Designation }).(pulumi.StringOutput)
 }
@@ -91,14 +138,17 @@ func (o LookupFlowResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupFlowResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupFlowResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupFlowResult) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupFlowResultOutput) Slug() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupFlowResult) string { return v.Slug }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupFlowResultOutput) Title() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupFlowResult) string { return v.Title }).(pulumi.StringOutput)
 }

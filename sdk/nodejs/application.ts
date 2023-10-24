@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const default-authorization-flow = authentik.getFlow({
+ *     slug: "default-provider-authorization-implicit-consent",
+ * });
+ * const nameProviderOauth2 = new authentik.ProviderOauth2("nameProviderOauth2", {
+ *     clientId: "example-app",
+ *     clientSecret: "test",
+ *     authorizationFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
+ * });
+ * const policy = new authentik.PolicyExpression("policy", {expression: "return True"});
+ * const nameApplication = new authentik.Application("nameApplication", {
+ *     slug: "example-app",
+ *     protocolProvider: nameProviderOauth2.id,
+ * });
+ * const app_access = new authentik.PolicyBinding("app-access", {
+ *     target: nameApplication.uuid,
+ *     policy: policy.id,
+ *     order: 0,
+ * });
+ * ```
+ */
 export class Application extends pulumi.CustomResource {
     /**
      * Get an existing Application resource's state with the given name, ID, and optional extra
@@ -39,10 +67,19 @@ export class Application extends pulumi.CustomResource {
     public readonly metaLaunchUrl!: pulumi.Output<string | undefined>;
     public readonly metaPublisher!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly openInNewTab!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `any`.
+     */
     public readonly policyEngineMode!: pulumi.Output<string | undefined>;
     public readonly protocolProvider!: pulumi.Output<number | undefined>;
     public readonly slug!: pulumi.Output<string>;
+    /**
+     * Generated.
+     */
     public readonly uuid!: pulumi.Output<string>;
 
     /**
@@ -104,10 +141,19 @@ export interface ApplicationState {
     metaLaunchUrl?: pulumi.Input<string>;
     metaPublisher?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     openInNewTab?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `any`.
+     */
     policyEngineMode?: pulumi.Input<string>;
     protocolProvider?: pulumi.Input<number>;
     slug?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     uuid?: pulumi.Input<string>;
 }
 
@@ -122,9 +168,18 @@ export interface ApplicationArgs {
     metaLaunchUrl?: pulumi.Input<string>;
     metaPublisher?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     openInNewTab?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `any`.
+     */
     policyEngineMode?: pulumi.Input<string>;
     protocolProvider?: pulumi.Input<number>;
     slug: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     uuid?: pulumi.Input<string>;
 }

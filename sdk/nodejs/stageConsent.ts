@@ -4,6 +4,16 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.StageConsent("name", {});
+ * ```
+ */
 export class StageConsent extends pulumi.CustomResource {
     /**
      * Get an existing StageConsent resource's state with the given name, ID, and optional extra
@@ -32,7 +42,13 @@ export class StageConsent extends pulumi.CustomResource {
         return obj['__pulumiType'] === StageConsent.__pulumiType;
     }
 
+    /**
+     * Defaults to `weeks=4`.
+     */
     public readonly consentExpireIn!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `alwaysRequire`.
+     */
     public readonly mode!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
 
@@ -67,7 +83,13 @@ export class StageConsent extends pulumi.CustomResource {
  * Input properties used for looking up and filtering StageConsent resources.
  */
 export interface StageConsentState {
+    /**
+     * Defaults to `weeks=4`.
+     */
     consentExpireIn?: pulumi.Input<string>;
+    /**
+     * Defaults to `alwaysRequire`.
+     */
     mode?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
 }
@@ -76,7 +98,13 @@ export interface StageConsentState {
  * The set of arguments for constructing a StageConsent resource.
  */
 export interface StageConsentArgs {
+    /**
+     * Defaults to `weeks=4`.
+     */
     consentExpireIn?: pulumi.Input<string>;
+    /**
+     * Defaults to `alwaysRequire`.
+     */
     mode?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
 }

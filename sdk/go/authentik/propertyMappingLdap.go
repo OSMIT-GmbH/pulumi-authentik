@@ -10,8 +10,35 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewPropertyMappingLdap(ctx, "name", &authentik.PropertyMappingLdapArgs{
+//				Expression:  pulumi.String("return ldap.get('sAMAccountName')"),
+//				ObjectField: pulumi.String("username"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type PropertyMappingLdap struct {
 	pulumi.CustomResourceState
 
@@ -107,6 +134,12 @@ func (i *PropertyMappingLdap) ToPropertyMappingLdapOutputWithContext(ctx context
 	return pulumi.ToOutputWithContext(ctx, i).(PropertyMappingLdapOutput)
 }
 
+func (i *PropertyMappingLdap) ToOutput(ctx context.Context) pulumix.Output[*PropertyMappingLdap] {
+	return pulumix.Output[*PropertyMappingLdap]{
+		OutputState: i.ToPropertyMappingLdapOutputWithContext(ctx).OutputState,
+	}
+}
+
 // PropertyMappingLdapArrayInput is an input type that accepts PropertyMappingLdapArray and PropertyMappingLdapArrayOutput values.
 // You can construct a concrete instance of `PropertyMappingLdapArrayInput` via:
 //
@@ -130,6 +163,12 @@ func (i PropertyMappingLdapArray) ToPropertyMappingLdapArrayOutput() PropertyMap
 
 func (i PropertyMappingLdapArray) ToPropertyMappingLdapArrayOutputWithContext(ctx context.Context) PropertyMappingLdapArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PropertyMappingLdapArrayOutput)
+}
+
+func (i PropertyMappingLdapArray) ToOutput(ctx context.Context) pulumix.Output[[]*PropertyMappingLdap] {
+	return pulumix.Output[[]*PropertyMappingLdap]{
+		OutputState: i.ToPropertyMappingLdapArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // PropertyMappingLdapMapInput is an input type that accepts PropertyMappingLdapMap and PropertyMappingLdapMapOutput values.
@@ -157,6 +196,12 @@ func (i PropertyMappingLdapMap) ToPropertyMappingLdapMapOutputWithContext(ctx co
 	return pulumi.ToOutputWithContext(ctx, i).(PropertyMappingLdapMapOutput)
 }
 
+func (i PropertyMappingLdapMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PropertyMappingLdap] {
+	return pulumix.Output[map[string]*PropertyMappingLdap]{
+		OutputState: i.ToPropertyMappingLdapMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type PropertyMappingLdapOutput struct{ *pulumi.OutputState }
 
 func (PropertyMappingLdapOutput) ElementType() reflect.Type {
@@ -169,6 +214,12 @@ func (o PropertyMappingLdapOutput) ToPropertyMappingLdapOutput() PropertyMapping
 
 func (o PropertyMappingLdapOutput) ToPropertyMappingLdapOutputWithContext(ctx context.Context) PropertyMappingLdapOutput {
 	return o
+}
+
+func (o PropertyMappingLdapOutput) ToOutput(ctx context.Context) pulumix.Output[*PropertyMappingLdap] {
+	return pulumix.Output[*PropertyMappingLdap]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PropertyMappingLdapOutput) Expression() pulumi.StringOutput {
@@ -197,6 +248,12 @@ func (o PropertyMappingLdapArrayOutput) ToPropertyMappingLdapArrayOutputWithCont
 	return o
 }
 
+func (o PropertyMappingLdapArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PropertyMappingLdap] {
+	return pulumix.Output[[]*PropertyMappingLdap]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o PropertyMappingLdapArrayOutput) Index(i pulumi.IntInput) PropertyMappingLdapOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PropertyMappingLdap {
 		return vs[0].([]*PropertyMappingLdap)[vs[1].(int)]
@@ -215,6 +272,12 @@ func (o PropertyMappingLdapMapOutput) ToPropertyMappingLdapMapOutput() PropertyM
 
 func (o PropertyMappingLdapMapOutput) ToPropertyMappingLdapMapOutputWithContext(ctx context.Context) PropertyMappingLdapMapOutput {
 	return o
+}
+
+func (o PropertyMappingLdapMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PropertyMappingLdap] {
+	return pulumix.Output[map[string]*PropertyMappingLdap]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PropertyMappingLdapMapOutput) MapIndex(k pulumi.StringInput) PropertyMappingLdapOutput {

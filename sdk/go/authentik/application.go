@@ -10,8 +10,63 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			default_authorization_flow, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
+//				Slug: pulumi.StringRef("default-provider-authorization-implicit-consent"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			nameProviderOauth2, err := authentik.NewProviderOauth2(ctx, "nameProviderOauth2", &authentik.ProviderOauth2Args{
+//				ClientId:          pulumi.String("example-app"),
+//				ClientSecret:      pulumi.String("test"),
+//				AuthorizationFlow: *pulumi.String(default_authorization_flow.Id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			policy, err := authentik.NewPolicyExpression(ctx, "policy", &authentik.PolicyExpressionArgs{
+//				Expression: pulumi.String("return True"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			nameApplication, err := authentik.NewApplication(ctx, "nameApplication", &authentik.ApplicationArgs{
+//				Slug:             pulumi.String("example-app"),
+//				ProtocolProvider: nameProviderOauth2.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewPolicyBinding(ctx, "app-access", &authentik.PolicyBindingArgs{
+//				Target: nameApplication.Uuid,
+//				Policy: policy.ID(),
+//				Order:  pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type Application struct {
 	pulumi.CustomResourceState
 
@@ -22,11 +77,14 @@ type Application struct {
 	MetaLaunchUrl        pulumi.StringPtrOutput `pulumi:"metaLaunchUrl"`
 	MetaPublisher        pulumi.StringPtrOutput `pulumi:"metaPublisher"`
 	Name                 pulumi.StringOutput    `pulumi:"name"`
-	OpenInNewTab         pulumi.BoolPtrOutput   `pulumi:"openInNewTab"`
-	PolicyEngineMode     pulumi.StringPtrOutput `pulumi:"policyEngineMode"`
-	ProtocolProvider     pulumi.IntPtrOutput    `pulumi:"protocolProvider"`
-	Slug                 pulumi.StringOutput    `pulumi:"slug"`
-	Uuid                 pulumi.StringOutput    `pulumi:"uuid"`
+	// Defaults to `false`.
+	OpenInNewTab pulumi.BoolPtrOutput `pulumi:"openInNewTab"`
+	// Defaults to `any`.
+	PolicyEngineMode pulumi.StringPtrOutput `pulumi:"policyEngineMode"`
+	ProtocolProvider pulumi.IntPtrOutput    `pulumi:"protocolProvider"`
+	Slug             pulumi.StringOutput    `pulumi:"slug"`
+	// Generated.
+	Uuid pulumi.StringOutput `pulumi:"uuid"`
 }
 
 // NewApplication registers a new resource with the given unique name, arguments, and options.
@@ -69,11 +127,14 @@ type applicationState struct {
 	MetaLaunchUrl        *string `pulumi:"metaLaunchUrl"`
 	MetaPublisher        *string `pulumi:"metaPublisher"`
 	Name                 *string `pulumi:"name"`
-	OpenInNewTab         *bool   `pulumi:"openInNewTab"`
-	PolicyEngineMode     *string `pulumi:"policyEngineMode"`
-	ProtocolProvider     *int    `pulumi:"protocolProvider"`
-	Slug                 *string `pulumi:"slug"`
-	Uuid                 *string `pulumi:"uuid"`
+	// Defaults to `false`.
+	OpenInNewTab *bool `pulumi:"openInNewTab"`
+	// Defaults to `any`.
+	PolicyEngineMode *string `pulumi:"policyEngineMode"`
+	ProtocolProvider *int    `pulumi:"protocolProvider"`
+	Slug             *string `pulumi:"slug"`
+	// Generated.
+	Uuid *string `pulumi:"uuid"`
 }
 
 type ApplicationState struct {
@@ -84,11 +145,14 @@ type ApplicationState struct {
 	MetaLaunchUrl        pulumi.StringPtrInput
 	MetaPublisher        pulumi.StringPtrInput
 	Name                 pulumi.StringPtrInput
-	OpenInNewTab         pulumi.BoolPtrInput
-	PolicyEngineMode     pulumi.StringPtrInput
-	ProtocolProvider     pulumi.IntPtrInput
-	Slug                 pulumi.StringPtrInput
-	Uuid                 pulumi.StringPtrInput
+	// Defaults to `false`.
+	OpenInNewTab pulumi.BoolPtrInput
+	// Defaults to `any`.
+	PolicyEngineMode pulumi.StringPtrInput
+	ProtocolProvider pulumi.IntPtrInput
+	Slug             pulumi.StringPtrInput
+	// Generated.
+	Uuid pulumi.StringPtrInput
 }
 
 func (ApplicationState) ElementType() reflect.Type {
@@ -103,11 +167,14 @@ type applicationArgs struct {
 	MetaLaunchUrl        *string `pulumi:"metaLaunchUrl"`
 	MetaPublisher        *string `pulumi:"metaPublisher"`
 	Name                 *string `pulumi:"name"`
-	OpenInNewTab         *bool   `pulumi:"openInNewTab"`
-	PolicyEngineMode     *string `pulumi:"policyEngineMode"`
-	ProtocolProvider     *int    `pulumi:"protocolProvider"`
-	Slug                 string  `pulumi:"slug"`
-	Uuid                 *string `pulumi:"uuid"`
+	// Defaults to `false`.
+	OpenInNewTab *bool `pulumi:"openInNewTab"`
+	// Defaults to `any`.
+	PolicyEngineMode *string `pulumi:"policyEngineMode"`
+	ProtocolProvider *int    `pulumi:"protocolProvider"`
+	Slug             string  `pulumi:"slug"`
+	// Generated.
+	Uuid *string `pulumi:"uuid"`
 }
 
 // The set of arguments for constructing a Application resource.
@@ -119,11 +186,14 @@ type ApplicationArgs struct {
 	MetaLaunchUrl        pulumi.StringPtrInput
 	MetaPublisher        pulumi.StringPtrInput
 	Name                 pulumi.StringPtrInput
-	OpenInNewTab         pulumi.BoolPtrInput
-	PolicyEngineMode     pulumi.StringPtrInput
-	ProtocolProvider     pulumi.IntPtrInput
-	Slug                 pulumi.StringInput
-	Uuid                 pulumi.StringPtrInput
+	// Defaults to `false`.
+	OpenInNewTab pulumi.BoolPtrInput
+	// Defaults to `any`.
+	PolicyEngineMode pulumi.StringPtrInput
+	ProtocolProvider pulumi.IntPtrInput
+	Slug             pulumi.StringInput
+	// Generated.
+	Uuid pulumi.StringPtrInput
 }
 
 func (ApplicationArgs) ElementType() reflect.Type {
@@ -147,6 +217,12 @@ func (i *Application) ToApplicationOutput() ApplicationOutput {
 
 func (i *Application) ToApplicationOutputWithContext(ctx context.Context) ApplicationOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ApplicationOutput)
+}
+
+func (i *Application) ToOutput(ctx context.Context) pulumix.Output[*Application] {
+	return pulumix.Output[*Application]{
+		OutputState: i.ToApplicationOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ApplicationArrayInput is an input type that accepts ApplicationArray and ApplicationArrayOutput values.
@@ -174,6 +250,12 @@ func (i ApplicationArray) ToApplicationArrayOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(ApplicationArrayOutput)
 }
 
+func (i ApplicationArray) ToOutput(ctx context.Context) pulumix.Output[[]*Application] {
+	return pulumix.Output[[]*Application]{
+		OutputState: i.ToApplicationArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ApplicationMapInput is an input type that accepts ApplicationMap and ApplicationMapOutput values.
 // You can construct a concrete instance of `ApplicationMapInput` via:
 //
@@ -199,6 +281,12 @@ func (i ApplicationMap) ToApplicationMapOutputWithContext(ctx context.Context) A
 	return pulumi.ToOutputWithContext(ctx, i).(ApplicationMapOutput)
 }
 
+func (i ApplicationMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Application] {
+	return pulumix.Output[map[string]*Application]{
+		OutputState: i.ToApplicationMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ApplicationOutput struct{ *pulumi.OutputState }
 
 func (ApplicationOutput) ElementType() reflect.Type {
@@ -211,6 +299,12 @@ func (o ApplicationOutput) ToApplicationOutput() ApplicationOutput {
 
 func (o ApplicationOutput) ToApplicationOutputWithContext(ctx context.Context) ApplicationOutput {
 	return o
+}
+
+func (o ApplicationOutput) ToOutput(ctx context.Context) pulumix.Output[*Application] {
+	return pulumix.Output[*Application]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ApplicationOutput) BackchannelProviders() pulumi.IntArrayOutput {
@@ -241,10 +335,12 @@ func (o ApplicationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Application) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// Defaults to `false`.
 func (o ApplicationOutput) OpenInNewTab() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Application) pulumi.BoolPtrOutput { return v.OpenInNewTab }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to `any`.
 func (o ApplicationOutput) PolicyEngineMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Application) pulumi.StringPtrOutput { return v.PolicyEngineMode }).(pulumi.StringPtrOutput)
 }
@@ -257,6 +353,7 @@ func (o ApplicationOutput) Slug() pulumi.StringOutput {
 	return o.ApplyT(func(v *Application) pulumi.StringOutput { return v.Slug }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o ApplicationOutput) Uuid() pulumi.StringOutput {
 	return o.ApplyT(func(v *Application) pulumi.StringOutput { return v.Uuid }).(pulumi.StringOutput)
 }
@@ -273,6 +370,12 @@ func (o ApplicationArrayOutput) ToApplicationArrayOutput() ApplicationArrayOutpu
 
 func (o ApplicationArrayOutput) ToApplicationArrayOutputWithContext(ctx context.Context) ApplicationArrayOutput {
 	return o
+}
+
+func (o ApplicationArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Application] {
+	return pulumix.Output[[]*Application]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ApplicationArrayOutput) Index(i pulumi.IntInput) ApplicationOutput {
@@ -293,6 +396,12 @@ func (o ApplicationMapOutput) ToApplicationMapOutput() ApplicationMapOutput {
 
 func (o ApplicationMapOutput) ToApplicationMapOutputWithContext(ctx context.Context) ApplicationMapOutput {
 	return o
+}
+
+func (o ApplicationMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Application] {
+	return pulumix.Output[map[string]*Application]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ApplicationMapOutput) MapIndex(k pulumi.StringInput) ApplicationOutput {

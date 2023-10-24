@@ -10,18 +10,62 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			name, err := authentik.NewStageDummy(ctx, "name", nil)
+//			if err != nil {
+//				return err
+//			}
+//			flow, err := authentik.NewFlow(ctx, "flow", &authentik.FlowArgs{
+//				Title:       pulumi.String("Test flow"),
+//				Slug:        pulumi.String("test-flow"),
+//				Designation: pulumi.String("authorization"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewFlowStageBinding(ctx, "dummy-flow", &authentik.FlowStageBindingArgs{
+//				Target: flow.Uuid,
+//				Stage:  name.ID(),
+//				Order:  pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type FlowStageBinding struct {
 	pulumi.CustomResourceState
 
-	EvaluateOnPlan        pulumi.BoolPtrOutput   `pulumi:"evaluateOnPlan"`
+	// Defaults to `true`.
+	EvaluateOnPlan pulumi.BoolPtrOutput `pulumi:"evaluateOnPlan"`
+	// Defaults to `retry`.
 	InvalidResponseAction pulumi.StringPtrOutput `pulumi:"invalidResponseAction"`
 	Order                 pulumi.IntOutput       `pulumi:"order"`
-	PolicyEngineMode      pulumi.StringPtrOutput `pulumi:"policyEngineMode"`
-	ReEvaluatePolicies    pulumi.BoolPtrOutput   `pulumi:"reEvaluatePolicies"`
-	Stage                 pulumi.StringOutput    `pulumi:"stage"`
-	Target                pulumi.StringOutput    `pulumi:"target"`
+	// Defaults to `any`.
+	PolicyEngineMode pulumi.StringPtrOutput `pulumi:"policyEngineMode"`
+	// Defaults to `false`.
+	ReEvaluatePolicies pulumi.BoolPtrOutput `pulumi:"reEvaluatePolicies"`
+	Stage              pulumi.StringOutput  `pulumi:"stage"`
+	Target             pulumi.StringOutput  `pulumi:"target"`
 }
 
 // NewFlowStageBinding registers a new resource with the given unique name, arguments, and options.
@@ -63,23 +107,31 @@ func GetFlowStageBinding(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering FlowStageBinding resources.
 type flowStageBindingState struct {
-	EvaluateOnPlan        *bool   `pulumi:"evaluateOnPlan"`
+	// Defaults to `true`.
+	EvaluateOnPlan *bool `pulumi:"evaluateOnPlan"`
+	// Defaults to `retry`.
 	InvalidResponseAction *string `pulumi:"invalidResponseAction"`
 	Order                 *int    `pulumi:"order"`
-	PolicyEngineMode      *string `pulumi:"policyEngineMode"`
-	ReEvaluatePolicies    *bool   `pulumi:"reEvaluatePolicies"`
-	Stage                 *string `pulumi:"stage"`
-	Target                *string `pulumi:"target"`
+	// Defaults to `any`.
+	PolicyEngineMode *string `pulumi:"policyEngineMode"`
+	// Defaults to `false`.
+	ReEvaluatePolicies *bool   `pulumi:"reEvaluatePolicies"`
+	Stage              *string `pulumi:"stage"`
+	Target             *string `pulumi:"target"`
 }
 
 type FlowStageBindingState struct {
-	EvaluateOnPlan        pulumi.BoolPtrInput
+	// Defaults to `true`.
+	EvaluateOnPlan pulumi.BoolPtrInput
+	// Defaults to `retry`.
 	InvalidResponseAction pulumi.StringPtrInput
 	Order                 pulumi.IntPtrInput
-	PolicyEngineMode      pulumi.StringPtrInput
-	ReEvaluatePolicies    pulumi.BoolPtrInput
-	Stage                 pulumi.StringPtrInput
-	Target                pulumi.StringPtrInput
+	// Defaults to `any`.
+	PolicyEngineMode pulumi.StringPtrInput
+	// Defaults to `false`.
+	ReEvaluatePolicies pulumi.BoolPtrInput
+	Stage              pulumi.StringPtrInput
+	Target             pulumi.StringPtrInput
 }
 
 func (FlowStageBindingState) ElementType() reflect.Type {
@@ -87,24 +139,32 @@ func (FlowStageBindingState) ElementType() reflect.Type {
 }
 
 type flowStageBindingArgs struct {
-	EvaluateOnPlan        *bool   `pulumi:"evaluateOnPlan"`
+	// Defaults to `true`.
+	EvaluateOnPlan *bool `pulumi:"evaluateOnPlan"`
+	// Defaults to `retry`.
 	InvalidResponseAction *string `pulumi:"invalidResponseAction"`
 	Order                 int     `pulumi:"order"`
-	PolicyEngineMode      *string `pulumi:"policyEngineMode"`
-	ReEvaluatePolicies    *bool   `pulumi:"reEvaluatePolicies"`
-	Stage                 string  `pulumi:"stage"`
-	Target                string  `pulumi:"target"`
+	// Defaults to `any`.
+	PolicyEngineMode *string `pulumi:"policyEngineMode"`
+	// Defaults to `false`.
+	ReEvaluatePolicies *bool  `pulumi:"reEvaluatePolicies"`
+	Stage              string `pulumi:"stage"`
+	Target             string `pulumi:"target"`
 }
 
 // The set of arguments for constructing a FlowStageBinding resource.
 type FlowStageBindingArgs struct {
-	EvaluateOnPlan        pulumi.BoolPtrInput
+	// Defaults to `true`.
+	EvaluateOnPlan pulumi.BoolPtrInput
+	// Defaults to `retry`.
 	InvalidResponseAction pulumi.StringPtrInput
 	Order                 pulumi.IntInput
-	PolicyEngineMode      pulumi.StringPtrInput
-	ReEvaluatePolicies    pulumi.BoolPtrInput
-	Stage                 pulumi.StringInput
-	Target                pulumi.StringInput
+	// Defaults to `any`.
+	PolicyEngineMode pulumi.StringPtrInput
+	// Defaults to `false`.
+	ReEvaluatePolicies pulumi.BoolPtrInput
+	Stage              pulumi.StringInput
+	Target             pulumi.StringInput
 }
 
 func (FlowStageBindingArgs) ElementType() reflect.Type {
@@ -128,6 +188,12 @@ func (i *FlowStageBinding) ToFlowStageBindingOutput() FlowStageBindingOutput {
 
 func (i *FlowStageBinding) ToFlowStageBindingOutputWithContext(ctx context.Context) FlowStageBindingOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(FlowStageBindingOutput)
+}
+
+func (i *FlowStageBinding) ToOutput(ctx context.Context) pulumix.Output[*FlowStageBinding] {
+	return pulumix.Output[*FlowStageBinding]{
+		OutputState: i.ToFlowStageBindingOutputWithContext(ctx).OutputState,
+	}
 }
 
 // FlowStageBindingArrayInput is an input type that accepts FlowStageBindingArray and FlowStageBindingArrayOutput values.
@@ -155,6 +221,12 @@ func (i FlowStageBindingArray) ToFlowStageBindingArrayOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(FlowStageBindingArrayOutput)
 }
 
+func (i FlowStageBindingArray) ToOutput(ctx context.Context) pulumix.Output[[]*FlowStageBinding] {
+	return pulumix.Output[[]*FlowStageBinding]{
+		OutputState: i.ToFlowStageBindingArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // FlowStageBindingMapInput is an input type that accepts FlowStageBindingMap and FlowStageBindingMapOutput values.
 // You can construct a concrete instance of `FlowStageBindingMapInput` via:
 //
@@ -180,6 +252,12 @@ func (i FlowStageBindingMap) ToFlowStageBindingMapOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(FlowStageBindingMapOutput)
 }
 
+func (i FlowStageBindingMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*FlowStageBinding] {
+	return pulumix.Output[map[string]*FlowStageBinding]{
+		OutputState: i.ToFlowStageBindingMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type FlowStageBindingOutput struct{ *pulumi.OutputState }
 
 func (FlowStageBindingOutput) ElementType() reflect.Type {
@@ -194,10 +272,18 @@ func (o FlowStageBindingOutput) ToFlowStageBindingOutputWithContext(ctx context.
 	return o
 }
 
+func (o FlowStageBindingOutput) ToOutput(ctx context.Context) pulumix.Output[*FlowStageBinding] {
+	return pulumix.Output[*FlowStageBinding]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Defaults to `true`.
 func (o FlowStageBindingOutput) EvaluateOnPlan() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *FlowStageBinding) pulumi.BoolPtrOutput { return v.EvaluateOnPlan }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to `retry`.
 func (o FlowStageBindingOutput) InvalidResponseAction() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *FlowStageBinding) pulumi.StringPtrOutput { return v.InvalidResponseAction }).(pulumi.StringPtrOutput)
 }
@@ -206,10 +292,12 @@ func (o FlowStageBindingOutput) Order() pulumi.IntOutput {
 	return o.ApplyT(func(v *FlowStageBinding) pulumi.IntOutput { return v.Order }).(pulumi.IntOutput)
 }
 
+// Defaults to `any`.
 func (o FlowStageBindingOutput) PolicyEngineMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *FlowStageBinding) pulumi.StringPtrOutput { return v.PolicyEngineMode }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `false`.
 func (o FlowStageBindingOutput) ReEvaluatePolicies() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *FlowStageBinding) pulumi.BoolPtrOutput { return v.ReEvaluatePolicies }).(pulumi.BoolPtrOutput)
 }
@@ -236,6 +324,12 @@ func (o FlowStageBindingArrayOutput) ToFlowStageBindingArrayOutputWithContext(ct
 	return o
 }
 
+func (o FlowStageBindingArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*FlowStageBinding] {
+	return pulumix.Output[[]*FlowStageBinding]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o FlowStageBindingArrayOutput) Index(i pulumi.IntInput) FlowStageBindingOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *FlowStageBinding {
 		return vs[0].([]*FlowStageBinding)[vs[1].(int)]
@@ -254,6 +348,12 @@ func (o FlowStageBindingMapOutput) ToFlowStageBindingMapOutput() FlowStageBindin
 
 func (o FlowStageBindingMapOutput) ToFlowStageBindingMapOutputWithContext(ctx context.Context) FlowStageBindingMapOutput {
 	return o
+}
+
+func (o FlowStageBindingMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*FlowStageBinding] {
+	return pulumix.Output[map[string]*FlowStageBinding]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o FlowStageBindingMapOutput) MapIndex(k pulumi.StringInput) FlowStageBindingOutput {

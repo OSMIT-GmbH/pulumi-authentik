@@ -32,10 +32,22 @@ export class EnterpriseLicense extends pulumi.CustomResource {
         return obj['__pulumiType'] === EnterpriseLicense.__pulumiType;
     }
 
+    /**
+     * Generated.
+     */
     public /*out*/ readonly expiry!: pulumi.Output<string>;
+    /**
+     * Generated.
+     */
     public /*out*/ readonly externalUsers!: pulumi.Output<number>;
+    /**
+     * Generated.
+     */
     public /*out*/ readonly internalUsers!: pulumi.Output<number>;
     public readonly key!: pulumi.Output<string>;
+    /**
+     * Generated.
+     */
     public /*out*/ readonly name!: pulumi.Output<string>;
 
     /**
@@ -78,10 +90,22 @@ export class EnterpriseLicense extends pulumi.CustomResource {
  * Input properties used for looking up and filtering EnterpriseLicense resources.
  */
 export interface EnterpriseLicenseState {
+    /**
+     * Generated.
+     */
     expiry?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     externalUsers?: pulumi.Input<number>;
+    /**
+     * Generated.
+     */
     internalUsers?: pulumi.Input<number>;
     key?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     name?: pulumi.Input<string>;
 }
 

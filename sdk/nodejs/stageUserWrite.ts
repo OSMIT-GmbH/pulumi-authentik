@@ -4,6 +4,16 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.StageUserWrite("name", {createUsersAsInactive: false});
+ * ```
+ */
 export class StageUserWrite extends pulumi.CustomResource {
     /**
      * Get an existing StageUserWrite resource's state with the given name, ID, and optional extra
@@ -32,10 +42,19 @@ export class StageUserWrite extends pulumi.CustomResource {
         return obj['__pulumiType'] === StageUserWrite.__pulumiType;
     }
 
+    /**
+     * Defaults to `true`.
+     */
     public readonly createUsersAsInactive!: pulumi.Output<boolean | undefined>;
     public readonly createUsersGroup!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Defaults to `createWhenRequired`.
+     */
     public readonly userCreationMode!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to ``.
+     */
     public readonly userPathTemplate!: pulumi.Output<string | undefined>;
 
     /**
@@ -73,10 +92,19 @@ export class StageUserWrite extends pulumi.CustomResource {
  * Input properties used for looking up and filtering StageUserWrite resources.
  */
 export interface StageUserWriteState {
+    /**
+     * Defaults to `true`.
+     */
     createUsersAsInactive?: pulumi.Input<boolean>;
     createUsersGroup?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `createWhenRequired`.
+     */
     userCreationMode?: pulumi.Input<string>;
+    /**
+     * Defaults to ``.
+     */
     userPathTemplate?: pulumi.Input<string>;
 }
 
@@ -84,9 +112,18 @@ export interface StageUserWriteState {
  * The set of arguments for constructing a StageUserWrite resource.
  */
 export interface StageUserWriteArgs {
+    /**
+     * Defaults to `true`.
+     */
     createUsersAsInactive?: pulumi.Input<boolean>;
     createUsersGroup?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `createWhenRequired`.
+     */
     userCreationMode?: pulumi.Input<string>;
+    /**
+     * Defaults to ``.
+     */
     userPathTemplate?: pulumi.Input<string>;
 }

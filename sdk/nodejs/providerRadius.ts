@@ -4,6 +4,28 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const default-authentication-flow = authentik.getFlow({
+ *     slug: "default-authentication-flow",
+ * });
+ * const nameProviderRadius = new authentik.ProviderRadius("nameProviderRadius", {
+ *     authorizationFlow: default_authentication_flow.then(default_authentication_flow => default_authentication_flow.id),
+ *     clientNetworks: "10.10.0.0/24",
+ *     sharedSecret: "my-shared-secret",
+ * });
+ * const nameApplication = new authentik.Application("nameApplication", {
+ *     slug: "radius-app",
+ *     protocolProvider: nameProviderRadius.id,
+ * });
+ * ```
+ */
 export class ProviderRadius extends pulumi.CustomResource {
     /**
      * Get an existing ProviderRadius resource's state with the given name, ID, and optional extra
@@ -33,6 +55,9 @@ export class ProviderRadius extends pulumi.CustomResource {
     }
 
     public readonly authorizationFlow!: pulumi.Output<string>;
+    /**
+     * Defaults to `0.0.0.0/0, ::/0`.
+     */
     public readonly clientNetworks!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly sharedSecret!: pulumi.Output<string>;
@@ -79,6 +104,9 @@ export class ProviderRadius extends pulumi.CustomResource {
  */
 export interface ProviderRadiusState {
     authorizationFlow?: pulumi.Input<string>;
+    /**
+     * Defaults to `0.0.0.0/0, ::/0`.
+     */
     clientNetworks?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     sharedSecret?: pulumi.Input<string>;
@@ -89,6 +117,9 @@ export interface ProviderRadiusState {
  */
 export interface ProviderRadiusArgs {
     authorizationFlow: pulumi.Input<string>;
+    /**
+     * Defaults to `0.0.0.0/0, ::/0`.
+     */
     clientNetworks?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     sharedSecret: pulumi.Input<string>;

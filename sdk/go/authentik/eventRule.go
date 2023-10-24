@@ -10,13 +10,15 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 type EventRule struct {
 	pulumi.CustomResourceState
 
-	Group          pulumi.StringPtrOutput   `pulumi:"group"`
-	Name           pulumi.StringOutput      `pulumi:"name"`
+	Group pulumi.StringPtrOutput `pulumi:"group"`
+	Name  pulumi.StringOutput    `pulumi:"name"`
+	// Defaults to `warning`.
 	Severity       pulumi.StringPtrOutput   `pulumi:"severity"`
 	Transports     pulumi.StringArrayOutput `pulumi:"transports"`
 	WebhookMapping pulumi.StringPtrOutput   `pulumi:"webhookMapping"`
@@ -55,16 +57,18 @@ func GetEventRule(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering EventRule resources.
 type eventRuleState struct {
-	Group          *string  `pulumi:"group"`
-	Name           *string  `pulumi:"name"`
+	Group *string `pulumi:"group"`
+	Name  *string `pulumi:"name"`
+	// Defaults to `warning`.
 	Severity       *string  `pulumi:"severity"`
 	Transports     []string `pulumi:"transports"`
 	WebhookMapping *string  `pulumi:"webhookMapping"`
 }
 
 type EventRuleState struct {
-	Group          pulumi.StringPtrInput
-	Name           pulumi.StringPtrInput
+	Group pulumi.StringPtrInput
+	Name  pulumi.StringPtrInput
+	// Defaults to `warning`.
 	Severity       pulumi.StringPtrInput
 	Transports     pulumi.StringArrayInput
 	WebhookMapping pulumi.StringPtrInput
@@ -75,8 +79,9 @@ func (EventRuleState) ElementType() reflect.Type {
 }
 
 type eventRuleArgs struct {
-	Group          *string  `pulumi:"group"`
-	Name           *string  `pulumi:"name"`
+	Group *string `pulumi:"group"`
+	Name  *string `pulumi:"name"`
+	// Defaults to `warning`.
 	Severity       *string  `pulumi:"severity"`
 	Transports     []string `pulumi:"transports"`
 	WebhookMapping *string  `pulumi:"webhookMapping"`
@@ -84,8 +89,9 @@ type eventRuleArgs struct {
 
 // The set of arguments for constructing a EventRule resource.
 type EventRuleArgs struct {
-	Group          pulumi.StringPtrInput
-	Name           pulumi.StringPtrInput
+	Group pulumi.StringPtrInput
+	Name  pulumi.StringPtrInput
+	// Defaults to `warning`.
 	Severity       pulumi.StringPtrInput
 	Transports     pulumi.StringArrayInput
 	WebhookMapping pulumi.StringPtrInput
@@ -114,6 +120,12 @@ func (i *EventRule) ToEventRuleOutputWithContext(ctx context.Context) EventRuleO
 	return pulumi.ToOutputWithContext(ctx, i).(EventRuleOutput)
 }
 
+func (i *EventRule) ToOutput(ctx context.Context) pulumix.Output[*EventRule] {
+	return pulumix.Output[*EventRule]{
+		OutputState: i.ToEventRuleOutputWithContext(ctx).OutputState,
+	}
+}
+
 // EventRuleArrayInput is an input type that accepts EventRuleArray and EventRuleArrayOutput values.
 // You can construct a concrete instance of `EventRuleArrayInput` via:
 //
@@ -137,6 +149,12 @@ func (i EventRuleArray) ToEventRuleArrayOutput() EventRuleArrayOutput {
 
 func (i EventRuleArray) ToEventRuleArrayOutputWithContext(ctx context.Context) EventRuleArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(EventRuleArrayOutput)
+}
+
+func (i EventRuleArray) ToOutput(ctx context.Context) pulumix.Output[[]*EventRule] {
+	return pulumix.Output[[]*EventRule]{
+		OutputState: i.ToEventRuleArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // EventRuleMapInput is an input type that accepts EventRuleMap and EventRuleMapOutput values.
@@ -164,6 +182,12 @@ func (i EventRuleMap) ToEventRuleMapOutputWithContext(ctx context.Context) Event
 	return pulumi.ToOutputWithContext(ctx, i).(EventRuleMapOutput)
 }
 
+func (i EventRuleMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*EventRule] {
+	return pulumix.Output[map[string]*EventRule]{
+		OutputState: i.ToEventRuleMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type EventRuleOutput struct{ *pulumi.OutputState }
 
 func (EventRuleOutput) ElementType() reflect.Type {
@@ -178,6 +202,12 @@ func (o EventRuleOutput) ToEventRuleOutputWithContext(ctx context.Context) Event
 	return o
 }
 
+func (o EventRuleOutput) ToOutput(ctx context.Context) pulumix.Output[*EventRule] {
+	return pulumix.Output[*EventRule]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o EventRuleOutput) Group() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *EventRule) pulumi.StringPtrOutput { return v.Group }).(pulumi.StringPtrOutput)
 }
@@ -186,6 +216,7 @@ func (o EventRuleOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *EventRule) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// Defaults to `warning`.
 func (o EventRuleOutput) Severity() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *EventRule) pulumi.StringPtrOutput { return v.Severity }).(pulumi.StringPtrOutput)
 }
@@ -212,6 +243,12 @@ func (o EventRuleArrayOutput) ToEventRuleArrayOutputWithContext(ctx context.Cont
 	return o
 }
 
+func (o EventRuleArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*EventRule] {
+	return pulumix.Output[[]*EventRule]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o EventRuleArrayOutput) Index(i pulumi.IntInput) EventRuleOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *EventRule {
 		return vs[0].([]*EventRule)[vs[1].(int)]
@@ -230,6 +267,12 @@ func (o EventRuleMapOutput) ToEventRuleMapOutput() EventRuleMapOutput {
 
 func (o EventRuleMapOutput) ToEventRuleMapOutputWithContext(ctx context.Context) EventRuleMapOutput {
 	return o
+}
+
+func (o EventRuleMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*EventRule] {
+	return pulumix.Output[map[string]*EventRule]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o EventRuleMapOutput) MapIndex(k pulumi.StringInput) EventRuleOutput {

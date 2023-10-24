@@ -10,20 +10,83 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			policy, err := authentik.NewPolicyExpression(ctx, "policy", &authentik.PolicyExpressionArgs{
+//				Expression: pulumi.String("return True"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			nameApplication, err := authentik.NewApplication(ctx, "nameApplication", &authentik.ApplicationArgs{
+//				Slug: pulumi.String("test-app"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewPolicyBinding(ctx, "app-accessPolicyBinding", &authentik.PolicyBindingArgs{
+//				Target: nameApplication.Uuid,
+//				Policy: policy.ID(),
+//				Order:  pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			admins, err := authentik.LookupGroup(ctx, &authentik.LookupGroupArgs{
+//				Name: pulumi.StringRef("authentik Admins"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewApplication(ctx, "nameIndex/applicationApplication", &authentik.ApplicationArgs{
+//				Slug: pulumi.String("test-app"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewPolicyBinding(ctx, "app-accessIndex/policyBindingPolicyBinding", &authentik.PolicyBindingArgs{
+//				Target: nameApplication.Uuid,
+//				Group:  *pulumi.String(admins.Id),
+//				Order:  pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type PolicyBinding struct {
 	pulumi.CustomResourceState
 
+	// Defaults to `true`.
 	Enabled pulumi.BoolPtrOutput `pulumi:"enabled"`
 	// UUID of the group
-	Group  pulumi.StringPtrOutput `pulumi:"group"`
-	Negate pulumi.BoolPtrOutput   `pulumi:"negate"`
-	Order  pulumi.IntOutput       `pulumi:"order"`
+	Group pulumi.StringPtrOutput `pulumi:"group"`
+	// Defaults to `false`.
+	Negate pulumi.BoolPtrOutput `pulumi:"negate"`
+	Order  pulumi.IntOutput     `pulumi:"order"`
 	// UUID of the policy
 	Policy pulumi.StringPtrOutput `pulumi:"policy"`
 	// ID of the object this binding should apply to
-	Target  pulumi.StringOutput `pulumi:"target"`
+	Target pulumi.StringOutput `pulumi:"target"`
+	// Defaults to `30`.
 	Timeout pulumi.IntPtrOutput `pulumi:"timeout"`
 	// PK of the user
 	User pulumi.IntPtrOutput `pulumi:"user"`
@@ -65,30 +128,36 @@ func GetPolicyBinding(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering PolicyBinding resources.
 type policyBindingState struct {
+	// Defaults to `true`.
 	Enabled *bool `pulumi:"enabled"`
 	// UUID of the group
-	Group  *string `pulumi:"group"`
-	Negate *bool   `pulumi:"negate"`
-	Order  *int    `pulumi:"order"`
+	Group *string `pulumi:"group"`
+	// Defaults to `false`.
+	Negate *bool `pulumi:"negate"`
+	Order  *int  `pulumi:"order"`
 	// UUID of the policy
 	Policy *string `pulumi:"policy"`
 	// ID of the object this binding should apply to
-	Target  *string `pulumi:"target"`
-	Timeout *int    `pulumi:"timeout"`
+	Target *string `pulumi:"target"`
+	// Defaults to `30`.
+	Timeout *int `pulumi:"timeout"`
 	// PK of the user
 	User *int `pulumi:"user"`
 }
 
 type PolicyBindingState struct {
+	// Defaults to `true`.
 	Enabled pulumi.BoolPtrInput
 	// UUID of the group
-	Group  pulumi.StringPtrInput
+	Group pulumi.StringPtrInput
+	// Defaults to `false`.
 	Negate pulumi.BoolPtrInput
 	Order  pulumi.IntPtrInput
 	// UUID of the policy
 	Policy pulumi.StringPtrInput
 	// ID of the object this binding should apply to
-	Target  pulumi.StringPtrInput
+	Target pulumi.StringPtrInput
+	// Defaults to `30`.
 	Timeout pulumi.IntPtrInput
 	// PK of the user
 	User pulumi.IntPtrInput
@@ -99,31 +168,37 @@ func (PolicyBindingState) ElementType() reflect.Type {
 }
 
 type policyBindingArgs struct {
+	// Defaults to `true`.
 	Enabled *bool `pulumi:"enabled"`
 	// UUID of the group
-	Group  *string `pulumi:"group"`
-	Negate *bool   `pulumi:"negate"`
-	Order  int     `pulumi:"order"`
+	Group *string `pulumi:"group"`
+	// Defaults to `false`.
+	Negate *bool `pulumi:"negate"`
+	Order  int   `pulumi:"order"`
 	// UUID of the policy
 	Policy *string `pulumi:"policy"`
 	// ID of the object this binding should apply to
-	Target  string `pulumi:"target"`
-	Timeout *int   `pulumi:"timeout"`
+	Target string `pulumi:"target"`
+	// Defaults to `30`.
+	Timeout *int `pulumi:"timeout"`
 	// PK of the user
 	User *int `pulumi:"user"`
 }
 
 // The set of arguments for constructing a PolicyBinding resource.
 type PolicyBindingArgs struct {
+	// Defaults to `true`.
 	Enabled pulumi.BoolPtrInput
 	// UUID of the group
-	Group  pulumi.StringPtrInput
+	Group pulumi.StringPtrInput
+	// Defaults to `false`.
 	Negate pulumi.BoolPtrInput
 	Order  pulumi.IntInput
 	// UUID of the policy
 	Policy pulumi.StringPtrInput
 	// ID of the object this binding should apply to
-	Target  pulumi.StringInput
+	Target pulumi.StringInput
+	// Defaults to `30`.
 	Timeout pulumi.IntPtrInput
 	// PK of the user
 	User pulumi.IntPtrInput
@@ -152,6 +227,12 @@ func (i *PolicyBinding) ToPolicyBindingOutputWithContext(ctx context.Context) Po
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyBindingOutput)
 }
 
+func (i *PolicyBinding) ToOutput(ctx context.Context) pulumix.Output[*PolicyBinding] {
+	return pulumix.Output[*PolicyBinding]{
+		OutputState: i.ToPolicyBindingOutputWithContext(ctx).OutputState,
+	}
+}
+
 // PolicyBindingArrayInput is an input type that accepts PolicyBindingArray and PolicyBindingArrayOutput values.
 // You can construct a concrete instance of `PolicyBindingArrayInput` via:
 //
@@ -175,6 +256,12 @@ func (i PolicyBindingArray) ToPolicyBindingArrayOutput() PolicyBindingArrayOutpu
 
 func (i PolicyBindingArray) ToPolicyBindingArrayOutputWithContext(ctx context.Context) PolicyBindingArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyBindingArrayOutput)
+}
+
+func (i PolicyBindingArray) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyBinding] {
+	return pulumix.Output[[]*PolicyBinding]{
+		OutputState: i.ToPolicyBindingArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // PolicyBindingMapInput is an input type that accepts PolicyBindingMap and PolicyBindingMapOutput values.
@@ -202,6 +289,12 @@ func (i PolicyBindingMap) ToPolicyBindingMapOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyBindingMapOutput)
 }
 
+func (i PolicyBindingMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyBinding] {
+	return pulumix.Output[map[string]*PolicyBinding]{
+		OutputState: i.ToPolicyBindingMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type PolicyBindingOutput struct{ *pulumi.OutputState }
 
 func (PolicyBindingOutput) ElementType() reflect.Type {
@@ -216,6 +309,13 @@ func (o PolicyBindingOutput) ToPolicyBindingOutputWithContext(ctx context.Contex
 	return o
 }
 
+func (o PolicyBindingOutput) ToOutput(ctx context.Context) pulumix.Output[*PolicyBinding] {
+	return pulumix.Output[*PolicyBinding]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Defaults to `true`.
 func (o PolicyBindingOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PolicyBinding) pulumi.BoolPtrOutput { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
@@ -225,6 +325,7 @@ func (o PolicyBindingOutput) Group() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PolicyBinding) pulumi.StringPtrOutput { return v.Group }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `false`.
 func (o PolicyBindingOutput) Negate() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PolicyBinding) pulumi.BoolPtrOutput { return v.Negate }).(pulumi.BoolPtrOutput)
 }
@@ -243,6 +344,7 @@ func (o PolicyBindingOutput) Target() pulumi.StringOutput {
 	return o.ApplyT(func(v *PolicyBinding) pulumi.StringOutput { return v.Target }).(pulumi.StringOutput)
 }
 
+// Defaults to `30`.
 func (o PolicyBindingOutput) Timeout() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *PolicyBinding) pulumi.IntPtrOutput { return v.Timeout }).(pulumi.IntPtrOutput)
 }
@@ -266,6 +368,12 @@ func (o PolicyBindingArrayOutput) ToPolicyBindingArrayOutputWithContext(ctx cont
 	return o
 }
 
+func (o PolicyBindingArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyBinding] {
+	return pulumix.Output[[]*PolicyBinding]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o PolicyBindingArrayOutput) Index(i pulumi.IntInput) PolicyBindingOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PolicyBinding {
 		return vs[0].([]*PolicyBinding)[vs[1].(int)]
@@ -284,6 +392,12 @@ func (o PolicyBindingMapOutput) ToPolicyBindingMapOutput() PolicyBindingMapOutpu
 
 func (o PolicyBindingMapOutput) ToPolicyBindingMapOutputWithContext(ctx context.Context) PolicyBindingMapOutput {
 	return o
+}
+
+func (o PolicyBindingMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyBinding] {
+	return pulumix.Output[map[string]*PolicyBinding]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PolicyBindingMapOutput) MapIndex(k pulumi.StringInput) PolicyBindingOutput {

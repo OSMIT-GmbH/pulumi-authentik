@@ -4,6 +4,20 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const field = new authentik.StagePromptField("field", {
+ *     fieldKey: "username",
+ *     label: "Username",
+ *     type: "username",
+ * });
+ * ```
+ */
 export class StagePromptField extends pulumi.CustomResource {
     /**
      * Get an existing StagePromptField resource's state with the given name, ID, and optional extra
@@ -34,13 +48,25 @@ export class StagePromptField extends pulumi.CustomResource {
 
     public readonly fieldKey!: pulumi.Output<string>;
     public readonly initialValue!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly initialValueExpression!: pulumi.Output<boolean | undefined>;
     public readonly label!: pulumi.Output<string>;
     public readonly name!: pulumi.Output<string>;
     public readonly order!: pulumi.Output<number | undefined>;
     public readonly placeholder!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly placeholderExpression!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly required!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to ``.
+     */
     public readonly subText!: pulumi.Output<string | undefined>;
     public readonly type!: pulumi.Output<string>;
 
@@ -102,13 +128,25 @@ export class StagePromptField extends pulumi.CustomResource {
 export interface StagePromptFieldState {
     fieldKey?: pulumi.Input<string>;
     initialValue?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     initialValueExpression?: pulumi.Input<boolean>;
     label?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     order?: pulumi.Input<number>;
     placeholder?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     placeholderExpression?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `false`.
+     */
     required?: pulumi.Input<boolean>;
+    /**
+     * Defaults to ``.
+     */
     subText?: pulumi.Input<string>;
     type?: pulumi.Input<string>;
 }
@@ -119,13 +157,25 @@ export interface StagePromptFieldState {
 export interface StagePromptFieldArgs {
     fieldKey: pulumi.Input<string>;
     initialValue?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     initialValueExpression?: pulumi.Input<boolean>;
     label: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     order?: pulumi.Input<number>;
     placeholder?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     placeholderExpression?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `false`.
+     */
     required?: pulumi.Input<boolean>;
+    /**
+     * Defaults to ``.
+     */
     subText?: pulumi.Input<string>;
     type: pulumi.Input<string>;
 }

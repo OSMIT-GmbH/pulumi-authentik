@@ -4,6 +4,19 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.StageCaptcha("name", {
+ *     privateKey: "foo",
+ *     publicKey: "bar",
+ * });
+ * ```
+ */
 export class StageCaptcha extends pulumi.CustomResource {
     /**
      * Get an existing StageCaptcha resource's state with the given name, ID, and optional extra
@@ -32,7 +45,13 @@ export class StageCaptcha extends pulumi.CustomResource {
         return obj['__pulumiType'] === StageCaptcha.__pulumiType;
     }
 
+    /**
+     * Defaults to `https://www.recaptcha.net/recaptcha/api/siteverify`.
+     */
     public readonly apiUrl!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
+     */
     public readonly jsUrl!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly privateKey!: pulumi.Output<string>;
@@ -81,7 +100,13 @@ export class StageCaptcha extends pulumi.CustomResource {
  * Input properties used for looking up and filtering StageCaptcha resources.
  */
 export interface StageCaptchaState {
+    /**
+     * Defaults to `https://www.recaptcha.net/recaptcha/api/siteverify`.
+     */
     apiUrl?: pulumi.Input<string>;
+    /**
+     * Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
+     */
     jsUrl?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     privateKey?: pulumi.Input<string>;
@@ -92,7 +117,13 @@ export interface StageCaptchaState {
  * The set of arguments for constructing a StageCaptcha resource.
  */
 export interface StageCaptchaArgs {
+    /**
+     * Defaults to `https://www.recaptcha.net/recaptcha/api/siteverify`.
+     */
     apiUrl?: pulumi.Input<string>;
+    /**
+     * Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
+     */
     jsUrl?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     privateKey: pulumi.Input<string>;

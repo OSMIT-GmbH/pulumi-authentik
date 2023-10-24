@@ -4,6 +4,23 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Get SCIM Property mappings
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const test = authentik.getPropertyMappingScim({
+ *     managedLists: [
+ *         "goauthentik.io/providers/scim/user",
+ *         "goauthentik.io/providers/scim/group",
+ *     ],
+ * });
+ * ```
+ */
 export function getPropertyMappingScim(args?: GetPropertyMappingScimArgs, opts?: pulumi.InvokeOptions): Promise<GetPropertyMappingScimResult> {
     args = args || {};
 
@@ -20,8 +37,14 @@ export function getPropertyMappingScim(args?: GetPropertyMappingScimArgs, opts?:
  * A collection of arguments for invoking getPropertyMappingScim.
  */
 export interface GetPropertyMappingScimArgs {
+    /**
+     * List of ids when `managedList` is set. Generated.
+     */
     ids?: string[];
     managed?: string;
+    /**
+     * Retrive multiple property mappings
+     */
     managedLists?: string[];
     name?: string;
 }
@@ -30,16 +53,42 @@ export interface GetPropertyMappingScimArgs {
  * A collection of values returned by getPropertyMappingScim.
  */
 export interface GetPropertyMappingScimResult {
+    /**
+     * Generated.
+     */
     readonly expression: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * List of ids when `managedList` is set. Generated.
+     */
     readonly ids: string[];
     readonly managed?: string;
+    /**
+     * Retrive multiple property mappings
+     */
     readonly managedLists?: string[];
     readonly name?: string;
 }
+/**
+ * Get SCIM Property mappings
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const test = authentik.getPropertyMappingScim({
+ *     managedLists: [
+ *         "goauthentik.io/providers/scim/user",
+ *         "goauthentik.io/providers/scim/group",
+ *     ],
+ * });
+ * ```
+ */
 export function getPropertyMappingScimOutput(args?: GetPropertyMappingScimOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPropertyMappingScimResult> {
     return pulumi.output(args).apply((a: any) => getPropertyMappingScim(a, opts))
 }
@@ -48,8 +97,14 @@ export function getPropertyMappingScimOutput(args?: GetPropertyMappingScimOutput
  * A collection of arguments for invoking getPropertyMappingScim.
  */
 export interface GetPropertyMappingScimOutputArgs {
+    /**
+     * List of ids when `managedList` is set. Generated.
+     */
     ids?: pulumi.Input<pulumi.Input<string>[]>;
     managed?: pulumi.Input<string>;
+    /**
+     * Retrive multiple property mappings
+     */
     managedLists?: pulumi.Input<pulumi.Input<string>[]>;
     name?: pulumi.Input<string>;
 }

@@ -4,6 +4,22 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * // Create a prompt stage with 1 field
+ * const field = new authentik.StagePromptField("field", {
+ *     fieldKey: "username",
+ *     label: "Username",
+ *     type: "username",
+ * });
+ * const name = new authentik.StagePrompt("name", {fields: [resource.authentik_stage_prompt_field.field.id]});
+ * ```
+ */
 export class StagePrompt extends pulumi.CustomResource {
     /**
      * Get an existing StagePrompt resource's state with the given name, ID, and optional extra

@@ -4,6 +4,16 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.StageInvitation("name", {});
+ * ```
+ */
 export class StageInvitation extends pulumi.CustomResource {
     /**
      * Get an existing StageInvitation resource's state with the given name, ID, and optional extra
@@ -32,6 +42,9 @@ export class StageInvitation extends pulumi.CustomResource {
         return obj['__pulumiType'] === StageInvitation.__pulumiType;
     }
 
+    /**
+     * Defaults to `true`.
+     */
     public readonly continueFlowWithoutInvitation!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
 
@@ -64,6 +77,9 @@ export class StageInvitation extends pulumi.CustomResource {
  * Input properties used for looking up and filtering StageInvitation resources.
  */
 export interface StageInvitationState {
+    /**
+     * Defaults to `true`.
+     */
     continueFlowWithoutInvitation?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
 }
@@ -72,6 +88,9 @@ export interface StageInvitationState {
  * The set of arguments for constructing a StageInvitation resource.
  */
 export interface StageInvitationArgs {
+    /**
+     * Defaults to `true`.
+     */
     continueFlowWithoutInvitation?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
 }

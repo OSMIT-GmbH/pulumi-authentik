@@ -4,6 +4,19 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.StageAuthenticatorValidate("name", {
+ *     deviceClasses: ["static"],
+ *     notConfiguredAction: "skip",
+ * });
+ * ```
+ */
 export class StageAuthenticatorValidate extends pulumi.CustomResource {
     /**
      * Get an existing StageAuthenticatorValidate resource's state with the given name, ID, and optional extra
@@ -34,9 +47,15 @@ export class StageAuthenticatorValidate extends pulumi.CustomResource {
 
     public readonly configurationStages!: pulumi.Output<string[] | undefined>;
     public readonly deviceClasses!: pulumi.Output<string[] | undefined>;
+    /**
+     * Defaults to `seconds=0`.
+     */
     public readonly lastAuthThreshold!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly notConfiguredAction!: pulumi.Output<string>;
+    /**
+     * Defaults to `preferred`.
+     */
     public readonly webauthnUserVerification!: pulumi.Output<string | undefined>;
 
     /**
@@ -81,9 +100,15 @@ export class StageAuthenticatorValidate extends pulumi.CustomResource {
 export interface StageAuthenticatorValidateState {
     configurationStages?: pulumi.Input<pulumi.Input<string>[]>;
     deviceClasses?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Defaults to `seconds=0`.
+     */
     lastAuthThreshold?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     notConfiguredAction?: pulumi.Input<string>;
+    /**
+     * Defaults to `preferred`.
+     */
     webauthnUserVerification?: pulumi.Input<string>;
 }
 
@@ -93,8 +118,14 @@ export interface StageAuthenticatorValidateState {
 export interface StageAuthenticatorValidateArgs {
     configurationStages?: pulumi.Input<pulumi.Input<string>[]>;
     deviceClasses?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Defaults to `seconds=0`.
+     */
     lastAuthThreshold?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     notConfiguredAction: pulumi.Input<string>;
+    /**
+     * Defaults to `preferred`.
+     */
     webauthnUserVerification?: pulumi.Input<string>;
 }

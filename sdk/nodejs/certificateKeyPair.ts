@@ -4,6 +4,39 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ * import * as tls from "@pulumi/tls";
+ *
+ * // Generate a certificate-key pair
+ * const examplePrivateKey = new tls.PrivateKey("examplePrivateKey", {
+ *     algorithm: "ECDSA",
+ *     ecdsaCurve: "P384",
+ * });
+ * const exampleSelfSignedCert = new tls.SelfSignedCert("exampleSelfSignedCert", {
+ *     keyAlgorithm: "ECDSA",
+ *     privateKeyPem: examplePrivateKey.privateKeyPem,
+ *     subject: {
+ *         commonName: "example.com",
+ *         organization: "ACME Examples, Inc",
+ *     },
+ *     validityPeriodHours: 12,
+ *     allowedUses: [
+ *         "key_encipherment",
+ *         "digital_signature",
+ *         "server_auth",
+ *     ],
+ * });
+ * const name = new authentik.CertificateKeyPair("name", {
+ *     certificateData: exampleSelfSignedCert.certPem,
+ *     keyData: examplePrivateKey.privateKeyPem,
+ * });
+ * ```
+ */
 export class CertificateKeyPair extends pulumi.CustomResource {
     /**
      * Get an existing CertificateKeyPair resource's state with the given name, ID, and optional extra

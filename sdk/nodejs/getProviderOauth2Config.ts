@@ -4,6 +4,9 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Get OAuth2 provider config
+ */
 export function getProviderOauth2Config(args?: GetProviderOauth2ConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetProviderOauth2ConfigResult> {
     args = args || {};
 
@@ -18,7 +21,13 @@ export function getProviderOauth2Config(args?: GetProviderOauth2ConfigArgs, opts
  * A collection of arguments for invoking getProviderOauth2Config.
  */
 export interface GetProviderOauth2ConfigArgs {
+    /**
+     * Find provider by name
+     */
     name?: string;
+    /**
+     * Find provider by ID
+     */
     providerId?: number;
 }
 
@@ -26,20 +35,50 @@ export interface GetProviderOauth2ConfigArgs {
  * A collection of values returned by getProviderOauth2Config.
  */
 export interface GetProviderOauth2ConfigResult {
+    /**
+     * Generated.
+     */
     readonly authorizeUrl: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * Generated.
+     */
     readonly issuerUrl: string;
+    /**
+     * Generated.
+     */
     readonly jwksUrl: string;
+    /**
+     * Generated.
+     */
     readonly logoutUrl: string;
+    /**
+     * Find provider by name
+     */
     readonly name?: string;
+    /**
+     * Find provider by ID
+     */
     readonly providerId?: number;
+    /**
+     * Generated.
+     */
     readonly providerInfoUrl: string;
+    /**
+     * Generated.
+     */
     readonly tokenUrl: string;
+    /**
+     * Generated.
+     */
     readonly userInfoUrl: string;
 }
+/**
+ * Get OAuth2 provider config
+ */
 export function getProviderOauth2ConfigOutput(args?: GetProviderOauth2ConfigOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProviderOauth2ConfigResult> {
     return pulumi.output(args).apply((a: any) => getProviderOauth2Config(a, opts))
 }
@@ -48,6 +87,12 @@ export function getProviderOauth2ConfigOutput(args?: GetProviderOauth2ConfigOutp
  * A collection of arguments for invoking getProviderOauth2Config.
  */
 export interface GetProviderOauth2ConfigOutputArgs {
+    /**
+     * Find provider by name
+     */
     name?: pulumi.Input<string>;
+    /**
+     * Find provider by ID
+     */
     providerId?: pulumi.Input<number>;
 }

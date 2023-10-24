@@ -4,6 +4,33 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const default-authorization-flow = authentik.getFlow({
+ *     slug: "default-provider-authorization-implicit-consent",
+ * });
+ * const nameSourceOauth = new authentik.SourceOauth("nameSourceOauth", {
+ *     slug: "test",
+ *     authenticationFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
+ *     enrollmentFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
+ *     providerType: "discord",
+ *     consumerKey: "foo",
+ *     consumerSecret: "bar",
+ * });
+ * const nameStagePassword = new authentik.StagePassword("nameStagePassword", {backends: ["authentik.core.auth.InbuiltBackend"]});
+ * const nameStageIdentification = new authentik.StageIdentification("nameStageIdentification", {
+ *     userFields: ["username"],
+ *     sources: [nameSourceOauth.uuid],
+ *     passwordStage: nameStagePassword.id,
+ * });
+ * ```
+ */
 export class StageIdentification extends pulumi.CustomResource {
     /**
      * Get an existing StageIdentification resource's state with the given name, ID, and optional extra
@@ -38,7 +65,13 @@ export class StageIdentification extends pulumi.CustomResource {
     public readonly passwordStage!: pulumi.Output<string | undefined>;
     public readonly passwordlessFlow!: pulumi.Output<string | undefined>;
     public readonly recoveryFlow!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly showMatchedUser!: pulumi.Output<boolean | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly showSourceLabels!: pulumi.Output<boolean | undefined>;
     public readonly sources!: pulumi.Output<string[] | undefined>;
     public readonly userFields!: pulumi.Output<string[] | undefined>;
@@ -94,7 +127,13 @@ export interface StageIdentificationState {
     passwordStage?: pulumi.Input<string>;
     passwordlessFlow?: pulumi.Input<string>;
     recoveryFlow?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     showMatchedUser?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `false`.
+     */
     showSourceLabels?: pulumi.Input<boolean>;
     sources?: pulumi.Input<pulumi.Input<string>[]>;
     userFields?: pulumi.Input<pulumi.Input<string>[]>;
@@ -110,7 +149,13 @@ export interface StageIdentificationArgs {
     passwordStage?: pulumi.Input<string>;
     passwordlessFlow?: pulumi.Input<string>;
     recoveryFlow?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     showMatchedUser?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `false`.
+     */
     showSourceLabels?: pulumi.Input<boolean>;
     sources?: pulumi.Input<pulumi.Input<string>[]>;
     userFields?: pulumi.Input<pulumi.Input<string>[]>;

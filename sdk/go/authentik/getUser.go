@@ -9,8 +9,36 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Get users by pk or username
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.LookupUser(ctx, &authentik.LookupUserArgs{
+//				Username: pulumi.StringRef("akadmin"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupUser(ctx *pulumi.Context, args *LookupUserArgs, opts ...pulumi.InvokeOption) (*LookupUserResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupUserResult
@@ -23,27 +51,42 @@ func LookupUser(ctx *pulumi.Context, args *LookupUserArgs, opts ...pulumi.Invoke
 
 // A collection of arguments for invoking getUser.
 type LookupUserArgs struct {
-	Pk       *int    `pulumi:"pk"`
+	// Generated.
+	Pk *int `pulumi:"pk"`
+	// Generated.
 	Username *string `pulumi:"username"`
 }
 
 // A collection of values returned by getUser.
 type LookupUserResult struct {
-	Attributes string   `pulumi:"attributes"`
-	Avatar     string   `pulumi:"avatar"`
-	Email      string   `pulumi:"email"`
-	Groups     []string `pulumi:"groups"`
+	// Generated.
+	Attributes string `pulumi:"attributes"`
+	// Generated.
+	Avatar string `pulumi:"avatar"`
+	// Generated.
+	Email string `pulumi:"email"`
+	// Generated.
+	Groups []string `pulumi:"groups"`
 	// The provider-assigned unique ID for this managed resource.
-	Id          string `pulumi:"id"`
-	IsActive    bool   `pulumi:"isActive"`
-	IsSuperuser bool   `pulumi:"isSuperuser"`
-	LastLogin   string `pulumi:"lastLogin"`
-	Name        string `pulumi:"name"`
-	Path        string `pulumi:"path"`
-	Pk          int    `pulumi:"pk"`
-	Type        string `pulumi:"type"`
-	Uid         string `pulumi:"uid"`
-	Username    string `pulumi:"username"`
+	Id string `pulumi:"id"`
+	// Generated.
+	IsActive bool `pulumi:"isActive"`
+	// Generated.
+	IsSuperuser bool `pulumi:"isSuperuser"`
+	// Generated.
+	LastLogin string `pulumi:"lastLogin"`
+	// Generated.
+	Name string `pulumi:"name"`
+	// Generated.
+	Path string `pulumi:"path"`
+	// Generated.
+	Pk int `pulumi:"pk"`
+	// Generated.
+	Type string `pulumi:"type"`
+	// Generated.
+	Uid string `pulumi:"uid"`
+	// Generated.
+	Username string `pulumi:"username"`
 }
 
 func LookupUserOutput(ctx *pulumi.Context, args LookupUserOutputArgs, opts ...pulumi.InvokeOption) LookupUserResultOutput {
@@ -61,7 +104,9 @@ func LookupUserOutput(ctx *pulumi.Context, args LookupUserOutputArgs, opts ...pu
 
 // A collection of arguments for invoking getUser.
 type LookupUserOutputArgs struct {
-	Pk       pulumi.IntPtrInput    `pulumi:"pk"`
+	// Generated.
+	Pk pulumi.IntPtrInput `pulumi:"pk"`
+	// Generated.
 	Username pulumi.StringPtrInput `pulumi:"username"`
 }
 
@@ -84,18 +129,28 @@ func (o LookupUserResultOutput) ToLookupUserResultOutputWithContext(ctx context.
 	return o
 }
 
+func (o LookupUserResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupUserResult] {
+	return pulumix.Output[LookupUserResult]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Generated.
 func (o LookupUserResultOutput) Attributes() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.Attributes }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupUserResultOutput) Avatar() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.Avatar }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupUserResultOutput) Email() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.Email }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupUserResultOutput) Groups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LookupUserResult) []string { return v.Groups }).(pulumi.StringArrayOutput)
 }
@@ -105,38 +160,47 @@ func (o LookupUserResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupUserResultOutput) IsActive() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupUserResult) bool { return v.IsActive }).(pulumi.BoolOutput)
 }
 
+// Generated.
 func (o LookupUserResultOutput) IsSuperuser() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupUserResult) bool { return v.IsSuperuser }).(pulumi.BoolOutput)
 }
 
+// Generated.
 func (o LookupUserResultOutput) LastLogin() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.LastLogin }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupUserResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupUserResultOutput) Path() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.Path }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupUserResultOutput) Pk() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupUserResult) int { return v.Pk }).(pulumi.IntOutput)
 }
 
+// Generated.
 func (o LookupUserResultOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.Type }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupUserResultOutput) Uid() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.Uid }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupUserResultOutput) Username() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.Username }).(pulumi.StringOutput)
 }

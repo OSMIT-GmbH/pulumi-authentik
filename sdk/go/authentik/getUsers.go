@@ -9,8 +9,40 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Get users list
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.GetUsers(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.GetUsers(ctx, &authentik.GetUsersArgs{
+//				IsSuperuser: pulumi.BoolRef(true),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func GetUsers(ctx *pulumi.Context, args *GetUsersArgs, opts ...pulumi.InvokeOption) (*GetUsersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUsersResult
@@ -45,17 +77,18 @@ type GetUsersResult struct {
 	GroupsByNames []string `pulumi:"groupsByNames"`
 	GroupsByPks   []string `pulumi:"groupsByPks"`
 	// The provider-assigned unique ID for this managed resource.
-	Id             string         `pulumi:"id"`
-	IsActive       *bool          `pulumi:"isActive"`
-	IsSuperuser    *bool          `pulumi:"isSuperuser"`
-	Name           *string        `pulumi:"name"`
-	Ordering       *string        `pulumi:"ordering"`
-	Path           *string        `pulumi:"path"`
-	PathStartswith *string        `pulumi:"pathStartswith"`
-	Search         *string        `pulumi:"search"`
-	Username       *string        `pulumi:"username"`
-	Users          []GetUsersUser `pulumi:"users"`
-	Uuid           *string        `pulumi:"uuid"`
+	Id             string  `pulumi:"id"`
+	IsActive       *bool   `pulumi:"isActive"`
+	IsSuperuser    *bool   `pulumi:"isSuperuser"`
+	Name           *string `pulumi:"name"`
+	Ordering       *string `pulumi:"ordering"`
+	Path           *string `pulumi:"path"`
+	PathStartswith *string `pulumi:"pathStartswith"`
+	Search         *string `pulumi:"search"`
+	Username       *string `pulumi:"username"`
+	// Generated.
+	Users []GetUsersUser `pulumi:"users"`
+	Uuid  *string        `pulumi:"uuid"`
 }
 
 func GetUsersOutput(ctx *pulumi.Context, args GetUsersOutputArgs, opts ...pulumi.InvokeOption) GetUsersResultOutput {
@@ -105,6 +138,12 @@ func (o GetUsersResultOutput) ToGetUsersResultOutput() GetUsersResultOutput {
 
 func (o GetUsersResultOutput) ToGetUsersResultOutputWithContext(ctx context.Context) GetUsersResultOutput {
 	return o
+}
+
+func (o GetUsersResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetUsersResult] {
+	return pulumix.Output[GetUsersResult]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o GetUsersResultOutput) Attributes() pulumi.StringPtrOutput {
@@ -160,6 +199,7 @@ func (o GetUsersResultOutput) Username() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetUsersResult) *string { return v.Username }).(pulumi.StringPtrOutput)
 }
 
+// Generated.
 func (o GetUsersResultOutput) Users() GetUsersUserArrayOutput {
 	return o.ApplyT(func(v GetUsersResult) []GetUsersUser { return v.Users }).(GetUsersUserArrayOutput)
 }

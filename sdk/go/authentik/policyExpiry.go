@@ -10,13 +10,41 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewPolicyExpiry(ctx, "name", &authentik.PolicyExpiryArgs{
+//				Days: pulumi.Int(3),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type PolicyExpiry struct {
 	pulumi.CustomResourceState
 
-	Days             pulumi.IntOutput     `pulumi:"days"`
-	DenyOnly         pulumi.BoolPtrOutput `pulumi:"denyOnly"`
+	Days pulumi.IntOutput `pulumi:"days"`
+	// Defaults to `false`.
+	DenyOnly pulumi.BoolPtrOutput `pulumi:"denyOnly"`
+	// Defaults to `false`.
 	ExecutionLogging pulumi.BoolPtrOutput `pulumi:"executionLogging"`
 	Name             pulumi.StringOutput  `pulumi:"name"`
 }
@@ -54,15 +82,19 @@ func GetPolicyExpiry(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering PolicyExpiry resources.
 type policyExpiryState struct {
-	Days             *int    `pulumi:"days"`
-	DenyOnly         *bool   `pulumi:"denyOnly"`
+	Days *int `pulumi:"days"`
+	// Defaults to `false`.
+	DenyOnly *bool `pulumi:"denyOnly"`
+	// Defaults to `false`.
 	ExecutionLogging *bool   `pulumi:"executionLogging"`
 	Name             *string `pulumi:"name"`
 }
 
 type PolicyExpiryState struct {
-	Days             pulumi.IntPtrInput
-	DenyOnly         pulumi.BoolPtrInput
+	Days pulumi.IntPtrInput
+	// Defaults to `false`.
+	DenyOnly pulumi.BoolPtrInput
+	// Defaults to `false`.
 	ExecutionLogging pulumi.BoolPtrInput
 	Name             pulumi.StringPtrInput
 }
@@ -72,16 +104,20 @@ func (PolicyExpiryState) ElementType() reflect.Type {
 }
 
 type policyExpiryArgs struct {
-	Days             int     `pulumi:"days"`
-	DenyOnly         *bool   `pulumi:"denyOnly"`
+	Days int `pulumi:"days"`
+	// Defaults to `false`.
+	DenyOnly *bool `pulumi:"denyOnly"`
+	// Defaults to `false`.
 	ExecutionLogging *bool   `pulumi:"executionLogging"`
 	Name             *string `pulumi:"name"`
 }
 
 // The set of arguments for constructing a PolicyExpiry resource.
 type PolicyExpiryArgs struct {
-	Days             pulumi.IntInput
-	DenyOnly         pulumi.BoolPtrInput
+	Days pulumi.IntInput
+	// Defaults to `false`.
+	DenyOnly pulumi.BoolPtrInput
+	// Defaults to `false`.
 	ExecutionLogging pulumi.BoolPtrInput
 	Name             pulumi.StringPtrInput
 }
@@ -109,6 +145,12 @@ func (i *PolicyExpiry) ToPolicyExpiryOutputWithContext(ctx context.Context) Poli
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyExpiryOutput)
 }
 
+func (i *PolicyExpiry) ToOutput(ctx context.Context) pulumix.Output[*PolicyExpiry] {
+	return pulumix.Output[*PolicyExpiry]{
+		OutputState: i.ToPolicyExpiryOutputWithContext(ctx).OutputState,
+	}
+}
+
 // PolicyExpiryArrayInput is an input type that accepts PolicyExpiryArray and PolicyExpiryArrayOutput values.
 // You can construct a concrete instance of `PolicyExpiryArrayInput` via:
 //
@@ -132,6 +174,12 @@ func (i PolicyExpiryArray) ToPolicyExpiryArrayOutput() PolicyExpiryArrayOutput {
 
 func (i PolicyExpiryArray) ToPolicyExpiryArrayOutputWithContext(ctx context.Context) PolicyExpiryArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyExpiryArrayOutput)
+}
+
+func (i PolicyExpiryArray) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyExpiry] {
+	return pulumix.Output[[]*PolicyExpiry]{
+		OutputState: i.ToPolicyExpiryArrayOutputWithContext(ctx).OutputState,
+	}
 }
 
 // PolicyExpiryMapInput is an input type that accepts PolicyExpiryMap and PolicyExpiryMapOutput values.
@@ -159,6 +207,12 @@ func (i PolicyExpiryMap) ToPolicyExpiryMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyExpiryMapOutput)
 }
 
+func (i PolicyExpiryMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyExpiry] {
+	return pulumix.Output[map[string]*PolicyExpiry]{
+		OutputState: i.ToPolicyExpiryMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type PolicyExpiryOutput struct{ *pulumi.OutputState }
 
 func (PolicyExpiryOutput) ElementType() reflect.Type {
@@ -173,14 +227,22 @@ func (o PolicyExpiryOutput) ToPolicyExpiryOutputWithContext(ctx context.Context)
 	return o
 }
 
+func (o PolicyExpiryOutput) ToOutput(ctx context.Context) pulumix.Output[*PolicyExpiry] {
+	return pulumix.Output[*PolicyExpiry]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o PolicyExpiryOutput) Days() pulumi.IntOutput {
 	return o.ApplyT(func(v *PolicyExpiry) pulumi.IntOutput { return v.Days }).(pulumi.IntOutput)
 }
 
+// Defaults to `false`.
 func (o PolicyExpiryOutput) DenyOnly() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PolicyExpiry) pulumi.BoolPtrOutput { return v.DenyOnly }).(pulumi.BoolPtrOutput)
 }
 
+// Defaults to `false`.
 func (o PolicyExpiryOutput) ExecutionLogging() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PolicyExpiry) pulumi.BoolPtrOutput { return v.ExecutionLogging }).(pulumi.BoolPtrOutput)
 }
@@ -203,6 +265,12 @@ func (o PolicyExpiryArrayOutput) ToPolicyExpiryArrayOutputWithContext(ctx contex
 	return o
 }
 
+func (o PolicyExpiryArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyExpiry] {
+	return pulumix.Output[[]*PolicyExpiry]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o PolicyExpiryArrayOutput) Index(i pulumi.IntInput) PolicyExpiryOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PolicyExpiry {
 		return vs[0].([]*PolicyExpiry)[vs[1].(int)]
@@ -221,6 +289,12 @@ func (o PolicyExpiryMapOutput) ToPolicyExpiryMapOutput() PolicyExpiryMapOutput {
 
 func (o PolicyExpiryMapOutput) ToPolicyExpiryMapOutputWithContext(ctx context.Context) PolicyExpiryMapOutput {
 	return o
+}
+
+func (o PolicyExpiryMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyExpiry] {
+	return pulumix.Output[map[string]*PolicyExpiry]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o PolicyExpiryMapOutput) MapIndex(k pulumi.StringInput) PolicyExpiryOutput {

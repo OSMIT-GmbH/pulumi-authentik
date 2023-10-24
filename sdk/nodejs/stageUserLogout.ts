@@ -4,6 +4,16 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * const name = new authentik.StageUserLogout("name", {});
+ * ```
+ */
 export class StageUserLogout extends pulumi.CustomResource {
     /**
      * Get an existing StageUserLogout resource's state with the given name, ID, and optional extra

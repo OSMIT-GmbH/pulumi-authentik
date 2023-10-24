@@ -9,8 +9,36 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Get tenants by domain
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.LookupTenant(ctx, &authentik.LookupTenantArgs{
+//				Domain: pulumi.StringRef("authentik-default"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupTenant(ctx *pulumi.Context, args *LookupTenantArgs, opts ...pulumi.InvokeOption) (*LookupTenantResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupTenantResult
@@ -23,37 +51,63 @@ func LookupTenant(ctx *pulumi.Context, args *LookupTenantArgs, opts ...pulumi.In
 
 // A collection of arguments for invoking getTenant.
 type LookupTenantArgs struct {
-	BrandingFavicon    *string `pulumi:"brandingFavicon"`
-	BrandingLogo       *string `pulumi:"brandingLogo"`
-	BrandingTitle      *string `pulumi:"brandingTitle"`
-	Default            *bool   `pulumi:"default"`
-	Domain             *string `pulumi:"domain"`
-	EventRetention     *string `pulumi:"eventRetention"`
+	// Generated.
+	BrandingFavicon *string `pulumi:"brandingFavicon"`
+	// Generated.
+	BrandingLogo *string `pulumi:"brandingLogo"`
+	// Generated.
+	BrandingTitle *string `pulumi:"brandingTitle"`
+	// Generated.
+	Default *bool `pulumi:"default"`
+	// Generated.
+	Domain *string `pulumi:"domain"`
+	// Generated.
+	EventRetention *string `pulumi:"eventRetention"`
+	// Generated.
 	FlowAuthentication *string `pulumi:"flowAuthentication"`
-	FlowDeviceCode     *string `pulumi:"flowDeviceCode"`
-	FlowInvalidation   *string `pulumi:"flowInvalidation"`
-	FlowRecovery       *string `pulumi:"flowRecovery"`
-	FlowUnenrollment   *string `pulumi:"flowUnenrollment"`
-	FlowUserSettings   *string `pulumi:"flowUserSettings"`
-	WebCertificate     *string `pulumi:"webCertificate"`
+	// Generated.
+	FlowDeviceCode *string `pulumi:"flowDeviceCode"`
+	// Generated.
+	FlowInvalidation *string `pulumi:"flowInvalidation"`
+	// Generated.
+	FlowRecovery *string `pulumi:"flowRecovery"`
+	// Generated.
+	FlowUnenrollment *string `pulumi:"flowUnenrollment"`
+	// Generated.
+	FlowUserSettings *string `pulumi:"flowUserSettings"`
+	// Generated.
+	WebCertificate *string `pulumi:"webCertificate"`
 }
 
 // A collection of values returned by getTenant.
 type LookupTenantResult struct {
-	BrandingFavicon    string `pulumi:"brandingFavicon"`
-	BrandingLogo       string `pulumi:"brandingLogo"`
-	BrandingTitle      string `pulumi:"brandingTitle"`
-	Default            bool   `pulumi:"default"`
-	Domain             string `pulumi:"domain"`
-	EventRetention     string `pulumi:"eventRetention"`
+	// Generated.
+	BrandingFavicon string `pulumi:"brandingFavicon"`
+	// Generated.
+	BrandingLogo string `pulumi:"brandingLogo"`
+	// Generated.
+	BrandingTitle string `pulumi:"brandingTitle"`
+	// Generated.
+	Default bool `pulumi:"default"`
+	// Generated.
+	Domain string `pulumi:"domain"`
+	// Generated.
+	EventRetention string `pulumi:"eventRetention"`
+	// Generated.
 	FlowAuthentication string `pulumi:"flowAuthentication"`
-	FlowDeviceCode     string `pulumi:"flowDeviceCode"`
-	FlowInvalidation   string `pulumi:"flowInvalidation"`
-	FlowRecovery       string `pulumi:"flowRecovery"`
-	FlowUnenrollment   string `pulumi:"flowUnenrollment"`
-	FlowUserSettings   string `pulumi:"flowUserSettings"`
+	// Generated.
+	FlowDeviceCode string `pulumi:"flowDeviceCode"`
+	// Generated.
+	FlowInvalidation string `pulumi:"flowInvalidation"`
+	// Generated.
+	FlowRecovery string `pulumi:"flowRecovery"`
+	// Generated.
+	FlowUnenrollment string `pulumi:"flowUnenrollment"`
+	// Generated.
+	FlowUserSettings string `pulumi:"flowUserSettings"`
 	// The provider-assigned unique ID for this managed resource.
-	Id             string `pulumi:"id"`
+	Id string `pulumi:"id"`
+	// Generated.
 	WebCertificate string `pulumi:"webCertificate"`
 }
 
@@ -72,19 +126,32 @@ func LookupTenantOutput(ctx *pulumi.Context, args LookupTenantOutputArgs, opts .
 
 // A collection of arguments for invoking getTenant.
 type LookupTenantOutputArgs struct {
-	BrandingFavicon    pulumi.StringPtrInput `pulumi:"brandingFavicon"`
-	BrandingLogo       pulumi.StringPtrInput `pulumi:"brandingLogo"`
-	BrandingTitle      pulumi.StringPtrInput `pulumi:"brandingTitle"`
-	Default            pulumi.BoolPtrInput   `pulumi:"default"`
-	Domain             pulumi.StringPtrInput `pulumi:"domain"`
-	EventRetention     pulumi.StringPtrInput `pulumi:"eventRetention"`
+	// Generated.
+	BrandingFavicon pulumi.StringPtrInput `pulumi:"brandingFavicon"`
+	// Generated.
+	BrandingLogo pulumi.StringPtrInput `pulumi:"brandingLogo"`
+	// Generated.
+	BrandingTitle pulumi.StringPtrInput `pulumi:"brandingTitle"`
+	// Generated.
+	Default pulumi.BoolPtrInput `pulumi:"default"`
+	// Generated.
+	Domain pulumi.StringPtrInput `pulumi:"domain"`
+	// Generated.
+	EventRetention pulumi.StringPtrInput `pulumi:"eventRetention"`
+	// Generated.
 	FlowAuthentication pulumi.StringPtrInput `pulumi:"flowAuthentication"`
-	FlowDeviceCode     pulumi.StringPtrInput `pulumi:"flowDeviceCode"`
-	FlowInvalidation   pulumi.StringPtrInput `pulumi:"flowInvalidation"`
-	FlowRecovery       pulumi.StringPtrInput `pulumi:"flowRecovery"`
-	FlowUnenrollment   pulumi.StringPtrInput `pulumi:"flowUnenrollment"`
-	FlowUserSettings   pulumi.StringPtrInput `pulumi:"flowUserSettings"`
-	WebCertificate     pulumi.StringPtrInput `pulumi:"webCertificate"`
+	// Generated.
+	FlowDeviceCode pulumi.StringPtrInput `pulumi:"flowDeviceCode"`
+	// Generated.
+	FlowInvalidation pulumi.StringPtrInput `pulumi:"flowInvalidation"`
+	// Generated.
+	FlowRecovery pulumi.StringPtrInput `pulumi:"flowRecovery"`
+	// Generated.
+	FlowUnenrollment pulumi.StringPtrInput `pulumi:"flowUnenrollment"`
+	// Generated.
+	FlowUserSettings pulumi.StringPtrInput `pulumi:"flowUserSettings"`
+	// Generated.
+	WebCertificate pulumi.StringPtrInput `pulumi:"webCertificate"`
 }
 
 func (LookupTenantOutputArgs) ElementType() reflect.Type {
@@ -106,50 +173,68 @@ func (o LookupTenantResultOutput) ToLookupTenantResultOutputWithContext(ctx cont
 	return o
 }
 
+func (o LookupTenantResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupTenantResult] {
+	return pulumix.Output[LookupTenantResult]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Generated.
 func (o LookupTenantResultOutput) BrandingFavicon() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupTenantResult) string { return v.BrandingFavicon }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupTenantResultOutput) BrandingLogo() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupTenantResult) string { return v.BrandingLogo }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupTenantResultOutput) BrandingTitle() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupTenantResult) string { return v.BrandingTitle }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupTenantResultOutput) Default() pulumi.BoolOutput {
 	return o.ApplyT(func(v LookupTenantResult) bool { return v.Default }).(pulumi.BoolOutput)
 }
 
+// Generated.
 func (o LookupTenantResultOutput) Domain() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupTenantResult) string { return v.Domain }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupTenantResultOutput) EventRetention() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupTenantResult) string { return v.EventRetention }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupTenantResultOutput) FlowAuthentication() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupTenantResult) string { return v.FlowAuthentication }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupTenantResultOutput) FlowDeviceCode() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupTenantResult) string { return v.FlowDeviceCode }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupTenantResultOutput) FlowInvalidation() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupTenantResult) string { return v.FlowInvalidation }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupTenantResultOutput) FlowRecovery() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupTenantResult) string { return v.FlowRecovery }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupTenantResultOutput) FlowUnenrollment() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupTenantResult) string { return v.FlowUnenrollment }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupTenantResultOutput) FlowUserSettings() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupTenantResult) string { return v.FlowUserSettings }).(pulumi.StringOutput)
 }
@@ -159,6 +244,7 @@ func (o LookupTenantResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupTenantResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupTenantResultOutput) WebCertificate() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupTenantResult) string { return v.WebCertificate }).(pulumi.StringOutput)
 }

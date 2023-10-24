@@ -4,6 +4,26 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const default-authorization-flow = authentik.getFlow({
+ *     slug: "default-provider-authorization-implicit-consent",
+ * });
+ * const name = new authentik.SourcePlex("name", {
+ *     slug: "plex",
+ *     authenticationFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
+ *     enrollmentFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
+ *     clientId: "foo-bar-baz",
+ *     plexToken: "foo",
+ * });
+ * ```
+ */
 export class SourcePlex extends pulumi.CustomResource {
     /**
      * Get an existing SourcePlex resource's state with the given name, ID, and optional extra
@@ -32,18 +52,36 @@ export class SourcePlex extends pulumi.CustomResource {
         return obj['__pulumiType'] === SourcePlex.__pulumiType;
     }
 
+    /**
+     * Defaults to `true`.
+     */
     public readonly allowFriends!: pulumi.Output<boolean | undefined>;
     public readonly allowedServers!: pulumi.Output<string[] | undefined>;
     public readonly authenticationFlow!: pulumi.Output<string>;
     public readonly clientId!: pulumi.Output<string>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly enabled!: pulumi.Output<boolean | undefined>;
     public readonly enrollmentFlow!: pulumi.Output<string>;
     public readonly name!: pulumi.Output<string>;
     public readonly plexToken!: pulumi.Output<string>;
+    /**
+     * Defaults to `any`.
+     */
     public readonly policyEngineMode!: pulumi.Output<string | undefined>;
     public readonly slug!: pulumi.Output<string>;
+    /**
+     * Defaults to `identifier`.
+     */
     public readonly userMatchingMode!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `goauthentik.io/sources/%(slug)s`.
+     */
     public readonly userPathTemplate!: pulumi.Output<string | undefined>;
+    /**
+     * Generated.
+     */
     public readonly uuid!: pulumi.Output<string>;
 
     /**
@@ -114,18 +152,36 @@ export class SourcePlex extends pulumi.CustomResource {
  * Input properties used for looking up and filtering SourcePlex resources.
  */
 export interface SourcePlexState {
+    /**
+     * Defaults to `true`.
+     */
     allowFriends?: pulumi.Input<boolean>;
     allowedServers?: pulumi.Input<pulumi.Input<string>[]>;
     authenticationFlow?: pulumi.Input<string>;
     clientId?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     enabled?: pulumi.Input<boolean>;
     enrollmentFlow?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     plexToken?: pulumi.Input<string>;
+    /**
+     * Defaults to `any`.
+     */
     policyEngineMode?: pulumi.Input<string>;
     slug?: pulumi.Input<string>;
+    /**
+     * Defaults to `identifier`.
+     */
     userMatchingMode?: pulumi.Input<string>;
+    /**
+     * Defaults to `goauthentik.io/sources/%(slug)s`.
+     */
     userPathTemplate?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     uuid?: pulumi.Input<string>;
 }
 
@@ -133,17 +189,35 @@ export interface SourcePlexState {
  * The set of arguments for constructing a SourcePlex resource.
  */
 export interface SourcePlexArgs {
+    /**
+     * Defaults to `true`.
+     */
     allowFriends?: pulumi.Input<boolean>;
     allowedServers?: pulumi.Input<pulumi.Input<string>[]>;
     authenticationFlow: pulumi.Input<string>;
     clientId: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     enabled?: pulumi.Input<boolean>;
     enrollmentFlow: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     plexToken: pulumi.Input<string>;
+    /**
+     * Defaults to `any`.
+     */
     policyEngineMode?: pulumi.Input<string>;
     slug: pulumi.Input<string>;
+    /**
+     * Defaults to `identifier`.
+     */
     userMatchingMode?: pulumi.Input<string>;
+    /**
+     * Defaults to `goauthentik.io/sources/%(slug)s`.
+     */
     userPathTemplate?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     uuid?: pulumi.Input<string>;
 }

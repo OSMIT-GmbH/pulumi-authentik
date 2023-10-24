@@ -71,7 +71,8 @@ func Provider() tfbridge.ProviderInfo {
 		Repository: "https://github.com/OSMIT-GmbH/pulumi-authentik",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
-		GitHubOrg: "goauthentik",
+		//GitHubOrg: "goauthentik",
+		GitHubOrg: "OSMIT-GmbH",
 		Config:    map[string]*tfbridge.SchemaInfo{},
 		Resources: map[string]*tfbridge.ResourceInfo{
 			// Map each resource in the Terraform provider to a Pulumi type. Two examples

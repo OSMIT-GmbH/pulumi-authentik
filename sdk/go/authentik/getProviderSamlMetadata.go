@@ -9,8 +9,10 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Get SAML Provider metadata
 func GetProviderSamlMetadata(ctx *pulumi.Context, args *GetProviderSamlMetadataArgs, opts ...pulumi.InvokeOption) (*GetProviderSamlMetadataResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProviderSamlMetadataResult
@@ -23,17 +25,22 @@ func GetProviderSamlMetadata(ctx *pulumi.Context, args *GetProviderSamlMetadataA
 
 // A collection of arguments for invoking getProviderSamlMetadata.
 type GetProviderSamlMetadataArgs struct {
-	Name       *string `pulumi:"name"`
-	ProviderId *int    `pulumi:"providerId"`
+	// Find provider by name
+	Name *string `pulumi:"name"`
+	// Find provider by ID
+	ProviderId *int `pulumi:"providerId"`
 }
 
 // A collection of values returned by getProviderSamlMetadata.
 type GetProviderSamlMetadataResult struct {
 	// The provider-assigned unique ID for this managed resource.
-	Id         string  `pulumi:"id"`
-	Metadata   string  `pulumi:"metadata"`
-	Name       *string `pulumi:"name"`
-	ProviderId *int    `pulumi:"providerId"`
+	Id string `pulumi:"id"`
+	// SAML Metadata Generated.
+	Metadata string `pulumi:"metadata"`
+	// Find provider by name
+	Name *string `pulumi:"name"`
+	// Find provider by ID
+	ProviderId *int `pulumi:"providerId"`
 }
 
 func GetProviderSamlMetadataOutput(ctx *pulumi.Context, args GetProviderSamlMetadataOutputArgs, opts ...pulumi.InvokeOption) GetProviderSamlMetadataResultOutput {
@@ -51,8 +58,10 @@ func GetProviderSamlMetadataOutput(ctx *pulumi.Context, args GetProviderSamlMeta
 
 // A collection of arguments for invoking getProviderSamlMetadata.
 type GetProviderSamlMetadataOutputArgs struct {
-	Name       pulumi.StringPtrInput `pulumi:"name"`
-	ProviderId pulumi.IntPtrInput    `pulumi:"providerId"`
+	// Find provider by name
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Find provider by ID
+	ProviderId pulumi.IntPtrInput `pulumi:"providerId"`
 }
 
 func (GetProviderSamlMetadataOutputArgs) ElementType() reflect.Type {
@@ -74,19 +83,28 @@ func (o GetProviderSamlMetadataResultOutput) ToGetProviderSamlMetadataResultOutp
 	return o
 }
 
+func (o GetProviderSamlMetadataResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetProviderSamlMetadataResult] {
+	return pulumix.Output[GetProviderSamlMetadataResult]{
+		OutputState: o.OutputState,
+	}
+}
+
 // The provider-assigned unique ID for this managed resource.
 func (o GetProviderSamlMetadataResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProviderSamlMetadataResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// SAML Metadata Generated.
 func (o GetProviderSamlMetadataResultOutput) Metadata() pulumi.StringOutput {
 	return o.ApplyT(func(v GetProviderSamlMetadataResult) string { return v.Metadata }).(pulumi.StringOutput)
 }
 
+// Find provider by name
 func (o GetProviderSamlMetadataResultOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetProviderSamlMetadataResult) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
+// Find provider by ID
 func (o GetProviderSamlMetadataResultOutput) ProviderId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v GetProviderSamlMetadataResult) *int { return v.ProviderId }).(pulumi.IntPtrOutput)
 }

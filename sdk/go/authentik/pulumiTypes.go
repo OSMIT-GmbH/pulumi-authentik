@@ -9,6 +9,7 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 var _ = internal.GetEnvOrDefault
@@ -58,6 +59,12 @@ func (i GetGroupUsersObjArgs) ToGetGroupUsersObjOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(GetGroupUsersObjOutput)
 }
 
+func (i GetGroupUsersObjArgs) ToOutput(ctx context.Context) pulumix.Output[GetGroupUsersObj] {
+	return pulumix.Output[GetGroupUsersObj]{
+		OutputState: i.ToGetGroupUsersObjOutputWithContext(ctx).OutputState,
+	}
+}
+
 // GetGroupUsersObjArrayInput is an input type that accepts GetGroupUsersObjArray and GetGroupUsersObjArrayOutput values.
 // You can construct a concrete instance of `GetGroupUsersObjArrayInput` via:
 //
@@ -83,6 +90,12 @@ func (i GetGroupUsersObjArray) ToGetGroupUsersObjArrayOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetGroupUsersObjArrayOutput)
 }
 
+func (i GetGroupUsersObjArray) ToOutput(ctx context.Context) pulumix.Output[[]GetGroupUsersObj] {
+	return pulumix.Output[[]GetGroupUsersObj]{
+		OutputState: i.ToGetGroupUsersObjArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 type GetGroupUsersObjOutput struct{ *pulumi.OutputState }
 
 func (GetGroupUsersObjOutput) ElementType() reflect.Type {
@@ -95,6 +108,12 @@ func (o GetGroupUsersObjOutput) ToGetGroupUsersObjOutput() GetGroupUsersObjOutpu
 
 func (o GetGroupUsersObjOutput) ToGetGroupUsersObjOutputWithContext(ctx context.Context) GetGroupUsersObjOutput {
 	return o
+}
+
+func (o GetGroupUsersObjOutput) ToOutput(ctx context.Context) pulumix.Output[GetGroupUsersObj] {
+	return pulumix.Output[GetGroupUsersObj]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o GetGroupUsersObjOutput) Attributes() pulumi.StringOutput {
@@ -141,6 +160,12 @@ func (o GetGroupUsersObjArrayOutput) ToGetGroupUsersObjArrayOutput() GetGroupUse
 
 func (o GetGroupUsersObjArrayOutput) ToGetGroupUsersObjArrayOutputWithContext(ctx context.Context) GetGroupUsersObjArrayOutput {
 	return o
+}
+
+func (o GetGroupUsersObjArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]GetGroupUsersObj] {
+	return pulumix.Output[[]GetGroupUsersObj]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o GetGroupUsersObjArrayOutput) Index(i pulumi.IntInput) GetGroupUsersObjOutput {
@@ -196,6 +221,12 @@ func (i GetGroupsGroupArgs) ToGetGroupsGroupOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsGroupOutput)
 }
 
+func (i GetGroupsGroupArgs) ToOutput(ctx context.Context) pulumix.Output[GetGroupsGroup] {
+	return pulumix.Output[GetGroupsGroup]{
+		OutputState: i.ToGetGroupsGroupOutputWithContext(ctx).OutputState,
+	}
+}
+
 // GetGroupsGroupArrayInput is an input type that accepts GetGroupsGroupArray and GetGroupsGroupArrayOutput values.
 // You can construct a concrete instance of `GetGroupsGroupArrayInput` via:
 //
@@ -221,6 +252,12 @@ func (i GetGroupsGroupArray) ToGetGroupsGroupArrayOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsGroupArrayOutput)
 }
 
+func (i GetGroupsGroupArray) ToOutput(ctx context.Context) pulumix.Output[[]GetGroupsGroup] {
+	return pulumix.Output[[]GetGroupsGroup]{
+		OutputState: i.ToGetGroupsGroupArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 type GetGroupsGroupOutput struct{ *pulumi.OutputState }
 
 func (GetGroupsGroupOutput) ElementType() reflect.Type {
@@ -233,6 +270,12 @@ func (o GetGroupsGroupOutput) ToGetGroupsGroupOutput() GetGroupsGroupOutput {
 
 func (o GetGroupsGroupOutput) ToGetGroupsGroupOutputWithContext(ctx context.Context) GetGroupsGroupOutput {
 	return o
+}
+
+func (o GetGroupsGroupOutput) ToOutput(ctx context.Context) pulumix.Output[GetGroupsGroup] {
+	return pulumix.Output[GetGroupsGroup]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o GetGroupsGroupOutput) Attributes() pulumi.StringOutput {
@@ -283,6 +326,12 @@ func (o GetGroupsGroupArrayOutput) ToGetGroupsGroupArrayOutput() GetGroupsGroupA
 
 func (o GetGroupsGroupArrayOutput) ToGetGroupsGroupArrayOutputWithContext(ctx context.Context) GetGroupsGroupArrayOutput {
 	return o
+}
+
+func (o GetGroupsGroupArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]GetGroupsGroup] {
+	return pulumix.Output[[]GetGroupsGroup]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o GetGroupsGroupArrayOutput) Index(i pulumi.IntInput) GetGroupsGroupOutput {
@@ -336,6 +385,12 @@ func (i GetGroupsGroupUsersObjArgs) ToGetGroupsGroupUsersObjOutputWithContext(ct
 	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsGroupUsersObjOutput)
 }
 
+func (i GetGroupsGroupUsersObjArgs) ToOutput(ctx context.Context) pulumix.Output[GetGroupsGroupUsersObj] {
+	return pulumix.Output[GetGroupsGroupUsersObj]{
+		OutputState: i.ToGetGroupsGroupUsersObjOutputWithContext(ctx).OutputState,
+	}
+}
+
 // GetGroupsGroupUsersObjArrayInput is an input type that accepts GetGroupsGroupUsersObjArray and GetGroupsGroupUsersObjArrayOutput values.
 // You can construct a concrete instance of `GetGroupsGroupUsersObjArrayInput` via:
 //
@@ -361,6 +416,12 @@ func (i GetGroupsGroupUsersObjArray) ToGetGroupsGroupUsersObjArrayOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(GetGroupsGroupUsersObjArrayOutput)
 }
 
+func (i GetGroupsGroupUsersObjArray) ToOutput(ctx context.Context) pulumix.Output[[]GetGroupsGroupUsersObj] {
+	return pulumix.Output[[]GetGroupsGroupUsersObj]{
+		OutputState: i.ToGetGroupsGroupUsersObjArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 type GetGroupsGroupUsersObjOutput struct{ *pulumi.OutputState }
 
 func (GetGroupsGroupUsersObjOutput) ElementType() reflect.Type {
@@ -373,6 +434,12 @@ func (o GetGroupsGroupUsersObjOutput) ToGetGroupsGroupUsersObjOutput() GetGroups
 
 func (o GetGroupsGroupUsersObjOutput) ToGetGroupsGroupUsersObjOutputWithContext(ctx context.Context) GetGroupsGroupUsersObjOutput {
 	return o
+}
+
+func (o GetGroupsGroupUsersObjOutput) ToOutput(ctx context.Context) pulumix.Output[GetGroupsGroupUsersObj] {
+	return pulumix.Output[GetGroupsGroupUsersObj]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o GetGroupsGroupUsersObjOutput) Attributes() pulumi.StringOutput {
@@ -419,6 +486,12 @@ func (o GetGroupsGroupUsersObjArrayOutput) ToGetGroupsGroupUsersObjArrayOutput()
 
 func (o GetGroupsGroupUsersObjArrayOutput) ToGetGroupsGroupUsersObjArrayOutputWithContext(ctx context.Context) GetGroupsGroupUsersObjArrayOutput {
 	return o
+}
+
+func (o GetGroupsGroupUsersObjArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]GetGroupsGroupUsersObj] {
+	return pulumix.Output[[]GetGroupsGroupUsersObj]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o GetGroupsGroupUsersObjArrayOutput) Index(i pulumi.IntInput) GetGroupsGroupUsersObjOutput {
@@ -482,6 +555,12 @@ func (i GetUsersUserArgs) ToGetUsersUserOutputWithContext(ctx context.Context) G
 	return pulumi.ToOutputWithContext(ctx, i).(GetUsersUserOutput)
 }
 
+func (i GetUsersUserArgs) ToOutput(ctx context.Context) pulumix.Output[GetUsersUser] {
+	return pulumix.Output[GetUsersUser]{
+		OutputState: i.ToGetUsersUserOutputWithContext(ctx).OutputState,
+	}
+}
+
 // GetUsersUserArrayInput is an input type that accepts GetUsersUserArray and GetUsersUserArrayOutput values.
 // You can construct a concrete instance of `GetUsersUserArrayInput` via:
 //
@@ -507,6 +586,12 @@ func (i GetUsersUserArray) ToGetUsersUserArrayOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(GetUsersUserArrayOutput)
 }
 
+func (i GetUsersUserArray) ToOutput(ctx context.Context) pulumix.Output[[]GetUsersUser] {
+	return pulumix.Output[[]GetUsersUser]{
+		OutputState: i.ToGetUsersUserArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 type GetUsersUserOutput struct{ *pulumi.OutputState }
 
 func (GetUsersUserOutput) ElementType() reflect.Type {
@@ -519,6 +604,12 @@ func (o GetUsersUserOutput) ToGetUsersUserOutput() GetUsersUserOutput {
 
 func (o GetUsersUserOutput) ToGetUsersUserOutputWithContext(ctx context.Context) GetUsersUserOutput {
 	return o
+}
+
+func (o GetUsersUserOutput) ToOutput(ctx context.Context) pulumix.Output[GetUsersUser] {
+	return pulumix.Output[GetUsersUser]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o GetUsersUserOutput) Attributes() pulumi.StringOutput {
@@ -585,6 +676,12 @@ func (o GetUsersUserArrayOutput) ToGetUsersUserArrayOutput() GetUsersUserArrayOu
 
 func (o GetUsersUserArrayOutput) ToGetUsersUserArrayOutputWithContext(ctx context.Context) GetUsersUserArrayOutput {
 	return o
+}
+
+func (o GetUsersUserArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]GetUsersUser] {
+	return pulumix.Output[[]GetUsersUser]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o GetUsersUserArrayOutput) Index(i pulumi.IntInput) GetUsersUserOutput {

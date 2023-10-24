@@ -4,6 +4,27 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const default-authorization-flow = authentik.getFlow({
+ *     slug: "default-provider-authorization-implicit-consent",
+ * });
+ * const name = new authentik.SourceOauth("name", {
+ *     slug: "discord",
+ *     authenticationFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
+ *     enrollmentFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
+ *     providerType: "discord",
+ *     consumerKey: "foo",
+ *     consumerSecret: "bar",
+ * });
+ * ```
+ */
 export class SourceOauth extends pulumi.CustomResource {
     /**
      * Get an existing SourceOauth resource's state with the given name, ID, and optional extra
@@ -39,42 +60,58 @@ export class SourceOauth extends pulumi.CustomResource {
     public readonly additionalScopes!: pulumi.Output<string | undefined>;
     public readonly authenticationFlow!: pulumi.Output<string>;
     /**
-     * Manually configure OAuth2 URLs when `oidc_well_known_url` is not set.
+     * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     public readonly authorizationUrl!: pulumi.Output<string | undefined>;
+    /**
+     * Generated.
+     */
     public /*out*/ readonly callbackUri!: pulumi.Output<string>;
     public readonly consumerKey!: pulumi.Output<string>;
     public readonly consumerSecret!: pulumi.Output<string>;
+    /**
+     * Defaults to `true`.
+     */
     public readonly enabled!: pulumi.Output<boolean | undefined>;
     public readonly enrollmentFlow!: pulumi.Output<string>;
     public readonly name!: pulumi.Output<string>;
     /**
-     * Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to
-     * pass objects.
+     * Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to pass objects. Generated.
      */
     public readonly oidcJwks!: pulumi.Output<string>;
     /**
-     * Automatically configure JWKS if not specified by `oidc_well_known_url`.
+     * Automatically configure JWKS if not specified by `oidcWellKnownUrl`.
      */
     public readonly oidcJwksUrl!: pulumi.Output<string | undefined>;
     /**
-     * Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with
-     * `.well-known/openid-configuration`.
+     * Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with `.well-known/openid-configuration`.
      */
     public readonly oidcWellKnownUrl!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `any`.
+     */
     public readonly policyEngineMode!: pulumi.Output<string | undefined>;
     /**
-     * Manually configure OAuth2 URLs when `oidc_well_known_url` is not set.
+     * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     public readonly profileUrl!: pulumi.Output<string | undefined>;
     public readonly providerType!: pulumi.Output<string>;
     /**
-     * Manually configure OAuth2 URLs when `oidc_well_known_url` is not set.
+     * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     public readonly requestTokenUrl!: pulumi.Output<string | undefined>;
     public readonly slug!: pulumi.Output<string>;
+    /**
+     * Defaults to `identifier`.
+     */
     public readonly userMatchingMode!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `goauthentik.io/sources/%(slug)s`.
+     */
     public readonly userPathTemplate!: pulumi.Output<string | undefined>;
+    /**
+     * Generated.
+     */
     public readonly uuid!: pulumi.Output<string>;
 
     /**
@@ -171,42 +208,58 @@ export interface SourceOauthState {
     additionalScopes?: pulumi.Input<string>;
     authenticationFlow?: pulumi.Input<string>;
     /**
-     * Manually configure OAuth2 URLs when `oidc_well_known_url` is not set.
+     * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     authorizationUrl?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     callbackUri?: pulumi.Input<string>;
     consumerKey?: pulumi.Input<string>;
     consumerSecret?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     enabled?: pulumi.Input<boolean>;
     enrollmentFlow?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     /**
-     * Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to
-     * pass objects.
+     * Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to pass objects. Generated.
      */
     oidcJwks?: pulumi.Input<string>;
     /**
-     * Automatically configure JWKS if not specified by `oidc_well_known_url`.
+     * Automatically configure JWKS if not specified by `oidcWellKnownUrl`.
      */
     oidcJwksUrl?: pulumi.Input<string>;
     /**
-     * Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with
-     * `.well-known/openid-configuration`.
+     * Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with `.well-known/openid-configuration`.
      */
     oidcWellKnownUrl?: pulumi.Input<string>;
+    /**
+     * Defaults to `any`.
+     */
     policyEngineMode?: pulumi.Input<string>;
     /**
-     * Manually configure OAuth2 URLs when `oidc_well_known_url` is not set.
+     * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     profileUrl?: pulumi.Input<string>;
     providerType?: pulumi.Input<string>;
     /**
-     * Manually configure OAuth2 URLs when `oidc_well_known_url` is not set.
+     * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     requestTokenUrl?: pulumi.Input<string>;
     slug?: pulumi.Input<string>;
+    /**
+     * Defaults to `identifier`.
+     */
     userMatchingMode?: pulumi.Input<string>;
+    /**
+     * Defaults to `goauthentik.io/sources/%(slug)s`.
+     */
     userPathTemplate?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     uuid?: pulumi.Input<string>;
 }
 
@@ -221,40 +274,53 @@ export interface SourceOauthArgs {
     additionalScopes?: pulumi.Input<string>;
     authenticationFlow: pulumi.Input<string>;
     /**
-     * Manually configure OAuth2 URLs when `oidc_well_known_url` is not set.
+     * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     authorizationUrl?: pulumi.Input<string>;
     consumerKey: pulumi.Input<string>;
     consumerSecret: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
     enabled?: pulumi.Input<boolean>;
     enrollmentFlow: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     /**
-     * Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to
-     * pass objects.
+     * Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to pass objects. Generated.
      */
     oidcJwks?: pulumi.Input<string>;
     /**
-     * Automatically configure JWKS if not specified by `oidc_well_known_url`.
+     * Automatically configure JWKS if not specified by `oidcWellKnownUrl`.
      */
     oidcJwksUrl?: pulumi.Input<string>;
     /**
-     * Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with
-     * `.well-known/openid-configuration`.
+     * Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with `.well-known/openid-configuration`.
      */
     oidcWellKnownUrl?: pulumi.Input<string>;
+    /**
+     * Defaults to `any`.
+     */
     policyEngineMode?: pulumi.Input<string>;
     /**
-     * Manually configure OAuth2 URLs when `oidc_well_known_url` is not set.
+     * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     profileUrl?: pulumi.Input<string>;
     providerType: pulumi.Input<string>;
     /**
-     * Manually configure OAuth2 URLs when `oidc_well_known_url` is not set.
+     * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     requestTokenUrl?: pulumi.Input<string>;
     slug: pulumi.Input<string>;
+    /**
+     * Defaults to `identifier`.
+     */
     userMatchingMode?: pulumi.Input<string>;
+    /**
+     * Defaults to `goauthentik.io/sources/%(slug)s`.
+     */
     userPathTemplate?: pulumi.Input<string>;
+    /**
+     * Generated.
+     */
     uuid?: pulumi.Input<string>;
 }

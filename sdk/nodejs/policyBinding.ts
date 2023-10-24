@@ -4,6 +4,34 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * // Create a policy binding for a resource
+ * const policy = new authentik.PolicyExpression("policy", {expression: "return True"});
+ * const nameApplication = new authentik.Application("nameApplication", {slug: "test-app"});
+ * const app_accessPolicyBinding = new authentik.PolicyBinding("app-accessPolicyBinding", {
+ *     target: nameApplication.uuid,
+ *     policy: policy.id,
+ *     order: 0,
+ * });
+ * // Create a binding to a group
+ * const admins = authentik.getGroup({
+ *     name: "authentik Admins",
+ * });
+ * const nameIndex_applicationApplication = new authentik.Application("nameIndex/applicationApplication", {slug: "test-app"});
+ * const app_accessIndex_policyBindingPolicyBinding = new authentik.PolicyBinding("app-accessIndex/policyBindingPolicyBinding", {
+ *     target: nameApplication.uuid,
+ *     group: admins.then(admins => admins.id),
+ *     order: 0,
+ * });
+ * ```
+ */
 export class PolicyBinding extends pulumi.CustomResource {
     /**
      * Get an existing PolicyBinding resource's state with the given name, ID, and optional extra
@@ -32,11 +60,17 @@ export class PolicyBinding extends pulumi.CustomResource {
         return obj['__pulumiType'] === PolicyBinding.__pulumiType;
     }
 
+    /**
+     * Defaults to `true`.
+     */
     public readonly enabled!: pulumi.Output<boolean | undefined>;
     /**
      * UUID of the group
      */
     public readonly group!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `false`.
+     */
     public readonly negate!: pulumi.Output<boolean | undefined>;
     public readonly order!: pulumi.Output<number>;
     /**
@@ -47,6 +81,9 @@ export class PolicyBinding extends pulumi.CustomResource {
      * ID of the object this binding should apply to
      */
     public readonly target!: pulumi.Output<string>;
+    /**
+     * Defaults to `30`.
+     */
     public readonly timeout!: pulumi.Output<number | undefined>;
     /**
      * PK of the user
@@ -100,11 +137,17 @@ export class PolicyBinding extends pulumi.CustomResource {
  * Input properties used for looking up and filtering PolicyBinding resources.
  */
 export interface PolicyBindingState {
+    /**
+     * Defaults to `true`.
+     */
     enabled?: pulumi.Input<boolean>;
     /**
      * UUID of the group
      */
     group?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     negate?: pulumi.Input<boolean>;
     order?: pulumi.Input<number>;
     /**
@@ -115,6 +158,9 @@ export interface PolicyBindingState {
      * ID of the object this binding should apply to
      */
     target?: pulumi.Input<string>;
+    /**
+     * Defaults to `30`.
+     */
     timeout?: pulumi.Input<number>;
     /**
      * PK of the user
@@ -126,11 +172,17 @@ export interface PolicyBindingState {
  * The set of arguments for constructing a PolicyBinding resource.
  */
 export interface PolicyBindingArgs {
+    /**
+     * Defaults to `true`.
+     */
     enabled?: pulumi.Input<boolean>;
     /**
      * UUID of the group
      */
     group?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
     negate?: pulumi.Input<boolean>;
     order: pulumi.Input<number>;
     /**
@@ -141,6 +193,9 @@ export interface PolicyBindingArgs {
      * ID of the object this binding should apply to
      */
     target: pulumi.Input<string>;
+    /**
+     * Defaults to `30`.
+     */
     timeout?: pulumi.Input<number>;
     /**
      * PK of the user

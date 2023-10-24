@@ -10,32 +10,85 @@ import (
 	"errors"
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			default_authorization_flow, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
+//				Slug: pulumi.StringRef("default-provider-authorization-implicit-consent"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			nameProviderSaml, err := authentik.NewProviderSaml(ctx, "nameProviderSaml", &authentik.ProviderSamlArgs{
+//				AuthorizationFlow: *pulumi.String(default_authorization_flow.Id),
+//				AcsUrl:            pulumi.String("http://localhost"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewApplication(ctx, "nameApplication", &authentik.ApplicationArgs{
+//				Slug:             pulumi.String("test-app"),
+//				ProtocolProvider: nameProviderSaml.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type ProviderSaml struct {
 	pulumi.CustomResourceState
 
-	AcsUrl                     pulumi.StringOutput      `pulumi:"acsUrl"`
-	AssertionValidNotBefore    pulumi.StringPtrOutput   `pulumi:"assertionValidNotBefore"`
-	AssertionValidNotOnOrAfter pulumi.StringPtrOutput   `pulumi:"assertionValidNotOnOrAfter"`
-	Audience                   pulumi.StringPtrOutput   `pulumi:"audience"`
-	AuthenticationFlow         pulumi.StringPtrOutput   `pulumi:"authenticationFlow"`
-	AuthorizationFlow          pulumi.StringOutput      `pulumi:"authorizationFlow"`
-	DigestAlgorithm            pulumi.StringPtrOutput   `pulumi:"digestAlgorithm"`
-	Issuer                     pulumi.StringPtrOutput   `pulumi:"issuer"`
-	Name                       pulumi.StringOutput      `pulumi:"name"`
-	NameIdMapping              pulumi.StringPtrOutput   `pulumi:"nameIdMapping"`
-	PropertyMappings           pulumi.StringArrayOutput `pulumi:"propertyMappings"`
-	SessionValidNotOnOrAfter   pulumi.StringPtrOutput   `pulumi:"sessionValidNotOnOrAfter"`
-	SignatureAlgorithm         pulumi.StringPtrOutput   `pulumi:"signatureAlgorithm"`
-	SigningKp                  pulumi.StringPtrOutput   `pulumi:"signingKp"`
-	SpBinding                  pulumi.StringPtrOutput   `pulumi:"spBinding"`
-	UrlSloPost                 pulumi.StringOutput      `pulumi:"urlSloPost"`
-	UrlSloRedirect             pulumi.StringOutput      `pulumi:"urlSloRedirect"`
-	UrlSsoInit                 pulumi.StringOutput      `pulumi:"urlSsoInit"`
-	UrlSsoPost                 pulumi.StringOutput      `pulumi:"urlSsoPost"`
-	UrlSsoRedirect             pulumi.StringOutput      `pulumi:"urlSsoRedirect"`
-	VerificationKp             pulumi.StringPtrOutput   `pulumi:"verificationKp"`
+	AcsUrl pulumi.StringOutput `pulumi:"acsUrl"`
+	// Defaults to `minutes=-5`.
+	AssertionValidNotBefore pulumi.StringPtrOutput `pulumi:"assertionValidNotBefore"`
+	// Defaults to `minutes=5`.
+	AssertionValidNotOnOrAfter pulumi.StringPtrOutput `pulumi:"assertionValidNotOnOrAfter"`
+	// Defaults to ``.
+	Audience           pulumi.StringPtrOutput `pulumi:"audience"`
+	AuthenticationFlow pulumi.StringPtrOutput `pulumi:"authenticationFlow"`
+	AuthorizationFlow  pulumi.StringOutput    `pulumi:"authorizationFlow"`
+	// Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+	DigestAlgorithm pulumi.StringPtrOutput `pulumi:"digestAlgorithm"`
+	// Defaults to `authentik`.
+	Issuer           pulumi.StringPtrOutput   `pulumi:"issuer"`
+	Name             pulumi.StringOutput      `pulumi:"name"`
+	NameIdMapping    pulumi.StringPtrOutput   `pulumi:"nameIdMapping"`
+	PropertyMappings pulumi.StringArrayOutput `pulumi:"propertyMappings"`
+	// Defaults to `minutes=86400`.
+	SessionValidNotOnOrAfter pulumi.StringPtrOutput `pulumi:"sessionValidNotOnOrAfter"`
+	// Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+	SignatureAlgorithm pulumi.StringPtrOutput `pulumi:"signatureAlgorithm"`
+	SigningKp          pulumi.StringPtrOutput `pulumi:"signingKp"`
+	// Defaults to `redirect`.
+	SpBinding pulumi.StringPtrOutput `pulumi:"spBinding"`
+	// Generated.
+	UrlSloPost pulumi.StringOutput `pulumi:"urlSloPost"`
+	// Generated.
+	UrlSloRedirect pulumi.StringOutput `pulumi:"urlSloRedirect"`
+	// Generated.
+	UrlSsoInit pulumi.StringOutput `pulumi:"urlSsoInit"`
+	// Generated.
+	UrlSsoPost pulumi.StringOutput `pulumi:"urlSsoPost"`
+	// Generated.
+	UrlSsoRedirect pulumi.StringOutput    `pulumi:"urlSsoRedirect"`
+	VerificationKp pulumi.StringPtrOutput `pulumi:"verificationKp"`
 }
 
 // NewProviderSaml registers a new resource with the given unique name, arguments, and options.
@@ -74,51 +127,77 @@ func GetProviderSaml(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ProviderSaml resources.
 type providerSamlState struct {
-	AcsUrl                     *string  `pulumi:"acsUrl"`
-	AssertionValidNotBefore    *string  `pulumi:"assertionValidNotBefore"`
-	AssertionValidNotOnOrAfter *string  `pulumi:"assertionValidNotOnOrAfter"`
-	Audience                   *string  `pulumi:"audience"`
-	AuthenticationFlow         *string  `pulumi:"authenticationFlow"`
-	AuthorizationFlow          *string  `pulumi:"authorizationFlow"`
-	DigestAlgorithm            *string  `pulumi:"digestAlgorithm"`
-	Issuer                     *string  `pulumi:"issuer"`
-	Name                       *string  `pulumi:"name"`
-	NameIdMapping              *string  `pulumi:"nameIdMapping"`
-	PropertyMappings           []string `pulumi:"propertyMappings"`
-	SessionValidNotOnOrAfter   *string  `pulumi:"sessionValidNotOnOrAfter"`
-	SignatureAlgorithm         *string  `pulumi:"signatureAlgorithm"`
-	SigningKp                  *string  `pulumi:"signingKp"`
-	SpBinding                  *string  `pulumi:"spBinding"`
-	UrlSloPost                 *string  `pulumi:"urlSloPost"`
-	UrlSloRedirect             *string  `pulumi:"urlSloRedirect"`
-	UrlSsoInit                 *string  `pulumi:"urlSsoInit"`
-	UrlSsoPost                 *string  `pulumi:"urlSsoPost"`
-	UrlSsoRedirect             *string  `pulumi:"urlSsoRedirect"`
-	VerificationKp             *string  `pulumi:"verificationKp"`
+	AcsUrl *string `pulumi:"acsUrl"`
+	// Defaults to `minutes=-5`.
+	AssertionValidNotBefore *string `pulumi:"assertionValidNotBefore"`
+	// Defaults to `minutes=5`.
+	AssertionValidNotOnOrAfter *string `pulumi:"assertionValidNotOnOrAfter"`
+	// Defaults to ``.
+	Audience           *string `pulumi:"audience"`
+	AuthenticationFlow *string `pulumi:"authenticationFlow"`
+	AuthorizationFlow  *string `pulumi:"authorizationFlow"`
+	// Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+	DigestAlgorithm *string `pulumi:"digestAlgorithm"`
+	// Defaults to `authentik`.
+	Issuer           *string  `pulumi:"issuer"`
+	Name             *string  `pulumi:"name"`
+	NameIdMapping    *string  `pulumi:"nameIdMapping"`
+	PropertyMappings []string `pulumi:"propertyMappings"`
+	// Defaults to `minutes=86400`.
+	SessionValidNotOnOrAfter *string `pulumi:"sessionValidNotOnOrAfter"`
+	// Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+	SignatureAlgorithm *string `pulumi:"signatureAlgorithm"`
+	SigningKp          *string `pulumi:"signingKp"`
+	// Defaults to `redirect`.
+	SpBinding *string `pulumi:"spBinding"`
+	// Generated.
+	UrlSloPost *string `pulumi:"urlSloPost"`
+	// Generated.
+	UrlSloRedirect *string `pulumi:"urlSloRedirect"`
+	// Generated.
+	UrlSsoInit *string `pulumi:"urlSsoInit"`
+	// Generated.
+	UrlSsoPost *string `pulumi:"urlSsoPost"`
+	// Generated.
+	UrlSsoRedirect *string `pulumi:"urlSsoRedirect"`
+	VerificationKp *string `pulumi:"verificationKp"`
 }
 
 type ProviderSamlState struct {
-	AcsUrl                     pulumi.StringPtrInput
-	AssertionValidNotBefore    pulumi.StringPtrInput
+	AcsUrl pulumi.StringPtrInput
+	// Defaults to `minutes=-5`.
+	AssertionValidNotBefore pulumi.StringPtrInput
+	// Defaults to `minutes=5`.
 	AssertionValidNotOnOrAfter pulumi.StringPtrInput
-	Audience                   pulumi.StringPtrInput
-	AuthenticationFlow         pulumi.StringPtrInput
-	AuthorizationFlow          pulumi.StringPtrInput
-	DigestAlgorithm            pulumi.StringPtrInput
-	Issuer                     pulumi.StringPtrInput
-	Name                       pulumi.StringPtrInput
-	NameIdMapping              pulumi.StringPtrInput
-	PropertyMappings           pulumi.StringArrayInput
-	SessionValidNotOnOrAfter   pulumi.StringPtrInput
-	SignatureAlgorithm         pulumi.StringPtrInput
-	SigningKp                  pulumi.StringPtrInput
-	SpBinding                  pulumi.StringPtrInput
-	UrlSloPost                 pulumi.StringPtrInput
-	UrlSloRedirect             pulumi.StringPtrInput
-	UrlSsoInit                 pulumi.StringPtrInput
-	UrlSsoPost                 pulumi.StringPtrInput
-	UrlSsoRedirect             pulumi.StringPtrInput
-	VerificationKp             pulumi.StringPtrInput
+	// Defaults to ``.
+	Audience           pulumi.StringPtrInput
+	AuthenticationFlow pulumi.StringPtrInput
+	AuthorizationFlow  pulumi.StringPtrInput
+	// Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+	DigestAlgorithm pulumi.StringPtrInput
+	// Defaults to `authentik`.
+	Issuer           pulumi.StringPtrInput
+	Name             pulumi.StringPtrInput
+	NameIdMapping    pulumi.StringPtrInput
+	PropertyMappings pulumi.StringArrayInput
+	// Defaults to `minutes=86400`.
+	SessionValidNotOnOrAfter pulumi.StringPtrInput
+	// Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+	SignatureAlgorithm pulumi.StringPtrInput
+	SigningKp          pulumi.StringPtrInput
+	// Defaults to `redirect`.
+	SpBinding pulumi.StringPtrInput
+	// Generated.
+	UrlSloPost pulumi.StringPtrInput
+	// Generated.
+	UrlSloRedirect pulumi.StringPtrInput
+	// Generated.
+	UrlSsoInit pulumi.StringPtrInput
+	// Generated.
+	UrlSsoPost pulumi.StringPtrInput
+	// Generated.
+	UrlSsoRedirect pulumi.StringPtrInput
+	VerificationKp pulumi.StringPtrInput
 }
 
 func (ProviderSamlState) ElementType() reflect.Type {
@@ -126,52 +205,78 @@ func (ProviderSamlState) ElementType() reflect.Type {
 }
 
 type providerSamlArgs struct {
-	AcsUrl                     string   `pulumi:"acsUrl"`
-	AssertionValidNotBefore    *string  `pulumi:"assertionValidNotBefore"`
-	AssertionValidNotOnOrAfter *string  `pulumi:"assertionValidNotOnOrAfter"`
-	Audience                   *string  `pulumi:"audience"`
-	AuthenticationFlow         *string  `pulumi:"authenticationFlow"`
-	AuthorizationFlow          string   `pulumi:"authorizationFlow"`
-	DigestAlgorithm            *string  `pulumi:"digestAlgorithm"`
-	Issuer                     *string  `pulumi:"issuer"`
-	Name                       *string  `pulumi:"name"`
-	NameIdMapping              *string  `pulumi:"nameIdMapping"`
-	PropertyMappings           []string `pulumi:"propertyMappings"`
-	SessionValidNotOnOrAfter   *string  `pulumi:"sessionValidNotOnOrAfter"`
-	SignatureAlgorithm         *string  `pulumi:"signatureAlgorithm"`
-	SigningKp                  *string  `pulumi:"signingKp"`
-	SpBinding                  *string  `pulumi:"spBinding"`
-	UrlSloPost                 *string  `pulumi:"urlSloPost"`
-	UrlSloRedirect             *string  `pulumi:"urlSloRedirect"`
-	UrlSsoInit                 *string  `pulumi:"urlSsoInit"`
-	UrlSsoPost                 *string  `pulumi:"urlSsoPost"`
-	UrlSsoRedirect             *string  `pulumi:"urlSsoRedirect"`
-	VerificationKp             *string  `pulumi:"verificationKp"`
+	AcsUrl string `pulumi:"acsUrl"`
+	// Defaults to `minutes=-5`.
+	AssertionValidNotBefore *string `pulumi:"assertionValidNotBefore"`
+	// Defaults to `minutes=5`.
+	AssertionValidNotOnOrAfter *string `pulumi:"assertionValidNotOnOrAfter"`
+	// Defaults to ``.
+	Audience           *string `pulumi:"audience"`
+	AuthenticationFlow *string `pulumi:"authenticationFlow"`
+	AuthorizationFlow  string  `pulumi:"authorizationFlow"`
+	// Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+	DigestAlgorithm *string `pulumi:"digestAlgorithm"`
+	// Defaults to `authentik`.
+	Issuer           *string  `pulumi:"issuer"`
+	Name             *string  `pulumi:"name"`
+	NameIdMapping    *string  `pulumi:"nameIdMapping"`
+	PropertyMappings []string `pulumi:"propertyMappings"`
+	// Defaults to `minutes=86400`.
+	SessionValidNotOnOrAfter *string `pulumi:"sessionValidNotOnOrAfter"`
+	// Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+	SignatureAlgorithm *string `pulumi:"signatureAlgorithm"`
+	SigningKp          *string `pulumi:"signingKp"`
+	// Defaults to `redirect`.
+	SpBinding *string `pulumi:"spBinding"`
+	// Generated.
+	UrlSloPost *string `pulumi:"urlSloPost"`
+	// Generated.
+	UrlSloRedirect *string `pulumi:"urlSloRedirect"`
+	// Generated.
+	UrlSsoInit *string `pulumi:"urlSsoInit"`
+	// Generated.
+	UrlSsoPost *string `pulumi:"urlSsoPost"`
+	// Generated.
+	UrlSsoRedirect *string `pulumi:"urlSsoRedirect"`
+	VerificationKp *string `pulumi:"verificationKp"`
 }
 
 // The set of arguments for constructing a ProviderSaml resource.
 type ProviderSamlArgs struct {
-	AcsUrl                     pulumi.StringInput
-	AssertionValidNotBefore    pulumi.StringPtrInput
+	AcsUrl pulumi.StringInput
+	// Defaults to `minutes=-5`.
+	AssertionValidNotBefore pulumi.StringPtrInput
+	// Defaults to `minutes=5`.
 	AssertionValidNotOnOrAfter pulumi.StringPtrInput
-	Audience                   pulumi.StringPtrInput
-	AuthenticationFlow         pulumi.StringPtrInput
-	AuthorizationFlow          pulumi.StringInput
-	DigestAlgorithm            pulumi.StringPtrInput
-	Issuer                     pulumi.StringPtrInput
-	Name                       pulumi.StringPtrInput
-	NameIdMapping              pulumi.StringPtrInput
-	PropertyMappings           pulumi.StringArrayInput
-	SessionValidNotOnOrAfter   pulumi.StringPtrInput
-	SignatureAlgorithm         pulumi.StringPtrInput
-	SigningKp                  pulumi.StringPtrInput
-	SpBinding                  pulumi.StringPtrInput
-	UrlSloPost                 pulumi.StringPtrInput
-	UrlSloRedirect             pulumi.StringPtrInput
-	UrlSsoInit                 pulumi.StringPtrInput
-	UrlSsoPost                 pulumi.StringPtrInput
-	UrlSsoRedirect             pulumi.StringPtrInput
-	VerificationKp             pulumi.StringPtrInput
+	// Defaults to ``.
+	Audience           pulumi.StringPtrInput
+	AuthenticationFlow pulumi.StringPtrInput
+	AuthorizationFlow  pulumi.StringInput
+	// Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+	DigestAlgorithm pulumi.StringPtrInput
+	// Defaults to `authentik`.
+	Issuer           pulumi.StringPtrInput
+	Name             pulumi.StringPtrInput
+	NameIdMapping    pulumi.StringPtrInput
+	PropertyMappings pulumi.StringArrayInput
+	// Defaults to `minutes=86400`.
+	SessionValidNotOnOrAfter pulumi.StringPtrInput
+	// Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+	SignatureAlgorithm pulumi.StringPtrInput
+	SigningKp          pulumi.StringPtrInput
+	// Defaults to `redirect`.
+	SpBinding pulumi.StringPtrInput
+	// Generated.
+	UrlSloPost pulumi.StringPtrInput
+	// Generated.
+	UrlSloRedirect pulumi.StringPtrInput
+	// Generated.
+	UrlSsoInit pulumi.StringPtrInput
+	// Generated.
+	UrlSsoPost pulumi.StringPtrInput
+	// Generated.
+	UrlSsoRedirect pulumi.StringPtrInput
+	VerificationKp pulumi.StringPtrInput
 }
 
 func (ProviderSamlArgs) ElementType() reflect.Type {
@@ -195,6 +300,12 @@ func (i *ProviderSaml) ToProviderSamlOutput() ProviderSamlOutput {
 
 func (i *ProviderSaml) ToProviderSamlOutputWithContext(ctx context.Context) ProviderSamlOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderSamlOutput)
+}
+
+func (i *ProviderSaml) ToOutput(ctx context.Context) pulumix.Output[*ProviderSaml] {
+	return pulumix.Output[*ProviderSaml]{
+		OutputState: i.ToProviderSamlOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ProviderSamlArrayInput is an input type that accepts ProviderSamlArray and ProviderSamlArrayOutput values.
@@ -222,6 +333,12 @@ func (i ProviderSamlArray) ToProviderSamlArrayOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderSamlArrayOutput)
 }
 
+func (i ProviderSamlArray) ToOutput(ctx context.Context) pulumix.Output[[]*ProviderSaml] {
+	return pulumix.Output[[]*ProviderSaml]{
+		OutputState: i.ToProviderSamlArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ProviderSamlMapInput is an input type that accepts ProviderSamlMap and ProviderSamlMapOutput values.
 // You can construct a concrete instance of `ProviderSamlMapInput` via:
 //
@@ -247,6 +364,12 @@ func (i ProviderSamlMap) ToProviderSamlMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderSamlMapOutput)
 }
 
+func (i ProviderSamlMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProviderSaml] {
+	return pulumix.Output[map[string]*ProviderSaml]{
+		OutputState: i.ToProviderSamlMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ProviderSamlOutput struct{ *pulumi.OutputState }
 
 func (ProviderSamlOutput) ElementType() reflect.Type {
@@ -261,18 +384,27 @@ func (o ProviderSamlOutput) ToProviderSamlOutputWithContext(ctx context.Context)
 	return o
 }
 
+func (o ProviderSamlOutput) ToOutput(ctx context.Context) pulumix.Output[*ProviderSaml] {
+	return pulumix.Output[*ProviderSaml]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ProviderSamlOutput) AcsUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringOutput { return v.AcsUrl }).(pulumi.StringOutput)
 }
 
+// Defaults to `minutes=-5`.
 func (o ProviderSamlOutput) AssertionValidNotBefore() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringPtrOutput { return v.AssertionValidNotBefore }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `minutes=5`.
 func (o ProviderSamlOutput) AssertionValidNotOnOrAfter() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringPtrOutput { return v.AssertionValidNotOnOrAfter }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to “.
 func (o ProviderSamlOutput) Audience() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringPtrOutput { return v.Audience }).(pulumi.StringPtrOutput)
 }
@@ -285,10 +417,12 @@ func (o ProviderSamlOutput) AuthorizationFlow() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringOutput { return v.AuthorizationFlow }).(pulumi.StringOutput)
 }
 
+// Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
 func (o ProviderSamlOutput) DigestAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringPtrOutput { return v.DigestAlgorithm }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `authentik`.
 func (o ProviderSamlOutput) Issuer() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringPtrOutput { return v.Issuer }).(pulumi.StringPtrOutput)
 }
@@ -305,10 +439,12 @@ func (o ProviderSamlOutput) PropertyMappings() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringArrayOutput { return v.PropertyMappings }).(pulumi.StringArrayOutput)
 }
 
+// Defaults to `minutes=86400`.
 func (o ProviderSamlOutput) SessionValidNotOnOrAfter() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringPtrOutput { return v.SessionValidNotOnOrAfter }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
 func (o ProviderSamlOutput) SignatureAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringPtrOutput { return v.SignatureAlgorithm }).(pulumi.StringPtrOutput)
 }
@@ -317,26 +453,32 @@ func (o ProviderSamlOutput) SigningKp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringPtrOutput { return v.SigningKp }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `redirect`.
 func (o ProviderSamlOutput) SpBinding() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringPtrOutput { return v.SpBinding }).(pulumi.StringPtrOutput)
 }
 
+// Generated.
 func (o ProviderSamlOutput) UrlSloPost() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringOutput { return v.UrlSloPost }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o ProviderSamlOutput) UrlSloRedirect() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringOutput { return v.UrlSloRedirect }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o ProviderSamlOutput) UrlSsoInit() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringOutput { return v.UrlSsoInit }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o ProviderSamlOutput) UrlSsoPost() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringOutput { return v.UrlSsoPost }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o ProviderSamlOutput) UrlSsoRedirect() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderSaml) pulumi.StringOutput { return v.UrlSsoRedirect }).(pulumi.StringOutput)
 }
@@ -359,6 +501,12 @@ func (o ProviderSamlArrayOutput) ToProviderSamlArrayOutputWithContext(ctx contex
 	return o
 }
 
+func (o ProviderSamlArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ProviderSaml] {
+	return pulumix.Output[[]*ProviderSaml]{
+		OutputState: o.OutputState,
+	}
+}
+
 func (o ProviderSamlArrayOutput) Index(i pulumi.IntInput) ProviderSamlOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ProviderSaml {
 		return vs[0].([]*ProviderSaml)[vs[1].(int)]
@@ -377,6 +525,12 @@ func (o ProviderSamlMapOutput) ToProviderSamlMapOutput() ProviderSamlMapOutput {
 
 func (o ProviderSamlMapOutput) ToProviderSamlMapOutputWithContext(ctx context.Context) ProviderSamlMapOutput {
 	return o
+}
+
+func (o ProviderSamlMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProviderSaml] {
+	return pulumix.Output[map[string]*ProviderSaml]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ProviderSamlMapOutput) MapIndex(k pulumi.StringInput) ProviderSamlOutput {

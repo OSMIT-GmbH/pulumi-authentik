@@ -9,8 +9,39 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Get SAML Property mappings
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.LookupPropertyMappingSaml(ctx, &authentik.LookupPropertyMappingSamlArgs{
+//				ManagedLists: []string{
+//					"goauthentik.io/providers/saml/upn",
+//					"goauthentik.io/providers/saml/name",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 func LookupPropertyMappingSaml(ctx *pulumi.Context, args *LookupPropertyMappingSamlArgs, opts ...pulumi.InvokeOption) (*LookupPropertyMappingSamlResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupPropertyMappingSamlResult
@@ -23,26 +54,36 @@ func LookupPropertyMappingSaml(ctx *pulumi.Context, args *LookupPropertyMappingS
 
 // A collection of arguments for invoking getPropertyMappingSaml.
 type LookupPropertyMappingSamlArgs struct {
-	Expression   *string  `pulumi:"expression"`
-	FriendlyName *string  `pulumi:"friendlyName"`
-	Ids          []string `pulumi:"ids"`
-	Managed      *string  `pulumi:"managed"`
+	// Generated.
+	Expression *string `pulumi:"expression"`
+	// Generated.
+	FriendlyName *string `pulumi:"friendlyName"`
+	// List of ids when `managedList` is set. Generated.
+	Ids     []string `pulumi:"ids"`
+	Managed *string  `pulumi:"managed"`
+	// Retrive multiple property mappings
 	ManagedLists []string `pulumi:"managedLists"`
 	Name         *string  `pulumi:"name"`
-	SamlName     *string  `pulumi:"samlName"`
+	// Generated.
+	SamlName *string `pulumi:"samlName"`
 }
 
 // A collection of values returned by getPropertyMappingSaml.
 type LookupPropertyMappingSamlResult struct {
-	Expression   string `pulumi:"expression"`
+	// Generated.
+	Expression string `pulumi:"expression"`
+	// Generated.
 	FriendlyName string `pulumi:"friendlyName"`
 	// The provider-assigned unique ID for this managed resource.
-	Id           string   `pulumi:"id"`
-	Ids          []string `pulumi:"ids"`
-	Managed      *string  `pulumi:"managed"`
+	Id string `pulumi:"id"`
+	// List of ids when `managedList` is set. Generated.
+	Ids     []string `pulumi:"ids"`
+	Managed *string  `pulumi:"managed"`
+	// Retrive multiple property mappings
 	ManagedLists []string `pulumi:"managedLists"`
 	Name         *string  `pulumi:"name"`
-	SamlName     string   `pulumi:"samlName"`
+	// Generated.
+	SamlName string `pulumi:"samlName"`
 }
 
 func LookupPropertyMappingSamlOutput(ctx *pulumi.Context, args LookupPropertyMappingSamlOutputArgs, opts ...pulumi.InvokeOption) LookupPropertyMappingSamlResultOutput {
@@ -60,13 +101,18 @@ func LookupPropertyMappingSamlOutput(ctx *pulumi.Context, args LookupPropertyMap
 
 // A collection of arguments for invoking getPropertyMappingSaml.
 type LookupPropertyMappingSamlOutputArgs struct {
-	Expression   pulumi.StringPtrInput   `pulumi:"expression"`
-	FriendlyName pulumi.StringPtrInput   `pulumi:"friendlyName"`
-	Ids          pulumi.StringArrayInput `pulumi:"ids"`
-	Managed      pulumi.StringPtrInput   `pulumi:"managed"`
+	// Generated.
+	Expression pulumi.StringPtrInput `pulumi:"expression"`
+	// Generated.
+	FriendlyName pulumi.StringPtrInput `pulumi:"friendlyName"`
+	// List of ids when `managedList` is set. Generated.
+	Ids     pulumi.StringArrayInput `pulumi:"ids"`
+	Managed pulumi.StringPtrInput   `pulumi:"managed"`
+	// Retrive multiple property mappings
 	ManagedLists pulumi.StringArrayInput `pulumi:"managedLists"`
 	Name         pulumi.StringPtrInput   `pulumi:"name"`
-	SamlName     pulumi.StringPtrInput   `pulumi:"samlName"`
+	// Generated.
+	SamlName pulumi.StringPtrInput `pulumi:"samlName"`
 }
 
 func (LookupPropertyMappingSamlOutputArgs) ElementType() reflect.Type {
@@ -88,10 +134,18 @@ func (o LookupPropertyMappingSamlResultOutput) ToLookupPropertyMappingSamlResult
 	return o
 }
 
+func (o LookupPropertyMappingSamlResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupPropertyMappingSamlResult] {
+	return pulumix.Output[LookupPropertyMappingSamlResult]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Generated.
 func (o LookupPropertyMappingSamlResultOutput) Expression() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPropertyMappingSamlResult) string { return v.Expression }).(pulumi.StringOutput)
 }
 
+// Generated.
 func (o LookupPropertyMappingSamlResultOutput) FriendlyName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPropertyMappingSamlResult) string { return v.FriendlyName }).(pulumi.StringOutput)
 }
@@ -101,6 +155,7 @@ func (o LookupPropertyMappingSamlResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPropertyMappingSamlResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
+// List of ids when `managedList` is set. Generated.
 func (o LookupPropertyMappingSamlResultOutput) Ids() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LookupPropertyMappingSamlResult) []string { return v.Ids }).(pulumi.StringArrayOutput)
 }
@@ -109,6 +164,7 @@ func (o LookupPropertyMappingSamlResultOutput) Managed() pulumi.StringPtrOutput 
 	return o.ApplyT(func(v LookupPropertyMappingSamlResult) *string { return v.Managed }).(pulumi.StringPtrOutput)
 }
 
+// Retrive multiple property mappings
 func (o LookupPropertyMappingSamlResultOutput) ManagedLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LookupPropertyMappingSamlResult) []string { return v.ManagedLists }).(pulumi.StringArrayOutput)
 }
@@ -117,6 +173,7 @@ func (o LookupPropertyMappingSamlResultOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LookupPropertyMappingSamlResult) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
+// Generated.
 func (o LookupPropertyMappingSamlResultOutput) SamlName() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPropertyMappingSamlResult) string { return v.SamlName }).(pulumi.StringOutput)
 }

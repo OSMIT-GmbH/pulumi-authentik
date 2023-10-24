@@ -9,16 +9,65 @@ import (
 
 	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := authentik.NewServiceConnectionDocker(ctx, "local", &authentik.ServiceConnectionDockerArgs{
+//				Local: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewCertificateKeyPair(ctx, "tls-auth", &authentik.CertificateKeyPairArgs{
+//				CertificateData: pulumi.String("..."),
+//				KeyData:         pulumi.String("..."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewCertificateKeyPair(ctx, "tls-verification", &authentik.CertificateKeyPairArgs{
+//				CertificateData: pulumi.String("..."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewServiceConnectionDocker(ctx, "remote-host", &authentik.ServiceConnectionDockerArgs{
+//				Url:               pulumi.String("http://1.2.3.4:2368"),
+//				TlsVerification:   tls_auth.ID(),
+//				TlsAuthentication: tls_verification.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type ServiceConnectionDocker struct {
 	pulumi.CustomResourceState
 
+	// Defaults to `false`.
 	Local             pulumi.BoolPtrOutput   `pulumi:"local"`
 	Name              pulumi.StringOutput    `pulumi:"name"`
 	TlsAuthentication pulumi.StringPtrOutput `pulumi:"tlsAuthentication"`
 	TlsVerification   pulumi.StringPtrOutput `pulumi:"tlsVerification"`
-	Url               pulumi.StringPtrOutput `pulumi:"url"`
+	// Defaults to `http+unix:///var/run/docker.sock`.
+	Url pulumi.StringPtrOutput `pulumi:"url"`
 }
 
 // NewServiceConnectionDocker registers a new resource with the given unique name, arguments, and options.
@@ -51,19 +100,23 @@ func GetServiceConnectionDocker(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ServiceConnectionDocker resources.
 type serviceConnectionDockerState struct {
+	// Defaults to `false`.
 	Local             *bool   `pulumi:"local"`
 	Name              *string `pulumi:"name"`
 	TlsAuthentication *string `pulumi:"tlsAuthentication"`
 	TlsVerification   *string `pulumi:"tlsVerification"`
-	Url               *string `pulumi:"url"`
+	// Defaults to `http+unix:///var/run/docker.sock`.
+	Url *string `pulumi:"url"`
 }
 
 type ServiceConnectionDockerState struct {
+	// Defaults to `false`.
 	Local             pulumi.BoolPtrInput
 	Name              pulumi.StringPtrInput
 	TlsAuthentication pulumi.StringPtrInput
 	TlsVerification   pulumi.StringPtrInput
-	Url               pulumi.StringPtrInput
+	// Defaults to `http+unix:///var/run/docker.sock`.
+	Url pulumi.StringPtrInput
 }
 
 func (ServiceConnectionDockerState) ElementType() reflect.Type {
@@ -71,20 +124,24 @@ func (ServiceConnectionDockerState) ElementType() reflect.Type {
 }
 
 type serviceConnectionDockerArgs struct {
+	// Defaults to `false`.
 	Local             *bool   `pulumi:"local"`
 	Name              *string `pulumi:"name"`
 	TlsAuthentication *string `pulumi:"tlsAuthentication"`
 	TlsVerification   *string `pulumi:"tlsVerification"`
-	Url               *string `pulumi:"url"`
+	// Defaults to `http+unix:///var/run/docker.sock`.
+	Url *string `pulumi:"url"`
 }
 
 // The set of arguments for constructing a ServiceConnectionDocker resource.
 type ServiceConnectionDockerArgs struct {
+	// Defaults to `false`.
 	Local             pulumi.BoolPtrInput
 	Name              pulumi.StringPtrInput
 	TlsAuthentication pulumi.StringPtrInput
 	TlsVerification   pulumi.StringPtrInput
-	Url               pulumi.StringPtrInput
+	// Defaults to `http+unix:///var/run/docker.sock`.
+	Url pulumi.StringPtrInput
 }
 
 func (ServiceConnectionDockerArgs) ElementType() reflect.Type {
@@ -108,6 +165,12 @@ func (i *ServiceConnectionDocker) ToServiceConnectionDockerOutput() ServiceConne
 
 func (i *ServiceConnectionDocker) ToServiceConnectionDockerOutputWithContext(ctx context.Context) ServiceConnectionDockerOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceConnectionDockerOutput)
+}
+
+func (i *ServiceConnectionDocker) ToOutput(ctx context.Context) pulumix.Output[*ServiceConnectionDocker] {
+	return pulumix.Output[*ServiceConnectionDocker]{
+		OutputState: i.ToServiceConnectionDockerOutputWithContext(ctx).OutputState,
+	}
 }
 
 // ServiceConnectionDockerArrayInput is an input type that accepts ServiceConnectionDockerArray and ServiceConnectionDockerArrayOutput values.
@@ -135,6 +198,12 @@ func (i ServiceConnectionDockerArray) ToServiceConnectionDockerArrayOutputWithCo
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceConnectionDockerArrayOutput)
 }
 
+func (i ServiceConnectionDockerArray) ToOutput(ctx context.Context) pulumix.Output[[]*ServiceConnectionDocker] {
+	return pulumix.Output[[]*ServiceConnectionDocker]{
+		OutputState: i.ToServiceConnectionDockerArrayOutputWithContext(ctx).OutputState,
+	}
+}
+
 // ServiceConnectionDockerMapInput is an input type that accepts ServiceConnectionDockerMap and ServiceConnectionDockerMapOutput values.
 // You can construct a concrete instance of `ServiceConnectionDockerMapInput` via:
 //
@@ -160,6 +229,12 @@ func (i ServiceConnectionDockerMap) ToServiceConnectionDockerMapOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceConnectionDockerMapOutput)
 }
 
+func (i ServiceConnectionDockerMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ServiceConnectionDocker] {
+	return pulumix.Output[map[string]*ServiceConnectionDocker]{
+		OutputState: i.ToServiceConnectionDockerMapOutputWithContext(ctx).OutputState,
+	}
+}
+
 type ServiceConnectionDockerOutput struct{ *pulumi.OutputState }
 
 func (ServiceConnectionDockerOutput) ElementType() reflect.Type {
@@ -174,6 +249,13 @@ func (o ServiceConnectionDockerOutput) ToServiceConnectionDockerOutputWithContex
 	return o
 }
 
+func (o ServiceConnectionDockerOutput) ToOutput(ctx context.Context) pulumix.Output[*ServiceConnectionDocker] {
+	return pulumix.Output[*ServiceConnectionDocker]{
+		OutputState: o.OutputState,
+	}
+}
+
+// Defaults to `false`.
 func (o ServiceConnectionDockerOutput) Local() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ServiceConnectionDocker) pulumi.BoolPtrOutput { return v.Local }).(pulumi.BoolPtrOutput)
 }
@@ -190,6 +272,7 @@ func (o ServiceConnectionDockerOutput) TlsVerification() pulumi.StringPtrOutput 
 	return o.ApplyT(func(v *ServiceConnectionDocker) pulumi.StringPtrOutput { return v.TlsVerification }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `http+unix:///var/run/docker.sock`.
 func (o ServiceConnectionDockerOutput) Url() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ServiceConnectionDocker) pulumi.StringPtrOutput { return v.Url }).(pulumi.StringPtrOutput)
 }
@@ -206,6 +289,12 @@ func (o ServiceConnectionDockerArrayOutput) ToServiceConnectionDockerArrayOutput
 
 func (o ServiceConnectionDockerArrayOutput) ToServiceConnectionDockerArrayOutputWithContext(ctx context.Context) ServiceConnectionDockerArrayOutput {
 	return o
+}
+
+func (o ServiceConnectionDockerArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ServiceConnectionDocker] {
+	return pulumix.Output[[]*ServiceConnectionDocker]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ServiceConnectionDockerArrayOutput) Index(i pulumi.IntInput) ServiceConnectionDockerOutput {
@@ -226,6 +315,12 @@ func (o ServiceConnectionDockerMapOutput) ToServiceConnectionDockerMapOutput() S
 
 func (o ServiceConnectionDockerMapOutput) ToServiceConnectionDockerMapOutputWithContext(ctx context.Context) ServiceConnectionDockerMapOutput {
 	return o
+}
+
+func (o ServiceConnectionDockerMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ServiceConnectionDocker] {
+	return pulumix.Output[map[string]*ServiceConnectionDocker]{
+		OutputState: o.OutputState,
+	}
 }
 
 func (o ServiceConnectionDockerMapOutput) MapIndex(k pulumi.StringInput) ServiceConnectionDockerOutput {

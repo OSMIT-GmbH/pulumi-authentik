@@ -4,6 +4,20 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Get stages by name
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const default-authentication-identification = authentik.getStage({
+ *     name: "default-authentication-identification",
+ * });
+ * ```
+ */
 export function getStage(args?: GetStageArgs, opts?: pulumi.InvokeOptions): Promise<GetStageResult> {
     args = args || {};
 
@@ -17,6 +31,9 @@ export function getStage(args?: GetStageArgs, opts?: pulumi.InvokeOptions): Prom
  * A collection of arguments for invoking getStage.
  */
 export interface GetStageArgs {
+    /**
+     * Generated.
+     */
     name?: string;
 }
 
@@ -28,8 +45,25 @@ export interface GetStageResult {
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * Generated.
+     */
     readonly name: string;
 }
+/**
+ * Get stages by name
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@pulumi/authentik";
+ *
+ * const default-authentication-identification = authentik.getStage({
+ *     name: "default-authentication-identification",
+ * });
+ * ```
+ */
 export function getStageOutput(args?: GetStageOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetStageResult> {
     return pulumi.output(args).apply((a: any) => getStage(a, opts))
 }
@@ -38,5 +72,8 @@ export function getStageOutput(args?: GetStageOutputArgs, opts?: pulumi.InvokeOp
  * A collection of arguments for invoking getStage.
  */
 export interface GetStageOutputArgs {
+    /**
+     * Generated.
+     */
     name?: pulumi.Input<string>;
 }
