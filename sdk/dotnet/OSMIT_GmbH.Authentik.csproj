@@ -9,6 +9,7 @@
     <PackageProjectUrl>https://www.pulumi.com</PackageProjectUrl>
     <RepositoryUrl>https://github.com/OSMIT-GmbH/pulumi-authentik</RepositoryUrl>
     <PackageIcon>logo.png</PackageIcon>
+    <Version>2024.10.1</Version>
 
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
