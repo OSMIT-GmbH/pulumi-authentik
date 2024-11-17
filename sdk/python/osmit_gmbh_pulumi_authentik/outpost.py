@@ -186,12 +186,16 @@ class Outpost(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create an outpost with a proxy provider
         default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
         proxy = authentik.ProviderProxy("proxy",
+            name="proxy",
             authorization_flow=default_authorization_flow.id,
             external_host="http://foo.bar.baz",
             internal_host="http://internal.local")
-        outpost = authentik.Outpost("outpost", protocol_providers=[proxy.id])
+        outpost = authentik.Outpost("outpost",
+            name="test-outpost",
+            protocol_providers=[proxy.id])
         ```
 
         :param str resource_name: The name of the resource.
@@ -213,12 +217,16 @@ class Outpost(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create an outpost with a proxy provider
         default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
         proxy = authentik.ProviderProxy("proxy",
+            name="proxy",
             authorization_flow=default_authorization_flow.id,
             external_host="http://foo.bar.baz",
             internal_host="http://internal.local")
-        outpost = authentik.Outpost("outpost", protocol_providers=[proxy.id])
+        outpost = authentik.Outpost("outpost",
+            name="test-outpost",
+            protocol_providers=[proxy.id])
         ```
 
         :param str resource_name: The name of the resource.

@@ -22,13 +22,15 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create an application with a provider attached and policies applied
     ///     var default_authorization_flow = Authentik.GetFlow.Invoke(new()
     ///     {
     ///         Slug = "default-provider-authorization-implicit-consent",
     ///     });
     /// 
-    ///     var nameProviderOauth2 = new Authentik.ProviderOauth2("nameProviderOauth2", new()
+    ///     var name = new Authentik.ProviderOauth2("name", new()
     ///     {
+    ///         Name = "example-app",
     ///         ClientId = "example-app",
     ///         ClientSecret = "test",
     ///         AuthorizationFlow = default_authorization_flow.Apply(default_authorization_flow =&gt; default_authorization_flow.Apply(getFlowResult =&gt; getFlowResult.Id)),
@@ -36,13 +38,15 @@ namespace OSMIT_GmbH.Authentik
     /// 
     ///     var policy = new Authentik.PolicyExpression("policy", new()
     ///     {
+    ///         Name = "example",
     ///         Expression = "return True",
     ///     });
     /// 
-    ///     var nameApplication = new Authentik.Application("nameApplication", new()
+    ///     var nameApplication = new Authentik.Application("name", new()
     ///     {
+    ///         Name = "example-app",
     ///         Slug = "example-app",
-    ///         ProtocolProvider = nameProviderOauth2.Id,
+    ///         ProtocolProvider = name.Id,
     ///     });
     /// 
     ///     var app_access = new Authentik.PolicyBinding("app-access", new()

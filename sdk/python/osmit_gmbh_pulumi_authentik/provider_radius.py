@@ -234,14 +234,17 @@ class ProviderRadius(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create a Radius Provider
         default_authentication_flow = authentik.get_flow(slug="default-authentication-flow")
-        name_provider_radius = authentik.ProviderRadius("nameProviderRadius",
+        name = authentik.ProviderRadius("name",
+            name="radius-app",
             authorization_flow=default_authentication_flow.id,
             client_networks="10.10.0.0/24",
             shared_secret="my-shared-secret")
-        name_application = authentik.Application("nameApplication",
+        name_application = authentik.Application("name",
+            name="radius-app",
             slug="radius-app",
-            protocol_provider=name_provider_radius.id)
+            protocol_provider=name.id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -263,14 +266,17 @@ class ProviderRadius(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create a Radius Provider
         default_authentication_flow = authentik.get_flow(slug="default-authentication-flow")
-        name_provider_radius = authentik.ProviderRadius("nameProviderRadius",
+        name = authentik.ProviderRadius("name",
+            name="radius-app",
             authorization_flow=default_authentication_flow.id,
             client_networks="10.10.0.0/24",
             shared_secret="my-shared-secret")
-        name_application = authentik.Application("nameApplication",
+        name_application = authentik.Application("name",
+            name="radius-app",
             slug="radius-app",
-            protocol_provider=name_provider_radius.id)
+            protocol_provider=name.id)
         ```
 
         :param str resource_name: The name of the resource.

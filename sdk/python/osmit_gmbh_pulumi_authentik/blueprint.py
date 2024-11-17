@@ -188,6 +188,7 @@ class Blueprint(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
 
         instance = authentik.Blueprint("instance",
+            name="blueprint-instance",
             path="default/flow-default-authentication-flow.yaml",
             context=json.dumps({
                 "foo": "bar",
@@ -214,6 +215,7 @@ class Blueprint(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
 
         instance = authentik.Blueprint("instance",
+            name="blueprint-instance",
             path="default/flow-default-authentication-flow.yaml",
             context=json.dumps({
                 "foo": "bar",

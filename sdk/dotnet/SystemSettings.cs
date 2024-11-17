@@ -21,6 +21,7 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Configure system settings
     ///     var settings = new Authentik.SystemSettings("settings", new()
     ///     {
     ///         DefaultUserChangeUsername = true,

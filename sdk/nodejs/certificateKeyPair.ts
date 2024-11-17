@@ -13,17 +13,17 @@ import * as utilities from "./utilities";
  * import * as tls from "@pulumi/tls";
  *
  * // Generate a certificate-key pair
- * const examplePrivateKey = new tls.PrivateKey("examplePrivateKey", {
+ * const example = new tls.index.PrivateKey("example", {
  *     algorithm: "ECDSA",
  *     ecdsaCurve: "P384",
  * });
- * const exampleSelfSignedCert = new tls.SelfSignedCert("exampleSelfSignedCert", {
+ * const exampleSelfSignedCert = new tls.index.SelfSignedCert("example", {
  *     keyAlgorithm: "ECDSA",
- *     privateKeyPem: examplePrivateKey.privateKeyPem,
- *     subject: {
+ *     privateKeyPem: example.privateKeyPem,
+ *     subject: [{
  *         commonName: "example.com",
  *         organization: "ACME Examples, Inc",
- *     },
+ *     }],
  *     validityPeriodHours: 12,
  *     allowedUses: [
  *         "key_encipherment",
@@ -32,8 +32,9 @@ import * as utilities from "./utilities";
  *     ],
  * });
  * const name = new authentik.CertificateKeyPair("name", {
+ *     name: "keypair",
  *     certificateData: exampleSelfSignedCert.certPem,
- *     keyData: examplePrivateKey.privateKeyPem,
+ *     keyData: example.privateKeyPem,
  * });
  * ```
  */

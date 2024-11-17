@@ -370,18 +370,23 @@ class StageIdentification(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create identification stage with sources and showing a password field
         default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
-        name_source_oauth = authentik.SourceOauth("nameSourceOauth",
+        name = authentik.SourceOauth("name",
+            name="test",
             slug="test",
             authentication_flow=default_authorization_flow.id,
             enrollment_flow=default_authorization_flow.id,
             provider_type="discord",
             consumer_key="foo",
             consumer_secret="bar")
-        name_stage_password = authentik.StagePassword("nameStagePassword", backends=["authentik.core.auth.InbuiltBackend"])
-        name_stage_identification = authentik.StageIdentification("nameStageIdentification",
+        name_stage_password = authentik.StagePassword("name",
+            name="test-pass",
+            backends=["authentik.core.auth.InbuiltBackend"])
+        name_stage_identification = authentik.StageIdentification("name",
+            name="test-ident",
             user_fields=["username"],
-            sources=[name_source_oauth.uuid],
+            sources=[name.uuid],
             password_stage=name_stage_password.id)
         ```
 
@@ -405,18 +410,23 @@ class StageIdentification(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create identification stage with sources and showing a password field
         default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
-        name_source_oauth = authentik.SourceOauth("nameSourceOauth",
+        name = authentik.SourceOauth("name",
+            name="test",
             slug="test",
             authentication_flow=default_authorization_flow.id,
             enrollment_flow=default_authorization_flow.id,
             provider_type="discord",
             consumer_key="foo",
             consumer_secret="bar")
-        name_stage_password = authentik.StagePassword("nameStagePassword", backends=["authentik.core.auth.InbuiltBackend"])
-        name_stage_identification = authentik.StageIdentification("nameStageIdentification",
+        name_stage_password = authentik.StagePassword("name",
+            name="test-pass",
+            backends=["authentik.core.auth.InbuiltBackend"])
+        name_stage_identification = authentik.StageIdentification("name",
+            name="test-ident",
             user_fields=["username"],
-            sources=[name_source_oauth.uuid],
+            sources=[name.uuid],
             password_stage=name_stage_password.id)
         ```
 

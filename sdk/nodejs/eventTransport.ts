@@ -6,18 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@osmit-gmbh/pulumi-authentik";
- *
- * // Create a notification transport to slack/discord
- * const transport = new authentik.EventTransport("transport", {
- *     mode: "webhook_slack",
- *     sendOnce: true,
- *     webhookUrl: "https://discord.com/....",
- * });
- * ```
  */
 export class EventTransport extends pulumi.CustomResource {
     /**

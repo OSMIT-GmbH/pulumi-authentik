@@ -6,20 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * Get OAuth Provider Scope Property mappings
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@pulumi/authentik";
- *
- * const test = authentik.getPropertyMappingProviderScope({
- *     managedLists: [
- *         "goauthentik.io/providers/oauth2/scope-email",
- *         "goauthentik.io/providers/oauth2/scope-openid",
- *     ],
- * });
- * ```
  */
 export function getPropertyMappingProviderScope(args?: GetPropertyMappingProviderScopeArgs, opts?: pulumi.InvokeOptions): Promise<GetPropertyMappingProviderScopeResult> {
     args = args || {};
@@ -86,20 +72,6 @@ export interface GetPropertyMappingProviderScopeResult {
 }
 /**
  * Get OAuth Provider Scope Property mappings
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@pulumi/authentik";
- *
- * const test = authentik.getPropertyMappingProviderScope({
- *     managedLists: [
- *         "goauthentik.io/providers/oauth2/scope-email",
- *         "goauthentik.io/providers/oauth2/scope-openid",
- *     ],
- * });
- * ```
  */
 export function getPropertyMappingProviderScopeOutput(args?: GetPropertyMappingProviderScopeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPropertyMappingProviderScopeResult> {
     args = args || {};

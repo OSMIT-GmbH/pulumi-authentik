@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -18,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -28,11 +28,13 @@ import (
 //			// Create a super-user group with a user
 //			name, err := authentik.NewUser(ctx, "name", &authentik.UserArgs{
 //				Username: pulumi.String("user"),
+//				Name:     pulumi.String("User"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = authentik.NewGroup(ctx, "group", &authentik.GroupArgs{
+//				Name: pulumi.String("tf_admins"),
 //				Users: pulumi.IntArray{
 //					name.ID(),
 //				},

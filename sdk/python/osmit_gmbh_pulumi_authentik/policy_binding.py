@@ -328,27 +328,6 @@ class PolicyBinding(pulumi.CustomResource):
         """
         ## Example Usage
 
-        ```python
-        import pulumi
-        import osmit_gmbh_pulumi_authentik as authentik
-        import pulumi_authentik as authentik
-
-        # Create a policy binding for a resource
-        policy = authentik.PolicyExpression("policy", expression="return True")
-        name_application = authentik.Application("nameApplication", slug="test-app")
-        app_access_policy_binding = authentik.PolicyBinding("app-accessPolicyBinding",
-            target=name_application.uuid,
-            policy=policy.id,
-            order=0)
-        # Create a binding to a group
-        admins = authentik.get_group(name="authentik Admins")
-        name_index_application_application = authentik.Application("nameIndex/applicationApplication", slug="test-app")
-        app_access_index_policy_binding_policy_binding = authentik.PolicyBinding("app-accessIndex/policyBindingPolicyBinding",
-            target=name_application.uuid,
-            group=admins.id,
-            order=0)
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] enabled: Defaults to `true`.
@@ -368,27 +347,6 @@ class PolicyBinding(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         ## Example Usage
-
-        ```python
-        import pulumi
-        import osmit_gmbh_pulumi_authentik as authentik
-        import pulumi_authentik as authentik
-
-        # Create a policy binding for a resource
-        policy = authentik.PolicyExpression("policy", expression="return True")
-        name_application = authentik.Application("nameApplication", slug="test-app")
-        app_access_policy_binding = authentik.PolicyBinding("app-accessPolicyBinding",
-            target=name_application.uuid,
-            policy=policy.id,
-            order=0)
-        # Create a binding to a group
-        admins = authentik.get_group(name="authentik Admins")
-        name_index_application_application = authentik.Application("nameIndex/applicationApplication", slug="test-app")
-        app_access_index_policy_binding_policy_binding = authentik.PolicyBinding("app-accessIndex/policyBindingPolicyBinding",
-            target=name_application.uuid,
-            group=admins.id,
-            order=0)
-        ```
 
         :param str resource_name: The name of the resource.
         :param PolicyBindingArgs args: The arguments to use to populate this resource's properties.

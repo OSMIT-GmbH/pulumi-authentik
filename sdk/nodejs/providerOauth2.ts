@@ -12,10 +12,14 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
  * // Create an OAuth2 Provider
- * const nameProviderOauth2 = new authentik.ProviderOauth2("nameProviderOauth2", {clientId: "grafana"});
- * const nameApplication = new authentik.Application("nameApplication", {
+ * const name = new authentik.ProviderOauth2("name", {
+ *     name: "grafana",
+ *     clientId: "grafana",
+ * });
+ * const nameApplication = new authentik.Application("name", {
+ *     name: "test app",
  *     slug: "test-app",
- *     protocolProvider: nameProviderOauth2.id,
+ *     protocolProvider: name.id,
  * });
  * ```
  */

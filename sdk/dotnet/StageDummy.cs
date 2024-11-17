@@ -21,7 +21,11 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var name = new Authentik.StageDummy("name");
+    ///     // Create dummy stage
+    ///     var name = new Authentik.StageDummy("name", new()
+    ///     {
+    ///         Name = "dummy",
+    ///     });
     /// 
     /// });
     /// ```

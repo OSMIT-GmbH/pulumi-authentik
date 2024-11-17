@@ -96,7 +96,10 @@ class PropertyMappingNotification(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.PropertyMappingNotification("name", expression="return {\\"foo\\": context['foo']}")
+        # Create a custom Notification transport mapping
+        name = authentik.PropertyMappingNotification("name",
+            name="custom-field",
+            expression="return {\\"foo\\": context['foo']}")
         ```
 
         :param str resource_name: The name of the resource.
@@ -117,7 +120,10 @@ class PropertyMappingNotification(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.PropertyMappingNotification("name", expression="return {\\"foo\\": context['foo']}")
+        # Create a custom Notification transport mapping
+        name = authentik.PropertyMappingNotification("name",
+            name="custom-field",
+            expression="return {\\"foo\\": context['foo']}")
         ```
 
         :param str resource_name: The name of the resource.

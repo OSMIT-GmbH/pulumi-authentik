@@ -13,7 +13,11 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const name = new authentik.PropertyMappingSourceLdap("name", {expression: "return ldap.get('sAMAccountName')"});
+ * // Create a custom LDAP source property mapping
+ * const name = new authentik.PropertyMappingSourceLdap("name", {
+ *     name: "custom-field",
+ *     expression: "return ldap.get('sAMAccountName')",
+ * });
  * ```
  */
 export class PropertyMappingSourceLdap extends pulumi.CustomResource {

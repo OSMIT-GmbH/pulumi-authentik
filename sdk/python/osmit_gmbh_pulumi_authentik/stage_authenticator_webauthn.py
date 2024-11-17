@@ -240,18 +240,6 @@ class StageAuthenticatorWebauthn(pulumi.CustomResource):
         """
         ## Example Usage
 
-        ```python
-        import pulumi
-        import osmit_gmbh_pulumi_authentik as authentik
-        import pulumi_authentik as authentik
-
-        # Create a WebAuthn setup stage
-        name_stage_authenticator_webauthn = authentik.StageAuthenticatorWebauthn("nameStageAuthenticatorWebauthn")
-        # Create a WebAuthn setup which allows limited WebAuthn device types
-        yubikey = authentik.get_webauthn_device_type(description="YubiKey 5C")
-        name_index_stage_authenticator_webauthn_stage_authenticator_webauthn = authentik.StageAuthenticatorWebauthn("nameIndex/stageAuthenticatorWebauthnStageAuthenticatorWebauthn", device_type_restrictions=[yubikey.aaguid])
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] authenticator_attachment: Allowed values: - `platform` - `cross-platform`
@@ -266,18 +254,6 @@ class StageAuthenticatorWebauthn(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         ## Example Usage
-
-        ```python
-        import pulumi
-        import osmit_gmbh_pulumi_authentik as authentik
-        import pulumi_authentik as authentik
-
-        # Create a WebAuthn setup stage
-        name_stage_authenticator_webauthn = authentik.StageAuthenticatorWebauthn("nameStageAuthenticatorWebauthn")
-        # Create a WebAuthn setup which allows limited WebAuthn device types
-        yubikey = authentik.get_webauthn_device_type(description="YubiKey 5C")
-        name_index_stage_authenticator_webauthn_stage_authenticator_webauthn = authentik.StageAuthenticatorWebauthn("nameIndex/stageAuthenticatorWebauthnStageAuthenticatorWebauthn", device_type_restrictions=[yubikey.aaguid])
-        ```
 
         :param str resource_name: The name of the resource.
         :param StageAuthenticatorWebauthnArgs args: The arguments to use to populate this resource's properties.

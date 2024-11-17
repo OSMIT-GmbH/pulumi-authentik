@@ -11,7 +11,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const name = new authentik.StageEmail("name", {});
+ * // Create email stage for email verification, uses global settings by default
+ * const name = new authentik.StageEmail("name", {name: "email-verification"});
  * ```
  */
 export class StageEmail extends pulumi.CustomResource {

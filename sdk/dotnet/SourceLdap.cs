@@ -21,13 +21,15 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create LDAP Source
     ///     var name = new Authentik.SourceLdap("name", new()
     ///     {
-    ///         BaseDn = "dn=foo",
+    ///         Name = "ldap-test",
+    ///         Slug = "ldap-test",
+    ///         ServerUri = "ldaps://1.2.3.4",
     ///         BindCn = "foo",
     ///         BindPassword = "bar",
-    ///         ServerUri = "ldaps://1.2.3.4",
-    ///         Slug = "ldap-test",
+    ///         BaseDn = "dn=foo",
     ///     });
     /// 
     /// });

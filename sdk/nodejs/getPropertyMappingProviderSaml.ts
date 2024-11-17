@@ -6,20 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * Get SAML Provider Property mappings
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@pulumi/authentik";
- *
- * const test = authentik.getPropertyMappingProviderSaml({
- *     managedLists: [
- *         "goauthentik.io/providers/saml/upn",
- *         "goauthentik.io/providers/saml/name",
- *     ],
- * });
- * ```
  */
 export function getPropertyMappingProviderSaml(args?: GetPropertyMappingProviderSamlArgs, opts?: pulumi.InvokeOptions): Promise<GetPropertyMappingProviderSamlResult> {
     args = args || {};
@@ -96,20 +82,6 @@ export interface GetPropertyMappingProviderSamlResult {
 }
 /**
  * Get SAML Provider Property mappings
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@pulumi/authentik";
- *
- * const test = authentik.getPropertyMappingProviderSaml({
- *     managedLists: [
- *         "goauthentik.io/providers/saml/upn",
- *         "goauthentik.io/providers/saml/name",
- *     ],
- * });
- * ```
  */
 export function getPropertyMappingProviderSamlOutput(args?: GetPropertyMappingProviderSamlOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPropertyMappingProviderSamlResult> {
     args = args || {};

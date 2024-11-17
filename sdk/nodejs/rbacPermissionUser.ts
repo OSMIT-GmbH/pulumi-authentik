@@ -6,31 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@osmit-gmbh/pulumi-authentik";
- *
- * // Assign a global permission to a user
- * const nameUser = new authentik.User("nameUser", {username: "user"});
- * const global_permissionRbacPermissionUser = new authentik.RbacPermissionUser("global-permissionRbacPermissionUser", {
- *     user: nameUser.id,
- *     permission: "authentik_flows.inspect_flow",
- * });
- * // Assign an object permission to a user
- * const flow = new authentik.Flow("flow", {
- *     title: "Test flow",
- *     slug: "test-flow",
- *     designation: "authorization",
- * });
- * const nameIndex_userUser = new authentik.User("nameIndex/userUser", {username: "user"});
- * const global_permissionIndex_rbacPermissionUserRbacPermissionUser = new authentik.RbacPermissionUser("global-permissionIndex/rbacPermissionUserRbacPermissionUser", {
- *     user: nameUser.id,
- *     model: "authentik_flows.flow",
- *     permission: "inspect_flow",
- *     objectId: flow.uuid,
- * });
- * ```
  */
 export class RbacPermissionUser extends pulumi.CustomResource {
     /**

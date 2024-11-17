@@ -319,28 +319,6 @@ class RbacPermissionUser(pulumi.CustomResource):
         """
         ## Example Usage
 
-        ```python
-        import pulumi
-        import osmit_gmbh_pulumi_authentik as authentik
-
-        # Assign a global permission to a user
-        name_user = authentik.User("nameUser", username="user")
-        global_permission_rbac_permission_user = authentik.RbacPermissionUser("global-permissionRbacPermissionUser",
-            user=name_user.id,
-            permission="authentik_flows.inspect_flow")
-        # Assign an object permission to a user
-        flow = authentik.Flow("flow",
-            title="Test flow",
-            slug="test-flow",
-            designation="authorization")
-        name_index_user_user = authentik.User("nameIndex/userUser", username="user")
-        global_permission_index_rbac_permission_user_rbac_permission_user = authentik.RbacPermissionUser("global-permissionIndex/rbacPermissionUserRbacPermissionUser",
-            user=name_user.id,
-            model="authentik_flows.flow",
-            permission="inspect_flow",
-            object_id=flow.uuid)
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] model: Allowed values: - `authentik_tenants.domain` - `authentik_crypto.certificatekeypair` - `authentik_flows.flow` -
@@ -396,28 +374,6 @@ class RbacPermissionUser(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         ## Example Usage
-
-        ```python
-        import pulumi
-        import osmit_gmbh_pulumi_authentik as authentik
-
-        # Assign a global permission to a user
-        name_user = authentik.User("nameUser", username="user")
-        global_permission_rbac_permission_user = authentik.RbacPermissionUser("global-permissionRbacPermissionUser",
-            user=name_user.id,
-            permission="authentik_flows.inspect_flow")
-        # Assign an object permission to a user
-        flow = authentik.Flow("flow",
-            title="Test flow",
-            slug="test-flow",
-            designation="authorization")
-        name_index_user_user = authentik.User("nameIndex/userUser", username="user")
-        global_permission_index_rbac_permission_user_rbac_permission_user = authentik.RbacPermissionUser("global-permissionIndex/rbacPermissionUserRbacPermissionUser",
-            user=name_user.id,
-            model="authentik_flows.flow",
-            permission="inspect_flow",
-            object_id=flow.uuid)
-        ```
 
         :param str resource_name: The name of the resource.
         :param RbacPermissionUserArgs args: The arguments to use to populate this resource's properties.

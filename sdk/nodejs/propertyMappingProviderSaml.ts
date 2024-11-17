@@ -13,9 +13,11 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
+ * // Create a custom SAML provider property mapping
  * const saml_aws_rolessessionname = new authentik.PropertyMappingProviderSaml("saml-aws-rolessessionname", {
- *     expression: "return user.email",
+ *     name: "SAML AWS RoleSessionName",
  *     samlName: "https://aws.amazon.com/SAML/Attributes/RoleSessionName",
+ *     expression: "return user.email",
  * });
  * ```
  */

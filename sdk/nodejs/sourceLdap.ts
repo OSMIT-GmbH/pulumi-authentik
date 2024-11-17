@@ -11,12 +11,14 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
+ * // Create LDAP Source
  * const name = new authentik.SourceLdap("name", {
- *     baseDn: "dn=foo",
+ *     name: "ldap-test",
+ *     slug: "ldap-test",
+ *     serverUri: "ldaps://1.2.3.4",
  *     bindCn: "foo",
  *     bindPassword: "bar",
- *     serverUri: "ldaps://1.2.3.4",
- *     slug: "ldap-test",
+ *     baseDn: "dn=foo",
  * });
  * ```
  */

@@ -7,48 +7,11 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			// Create a WebAuthn setup stage
-//			_, err := authentik.NewStageAuthenticatorWebauthn(ctx, "nameStageAuthenticatorWebauthn", nil)
-//			if err != nil {
-//				return err
-//			}
-//			yubikey, err := authentik.GetWebauthnDeviceType(ctx, &authentik.GetWebauthnDeviceTypeArgs{
-//				Description: pulumi.StringRef("YubiKey 5C"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = authentik.NewStageAuthenticatorWebauthn(ctx, "nameIndex/stageAuthenticatorWebauthnStageAuthenticatorWebauthn", &authentik.StageAuthenticatorWebauthnArgs{
-//				DeviceTypeRestrictions: pulumi.StringArray{
-//					pulumi.String(yubikey.Aaguid),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 type StageAuthenticatorWebauthn struct {
 	pulumi.CustomResourceState
 

@@ -128,7 +128,8 @@ class StageConsent(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageConsent("name")
+        # Create consent stage
+        name = authentik.StageConsent("name", name="consent")
         ```
 
         :param str resource_name: The name of the resource.
@@ -148,7 +149,8 @@ class StageConsent(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageConsent("name")
+        # Create consent stage
+        name = authentik.StageConsent("name", name="consent")
         ```
 
         :param str resource_name: The name of the resource.

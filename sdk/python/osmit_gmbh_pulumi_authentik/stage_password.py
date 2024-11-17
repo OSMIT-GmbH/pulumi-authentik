@@ -185,7 +185,10 @@ class StagePassword(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        test = authentik.StagePassword("test", backends=["authentik.core.auth.InbuiltBackend"])
+        # Create a password stage that tests against the interla database
+        test = authentik.StagePassword("test",
+            name="test-stage",
+            backends=["authentik.core.auth.InbuiltBackend"])
         ```
 
         :param str resource_name: The name of the resource.
@@ -206,7 +209,10 @@ class StagePassword(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        test = authentik.StagePassword("test", backends=["authentik.core.auth.InbuiltBackend"])
+        # Create a password stage that tests against the interla database
+        test = authentik.StagePassword("test",
+            name="test-stage",
+            backends=["authentik.core.auth.InbuiltBackend"])
         ```
 
         :param str resource_name: The name of the resource.

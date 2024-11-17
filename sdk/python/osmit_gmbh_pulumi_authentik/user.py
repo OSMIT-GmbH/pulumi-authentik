@@ -289,19 +289,6 @@ class User(pulumi.CustomResource):
         """
         ## Example Usage
 
-        ```python
-        import pulumi
-        import osmit_gmbh_pulumi_authentik as authentik
-
-        # Create a user
-        name_user = authentik.User("nameUser", username="user")
-        # Create a user that is member of a group
-        group = authentik.Group("group")
-        name_index_user_user = authentik.User("nameIndex/userUser",
-            username="user",
-            groups=[group.id])
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] attributes: JSON format expected. Use jsonencode() to pass objects.
@@ -316,19 +303,6 @@ class User(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         ## Example Usage
-
-        ```python
-        import pulumi
-        import osmit_gmbh_pulumi_authentik as authentik
-
-        # Create a user
-        name_user = authentik.User("nameUser", username="user")
-        # Create a user that is member of a group
-        group = authentik.Group("group")
-        name_index_user_user = authentik.User("nameIndex/userUser",
-            username="user",
-            groups=[group.id])
-        ```
 
         :param str resource_name: The name of the resource.
         :param UserArgs args: The arguments to use to populate this resource's properties.

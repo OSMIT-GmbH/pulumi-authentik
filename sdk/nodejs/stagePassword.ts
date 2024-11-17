@@ -11,7 +11,11 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const test = new authentik.StagePassword("test", {backends: ["authentik.core.auth.InbuiltBackend"]});
+ * // Create a password stage that tests against the interla database
+ * const test = new authentik.StagePassword("test", {
+ *     name: "test-stage",
+ *     backends: ["authentik.core.auth.InbuiltBackend"],
+ * });
  * ```
  */
 export class StagePassword extends pulumi.CustomResource {

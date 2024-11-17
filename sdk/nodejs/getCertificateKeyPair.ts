@@ -13,6 +13,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // To get the the ID and other info about a certificate
  * const generated = authentik.getCertificateKeyPair({
  *     name: "authentik Self-signed Certificate",
  * });
@@ -98,6 +99,7 @@ export interface GetCertificateKeyPairResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // To get the the ID and other info about a certificate
  * const generated = authentik.getCertificateKeyPair({
  *     name: "authentik Self-signed Certificate",
  * });

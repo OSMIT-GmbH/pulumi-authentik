@@ -417,8 +417,10 @@ class SourcePlex(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create a plex source
         default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
         name = authentik.SourcePlex("name",
+            name="plex",
             slug="plex",
             authentication_flow=default_authorization_flow.id,
             enrollment_flow=default_authorization_flow.id,
@@ -446,8 +448,10 @@ class SourcePlex(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create a plex source
         default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
         name = authentik.SourcePlex("name",
+            name="plex",
             slug="plex",
             authentication_flow=default_authorization_flow.id,
             enrollment_flow=default_authorization_flow.id,

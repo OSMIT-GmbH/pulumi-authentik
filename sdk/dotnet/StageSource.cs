@@ -22,13 +22,15 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create OAuth Source using an existing provider
     ///     var default_authorization_flow = Authentik.GetFlow.Invoke(new()
     ///     {
     ///         Slug = "default-provider-authorization-implicit-consent",
     ///     });
     /// 
-    ///     var nameSourceOauth = new Authentik.SourceOauth("nameSourceOauth", new()
+    ///     var name = new Authentik.SourceOauth("name", new()
     ///     {
+    ///         Name = "discord",
     ///         Slug = "discord",
     ///         AuthenticationFlow = default_authorization_flow.Apply(default_authorization_flow =&gt; default_authorization_flow.Apply(getFlowResult =&gt; getFlowResult.Id)),
     ///         EnrollmentFlow = default_authorization_flow.Apply(default_authorization_flow =&gt; default_authorization_flow.Apply(getFlowResult =&gt; getFlowResult.Id)),
@@ -38,9 +40,10 @@ namespace OSMIT_GmbH.Authentik
     ///     });
     /// 
     ///     // Create a source stage using the source defined above
-    ///     var nameStageSource = new Authentik.StageSource("nameStageSource", new()
+    ///     var nameStageSource = new Authentik.StageSource("name", new()
     ///     {
-    ///         Source = nameSourceOauth.Id,
+    ///         Name = "source-stage",
+    ///         Source = name.Id,
     ///     });
     /// 
     /// });

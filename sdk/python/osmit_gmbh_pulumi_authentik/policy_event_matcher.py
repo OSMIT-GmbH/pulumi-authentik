@@ -451,7 +451,9 @@ class PolicyEventMatcher(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create policy to match events
         name = authentik.PolicyEventMatcher("name",
+            name="login-from-1.2.3.4",
             action="login",
             app="authentik.events",
             client_ip="1.2.3.4")
@@ -535,7 +537,9 @@ class PolicyEventMatcher(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create policy to match events
         name = authentik.PolicyEventMatcher("name",
+            name="login-from-1.2.3.4",
             action="login",
             app="authentik.events",
             client_ip="1.2.3.4")

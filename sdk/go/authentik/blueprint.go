@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -20,7 +20,7 @@ import (
 //
 //	"encoding/json"
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -35,6 +35,7 @@ import (
 //			}
 //			json0 := string(tmpJSON0)
 //			_, err = authentik.NewBlueprint(ctx, "instance", &authentik.BlueprintArgs{
+//				Name:    pulumi.String("blueprint-instance"),
 //				Path:    pulumi.String("default/flow-default-authentication-flow.yaml"),
 //				Context: pulumi.String(json0),
 //			})

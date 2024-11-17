@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -18,20 +18,22 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create identification stage with sources and showing a password field
 //			default_authorization_flow, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
 //				Slug: pulumi.StringRef("default-provider-authorization-implicit-consent"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			nameSourceOauth, err := authentik.NewSourceOauth(ctx, "nameSourceOauth", &authentik.SourceOauthArgs{
+//			name, err := authentik.NewSourceOauth(ctx, "name", &authentik.SourceOauthArgs{
+//				Name:               pulumi.String("test"),
 //				Slug:               pulumi.String("test"),
 //				AuthenticationFlow: pulumi.String(default_authorization_flow.Id),
 //				EnrollmentFlow:     pulumi.String(default_authorization_flow.Id),
@@ -42,7 +44,8 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			nameStagePassword, err := authentik.NewStagePassword(ctx, "nameStagePassword", &authentik.StagePasswordArgs{
+//			nameStagePassword, err := authentik.NewStagePassword(ctx, "name", &authentik.StagePasswordArgs{
+//				Name: pulumi.String("test-pass"),
 //				Backends: pulumi.StringArray{
 //					pulumi.String("authentik.core.auth.InbuiltBackend"),
 //				},
@@ -50,12 +53,13 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_, err = authentik.NewStageIdentification(ctx, "nameStageIdentification", &authentik.StageIdentificationArgs{
+//			_, err = authentik.NewStageIdentification(ctx, "name", &authentik.StageIdentificationArgs{
+//				Name: pulumi.String("test-ident"),
 //				UserFields: pulumi.StringArray{
 //					pulumi.String("username"),
 //				},
 //				Sources: pulumi.StringArray{
-//					nameSourceOauth.Uuid,
+//					name.Uuid,
 //				},
 //				PasswordStage: nameStagePassword.ID(),
 //			})

@@ -25,6 +25,7 @@ namespace OSMIT_GmbH.Authentik
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
+        ///     // To get the ID of a group by name
         ///     var admins = Authentik.GetGroup.Invoke(new()
         ///     {
         ///         Name = "authentik Admins",
@@ -49,6 +50,7 @@ namespace OSMIT_GmbH.Authentik
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
+        ///     // To get the ID of a group by name
         ///     var admins = Authentik.GetGroup.Invoke(new()
         ///     {
         ///         Name = "authentik Admins",

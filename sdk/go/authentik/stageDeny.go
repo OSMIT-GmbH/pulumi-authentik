@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -18,14 +18,17 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := authentik.NewStageDeny(ctx, "name", nil)
+//			// Create deny stage, can be used with policies
+//			_, err := authentik.NewStageDeny(ctx, "name", &authentik.StageDenyArgs{
+//				Name: pulumi.String("deny"),
+//			})
 //			if err != nil {
 //				return err
 //			}

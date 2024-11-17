@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -18,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -27,12 +27,15 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			// Create a local docker connection
 //			_, err := authentik.NewServiceConnectionDocker(ctx, "local", &authentik.ServiceConnectionDockerArgs{
+//				Name:  pulumi.String("local"),
 //				Local: pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err
 //			}
+//			// Create a remote docker connection
 //			_, err = authentik.NewCertificateKeyPair(ctx, "tls-auth", &authentik.CertificateKeyPairArgs{
+//				Name:            pulumi.String("docker-tls-auth"),
 //				CertificateData: pulumi.String("..."),
 //				KeyData:         pulumi.String("..."),
 //			})
@@ -40,12 +43,14 @@ import (
 //				return err
 //			}
 //			_, err = authentik.NewCertificateKeyPair(ctx, "tls-verification", &authentik.CertificateKeyPairArgs{
+//				Name:            pulumi.String("docker-tls-verification"),
 //				CertificateData: pulumi.String("..."),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = authentik.NewServiceConnectionDocker(ctx, "remote-host", &authentik.ServiceConnectionDockerArgs{
+//				Name:              pulumi.String("remote-host"),
 //				Url:               pulumi.String("http://1.2.3.4:2368"),
 //				TlsVerification:   tls_auth.ID(),
 //				TlsAuthentication: tls_verification.ID(),

@@ -11,6 +11,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
+ * // Create a prompt field
  * const field = new authentik.StagePromptField("field", {
  *     fieldKey: "username",
  *     label: "Username",

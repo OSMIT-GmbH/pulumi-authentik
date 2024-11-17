@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,17 +19,19 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create a duo setup stage
 //			_, err := authentik.NewStageAuthenticatorDuo(ctx, "name", &authentik.StageAuthenticatorDuoArgs{
-//				ApiHostname:  pulumi.String("http://foo.bar.baz"),
+//				Name:         pulumi.String("duo-setup"),
 //				ClientId:     pulumi.String("foo"),
 //				ClientSecret: pulumi.String("bar"),
+//				ApiHostname:  pulumi.String("http://foo.bar.baz"),
 //			})
 //			if err != nil {
 //				return err

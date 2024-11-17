@@ -11,7 +11,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const name = new authentik.StageConsent("name", {});
+ * // Create consent stage
+ * const name = new authentik.StageConsent("name", {name: "consent"});
  * ```
  */
 export class StageConsent extends pulumi.CustomResource {

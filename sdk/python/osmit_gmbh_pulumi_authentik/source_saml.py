@@ -697,10 +697,12 @@ class SourceSaml(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create a SAML Source
         default_source_pre_authentication = authentik.get_flow(slug="default-source-pre-authentication")
         default_source_authentication = authentik.get_flow(slug="default-source-authentication")
         default_source_enrollment = authentik.get_flow(slug="default-source-enrollment")
         name = authentik.SourceSaml("name",
+            name="test-source",
             slug="test-source",
             authentication_flow=default_source_authentication.id,
             enrollment_flow=default_source_enrollment.id,
@@ -740,10 +742,12 @@ class SourceSaml(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create a SAML Source
         default_source_pre_authentication = authentik.get_flow(slug="default-source-pre-authentication")
         default_source_authentication = authentik.get_flow(slug="default-source-authentication")
         default_source_enrollment = authentik.get_flow(slug="default-source-enrollment")
         name = authentik.SourceSaml("name",
+            name="test-source",
             slug="test-source",
             authentication_flow=default_source_authentication.id,
             enrollment_flow=default_source_enrollment.id,

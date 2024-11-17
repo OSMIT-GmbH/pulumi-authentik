@@ -12,6 +12,7 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
  * const instance = new authentik.Blueprint("instance", {
+ *     name: "blueprint-instance",
  *     path: "default/flow-default-authentication-flow.yaml",
  *     context: JSON.stringify({
  *         foo: "bar",

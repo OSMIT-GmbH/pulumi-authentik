@@ -367,6 +367,7 @@ class SystemSettings(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Configure system settings
         settings = authentik.SystemSettings("settings", default_user_change_username=True)
         ```
 
@@ -399,6 +400,7 @@ class SystemSettings(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Configure system settings
         settings = authentik.SystemSettings("settings", default_user_change_username=True)
         ```
 

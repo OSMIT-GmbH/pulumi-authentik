@@ -11,7 +11,11 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const name = new authentik.PolicyExpiry("name", {days: 3});
+ * // Create expiry policy
+ * const name = new authentik.PolicyExpiry("name", {
+ *     name: "expiry",
+ *     days: 3,
+ * });
  * ```
  */
 export class PolicyExpiry extends pulumi.CustomResource {

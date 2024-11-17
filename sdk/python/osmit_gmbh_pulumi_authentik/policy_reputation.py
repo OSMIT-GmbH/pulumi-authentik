@@ -202,7 +202,8 @@ class PolicyReputation(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.PolicyReputation("name")
+        # Create a reputation policy
+        name = authentik.PolicyReputation("name", name="reputation")
         ```
 
         :param str resource_name: The name of the resource.
@@ -225,7 +226,8 @@ class PolicyReputation(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.PolicyReputation("name")
+        # Create a reputation policy
+        name = authentik.PolicyReputation("name", name="reputation")
         ```
 
         :param str resource_name: The name of the resource.

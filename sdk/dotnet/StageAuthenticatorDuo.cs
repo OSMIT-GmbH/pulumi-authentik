@@ -21,11 +21,13 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create a duo setup stage
     ///     var name = new Authentik.StageAuthenticatorDuo("name", new()
     ///     {
-    ///         ApiHostname = "http://foo.bar.baz",
+    ///         Name = "duo-setup",
     ///         ClientId = "foo",
     ///         ClientSecret = "bar",
+    ///         ApiHostname = "http://foo.bar.baz",
     ///     });
     /// 
     /// });

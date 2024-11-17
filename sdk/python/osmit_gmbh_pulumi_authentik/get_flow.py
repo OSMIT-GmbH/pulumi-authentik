@@ -122,6 +122,7 @@ def get_flow(authentication: Optional[str] = None,
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the ID of a flow by slug
     default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
     ```
 
@@ -157,6 +158,7 @@ def get_flow_output(authentication: Optional[pulumi.Input[Optional[str]]] = None
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the ID of a flow by slug
     default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
     ```
 

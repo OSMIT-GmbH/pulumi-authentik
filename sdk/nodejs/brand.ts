@@ -11,10 +11,11 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
+ * // Create/manage a default brand
  * const _default = new authentik.Brand("default", {
- *     brandingTitle: "test",
- *     "default": true,
  *     domain: ".",
+ *     "default": true,
+ *     brandingTitle: "test",
  * });
  * ```
  */

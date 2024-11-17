@@ -333,6 +333,7 @@ class StagePromptField(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create a prompt field
         field = authentik.StagePromptField("field",
             field_key="username",
             label="Username",
@@ -358,6 +359,7 @@ class StagePromptField(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create a prompt field
         field = authentik.StagePromptField("field",
             field_key="username",
             label="Username",

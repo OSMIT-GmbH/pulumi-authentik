@@ -12,17 +12,20 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // Create a Radius Provider
  * const default-authentication-flow = authentik.getFlow({
  *     slug: "default-authentication-flow",
  * });
- * const nameProviderRadius = new authentik.ProviderRadius("nameProviderRadius", {
+ * const name = new authentik.ProviderRadius("name", {
+ *     name: "radius-app",
  *     authorizationFlow: default_authentication_flow.then(default_authentication_flow => default_authentication_flow.id),
  *     clientNetworks: "10.10.0.0/24",
  *     sharedSecret: "my-shared-secret",
  * });
- * const nameApplication = new authentik.Application("nameApplication", {
+ * const nameApplication = new authentik.Application("name", {
+ *     name: "radius-app",
  *     slug: "radius-app",
- *     protocolProvider: nameProviderRadius.id,
+ *     protocolProvider: name.id,
  * });
  * ```
  */

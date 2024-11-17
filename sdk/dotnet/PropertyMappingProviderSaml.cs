@@ -23,10 +23,12 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create a custom SAML provider property mapping
     ///     var saml_aws_rolessessionname = new Authentik.PropertyMappingProviderSaml("saml-aws-rolessessionname", new()
     ///     {
-    ///         Expression = "return user.email",
+    ///         Name = "SAML AWS RoleSessionName",
     ///         SamlName = "https://aws.amazon.com/SAML/Attributes/RoleSessionName",
+    ///         Expression = "return user.email",
     ///     });
     /// 
     /// });

@@ -21,8 +21,10 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create a captcha stage
     ///     var name = new Authentik.StageCaptcha("name", new()
     ///     {
+    ///         Name = "captcha",
     ///         PrivateKey = "foo",
     ///         PublicKey = "bar",
     ///     });

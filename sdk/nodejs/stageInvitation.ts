@@ -11,7 +11,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const name = new authentik.StageInvitation("name", {});
+ * // Create invitation stage
+ * const name = new authentik.StageInvitation("name", {name: "invitation"});
  * ```
  */
 export class StageInvitation extends pulumi.CustomResource {

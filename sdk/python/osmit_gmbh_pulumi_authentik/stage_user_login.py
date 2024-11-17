@@ -211,7 +211,8 @@ class StageUserLogin(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageUserLogin("name")
+        # Create a user login stage
+        name = authentik.StageUserLogin("name", name="user-login")
         ```
 
         :param str resource_name: The name of the resource.
@@ -232,7 +233,8 @@ class StageUserLogin(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageUserLogin("name")
+        # Create a user login stage
+        name = authentik.StageUserLogin("name", name="user-login")
         ```
 
         :param str resource_name: The name of the resource.

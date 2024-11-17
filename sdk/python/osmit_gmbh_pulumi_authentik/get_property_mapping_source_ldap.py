@@ -111,18 +111,6 @@ def get_property_mapping_source_ldap(ids: Optional[Sequence[str]] = None,
     """
     Get LDAP Source Property mappings
 
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_authentik as authentik
-
-    test = authentik.get_property_mapping_source_ldap(managed_lists=[
-        "goauthentik.io/sources/ldap/default-name",
-        "goauthentik.io/sources/ldap/default-mail",
-    ])
-    ```
-
 
     :param Sequence[str] ids: List of ids when `managed_list` is set. Generated.
     :param Sequence[str] managed_lists: Retrieve multiple property mappings
@@ -149,18 +137,6 @@ def get_property_mapping_source_ldap_output(ids: Optional[pulumi.Input[Optional[
                                             opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetPropertyMappingSourceLdapResult]:
     """
     Get LDAP Source Property mappings
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_authentik as authentik
-
-    test = authentik.get_property_mapping_source_ldap(managed_lists=[
-        "goauthentik.io/sources/ldap/default-name",
-        "goauthentik.io/sources/ldap/default-mail",
-    ])
-    ```
 
 
     :param Sequence[str] ids: List of ids when `managed_list` is set. Generated.

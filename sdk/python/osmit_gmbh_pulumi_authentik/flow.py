@@ -349,8 +349,9 @@ class Flow(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
 
         # Create a flow with a stage attached
-        name = authentik.StageDummy("name")
+        name = authentik.StageDummy("name", name="test-stage")
         flow = authentik.Flow("flow",
+            name="test-flow",
             title="Test flow",
             slug="test-flow",
             designation="authorization")
@@ -383,8 +384,9 @@ class Flow(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
 
         # Create a flow with a stage attached
-        name = authentik.StageDummy("name")
+        name = authentik.StageDummy("name", name="test-stage")
         flow = authentik.Flow("flow",
+            name="test-flow",
             title="Test flow",
             slug="test-flow",
             designation="authorization")

@@ -121,25 +121,26 @@ class CertificateKeyPair(pulumi.CustomResource):
         import pulumi_tls as tls
 
         # Generate a certificate-key pair
-        example_private_key = tls.PrivateKey("examplePrivateKey",
-            algorithm="ECDSA",
-            ecdsa_curve="P384")
-        example_self_signed_cert = tls.SelfSignedCert("exampleSelfSignedCert",
-            key_algorithm="ECDSA",
-            private_key_pem=example_private_key.private_key_pem,
-            subject={
-                "common_name": "example.com",
-                "organization": "ACME Examples, Inc",
-            },
+        example = tls.index.PrivateKey("example",
+            algorithm=ECDSA,
+            ecdsa_curve=P384)
+        example_self_signed_cert = tls.index.SelfSignedCert("example",
+            key_algorithm=ECDSA,
+            private_key_pem=example.private_key_pem,
+            subject=[{
+                commonName: example.com,
+                organization: ACME Examples, Inc,
+            }],
             validity_period_hours=12,
             allowed_uses=[
-                "key_encipherment",
-                "digital_signature",
-                "server_auth",
+                key_encipherment,
+                digital_signature,
+                server_auth,
             ])
         name = authentik.CertificateKeyPair("name",
-            certificate_data=example_self_signed_cert.cert_pem,
-            key_data=example_private_key.private_key_pem)
+            name="keypair",
+            certificate_data=example_self_signed_cert["certPem"],
+            key_data=example["privateKeyPem"])
         ```
 
         :param str resource_name: The name of the resource.
@@ -160,25 +161,26 @@ class CertificateKeyPair(pulumi.CustomResource):
         import pulumi_tls as tls
 
         # Generate a certificate-key pair
-        example_private_key = tls.PrivateKey("examplePrivateKey",
-            algorithm="ECDSA",
-            ecdsa_curve="P384")
-        example_self_signed_cert = tls.SelfSignedCert("exampleSelfSignedCert",
-            key_algorithm="ECDSA",
-            private_key_pem=example_private_key.private_key_pem,
-            subject={
-                "common_name": "example.com",
-                "organization": "ACME Examples, Inc",
-            },
+        example = tls.index.PrivateKey("example",
+            algorithm=ECDSA,
+            ecdsa_curve=P384)
+        example_self_signed_cert = tls.index.SelfSignedCert("example",
+            key_algorithm=ECDSA,
+            private_key_pem=example.private_key_pem,
+            subject=[{
+                commonName: example.com,
+                organization: ACME Examples, Inc,
+            }],
             validity_period_hours=12,
             allowed_uses=[
-                "key_encipherment",
-                "digital_signature",
-                "server_auth",
+                key_encipherment,
+                digital_signature,
+                server_auth,
             ])
         name = authentik.CertificateKeyPair("name",
-            certificate_data=example_self_signed_cert.cert_pem,
-            key_data=example_private_key.private_key_pem)
+            name="keypair",
+            certificate_data=example_self_signed_cert["certPem"],
+            key_data=example["privateKeyPem"])
         ```
 
         :param str resource_name: The name of the resource.

@@ -21,8 +21,10 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create expression policys
     ///     var name = new Authentik.PolicyExpression("name", new()
     ///     {
+    ///         Name = "expression",
     ///         Expression = "return True",
     ///     });
     /// 

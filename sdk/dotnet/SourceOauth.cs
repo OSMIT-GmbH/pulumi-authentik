@@ -22,6 +22,7 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create OAuth Source using an existing provider
     ///     var default_source_authentication = Authentik.GetFlow.Invoke(new()
     ///     {
     ///         Slug = "default-source-authentication",
@@ -34,6 +35,7 @@ namespace OSMIT_GmbH.Authentik
     /// 
     ///     var name = new Authentik.SourceOauth("name", new()
     ///     {
+    ///         Name = "discord",
     ///         Slug = "discord",
     ///         AuthenticationFlow = default_source_authentication.Apply(default_source_authentication =&gt; default_source_authentication.Apply(getFlowResult =&gt; getFlowResult.Id)),
     ///         EnrollmentFlow = default_source_enrollment.Apply(default_source_enrollment =&gt; default_source_enrollment.Apply(getFlowResult =&gt; getFlowResult.Id)),

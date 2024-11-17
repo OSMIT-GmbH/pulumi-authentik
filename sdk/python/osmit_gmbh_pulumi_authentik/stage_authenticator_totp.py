@@ -153,7 +153,8 @@ class StageAuthenticatorTotp(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageAuthenticatorTotp("name")
+        # Create a TOTP Setup stage
+        name = authentik.StageAuthenticatorTotp("name", name="totp-setup")
         ```
 
         :param str resource_name: The name of the resource.
@@ -173,7 +174,8 @@ class StageAuthenticatorTotp(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageAuthenticatorTotp("name")
+        # Create a TOTP Setup stage
+        name = authentik.StageAuthenticatorTotp("name", name="totp-setup")
         ```
 
         :param str resource_name: The name of the resource.

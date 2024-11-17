@@ -21,7 +21,11 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var name = new Authentik.StageUserDelete("name");
+    ///     // Create a user deletion stage
+    ///     var name = new Authentik.StageUserDelete("name", new()
+    ///     {
+    ///         Name = "user-delete",
+    ///     });
     /// 
     /// });
     /// ```

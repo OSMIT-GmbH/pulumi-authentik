@@ -21,16 +21,19 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create a local kubernetes connection
     ///     var local = new Authentik.ServiceConnectionKubernetes("local", new()
     ///     {
+    ///         Name = "local",
     ///         Local = true,
     ///     });
     /// 
+    ///     // Create a remote kubernetes connection
     ///     var remote_test_cluster = new Authentik.ServiceConnectionKubernetes("remote-test-cluster", new()
     ///     {
+    ///         Name = "test-cluster",
     ///         Kubeconfig = @"kind: Config
     /// users: [...]
-    /// 
     /// ",
     ///     });
     /// 

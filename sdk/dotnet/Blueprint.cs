@@ -24,6 +24,7 @@ namespace OSMIT_GmbH.Authentik
     /// {
     ///     var instance = new Authentik.Blueprint("instance", new()
     ///     {
+    ///         Name = "blueprint-instance",
     ///         Path = "default/flow-default-authentication-flow.yaml",
     ///         Context = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
     ///         {

@@ -6,31 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@osmit-gmbh/pulumi-authentik";
- * import * as authentik from "@pulumi/authentik";
- *
- * // Create a policy binding for a resource
- * const policy = new authentik.PolicyExpression("policy", {expression: "return True"});
- * const nameApplication = new authentik.Application("nameApplication", {slug: "test-app"});
- * const app_accessPolicyBinding = new authentik.PolicyBinding("app-accessPolicyBinding", {
- *     target: nameApplication.uuid,
- *     policy: policy.id,
- *     order: 0,
- * });
- * // Create a binding to a group
- * const admins = authentik.getGroup({
- *     name: "authentik Admins",
- * });
- * const nameIndex_applicationApplication = new authentik.Application("nameIndex/applicationApplication", {slug: "test-app"});
- * const app_accessIndex_policyBindingPolicyBinding = new authentik.PolicyBinding("app-accessIndex/policyBindingPolicyBinding", {
- *     target: nameApplication.uuid,
- *     group: admins.then(admins => admins.id),
- *     order: 0,
- * });
- * ```
  */
 export class PolicyBinding extends pulumi.CustomResource {
     /**

@@ -22,22 +22,25 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create a Radius Provider
     ///     var default_authentication_flow = Authentik.GetFlow.Invoke(new()
     ///     {
     ///         Slug = "default-authentication-flow",
     ///     });
     /// 
-    ///     var nameProviderRadius = new Authentik.ProviderRadius("nameProviderRadius", new()
+    ///     var name = new Authentik.ProviderRadius("name", new()
     ///     {
+    ///         Name = "radius-app",
     ///         AuthorizationFlow = default_authentication_flow.Apply(default_authentication_flow =&gt; default_authentication_flow.Apply(getFlowResult =&gt; getFlowResult.Id)),
     ///         ClientNetworks = "10.10.0.0/24",
     ///         SharedSecret = "my-shared-secret",
     ///     });
     /// 
-    ///     var nameApplication = new Authentik.Application("nameApplication", new()
+    ///     var nameApplication = new Authentik.Application("name", new()
     ///     {
+    ///         Name = "radius-app",
     ///         Slug = "radius-app",
-    ///         ProtocolProvider = nameProviderRadius.Id,
+    ///         ProtocolProvider = name.Id,
     ///     });
     /// 
     /// });

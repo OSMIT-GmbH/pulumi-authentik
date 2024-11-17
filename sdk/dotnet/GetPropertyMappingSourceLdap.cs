@@ -14,56 +14,12 @@ namespace OSMIT_GmbH.Authentik
     {
         /// <summary>
         /// Get LDAP Source Property mappings
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Authentik = Pulumi.Authentik;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var test = Authentik.GetPropertyMappingSourceLdap.Invoke(new()
-        ///     {
-        ///         ManagedLists = new[]
-        ///         {
-        ///             "goauthentik.io/sources/ldap/default-name",
-        ///             "goauthentik.io/sources/ldap/default-mail",
-        ///         },
-        ///     });
-        /// 
-        /// });
-        /// ```
         /// </summary>
         public static Task<GetPropertyMappingSourceLdapResult> InvokeAsync(GetPropertyMappingSourceLdapArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPropertyMappingSourceLdapResult>("authentik:index/getPropertyMappingSourceLdap:getPropertyMappingSourceLdap", args ?? new GetPropertyMappingSourceLdapArgs(), options.WithDefaults());
 
         /// <summary>
         /// Get LDAP Source Property mappings
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Authentik = Pulumi.Authentik;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var test = Authentik.GetPropertyMappingSourceLdap.Invoke(new()
-        ///     {
-        ///         ManagedLists = new[]
-        ///         {
-        ///             "goauthentik.io/sources/ldap/default-name",
-        ///             "goauthentik.io/sources/ldap/default-mail",
-        ///         },
-        ///     });
-        /// 
-        /// });
-        /// ```
         /// </summary>
         public static Output<GetPropertyMappingSourceLdapResult> Invoke(GetPropertyMappingSourceLdapInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPropertyMappingSourceLdapResult>("authentik:index/getPropertyMappingSourceLdap:getPropertyMappingSourceLdap", args ?? new GetPropertyMappingSourceLdapInvokeArgs(), options.WithDefaults());

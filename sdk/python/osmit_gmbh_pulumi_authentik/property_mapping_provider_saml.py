@@ -145,9 +145,11 @@ class PropertyMappingProviderSaml(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create a custom SAML provider property mapping
         saml_aws_rolessessionname = authentik.PropertyMappingProviderSaml("saml-aws-rolessessionname",
-            expression="return user.email",
-            saml_name="https://aws.amazon.com/SAML/Attributes/RoleSessionName")
+            name="SAML AWS RoleSessionName",
+            saml_name="https://aws.amazon.com/SAML/Attributes/RoleSessionName",
+            expression="return user.email")
         ```
 
         :param str resource_name: The name of the resource.
@@ -168,9 +170,11 @@ class PropertyMappingProviderSaml(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create a custom SAML provider property mapping
         saml_aws_rolessessionname = authentik.PropertyMappingProviderSaml("saml-aws-rolessessionname",
-            expression="return user.email",
-            saml_name="https://aws.amazon.com/SAML/Attributes/RoleSessionName")
+            name="SAML AWS RoleSessionName",
+            saml_name="https://aws.amazon.com/SAML/Attributes/RoleSessionName",
+            expression="return user.email")
         ```
 
         :param str resource_name: The name of the resource.

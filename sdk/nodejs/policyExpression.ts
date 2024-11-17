@@ -11,7 +11,11 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const name = new authentik.PolicyExpression("name", {expression: "return True"});
+ * // Create expression policys
+ * const name = new authentik.PolicyExpression("name", {
+ *     name: "expression",
+ *     expression: "return True",
+ * });
  * ```
  */
 export class PolicyExpression extends pulumi.CustomResource {

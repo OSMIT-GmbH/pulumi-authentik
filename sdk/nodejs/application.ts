@@ -12,18 +12,24 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // Create an application with a provider attached and policies applied
  * const default-authorization-flow = authentik.getFlow({
  *     slug: "default-provider-authorization-implicit-consent",
  * });
- * const nameProviderOauth2 = new authentik.ProviderOauth2("nameProviderOauth2", {
+ * const name = new authentik.ProviderOauth2("name", {
+ *     name: "example-app",
  *     clientId: "example-app",
  *     clientSecret: "test",
  *     authorizationFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
  * });
- * const policy = new authentik.PolicyExpression("policy", {expression: "return True"});
- * const nameApplication = new authentik.Application("nameApplication", {
+ * const policy = new authentik.PolicyExpression("policy", {
+ *     name: "example",
+ *     expression: "return True",
+ * });
+ * const nameApplication = new authentik.Application("name", {
+ *     name: "example-app",
  *     slug: "example-app",
- *     protocolProvider: nameProviderOauth2.id,
+ *     protocolProvider: name.id,
  * });
  * const app_access = new authentik.PolicyBinding("app-access", {
  *     target: nameApplication.uuid,

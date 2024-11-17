@@ -353,15 +353,20 @@ class Application(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create an application with a provider attached and policies applied
         default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
-        name_provider_oauth2 = authentik.ProviderOauth2("nameProviderOauth2",
+        name = authentik.ProviderOauth2("name",
+            name="example-app",
             client_id="example-app",
             client_secret="test",
             authorization_flow=default_authorization_flow.id)
-        policy = authentik.PolicyExpression("policy", expression="return True")
-        name_application = authentik.Application("nameApplication",
+        policy = authentik.PolicyExpression("policy",
+            name="example",
+            expression="return True")
+        name_application = authentik.Application("name",
+            name="example-app",
             slug="example-app",
-            protocol_provider=name_provider_oauth2.id)
+            protocol_provider=name.id)
         app_access = authentik.PolicyBinding("app-access",
             target=name_application.uuid,
             policy=policy.id,
@@ -386,15 +391,20 @@ class Application(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create an application with a provider attached and policies applied
         default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
-        name_provider_oauth2 = authentik.ProviderOauth2("nameProviderOauth2",
+        name = authentik.ProviderOauth2("name",
+            name="example-app",
             client_id="example-app",
             client_secret="test",
             authorization_flow=default_authorization_flow.id)
-        policy = authentik.PolicyExpression("policy", expression="return True")
-        name_application = authentik.Application("nameApplication",
+        policy = authentik.PolicyExpression("policy",
+            name="example",
+            expression="return True")
+        name_application = authentik.Application("name",
+            name="example-app",
             slug="example-app",
-            protocol_provider=name_provider_oauth2.id)
+            protocol_provider=name.id)
         app_access = authentik.PolicyBinding("app-access",
             target=name_application.uuid,
             policy=policy.id,

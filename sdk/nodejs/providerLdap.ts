@@ -12,16 +12,19 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // Create an LDAP Provider
  * const default-authentication-flow = authentik.getFlow({
  *     slug: "default-authentication-flow",
  * });
- * const nameProviderLdap = new authentik.ProviderLdap("nameProviderLdap", {
+ * const name = new authentik.ProviderLdap("name", {
+ *     name: "ldap-app",
  *     baseDn: "dc=ldap,dc=goauthentik,dc=io",
  *     bindFlow: default_authentication_flow.then(default_authentication_flow => default_authentication_flow.id),
  * });
- * const nameApplication = new authentik.Application("nameApplication", {
+ * const nameApplication = new authentik.Application("name", {
+ *     name: "ldap-app",
  *     slug: "ldap-app",
- *     protocolProvider: nameProviderLdap.id,
+ *     protocolProvider: name.id,
  * });
  * ```
  */

@@ -70,7 +70,8 @@ class StageUserDelete(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageUserDelete("name")
+        # Create a user deletion stage
+        name = authentik.StageUserDelete("name", name="user-delete")
         ```
 
         :param str resource_name: The name of the resource.
@@ -89,7 +90,8 @@ class StageUserDelete(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageUserDelete("name")
+        # Create a user deletion stage
+        name = authentik.StageUserDelete("name", name="user-delete")
         ```
 
         :param str resource_name: The name of the resource.

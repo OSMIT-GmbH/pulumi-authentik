@@ -25,10 +25,12 @@ namespace OSMIT_GmbH.Authentik
     ///     var name = new Authentik.User("name", new()
     ///     {
     ///         Username = "user",
+    ///         Name = "User",
     ///     });
     /// 
     ///     var @group = new Authentik.Group("group", new()
     ///     {
+    ///         Name = "tf_admins",
     ///         Users = new[]
     ///         {
     ///             name.Id,

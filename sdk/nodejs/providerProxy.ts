@@ -12,17 +12,20 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // Create a proxy provider
  * const default-authorization-flow = authentik.getFlow({
  *     slug: "default-provider-authorization-implicit-consent",
  * });
- * const nameProviderProxy = new authentik.ProviderProxy("nameProviderProxy", {
+ * const name = new authentik.ProviderProxy("name", {
+ *     name: "test-app",
  *     internalHost: "http://foo.bar.baz",
  *     externalHost: "http://internal.service",
  *     authorizationFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
  * });
- * const nameApplication = new authentik.Application("nameApplication", {
+ * const nameApplication = new authentik.Application("name", {
+ *     name: "test-app",
  *     slug: "test-app",
- *     protocolProvider: nameProviderProxy.id,
+ *     protocolProvider: name.id,
  * });
  * ```
  */

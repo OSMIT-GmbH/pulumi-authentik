@@ -12,6 +12,7 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // Create a SAML Source
  * const default-source-pre-authentication = authentik.getFlow({
  *     slug: "default-source-pre-authentication",
  * });
@@ -22,6 +23,7 @@ import * as utilities from "./utilities";
  *     slug: "default-source-enrollment",
  * });
  * const name = new authentik.SourceSaml("name", {
+ *     name: "test-source",
  *     slug: "test-source",
  *     authenticationFlow: default_source_authentication.then(default_source_authentication => default_source_authentication.id),
  *     enrollmentFlow: default_source_enrollment.then(default_source_enrollment => default_source_enrollment.id),

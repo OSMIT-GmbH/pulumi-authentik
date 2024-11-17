@@ -23,8 +23,10 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create a custom LDAP source property mapping
     ///     var name = new Authentik.PropertyMappingSourceLdap("name", new()
     ///     {
+    ///         Name = "custom-field",
     ///         Expression = "return ldap.get('sAMAccountName')",
     ///     });
     /// 

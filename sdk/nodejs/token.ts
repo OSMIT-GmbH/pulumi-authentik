@@ -12,7 +12,10 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
  * // Create a token for a user
- * const name = new authentik.User("name", {username: "user"});
+ * const name = new authentik.User("name", {
+ *     username: "user",
+ *     name: "User",
+ * });
  * const _default = new authentik.Token("default", {
  *     identifier: "my-token",
  *     user: name.id,

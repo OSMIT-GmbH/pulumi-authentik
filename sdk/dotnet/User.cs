@@ -12,35 +12,6 @@ namespace OSMIT_GmbH.Authentik
 {
     /// <summary>
     /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Authentik = OSMIT_GmbH.Authentik;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     // Create a user
-    ///     var nameUser = new Authentik.User("nameUser", new()
-    ///     {
-    ///         Username = "user",
-    ///     });
-    /// 
-    ///     // Create a user that is member of a group
-    ///     var @group = new Authentik.Group("group");
-    /// 
-    ///     var nameIndex_userUser = new Authentik.User("nameIndex/userUser", new()
-    ///     {
-    ///         Username = "user",
-    ///         Groups = new[]
-    ///         {
-    ///             @group.Id,
-    ///         },
-    ///     });
-    /// 
-    /// });
-    /// ```
     /// </summary>
     [AuthentikResourceType("authentik:index/user:User")]
     public partial class User : global::Pulumi.CustomResource

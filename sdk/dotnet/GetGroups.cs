@@ -25,8 +25,10 @@ namespace OSMIT_GmbH.Authentik
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
+        ///     // To get the complete groups list
         ///     var all = Authentik.GetGroups.Invoke();
         /// 
+        ///     // Or, to filter according to a specific field
         ///     var admins = Authentik.GetGroups.Invoke(new()
         ///     {
         ///         IsSuperuser = true,
@@ -51,8 +53,10 @@ namespace OSMIT_GmbH.Authentik
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
+        ///     // To get the complete groups list
         ///     var all = Authentik.GetGroups.Invoke();
         /// 
+        ///     // Or, to filter according to a specific field
         ///     var admins = Authentik.GetGroups.Invoke(new()
         ///     {
         ///         IsSuperuser = true,

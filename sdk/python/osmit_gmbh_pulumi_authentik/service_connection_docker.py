@@ -187,13 +187,19 @@ class ServiceConnectionDocker(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
 
         # Create a local docker connection
-        local = authentik.ServiceConnectionDocker("local", local=True)
+        local = authentik.ServiceConnectionDocker("local",
+            name="local",
+            local=True)
         # Create a remote docker connection
         tls_auth = authentik.CertificateKeyPair("tls-auth",
+            name="docker-tls-auth",
             certificate_data="...",
             key_data="...")
-        tls_verification = authentik.CertificateKeyPair("tls-verification", certificate_data="...")
+        tls_verification = authentik.CertificateKeyPair("tls-verification",
+            name="docker-tls-verification",
+            certificate_data="...")
         remote_host = authentik.ServiceConnectionDocker("remote-host",
+            name="remote-host",
             url="http://1.2.3.4:2368",
             tls_verification=tls_auth.id,
             tls_authentication=tls_verification.id)
@@ -218,13 +224,19 @@ class ServiceConnectionDocker(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
 
         # Create a local docker connection
-        local = authentik.ServiceConnectionDocker("local", local=True)
+        local = authentik.ServiceConnectionDocker("local",
+            name="local",
+            local=True)
         # Create a remote docker connection
         tls_auth = authentik.CertificateKeyPair("tls-auth",
+            name="docker-tls-auth",
             certificate_data="...",
             key_data="...")
-        tls_verification = authentik.CertificateKeyPair("tls-verification", certificate_data="...")
+        tls_verification = authentik.CertificateKeyPair("tls-verification",
+            name="docker-tls-verification",
+            certificate_data="...")
         remote_host = authentik.ServiceConnectionDocker("remote-host",
+            name="remote-host",
             url="http://1.2.3.4:2368",
             tls_verification=tls_auth.id,
             tls_authentication=tls_verification.id)

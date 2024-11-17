@@ -6,20 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * Get LDAP Source Property mappings
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@pulumi/authentik";
- *
- * const test = authentik.getPropertyMappingSourceLdap({
- *     managedLists: [
- *         "goauthentik.io/sources/ldap/default-name",
- *         "goauthentik.io/sources/ldap/default-mail",
- *     ],
- * });
- * ```
  */
 export function getPropertyMappingSourceLdap(args?: GetPropertyMappingSourceLdapArgs, opts?: pulumi.InvokeOptions): Promise<GetPropertyMappingSourceLdapResult> {
     args = args || {};
@@ -73,20 +59,6 @@ export interface GetPropertyMappingSourceLdapResult {
 }
 /**
  * Get LDAP Source Property mappings
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@pulumi/authentik";
- *
- * const test = authentik.getPropertyMappingSourceLdap({
- *     managedLists: [
- *         "goauthentik.io/sources/ldap/default-name",
- *         "goauthentik.io/sources/ldap/default-mail",
- *     ],
- * });
- * ```
  */
 export function getPropertyMappingSourceLdapOutput(args?: GetPropertyMappingSourceLdapOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPropertyMappingSourceLdapResult> {
     args = args || {};

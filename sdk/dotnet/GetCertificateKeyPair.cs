@@ -25,6 +25,7 @@ namespace OSMIT_GmbH.Authentik
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
+        ///     // To get the the ID and other info about a certificate
         ///     var generated = Authentik.GetCertificateKeyPair.Invoke(new()
         ///     {
         ///         Name = "authentik Self-signed Certificate",
@@ -49,6 +50,7 @@ namespace OSMIT_GmbH.Authentik
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
+        ///     // To get the the ID and other info about a certificate
         ///     var generated = Authentik.GetCertificateKeyPair.Invoke(new()
         ///     {
         ///         Name = "authentik Self-signed Certificate",

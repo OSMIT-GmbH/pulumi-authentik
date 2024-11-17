@@ -418,10 +418,11 @@ class Brand(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create/manage a default brand
         default = authentik.Brand("default",
-            branding_title="test",
+            domain=".",
             default=True,
-            domain=".")
+            branding_title="test")
         ```
 
         :param str resource_name: The name of the resource.
@@ -443,10 +444,11 @@ class Brand(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create/manage a default brand
         default = authentik.Brand("default",
-            branding_title="test",
+            domain=".",
             default=True,
-            domain=".")
+            branding_title="test")
         ```
 
         :param str resource_name: The name of the resource.

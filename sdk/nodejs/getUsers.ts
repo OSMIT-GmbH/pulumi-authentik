@@ -15,7 +15,9 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // To get the complete users list
  * const all = authentik.getUsers({});
+ * // Or, to filter according to a specific field
  * const admins = authentik.getUsers({
  *     isSuperuser: true,
  * });
@@ -95,7 +97,9 @@ export interface GetUsersResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // To get the complete users list
  * const all = authentik.getUsers({});
+ * // Or, to filter according to a specific field
  * const admins = authentik.getUsers({
  *     isSuperuser: true,
  * });

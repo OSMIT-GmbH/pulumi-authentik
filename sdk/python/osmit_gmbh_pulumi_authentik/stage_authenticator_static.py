@@ -186,7 +186,8 @@ class StageAuthenticatorStatic(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageAuthenticatorStatic("name")
+        # Create a static TOTP Setup stage
+        name = authentik.StageAuthenticatorStatic("name", name="static-totp-setup")
         ```
 
         :param str resource_name: The name of the resource.
@@ -207,7 +208,8 @@ class StageAuthenticatorStatic(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageAuthenticatorStatic("name")
+        # Create a static TOTP Setup stage
+        name = authentik.StageAuthenticatorStatic("name", name="static-totp-setup")
         ```
 
         :param str resource_name: The name of the resource.

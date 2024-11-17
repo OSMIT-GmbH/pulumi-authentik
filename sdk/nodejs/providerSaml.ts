@@ -12,16 +12,19 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // Create a SAML Provider
  * const default-authorization-flow = authentik.getFlow({
  *     slug: "default-provider-authorization-implicit-consent",
  * });
- * const nameProviderSaml = new authentik.ProviderSaml("nameProviderSaml", {
+ * const name = new authentik.ProviderSaml("name", {
+ *     name: "test-app",
  *     authorizationFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
  *     acsUrl: "http://localhost",
  * });
- * const nameApplication = new authentik.Application("nameApplication", {
+ * const nameApplication = new authentik.Application("name", {
+ *     name: "test-app",
  *     slug: "test-app",
- *     protocolProvider: nameProviderSaml.id,
+ *     protocolProvider: name.id,
  * });
  * ```
  */

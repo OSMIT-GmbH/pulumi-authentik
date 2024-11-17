@@ -124,7 +124,9 @@ class StagePrompt(pulumi.CustomResource):
             field_key="username",
             label="Username",
             type="username")
-        name = authentik.StagePrompt("name", fields=[resource["authentik_stage_prompt_field"]["field"]["id"]])
+        name = authentik.StagePrompt("name",
+            name="test",
+            fields=[authentik_stage_prompt_field["field"]["id"]])
         ```
 
         :param str resource_name: The name of the resource.
@@ -148,7 +150,9 @@ class StagePrompt(pulumi.CustomResource):
             field_key="username",
             label="Username",
             type="username")
-        name = authentik.StagePrompt("name", fields=[resource["authentik_stage_prompt_field"]["field"]["id"]])
+        name = authentik.StagePrompt("name",
+            name="test",
+            fields=[authentik_stage_prompt_field["field"]["id"]])
         ```
 
         :param str resource_name: The name of the resource.

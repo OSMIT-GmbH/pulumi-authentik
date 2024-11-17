@@ -25,6 +25,7 @@ namespace OSMIT_GmbH.Authentik
     ///     var name = new Authentik.User("name", new()
     ///     {
     ///         Username = "user",
+    ///         Name = "User",
     ///     });
     /// 
     ///     var @default = new Authentik.Token("default", new()

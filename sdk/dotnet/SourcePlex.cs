@@ -22,6 +22,7 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create a plex source
     ///     var default_authorization_flow = Authentik.GetFlow.Invoke(new()
     ///     {
     ///         Slug = "default-provider-authorization-implicit-consent",
@@ -29,6 +30,7 @@ namespace OSMIT_GmbH.Authentik
     /// 
     ///     var name = new Authentik.SourcePlex("name", new()
     ///     {
+    ///         Name = "plex",
     ///         Slug = "plex",
     ///         AuthenticationFlow = default_authorization_flow.Apply(default_authorization_flow =&gt; default_authorization_flow.Apply(getFlowResult =&gt; getFlowResult.Id)),
     ///         EnrollmentFlow = default_authorization_flow.Apply(default_authorization_flow =&gt; default_authorization_flow.Apply(getFlowResult =&gt; getFlowResult.Id)),

@@ -12,25 +12,6 @@ namespace OSMIT_GmbH.Authentik
 {
     /// <summary>
     /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Authentik = OSMIT_GmbH.Authentik;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     // Create a notification transport to slack/discord
-    ///     var transport = new Authentik.EventTransport("transport", new()
-    ///     {
-    ///         Mode = "webhook_slack",
-    ///         SendOnce = true,
-    ///         WebhookUrl = "https://discord.com/....",
-    ///     });
-    /// 
-    /// });
-    /// ```
     /// </summary>
     [AuthentikResourceType("authentik:index/eventTransport:EventTransport")]
     public partial class EventTransport : global::Pulumi.CustomResource

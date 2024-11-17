@@ -25,6 +25,7 @@ namespace OSMIT_GmbH.Authentik
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
+        ///     // To get the ID of a flow by slug
         ///     var default_authorization_flow = Authentik.GetFlow.Invoke(new()
         ///     {
         ///         Slug = "default-provider-authorization-implicit-consent",
@@ -49,6 +50,7 @@ namespace OSMIT_GmbH.Authentik
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
+        ///     // To get the ID of a flow by slug
         ///     var default_authorization_flow = Authentik.GetFlow.Invoke(new()
         ///     {
         ///         Slug = "default-provider-authorization-implicit-consent",

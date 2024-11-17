@@ -160,7 +160,10 @@ class PolicyExpiry(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.PolicyExpiry("name", days=3)
+        # Create expiry policy
+        name = authentik.PolicyExpiry("name",
+            name="expiry",
+            days=3)
         ```
 
         :param str resource_name: The name of the resource.
@@ -181,7 +184,10 @@ class PolicyExpiry(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.PolicyExpiry("name", days=3)
+        # Create expiry policy
+        name = authentik.PolicyExpiry("name",
+            name="expiry",
+            days=3)
         ```
 
         :param str resource_name: The name of the resource.

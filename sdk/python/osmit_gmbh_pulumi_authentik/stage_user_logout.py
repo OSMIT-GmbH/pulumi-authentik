@@ -70,7 +70,8 @@ class StageUserLogout(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageUserLogout("name")
+        # Create a user logout stage
+        name = authentik.StageUserLogout("name", name="user-logout")
         ```
 
         :param str resource_name: The name of the resource.
@@ -89,7 +90,8 @@ class StageUserLogout(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageUserLogout("name")
+        # Create a user logout stage
+        name = authentik.StageUserLogout("name", name="user-logout")
         ```
 
         :param str resource_name: The name of the resource.

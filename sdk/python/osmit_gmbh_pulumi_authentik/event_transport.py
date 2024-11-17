@@ -173,17 +173,6 @@ class EventTransport(pulumi.CustomResource):
         """
         ## Example Usage
 
-        ```python
-        import pulumi
-        import osmit_gmbh_pulumi_authentik as authentik
-
-        # Create a notification transport to slack/discord
-        transport = authentik.EventTransport("transport",
-            mode="webhook_slack",
-            send_once=True,
-            webhook_url="https://discord.com/....")
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] mode: Allowed values: - `local` - `webhook` - `webhook_slack` - `email`
@@ -196,17 +185,6 @@ class EventTransport(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         ## Example Usage
-
-        ```python
-        import pulumi
-        import osmit_gmbh_pulumi_authentik as authentik
-
-        # Create a notification transport to slack/discord
-        transport = authentik.EventTransport("transport",
-            mode="webhook_slack",
-            send_once=True,
-            webhook_url="https://discord.com/....")
-        ```
 
         :param str resource_name: The name of the resource.
         :param EventTransportArgs args: The arguments to use to populate this resource's properties.

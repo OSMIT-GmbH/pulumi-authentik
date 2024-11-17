@@ -25,6 +25,7 @@ namespace OSMIT_GmbH.Authentik
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
+        ///     // To get the ID of a stage by name
         ///     var default_authentication_identification = Authentik.GetStage.Invoke(new()
         ///     {
         ///         Name = "default-authentication-identification",
@@ -49,6 +50,7 @@ namespace OSMIT_GmbH.Authentik
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
+        ///     // To get the ID of a stage by name
         ///     var default_authentication_identification = Authentik.GetStage.Invoke(new()
         ///     {
         ///         Name = "default-authentication-identification",

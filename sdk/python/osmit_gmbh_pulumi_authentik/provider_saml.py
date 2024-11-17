@@ -737,13 +737,16 @@ class ProviderSaml(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create a SAML Provider
         default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
-        name_provider_saml = authentik.ProviderSaml("nameProviderSaml",
+        name = authentik.ProviderSaml("name",
+            name="test-app",
             authorization_flow=default_authorization_flow.id,
             acs_url="http://localhost")
-        name_application = authentik.Application("nameApplication",
+        name_application = authentik.Application("name",
+            name="test-app",
             slug="test-app",
-            protocol_provider=name_provider_saml.id)
+            protocol_provider=name.id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -771,13 +774,16 @@ class ProviderSaml(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create a SAML Provider
         default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
-        name_provider_saml = authentik.ProviderSaml("nameProviderSaml",
+        name = authentik.ProviderSaml("name",
+            name="test-app",
             authorization_flow=default_authorization_flow.id,
             acs_url="http://localhost")
-        name_application = authentik.Application("nameApplication",
+        name_application = authentik.Application("name",
+            name="test-app",
             slug="test-app",
-            protocol_provider=name_provider_saml.id)
+            protocol_provider=name.id)
         ```
 
         :param str resource_name: The name of the resource.

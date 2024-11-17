@@ -21,7 +21,11 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var name = new Authentik.StageEmail("name");
+    ///     // Create email stage for email verification, uses global settings by default
+    ///     var name = new Authentik.StageEmail("name", new()
+    ///     {
+    ///         Name = "email-verification",
+    ///     });
     /// 
     /// });
     /// ```

@@ -11,11 +11,18 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const local = new authentik.ServiceConnectionKubernetes("local", {local: true});
- * const remote_test_cluster = new authentik.ServiceConnectionKubernetes("remote-test-cluster", {kubeconfig: `kind: Config
+ * // Create a local kubernetes connection
+ * const local = new authentik.ServiceConnectionKubernetes("local", {
+ *     name: "local",
+ *     local: true,
+ * });
+ * // Create a remote kubernetes connection
+ * const remote_test_cluster = new authentik.ServiceConnectionKubernetes("remote-test-cluster", {
+ *     name: "test-cluster",
+ *     kubeconfig: `kind: Config
  * users: [...]
- *
- * `});
+ * `,
+ * });
  * ```
  */
 export class ServiceConnectionKubernetes extends pulumi.CustomResource {

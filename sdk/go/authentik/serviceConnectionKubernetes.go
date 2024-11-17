@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -18,21 +18,25 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create a local kubernetes connection
 //			_, err := authentik.NewServiceConnectionKubernetes(ctx, "local", &authentik.ServiceConnectionKubernetesArgs{
+//				Name:  pulumi.String("local"),
 //				Local: pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err
 //			}
+//			// Create a remote kubernetes connection
 //			_, err = authentik.NewServiceConnectionKubernetes(ctx, "remote-test-cluster", &authentik.ServiceConnectionKubernetesArgs{
-//				Kubeconfig: pulumi.String("kind: Config\nusers: [...]\n\n"),
+//				Name:       pulumi.String("test-cluster"),
+//				Kubeconfig: pulumi.String("kind: Config\nusers: [...]\n"),
 //			})
 //			if err != nil {
 //				return err

@@ -202,7 +202,9 @@ def get_users(attributes: Optional[str] = None,
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the complete users list
     all = authentik.get_users()
+    # Or, to filter according to a specific field
     admins = authentik.get_users(is_superuser=True)
     ```
     """
@@ -262,7 +264,9 @@ def get_users_output(attributes: Optional[pulumi.Input[Optional[str]]] = None,
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the complete users list
     all = authentik.get_users()
+    # Or, to filter according to a specific field
     admins = authentik.get_users(is_superuser=True)
     ```
     """

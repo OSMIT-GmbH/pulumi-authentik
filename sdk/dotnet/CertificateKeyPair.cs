@@ -23,20 +23,23 @@ namespace OSMIT_GmbH.Authentik
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
     ///     // Generate a certificate-key pair
-    ///     var examplePrivateKey = new Tls.PrivateKey("examplePrivateKey", new()
+    ///     var example = new Tls.Index.PrivateKey("example", new()
     ///     {
     ///         Algorithm = "ECDSA",
     ///         EcdsaCurve = "P384",
     ///     });
     /// 
-    ///     var exampleSelfSignedCert = new Tls.SelfSignedCert("exampleSelfSignedCert", new()
+    ///     var exampleSelfSignedCert = new Tls.Index.SelfSignedCert("example", new()
     ///     {
     ///         KeyAlgorithm = "ECDSA",
-    ///         PrivateKeyPem = examplePrivateKey.PrivateKeyPem,
-    ///         Subject = new Tls.Inputs.SelfSignedCertSubjectArgs
+    ///         PrivateKeyPem = example.PrivateKeyPem,
+    ///         Subject = new[]
     ///         {
-    ///             CommonName = "example.com",
-    ///             Organization = "ACME Examples, Inc",
+    ///             
+    ///             {
+    ///                 { "commonName", "example.com" },
+    ///                 { "organization", "ACME Examples, Inc" },
+    ///             },
     ///         },
     ///         ValidityPeriodHours = 12,
     ///         AllowedUses = new[]
@@ -49,8 +52,9 @@ namespace OSMIT_GmbH.Authentik
     /// 
     ///     var name = new Authentik.CertificateKeyPair("name", new()
     ///     {
+    ///         Name = "keypair",
     ///         CertificateData = exampleSelfSignedCert.CertPem,
-    ///         KeyData = examplePrivateKey.PrivateKeyPem,
+    ///         KeyData = example.PrivateKeyPem,
     ///     });
     /// 
     /// });

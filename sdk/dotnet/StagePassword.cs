@@ -21,8 +21,10 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create a password stage that tests against the interla database
     ///     var test = new Authentik.StagePassword("test", new()
     ///     {
+    ///         Name = "test-stage",
     ///         Backends = new[]
     ///         {
     ///             "authentik.core.auth.InbuiltBackend",

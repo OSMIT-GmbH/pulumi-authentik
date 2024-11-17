@@ -8,38 +8,11 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			// Create a notification transport to slack/discord
-//			_, err := authentik.NewEventTransport(ctx, "transport", &authentik.EventTransportArgs{
-//				Mode:       pulumi.String("webhook_slack"),
-//				SendOnce:   pulumi.Bool(true),
-//				WebhookUrl: pulumi.String("https://discord.com/...."),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 type EventTransport struct {
 	pulumi.CustomResourceState
 

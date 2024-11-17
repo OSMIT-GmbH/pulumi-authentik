@@ -14,56 +14,12 @@ namespace OSMIT_GmbH.Authentik
     {
         /// <summary>
         /// Get SCIM Provider Property mappings
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Authentik = Pulumi.Authentik;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var test = Authentik.GetPropertyMappingProviderScim.Invoke(new()
-        ///     {
-        ///         ManagedLists = new[]
-        ///         {
-        ///             "goauthentik.io/providers/scim/user",
-        ///             "goauthentik.io/providers/scim/group",
-        ///         },
-        ///     });
-        /// 
-        /// });
-        /// ```
         /// </summary>
         public static Task<GetPropertyMappingProviderScimResult> InvokeAsync(GetPropertyMappingProviderScimArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPropertyMappingProviderScimResult>("authentik:index/getPropertyMappingProviderScim:getPropertyMappingProviderScim", args ?? new GetPropertyMappingProviderScimArgs(), options.WithDefaults());
 
         /// <summary>
         /// Get SCIM Provider Property mappings
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Authentik = Pulumi.Authentik;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var test = Authentik.GetPropertyMappingProviderScim.Invoke(new()
-        ///     {
-        ///         ManagedLists = new[]
-        ///         {
-        ///             "goauthentik.io/providers/scim/user",
-        ///             "goauthentik.io/providers/scim/group",
-        ///         },
-        ///     });
-        /// 
-        /// });
-        /// ```
         /// </summary>
         public static Output<GetPropertyMappingProviderScimResult> Invoke(GetPropertyMappingProviderScimInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPropertyMappingProviderScimResult>("authentik:index/getPropertyMappingProviderScim:getPropertyMappingProviderScim", args ?? new GetPropertyMappingProviderScimInvokeArgs(), options.WithDefaults());

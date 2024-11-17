@@ -21,11 +21,12 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create/manage a default brand
     ///     var @default = new Authentik.Brand("default", new()
     ///     {
-    ///         BrandingTitle = "test",
-    ///         Default = true,
     ///         Domain = ".",
+    ///         Default = true,
+    ///         BrandingTitle = "test",
     ///     });
     /// 
     /// });

@@ -521,14 +521,17 @@ class ProviderProxy(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create a proxy provider
         default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
-        name_provider_proxy = authentik.ProviderProxy("nameProviderProxy",
+        name = authentik.ProviderProxy("name",
+            name="test-app",
             internal_host="http://foo.bar.baz",
             external_host="http://internal.service",
             authorization_flow=default_authorization_flow.id)
-        name_application = authentik.Application("nameApplication",
+        name_application = authentik.Application("name",
+            name="test-app",
             slug="test-app",
-            protocol_provider=name_provider_proxy.id)
+            protocol_provider=name.id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -550,14 +553,17 @@ class ProviderProxy(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create a proxy provider
         default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
-        name_provider_proxy = authentik.ProviderProxy("nameProviderProxy",
+        name = authentik.ProviderProxy("name",
+            name="test-app",
             internal_host="http://foo.bar.baz",
             external_host="http://internal.service",
             authorization_flow=default_authorization_flow.id)
-        name_application = authentik.Application("nameApplication",
+        name_application = authentik.Application("name",
+            name="test-app",
             slug="test-app",
-            protocol_provider=name_provider_proxy.id)
+            protocol_provider=name.id)
         ```
 
         :param str resource_name: The name of the resource.

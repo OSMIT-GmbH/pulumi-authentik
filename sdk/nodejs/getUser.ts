@@ -13,6 +13,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // To get the name of a user by username
  * const akadmin = authentik.getUser({
  *     username: "akadmin",
  * });
@@ -115,6 +116,7 @@ export interface GetUserResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // To get the name of a user by username
  * const akadmin = authentik.getUser({
  *     username: "akadmin",
  * });

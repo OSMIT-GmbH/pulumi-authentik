@@ -138,18 +138,6 @@ def get_property_mapping_provider_saml(expression: Optional[str] = None,
     """
     Get SAML Provider Property mappings
 
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_authentik as authentik
-
-    test = authentik.get_property_mapping_provider_saml(managed_lists=[
-        "goauthentik.io/providers/saml/upn",
-        "goauthentik.io/providers/saml/name",
-    ])
-    ```
-
 
     :param str expression: Generated.
     :param str friendly_name: Generated.
@@ -187,18 +175,6 @@ def get_property_mapping_provider_saml_output(expression: Optional[pulumi.Input[
                                               opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetPropertyMappingProviderSamlResult]:
     """
     Get SAML Provider Property mappings
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_authentik as authentik
-
-    test = authentik.get_property_mapping_provider_saml(managed_lists=[
-        "goauthentik.io/providers/saml/upn",
-        "goauthentik.io/providers/saml/name",
-    ])
-    ```
 
 
     :param str expression: Generated.

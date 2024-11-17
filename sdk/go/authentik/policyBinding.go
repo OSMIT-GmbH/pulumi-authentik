@@ -8,70 +8,11 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			// Create a policy binding for a resource
-//			policy, err := authentik.NewPolicyExpression(ctx, "policy", &authentik.PolicyExpressionArgs{
-//				Expression: pulumi.String("return True"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			nameApplication, err := authentik.NewApplication(ctx, "nameApplication", &authentik.ApplicationArgs{
-//				Slug: pulumi.String("test-app"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = authentik.NewPolicyBinding(ctx, "app-accessPolicyBinding", &authentik.PolicyBindingArgs{
-//				Target: nameApplication.Uuid,
-//				Policy: policy.ID(),
-//				Order:  pulumi.Int(0),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			admins, err := authentik.LookupGroup(ctx, &authentik.LookupGroupArgs{
-//				Name: pulumi.StringRef("authentik Admins"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = authentik.NewApplication(ctx, "nameIndex/applicationApplication", &authentik.ApplicationArgs{
-//				Slug: pulumi.String("test-app"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = authentik.NewPolicyBinding(ctx, "app-accessIndex/policyBindingPolicyBinding", &authentik.PolicyBindingArgs{
-//				Target: nameApplication.Uuid,
-//				Group:  pulumi.String(admins.Id),
-//				Order:  pulumi.Int(0),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 type PolicyBinding struct {
 	pulumi.CustomResourceState
 

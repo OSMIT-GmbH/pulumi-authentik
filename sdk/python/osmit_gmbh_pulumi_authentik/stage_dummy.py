@@ -70,7 +70,8 @@ class StageDummy(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageDummy("name")
+        # Create dummy stage
+        name = authentik.StageDummy("name", name="dummy")
         ```
 
         :param str resource_name: The name of the resource.
@@ -89,7 +90,8 @@ class StageDummy(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageDummy("name")
+        # Create dummy stage
+        name = authentik.StageDummy("name", name="dummy")
         ```
 
         :param str resource_name: The name of the resource.

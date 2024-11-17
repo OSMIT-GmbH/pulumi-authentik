@@ -136,18 +136,6 @@ def get_property_mapping_provider_scope(ids: Optional[Sequence[str]] = None,
     """
     Get OAuth Provider Scope Property mappings
 
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_authentik as authentik
-
-    test = authentik.get_property_mapping_provider_scope(managed_lists=[
-        "goauthentik.io/providers/oauth2/scope-email",
-        "goauthentik.io/providers/oauth2/scope-openid",
-    ])
-    ```
-
 
     :param Sequence[str] ids: List of ids when `managed_list` is set. Generated.
     :param Sequence[str] managed_lists: Retrieve multiple property mappings
@@ -179,18 +167,6 @@ def get_property_mapping_provider_scope_output(ids: Optional[pulumi.Input[Option
                                                opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetPropertyMappingProviderScopeResult]:
     """
     Get OAuth Provider Scope Property mappings
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_authentik as authentik
-
-    test = authentik.get_property_mapping_provider_scope(managed_lists=[
-        "goauthentik.io/providers/oauth2/scope-email",
-        "goauthentik.io/providers/oauth2/scope-openid",
-    ])
-    ```
 
 
     :param Sequence[str] ids: List of ids when `managed_list` is set. Generated.

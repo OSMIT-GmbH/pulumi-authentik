@@ -467,7 +467,8 @@ class StageEmail(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageEmail("name")
+        # Create email stage for email verification, uses global settings by default
+        name = authentik.StageEmail("name", name="email-verification")
         ```
 
         :param str resource_name: The name of the resource.
@@ -495,7 +496,8 @@ class StageEmail(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageEmail("name")
+        # Create email stage for email verification, uses global settings by default
+        name = authentik.StageEmail("name", name="email-verification")
         ```
 
         :param str resource_name: The name of the resource.

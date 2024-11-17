@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,20 +19,22 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create a proxy provider
 //			default_authorization_flow, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
 //				Slug: pulumi.StringRef("default-provider-authorization-implicit-consent"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			nameProviderProxy, err := authentik.NewProviderProxy(ctx, "nameProviderProxy", &authentik.ProviderProxyArgs{
+//			name, err := authentik.NewProviderProxy(ctx, "name", &authentik.ProviderProxyArgs{
+//				Name:              pulumi.String("test-app"),
 //				InternalHost:      pulumi.String("http://foo.bar.baz"),
 //				ExternalHost:      pulumi.String("http://internal.service"),
 //				AuthorizationFlow: pulumi.String(default_authorization_flow.Id),
@@ -40,9 +42,10 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_, err = authentik.NewApplication(ctx, "nameApplication", &authentik.ApplicationArgs{
+//			_, err = authentik.NewApplication(ctx, "name", &authentik.ApplicationArgs{
+//				Name:             pulumi.String("test-app"),
 //				Slug:             pulumi.String("test-app"),
-//				ProtocolProvider: nameProviderProxy.ID(),
+//				ProtocolProvider: name.ID(),
 //			})
 //			if err != nil {
 //				return err

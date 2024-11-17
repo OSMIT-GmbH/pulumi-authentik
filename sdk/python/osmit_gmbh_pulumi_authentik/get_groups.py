@@ -152,7 +152,9 @@ def get_groups(attributes: Optional[str] = None,
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the complete groups list
     all = authentik.get_groups()
+    # Or, to filter according to a specific field
     admins = authentik.get_groups(is_superuser=True)
     ```
     """
@@ -197,7 +199,9 @@ def get_groups_output(attributes: Optional[pulumi.Input[Optional[str]]] = None,
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the complete groups list
     all = authentik.get_groups()
+    # Or, to filter according to a specific field
     admins = authentik.get_groups(is_superuser=True)
     ```
     """

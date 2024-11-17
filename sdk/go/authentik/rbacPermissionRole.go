@@ -8,62 +8,11 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			// Assign a global permission to a role
-//			_, err := authentik.NewRbacRole(ctx, "my-roleRbacRole", nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = authentik.NewRbacPermissionRole(ctx, "global-permissionRbacPermissionRole", &authentik.RbacPermissionRoleArgs{
-//				Role:       my_roleRbacRole.ID(),
-//				Permission: pulumi.String("authentik_flows.inspect_flow"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			flow, err := authentik.NewFlow(ctx, "flow", &authentik.FlowArgs{
-//				Title:       pulumi.String("Test flow"),
-//				Slug:        pulumi.String("test-flow"),
-//				Designation: pulumi.String("authorization"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = authentik.NewRbacRole(ctx, "my-roleIndex/rbacRoleRbacRole", nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = authentik.NewRbacPermissionRole(ctx, "global-permissionIndex/rbacPermissionRoleRbacPermissionRole", &authentik.RbacPermissionRoleArgs{
-//				Role:       my_roleRbacRole.ID(),
-//				Model:      pulumi.String("authentik_flows.flow"),
-//				Permission: pulumi.String("inspect_flow"),
-//				ObjectId:   flow.Uuid,
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 type RbacPermissionRole struct {
 	pulumi.CustomResourceState
 

@@ -22,6 +22,7 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create a SAML Source
     ///     var default_source_pre_authentication = Authentik.GetFlow.Invoke(new()
     ///     {
     ///         Slug = "default-source-pre-authentication",
@@ -39,6 +40,7 @@ namespace OSMIT_GmbH.Authentik
     /// 
     ///     var name = new Authentik.SourceSaml("name", new()
     ///     {
+    ///         Name = "test-source",
     ///         Slug = "test-source",
     ///         AuthenticationFlow = default_source_authentication.Apply(default_source_authentication =&gt; default_source_authentication.Apply(getFlowResult =&gt; getFlowResult.Id)),
     ///         EnrollmentFlow = default_source_enrollment.Apply(default_source_enrollment =&gt; default_source_enrollment.Apply(getFlowResult =&gt; getFlowResult.Id)),

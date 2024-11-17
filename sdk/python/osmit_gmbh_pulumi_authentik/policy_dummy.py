@@ -202,7 +202,8 @@ class PolicyDummy(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.PolicyDummy("name")
+        # Create a dummy policy for testing
+        name = authentik.PolicyDummy("name", name="dummy")
         ```
 
         :param str resource_name: The name of the resource.
@@ -225,7 +226,8 @@ class PolicyDummy(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.PolicyDummy("name")
+        # Create a dummy policy for testing
+        name = authentik.PolicyDummy("name", name="dummy")
         ```
 
         :param str resource_name: The name of the resource.

@@ -22,13 +22,15 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create identification stage with sources and showing a password field
     ///     var default_authorization_flow = Authentik.GetFlow.Invoke(new()
     ///     {
     ///         Slug = "default-provider-authorization-implicit-consent",
     ///     });
     /// 
-    ///     var nameSourceOauth = new Authentik.SourceOauth("nameSourceOauth", new()
+    ///     var name = new Authentik.SourceOauth("name", new()
     ///     {
+    ///         Name = "test",
     ///         Slug = "test",
     ///         AuthenticationFlow = default_authorization_flow.Apply(default_authorization_flow =&gt; default_authorization_flow.Apply(getFlowResult =&gt; getFlowResult.Id)),
     ///         EnrollmentFlow = default_authorization_flow.Apply(default_authorization_flow =&gt; default_authorization_flow.Apply(getFlowResult =&gt; getFlowResult.Id)),
@@ -37,23 +39,25 @@ namespace OSMIT_GmbH.Authentik
     ///         ConsumerSecret = "bar",
     ///     });
     /// 
-    ///     var nameStagePassword = new Authentik.StagePassword("nameStagePassword", new()
+    ///     var nameStagePassword = new Authentik.StagePassword("name", new()
     ///     {
+    ///         Name = "test-pass",
     ///         Backends = new[]
     ///         {
     ///             "authentik.core.auth.InbuiltBackend",
     ///         },
     ///     });
     /// 
-    ///     var nameStageIdentification = new Authentik.StageIdentification("nameStageIdentification", new()
+    ///     var nameStageIdentification = new Authentik.StageIdentification("name", new()
     ///     {
+    ///         Name = "test-ident",
     ///         UserFields = new[]
     ///         {
     ///             "username",
     ///         },
     ///         Sources = new[]
     ///         {
-    ///             nameSourceOauth.Uuid,
+    ///             name.Uuid,
     ///         },
     ///         PasswordStage = nameStagePassword.Id,
     ///     });

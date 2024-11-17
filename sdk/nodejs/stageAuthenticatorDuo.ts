@@ -11,10 +11,12 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
+ * // Create a duo setup stage
  * const name = new authentik.StageAuthenticatorDuo("name", {
- *     apiHostname: "http://foo.bar.baz",
+ *     name: "duo-setup",
  *     clientId: "foo",
  *     clientSecret: "bar",
+ *     apiHostname: "http://foo.bar.baz",
  * });
  * ```
  */

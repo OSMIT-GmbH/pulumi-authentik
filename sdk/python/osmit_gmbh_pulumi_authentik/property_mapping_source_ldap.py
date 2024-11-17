@@ -96,7 +96,10 @@ class PropertyMappingSourceLdap(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.PropertyMappingSourceLdap("name", expression="return ldap.get('sAMAccountName')")
+        # Create a custom LDAP source property mapping
+        name = authentik.PropertyMappingSourceLdap("name",
+            name="custom-field",
+            expression="return ldap.get('sAMAccountName')")
         ```
 
         :param str resource_name: The name of the resource.
@@ -117,7 +120,10 @@ class PropertyMappingSourceLdap(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.PropertyMappingSourceLdap("name", expression="return ldap.get('sAMAccountName')")
+        # Create a custom LDAP source property mapping
+        name = authentik.PropertyMappingSourceLdap("name",
+            name="custom-field",
+            expression="return ldap.get('sAMAccountName')")
         ```
 
         :param str resource_name: The name of the resource.

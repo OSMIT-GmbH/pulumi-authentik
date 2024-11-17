@@ -22,10 +22,14 @@ namespace OSMIT_GmbH.Authentik
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
     ///     // Create a flow with a stage attached
-    ///     var name = new Authentik.StageDummy("name");
+    ///     var name = new Authentik.StageDummy("name", new()
+    ///     {
+    ///         Name = "test-stage",
+    ///     });
     /// 
     ///     var flow = new Authentik.Flow("flow", new()
     ///     {
+    ///         Name = "test-flow",
     ///         Title = "Test flow",
     ///         Slug = "test-flow",
     ///         Designation = "authorization",

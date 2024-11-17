@@ -7,40 +7,11 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get LDAP Source Property mappings
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := authentik.LookupPropertyMappingSourceLdap(ctx, &authentik.LookupPropertyMappingSourceLdapArgs{
-//				ManagedLists: []string{
-//					"goauthentik.io/sources/ldap/default-name",
-//					"goauthentik.io/sources/ldap/default-mail",
-//				},
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 func LookupPropertyMappingSourceLdap(ctx *pulumi.Context, args *LookupPropertyMappingSourceLdapArgs, opts ...pulumi.InvokeOption) (*LookupPropertyMappingSourceLdapResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupPropertyMappingSourceLdapResult

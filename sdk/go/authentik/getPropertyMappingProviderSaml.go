@@ -7,40 +7,11 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // Get SAML Provider Property mappings
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := authentik.LookupPropertyMappingProviderSaml(ctx, &authentik.LookupPropertyMappingProviderSamlArgs{
-//				ManagedLists: []string{
-//					"goauthentik.io/providers/saml/upn",
-//					"goauthentik.io/providers/saml/name",
-//				},
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 func LookupPropertyMappingProviderSaml(ctx *pulumi.Context, args *LookupPropertyMappingProviderSamlArgs, opts ...pulumi.InvokeOption) (*LookupPropertyMappingProviderSamlResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupPropertyMappingProviderSamlResult

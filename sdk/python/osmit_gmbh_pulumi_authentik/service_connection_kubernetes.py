@@ -169,10 +169,15 @@ class ServiceConnectionKubernetes(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        local = authentik.ServiceConnectionKubernetes("local", local=True)
-        remote_test_cluster = authentik.ServiceConnectionKubernetes("remote-test-cluster", kubeconfig=\"\"\"kind: Config
+        # Create a local kubernetes connection
+        local = authentik.ServiceConnectionKubernetes("local",
+            name="local",
+            local=True)
+        # Create a remote kubernetes connection
+        remote_test_cluster = authentik.ServiceConnectionKubernetes("remote-test-cluster",
+            name="test-cluster",
+            kubeconfig=\"\"\"kind: Config
         users: [...]
-
         \"\"\")
         ```
 
@@ -195,10 +200,15 @@ class ServiceConnectionKubernetes(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        local = authentik.ServiceConnectionKubernetes("local", local=True)
-        remote_test_cluster = authentik.ServiceConnectionKubernetes("remote-test-cluster", kubeconfig=\"\"\"kind: Config
+        # Create a local kubernetes connection
+        local = authentik.ServiceConnectionKubernetes("local",
+            name="local",
+            local=True)
+        # Create a remote kubernetes connection
+        remote_test_cluster = authentik.ServiceConnectionKubernetes("remote-test-cluster",
+            name="test-cluster",
+            kubeconfig=\"\"\"kind: Config
         users: [...]
-
         \"\"\")
         ```
 

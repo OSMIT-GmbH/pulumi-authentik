@@ -129,8 +129,10 @@ class StageSource(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create OAuth Source using an existing provider
         default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
-        name_source_oauth = authentik.SourceOauth("nameSourceOauth",
+        name = authentik.SourceOauth("name",
+            name="discord",
             slug="discord",
             authentication_flow=default_authorization_flow.id,
             enrollment_flow=default_authorization_flow.id,
@@ -138,7 +140,9 @@ class StageSource(pulumi.CustomResource):
             consumer_key="foo",
             consumer_secret="bar")
         # Create a source stage using the source defined above
-        name_stage_source = authentik.StageSource("nameStageSource", source=name_source_oauth.id)
+        name_stage_source = authentik.StageSource("name",
+            name="source-stage",
+            source=name.id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -159,8 +163,10 @@ class StageSource(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create OAuth Source using an existing provider
         default_authorization_flow = authentik.get_flow(slug="default-provider-authorization-implicit-consent")
-        name_source_oauth = authentik.SourceOauth("nameSourceOauth",
+        name = authentik.SourceOauth("name",
+            name="discord",
             slug="discord",
             authentication_flow=default_authorization_flow.id,
             enrollment_flow=default_authorization_flow.id,
@@ -168,7 +174,9 @@ class StageSource(pulumi.CustomResource):
             consumer_key="foo",
             consumer_secret="bar")
         # Create a source stage using the source defined above
-        name_stage_source = authentik.StageSource("nameStageSource", source=name_source_oauth.id)
+        name_stage_source = authentik.StageSource("name",
+            name="source-stage",
+            source=name.id)
         ```
 
         :param str resource_name: The name of the resource.

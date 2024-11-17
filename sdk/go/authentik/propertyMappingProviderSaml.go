@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -21,16 +21,18 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create a custom SAML provider property mapping
 //			_, err := authentik.NewPropertyMappingProviderSaml(ctx, "saml-aws-rolessessionname", &authentik.PropertyMappingProviderSamlArgs{
-//				Expression: pulumi.String("return user.email"),
+//				Name:       pulumi.String("SAML AWS RoleSessionName"),
 //				SamlName:   pulumi.String("https://aws.amazon.com/SAML/Attributes/RoleSessionName"),
+//				Expression: pulumi.String("return user.email"),
 //			})
 //			if err != nil {
 //				return err

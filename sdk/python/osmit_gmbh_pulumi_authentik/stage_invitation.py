@@ -103,7 +103,8 @@ class StageInvitation(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageInvitation("name")
+        # Create invitation stage
+        name = authentik.StageInvitation("name", name="invitation")
         ```
 
         :param str resource_name: The name of the resource.
@@ -123,7 +124,8 @@ class StageInvitation(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageInvitation("name")
+        # Create invitation stage
+        name = authentik.StageInvitation("name", name="invitation")
         ```
 
         :param str resource_name: The name of the resource.

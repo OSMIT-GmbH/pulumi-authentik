@@ -6,20 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@osmit-gmbh/pulumi-authentik";
- *
- * // Create a user
- * const nameUser = new authentik.User("nameUser", {username: "user"});
- * // Create a user that is member of a group
- * const group = new authentik.Group("group", {});
- * const nameIndex_userUser = new authentik.User("nameIndex/userUser", {
- *     username: "user",
- *     groups: [group.id],
- * });
- * ```
  */
 export class User extends pulumi.CustomResource {
     /**

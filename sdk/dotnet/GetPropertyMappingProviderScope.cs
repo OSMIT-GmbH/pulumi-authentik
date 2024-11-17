@@ -14,56 +14,12 @@ namespace OSMIT_GmbH.Authentik
     {
         /// <summary>
         /// Get OAuth Provider Scope Property mappings
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Authentik = Pulumi.Authentik;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var test = Authentik.GetPropertyMappingProviderScope.Invoke(new()
-        ///     {
-        ///         ManagedLists = new[]
-        ///         {
-        ///             "goauthentik.io/providers/oauth2/scope-email",
-        ///             "goauthentik.io/providers/oauth2/scope-openid",
-        ///         },
-        ///     });
-        /// 
-        /// });
-        /// ```
         /// </summary>
         public static Task<GetPropertyMappingProviderScopeResult> InvokeAsync(GetPropertyMappingProviderScopeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPropertyMappingProviderScopeResult>("authentik:index/getPropertyMappingProviderScope:getPropertyMappingProviderScope", args ?? new GetPropertyMappingProviderScopeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Get OAuth Provider Scope Property mappings
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Authentik = Pulumi.Authentik;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var test = Authentik.GetPropertyMappingProviderScope.Invoke(new()
-        ///     {
-        ///         ManagedLists = new[]
-        ///         {
-        ///             "goauthentik.io/providers/oauth2/scope-email",
-        ///             "goauthentik.io/providers/oauth2/scope-openid",
-        ///         },
-        ///     });
-        /// 
-        /// });
-        /// ```
         /// </summary>
         public static Output<GetPropertyMappingProviderScopeResult> Invoke(GetPropertyMappingProviderScopeInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPropertyMappingProviderScopeResult>("authentik:index/getPropertyMappingProviderScope:getPropertyMappingProviderScope", args ?? new GetPropertyMappingProviderScopeInvokeArgs(), options.WithDefaults());

@@ -145,13 +145,14 @@ class PropertyMappingProviderScope(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create a scope mapping
         name = authentik.PropertyMappingProviderScope("name",
+            name="minio",
+            scope_name="minio",
             expression=\"\"\"return {
           "policy": "readwrite",
         }
-
-        \"\"\",
-            scope_name="minio")
+        \"\"\")
         ```
 
         :param str resource_name: The name of the resource.
@@ -172,13 +173,14 @@ class PropertyMappingProviderScope(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create a scope mapping
         name = authentik.PropertyMappingProviderScope("name",
+            name="minio",
+            scope_name="minio",
             expression=\"\"\"return {
           "policy": "readwrite",
         }
-
-        \"\"\",
-            scope_name="minio")
+        \"\"\")
         ```
 
         :param str resource_name: The name of the resource.

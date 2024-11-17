@@ -11,7 +11,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const name = new authentik.PolicyDummy("name", {});
+ * // Create a dummy policy for testing
+ * const name = new authentik.PolicyDummy("name", {name: "dummy"});
  * ```
  */
 export class PolicyDummy extends pulumi.CustomResource {

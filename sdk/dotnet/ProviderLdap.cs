@@ -22,21 +22,24 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create an LDAP Provider
     ///     var default_authentication_flow = Authentik.GetFlow.Invoke(new()
     ///     {
     ///         Slug = "default-authentication-flow",
     ///     });
     /// 
-    ///     var nameProviderLdap = new Authentik.ProviderLdap("nameProviderLdap", new()
+    ///     var name = new Authentik.ProviderLdap("name", new()
     ///     {
+    ///         Name = "ldap-app",
     ///         BaseDn = "dc=ldap,dc=goauthentik,dc=io",
     ///         BindFlow = default_authentication_flow.Apply(default_authentication_flow =&gt; default_authentication_flow.Apply(getFlowResult =&gt; getFlowResult.Id)),
     ///     });
     /// 
-    ///     var nameApplication = new Authentik.Application("nameApplication", new()
+    ///     var nameApplication = new Authentik.Application("name", new()
     ///     {
+    ///         Name = "ldap-app",
     ///         Slug = "ldap-app",
-    ///         ProtocolProvider = nameProviderLdap.Id,
+    ///         ProtocolProvider = name.Id,
     ///     });
     /// 
     /// });

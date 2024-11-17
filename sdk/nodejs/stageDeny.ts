@@ -11,7 +11,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const name = new authentik.StageDeny("name", {});
+ * // Create deny stage, can be used with policies
+ * const name = new authentik.StageDeny("name", {name: "deny"});
  * ```
  */
 export class StageDeny extends pulumi.CustomResource {

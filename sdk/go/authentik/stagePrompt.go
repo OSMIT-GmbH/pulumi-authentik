@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -36,8 +36,9 @@ import (
 //				return err
 //			}
 //			_, err = authentik.NewStagePrompt(ctx, "name", &authentik.StagePromptArgs{
+//				Name: pulumi.String("test"),
 //				Fields: pulumi.StringArray{
-//					resource.Authentik_stage_prompt_field.Field.Id,
+//					authentikStagePromptField.Field.Id,
 //				},
 //			})
 //			if err != nil {

@@ -72,6 +72,7 @@ def get_stage(name: Optional[str] = None,
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the ID of a stage by name
     default_authentication_identification = authentik.get_stage(name="default-authentication-identification")
     ```
 
@@ -97,6 +98,7 @@ def get_stage_output(name: Optional[pulumi.Input[Optional[str]]] = None,
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the ID of a stage by name
     default_authentication_identification = authentik.get_stage(name="default-authentication-identification")
     ```
 

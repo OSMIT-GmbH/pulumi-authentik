@@ -12,54 +12,6 @@ namespace OSMIT_GmbH.Authentik
 {
     /// <summary>
     /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Authentik = OSMIT_GmbH.Authentik;
-    /// using Authentik = Pulumi.Authentik;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     // Create a policy binding for a resource
-    ///     var policy = new Authentik.PolicyExpression("policy", new()
-    ///     {
-    ///         Expression = "return True",
-    ///     });
-    /// 
-    ///     var nameApplication = new Authentik.Application("nameApplication", new()
-    ///     {
-    ///         Slug = "test-app",
-    ///     });
-    /// 
-    ///     var app_accessPolicyBinding = new Authentik.PolicyBinding("app-accessPolicyBinding", new()
-    ///     {
-    ///         Target = nameApplication.Uuid,
-    ///         Policy = policy.Id,
-    ///         Order = 0,
-    ///     });
-    /// 
-    ///     // Create a binding to a group
-    ///     var admins = Authentik.GetGroup.Invoke(new()
-    ///     {
-    ///         Name = "authentik Admins",
-    ///     });
-    /// 
-    ///     var nameIndex_applicationApplication = new Authentik.Application("nameIndex/applicationApplication", new()
-    ///     {
-    ///         Slug = "test-app",
-    ///     });
-    /// 
-    ///     var app_accessIndex_policyBindingPolicyBinding = new Authentik.PolicyBinding("app-accessIndex/policyBindingPolicyBinding", new()
-    ///     {
-    ///         Target = nameApplication.Uuid,
-    ///         Group = admins.Apply(getGroupResult =&gt; getGroupResult.Id),
-    ///         Order = 0,
-    ///     });
-    /// 
-    /// });
-    /// ```
     /// </summary>
     [AuthentikResourceType("authentik:index/policyBinding:PolicyBinding")]
     public partial class PolicyBinding : global::Pulumi.CustomResource

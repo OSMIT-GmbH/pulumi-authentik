@@ -11,7 +11,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const name = new authentik.StageDummy("name", {});
+ * // Create dummy stage
+ * const name = new authentik.StageDummy("name", {name: "dummy"});
  * ```
  */
 export class StageDummy extends pulumi.CustomResource {

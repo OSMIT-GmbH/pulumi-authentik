@@ -8,49 +8,11 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 // ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			// Create a user
-//			_, err := authentik.NewUser(ctx, "nameUser", &authentik.UserArgs{
-//				Username: pulumi.String("user"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			group, err := authentik.NewGroup(ctx, "group", nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = authentik.NewUser(ctx, "nameIndex/userUser", &authentik.UserArgs{
-//				Username: pulumi.String("user"),
-//				Groups: pulumi.StringArray{
-//					group.ID(),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 type User struct {
 	pulumi.CustomResourceState
 

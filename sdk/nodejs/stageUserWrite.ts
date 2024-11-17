@@ -11,7 +11,11 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const name = new authentik.StageUserWrite("name", {createUsersAsInactive: false});
+ * // Create a user write stage
+ * const name = new authentik.StageUserWrite("name", {
+ *     name: "user-write",
+ *     createUsersAsInactive: false,
+ * });
  * ```
  */
 export class StageUserWrite extends pulumi.CustomResource {

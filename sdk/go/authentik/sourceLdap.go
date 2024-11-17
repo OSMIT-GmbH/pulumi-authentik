@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,19 +19,21 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create LDAP Source
 //			_, err := authentik.NewSourceLdap(ctx, "name", &authentik.SourceLdapArgs{
-//				BaseDn:       pulumi.String("dn=foo"),
+//				Name:         pulumi.String("ldap-test"),
+//				Slug:         pulumi.String("ldap-test"),
+//				ServerUri:    pulumi.String("ldaps://1.2.3.4"),
 //				BindCn:       pulumi.String("foo"),
 //				BindPassword: pulumi.String("bar"),
-//				ServerUri:    pulumi.String("ldaps://1.2.3.4"),
-//				Slug:         pulumi.String("ldap-test"),
+//				BaseDn:       pulumi.String("dn=foo"),
 //			})
 //			if err != nil {
 //				return err

@@ -13,6 +13,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // To get the details of a brand by domain
  * const authentik-default = authentik.getBrand({
  *     domain: "authentik-default",
  * });
@@ -166,6 +167,7 @@ export interface GetBrandResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // To get the details of a brand by domain
  * const authentik-default = authentik.getBrand({
  *     domain: "authentik-default",
  * });

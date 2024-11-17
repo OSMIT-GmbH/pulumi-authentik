@@ -12,10 +12,12 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // Create OAuth Source using an existing provider
  * const default-authorization-flow = authentik.getFlow({
  *     slug: "default-provider-authorization-implicit-consent",
  * });
- * const nameSourceOauth = new authentik.SourceOauth("nameSourceOauth", {
+ * const name = new authentik.SourceOauth("name", {
+ *     name: "discord",
  *     slug: "discord",
  *     authenticationFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
  *     enrollmentFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
@@ -24,7 +26,10 @@ import * as utilities from "./utilities";
  *     consumerSecret: "bar",
  * });
  * // Create a source stage using the source defined above
- * const nameStageSource = new authentik.StageSource("nameStageSource", {source: nameSourceOauth.id});
+ * const nameStageSource = new authentik.StageSource("name", {
+ *     name: "source-stage",
+ *     source: name.id,
+ * });
  * ```
  */
 export class StageSource extends pulumi.CustomResource {

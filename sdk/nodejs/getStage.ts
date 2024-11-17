@@ -13,6 +13,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // To get the ID of a stage by name
  * const default-authentication-identification = authentik.getStage({
  *     name: "default-authentication-identification",
  * });
@@ -58,6 +59,7 @@ export interface GetStageResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // To get the ID of a stage by name
  * const default-authentication-identification = authentik.getStage({
  *     name: "default-authentication-identification",
  * });

@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -27,15 +27,17 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			// Create an OAuth2 Provider
-//			nameProviderOauth2, err := authentik.NewProviderOauth2(ctx, "nameProviderOauth2", &authentik.ProviderOauth2Args{
+//			name, err := authentik.NewProviderOauth2(ctx, "name", &authentik.ProviderOauth2Args{
+//				Name:     pulumi.String("grafana"),
 //				ClientId: pulumi.String("grafana"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = authentik.NewApplication(ctx, "nameApplication", &authentik.ApplicationArgs{
+//			_, err = authentik.NewApplication(ctx, "name", &authentik.ApplicationArgs{
+//				Name:             pulumi.String("test app"),
 //				Slug:             pulumi.String("test-app"),
-//				ProtocolProvider: nameProviderOauth2.ID(),
+//				ProtocolProvider: name.ID(),
 //			})
 //			if err != nil {
 //				return err

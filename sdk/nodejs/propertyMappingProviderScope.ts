@@ -13,13 +13,14 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
+ * // Create a scope mapping
  * const name = new authentik.PropertyMappingProviderScope("name", {
+ *     name: "minio",
+ *     scopeName: "minio",
  *     expression: `return {
  *   "policy": "readwrite",
  * }
- *
  * `,
- *     scopeName: "minio",
  * });
  * ```
  */

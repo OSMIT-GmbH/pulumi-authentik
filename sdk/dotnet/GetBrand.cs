@@ -25,6 +25,7 @@ namespace OSMIT_GmbH.Authentik
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
+        ///     // To get the details of a brand by domain
         ///     var authentik_default = Authentik.GetBrand.Invoke(new()
         ///     {
         ///         Domain = "authentik-default",
@@ -49,6 +50,7 @@ namespace OSMIT_GmbH.Authentik
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
+        ///     // To get the details of a brand by domain
         ///     var authentik_default = Authentik.GetBrand.Invoke(new()
         ///     {
         ///         Domain = "authentik-default",

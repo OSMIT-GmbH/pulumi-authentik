@@ -12,10 +12,12 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // Create identification stage with sources and showing a password field
  * const default-authorization-flow = authentik.getFlow({
  *     slug: "default-provider-authorization-implicit-consent",
  * });
- * const nameSourceOauth = new authentik.SourceOauth("nameSourceOauth", {
+ * const name = new authentik.SourceOauth("name", {
+ *     name: "test",
  *     slug: "test",
  *     authenticationFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
  *     enrollmentFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
@@ -23,10 +25,14 @@ import * as utilities from "./utilities";
  *     consumerKey: "foo",
  *     consumerSecret: "bar",
  * });
- * const nameStagePassword = new authentik.StagePassword("nameStagePassword", {backends: ["authentik.core.auth.InbuiltBackend"]});
- * const nameStageIdentification = new authentik.StageIdentification("nameStageIdentification", {
+ * const nameStagePassword = new authentik.StagePassword("name", {
+ *     name: "test-pass",
+ *     backends: ["authentik.core.auth.InbuiltBackend"],
+ * });
+ * const nameStageIdentification = new authentik.StageIdentification("name", {
+ *     name: "test-ident",
  *     userFields: ["username"],
- *     sources: [nameSourceOauth.uuid],
+ *     sources: [name.uuid],
  *     passwordStage: nameStagePassword.id,
  * });
  * ```

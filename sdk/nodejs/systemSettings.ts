@@ -11,6 +11,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
+ * // Configure system settings
  * const settings = new authentik.SystemSettings("settings", {defaultUserChangeUsername: true});
  * ```
  *

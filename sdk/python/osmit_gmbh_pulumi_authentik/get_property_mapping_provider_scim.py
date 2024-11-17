@@ -111,18 +111,6 @@ def get_property_mapping_provider_scim(ids: Optional[Sequence[str]] = None,
     """
     Get SCIM Provider Property mappings
 
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_authentik as authentik
-
-    test = authentik.get_property_mapping_provider_scim(managed_lists=[
-        "goauthentik.io/providers/scim/user",
-        "goauthentik.io/providers/scim/group",
-    ])
-    ```
-
 
     :param Sequence[str] ids: List of ids when `managed_list` is set. Generated.
     :param Sequence[str] managed_lists: Retrieve multiple property mappings
@@ -149,18 +137,6 @@ def get_property_mapping_provider_scim_output(ids: Optional[pulumi.Input[Optiona
                                               opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetPropertyMappingProviderScimResult]:
     """
     Get SCIM Provider Property mappings
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_authentik as authentik
-
-    test = authentik.get_property_mapping_provider_scim(managed_lists=[
-        "goauthentik.io/providers/scim/user",
-        "goauthentik.io/providers/scim/group",
-    ])
-    ```
 
 
     :param Sequence[str] ids: List of ids when `managed_list` is set. Generated.

@@ -14,56 +14,12 @@ namespace OSMIT_GmbH.Authentik
     {
         /// <summary>
         /// Get SAML Provider Property mappings
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Authentik = Pulumi.Authentik;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var test = Authentik.GetPropertyMappingProviderSaml.Invoke(new()
-        ///     {
-        ///         ManagedLists = new[]
-        ///         {
-        ///             "goauthentik.io/providers/saml/upn",
-        ///             "goauthentik.io/providers/saml/name",
-        ///         },
-        ///     });
-        /// 
-        /// });
-        /// ```
         /// </summary>
         public static Task<GetPropertyMappingProviderSamlResult> InvokeAsync(GetPropertyMappingProviderSamlArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPropertyMappingProviderSamlResult>("authentik:index/getPropertyMappingProviderSaml:getPropertyMappingProviderSaml", args ?? new GetPropertyMappingProviderSamlArgs(), options.WithDefaults());
 
         /// <summary>
         /// Get SAML Provider Property mappings
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Authentik = Pulumi.Authentik;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     var test = Authentik.GetPropertyMappingProviderSaml.Invoke(new()
-        ///     {
-        ///         ManagedLists = new[]
-        ///         {
-        ///             "goauthentik.io/providers/saml/upn",
-        ///             "goauthentik.io/providers/saml/name",
-        ///         },
-        ///     });
-        /// 
-        /// });
-        /// ```
         /// </summary>
         public static Output<GetPropertyMappingProviderSamlResult> Invoke(GetPropertyMappingProviderSamlInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPropertyMappingProviderSamlResult>("authentik:index/getPropertyMappingProviderSaml:getPropertyMappingProviderSaml", args ?? new GetPropertyMappingProviderSamlInvokeArgs(), options.WithDefaults());

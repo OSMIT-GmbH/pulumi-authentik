@@ -95,7 +95,8 @@ class StageDeny(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageDeny("name")
+        # Create deny stage, can be used with policies
+        name = authentik.StageDeny("name", name="deny")
         ```
 
         :param str resource_name: The name of the resource.
@@ -114,7 +115,8 @@ class StageDeny(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageDeny("name")
+        # Create deny stage, can be used with policies
+        name = authentik.StageDeny("name", name="deny")
         ```
 
         :param str resource_name: The name of the resource.

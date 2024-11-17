@@ -21,6 +21,7 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create a prompt field
     ///     var field = new Authentik.StagePromptField("field", new()
     ///     {
     ///         FieldKey = "username",

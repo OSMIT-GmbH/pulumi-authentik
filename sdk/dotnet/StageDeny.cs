@@ -21,7 +21,11 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var name = new Authentik.StageDeny("name");
+    ///     // Create deny stage, can be used with policies
+    ///     var name = new Authentik.StageDeny("name", new()
+    ///     {
+    ///         Name = "deny",
+    ///     });
     /// 
     /// });
     /// ```

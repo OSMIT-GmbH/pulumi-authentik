@@ -22,21 +22,24 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create a SAML Provider
     ///     var default_authorization_flow = Authentik.GetFlow.Invoke(new()
     ///     {
     ///         Slug = "default-provider-authorization-implicit-consent",
     ///     });
     /// 
-    ///     var nameProviderSaml = new Authentik.ProviderSaml("nameProviderSaml", new()
+    ///     var name = new Authentik.ProviderSaml("name", new()
     ///     {
+    ///         Name = "test-app",
     ///         AuthorizationFlow = default_authorization_flow.Apply(default_authorization_flow =&gt; default_authorization_flow.Apply(getFlowResult =&gt; getFlowResult.Id)),
     ///         AcsUrl = "http://localhost",
     ///     });
     /// 
-    ///     var nameApplication = new Authentik.Application("nameApplication", new()
+    ///     var nameApplication = new Authentik.Application("name", new()
     ///     {
+    ///         Name = "test-app",
     ///         Slug = "test-app",
-    ///         ProtocolProvider = nameProviderSaml.Id,
+    ///         ProtocolProvider = name.Id,
     ///     });
     /// 
     /// });

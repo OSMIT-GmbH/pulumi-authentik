@@ -22,6 +22,7 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create an outpost with a proxy provider
     ///     var default_authorization_flow = Authentik.GetFlow.Invoke(new()
     ///     {
     ///         Slug = "default-provider-authorization-implicit-consent",
@@ -29,6 +30,7 @@ namespace OSMIT_GmbH.Authentik
     /// 
     ///     var proxy = new Authentik.ProviderProxy("proxy", new()
     ///     {
+    ///         Name = "proxy",
     ///         AuthorizationFlow = default_authorization_flow.Apply(default_authorization_flow =&gt; default_authorization_flow.Apply(getFlowResult =&gt; getFlowResult.Id)),
     ///         ExternalHost = "http://foo.bar.baz",
     ///         InternalHost = "http://internal.local",
@@ -36,6 +38,7 @@ namespace OSMIT_GmbH.Authentik
     /// 
     ///     var outpost = new Authentik.Outpost("outpost", new()
     ///     {
+    ///         Name = "test-outpost",
     ///         ProtocolProviders = new[]
     ///         {
     ///             proxy.Id,

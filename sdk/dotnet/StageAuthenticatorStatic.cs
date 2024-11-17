@@ -21,7 +21,11 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var name = new Authentik.StageAuthenticatorStatic("name");
+    ///     // Create a static TOTP Setup stage
+    ///     var name = new Authentik.StageAuthenticatorStatic("name", new()
+    ///     {
+    ///         Name = "static-totp-setup",
+    ///     });
     /// 
     /// });
     /// ```

@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,8 +19,8 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
-//	"github.com/pulumi/pulumi-tls/sdk/v4/go/tls"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/pulumi/pulumi-tls/sdk/go/tls"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -28,33 +28,36 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			// Generate a certificate-key pair
-//			examplePrivateKey, err := tls.NewPrivateKey(ctx, "examplePrivateKey", &tls.PrivateKeyArgs{
-//				Algorithm:  pulumi.String("ECDSA"),
-//				EcdsaCurve: pulumi.String("P384"),
+//			example, err := tls.NewPrivateKey(ctx, "example", &tls.PrivateKeyArgs{
+//				Algorithm:  "ECDSA",
+//				EcdsaCurve: "P384",
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			exampleSelfSignedCert, err := tls.NewSelfSignedCert(ctx, "exampleSelfSignedCert", &tls.SelfSignedCertArgs{
-//				KeyAlgorithm:  pulumi.String("ECDSA"),
-//				PrivateKeyPem: examplePrivateKey.PrivateKeyPem,
-//				Subject: &tls.SelfSignedCertSubjectArgs{
-//					CommonName:   pulumi.String("example.com"),
-//					Organization: pulumi.String("ACME Examples, Inc"),
+//			exampleSelfSignedCert, err := tls.NewSelfSignedCert(ctx, "example", &tls.SelfSignedCertArgs{
+//				KeyAlgorithm:  "ECDSA",
+//				PrivateKeyPem: example.PrivateKeyPem,
+//				Subject: []map[string]interface{}{
+//					map[string]interface{}{
+//						"commonName":   "example.com",
+//						"organization": "ACME Examples, Inc",
+//					},
 //				},
-//				ValidityPeriodHours: pulumi.Int(12),
-//				AllowedUses: pulumi.StringArray{
-//					pulumi.String("key_encipherment"),
-//					pulumi.String("digital_signature"),
-//					pulumi.String("server_auth"),
+//				ValidityPeriodHours: 12,
+//				AllowedUses: []string{
+//					"key_encipherment",
+//					"digital_signature",
+//					"server_auth",
 //				},
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = authentik.NewCertificateKeyPair(ctx, "name", &authentik.CertificateKeyPairArgs{
+//				Name:            pulumi.String("keypair"),
 //				CertificateData: exampleSelfSignedCert.CertPem,
-//				KeyData:         examplePrivateKey.PrivateKeyPem,
+//				KeyData:         example.PrivateKeyPem,
 //			})
 //			if err != nil {
 //				return err

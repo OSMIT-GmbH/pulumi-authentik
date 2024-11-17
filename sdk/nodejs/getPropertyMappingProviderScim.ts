@@ -6,20 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * Get SCIM Provider Property mappings
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@pulumi/authentik";
- *
- * const test = authentik.getPropertyMappingProviderScim({
- *     managedLists: [
- *         "goauthentik.io/providers/scim/user",
- *         "goauthentik.io/providers/scim/group",
- *     ],
- * });
- * ```
  */
 export function getPropertyMappingProviderScim(args?: GetPropertyMappingProviderScimArgs, opts?: pulumi.InvokeOptions): Promise<GetPropertyMappingProviderScimResult> {
     args = args || {};
@@ -73,20 +59,6 @@ export interface GetPropertyMappingProviderScimResult {
 }
 /**
  * Get SCIM Provider Property mappings
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@pulumi/authentik";
- *
- * const test = authentik.getPropertyMappingProviderScim({
- *     managedLists: [
- *         "goauthentik.io/providers/scim/user",
- *         "goauthentik.io/providers/scim/group",
- *     ],
- * });
- * ```
  */
 export function getPropertyMappingProviderScimOutput(args?: GetPropertyMappingProviderScimOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPropertyMappingProviderScimResult> {
     args = args || {};

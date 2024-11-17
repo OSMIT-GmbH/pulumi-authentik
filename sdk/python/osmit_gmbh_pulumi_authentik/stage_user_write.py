@@ -211,7 +211,10 @@ class StageUserWrite(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageUserWrite("name", create_users_as_inactive=False)
+        # Create a user write stage
+        name = authentik.StageUserWrite("name",
+            name="user-write",
+            create_users_as_inactive=False)
         ```
 
         :param str resource_name: The name of the resource.
@@ -232,7 +235,10 @@ class StageUserWrite(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.StageUserWrite("name", create_users_as_inactive=False)
+        # Create a user write stage
+        name = authentik.StageUserWrite("name",
+            name="user-write",
+            create_users_as_inactive=False)
         ```
 
         :param str resource_name: The name of the resource.

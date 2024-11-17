@@ -23,14 +23,15 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create a scope mapping
     ///     var name = new Authentik.PropertyMappingProviderScope("name", new()
     ///     {
+    ///         Name = "minio",
+    ///         ScopeName = "minio",
     ///         Expression = @"return {
     ///   ""policy"": ""readwrite"",
     /// }
-    /// 
     /// ",
-    ///         ScopeName = "minio",
     ///     });
     /// 
     /// });

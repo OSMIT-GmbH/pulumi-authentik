@@ -12,14 +12,22 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
  * // Create a local docker connection
- * const local = new authentik.ServiceConnectionDocker("local", {local: true});
+ * const local = new authentik.ServiceConnectionDocker("local", {
+ *     name: "local",
+ *     local: true,
+ * });
  * // Create a remote docker connection
  * const tls_auth = new authentik.CertificateKeyPair("tls-auth", {
+ *     name: "docker-tls-auth",
  *     certificateData: "...",
  *     keyData: "...",
  * });
- * const tls_verification = new authentik.CertificateKeyPair("tls-verification", {certificateData: "..."});
+ * const tls_verification = new authentik.CertificateKeyPair("tls-verification", {
+ *     name: "docker-tls-verification",
+ *     certificateData: "...",
+ * });
  * const remote_host = new authentik.ServiceConnectionDocker("remote-host", {
+ *     name: "remote-host",
  *     url: "http://1.2.3.4:2368",
  *     tlsVerification: tls_auth.id,
  *     tlsAuthentication: tls_verification.id,

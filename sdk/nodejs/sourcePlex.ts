@@ -12,10 +12,12 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // Create a plex source
  * const default-authorization-flow = authentik.getFlow({
  *     slug: "default-provider-authorization-implicit-consent",
  * });
  * const name = new authentik.SourcePlex("name", {
+ *     name: "plex",
  *     slug: "plex",
  *     authenticationFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
  *     enrollmentFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),

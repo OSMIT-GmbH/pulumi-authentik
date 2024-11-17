@@ -22,15 +22,17 @@ namespace OSMIT_GmbH.Authentik
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
     ///     // Create an OAuth2 Provider
-    ///     var nameProviderOauth2 = new Authentik.ProviderOauth2("nameProviderOauth2", new()
+    ///     var name = new Authentik.ProviderOauth2("name", new()
     ///     {
+    ///         Name = "grafana",
     ///         ClientId = "grafana",
     ///     });
     /// 
-    ///     var nameApplication = new Authentik.Application("nameApplication", new()
+    ///     var nameApplication = new Authentik.Application("name", new()
     ///     {
+    ///         Name = "test app",
     ///         Slug = "test-app",
-    ///         ProtocolProvider = nameProviderOauth2.Id,
+    ///         ProtocolProvider = name.Id,
     ///     });
     /// 
     /// });

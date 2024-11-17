@@ -12,8 +12,9 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
  * // Create a flow with a stage attached
- * const name = new authentik.StageDummy("name", {});
+ * const name = new authentik.StageDummy("name", {name: "test-stage"});
  * const flow = new authentik.Flow("flow", {
+ *     name: "test-flow",
  *     title: "Test flow",
  *     slug: "test-flow",
  *     designation: "authorization",

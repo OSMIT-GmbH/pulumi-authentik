@@ -11,7 +11,9 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
+ * // Create an Authenticator validations tage
  * const name = new authentik.StageAuthenticatorValidate("name", {
+ *     name: "authenticator-validate",
  *     deviceClasses: ["static"],
  *     notConfiguredAction: "skip",
  * });

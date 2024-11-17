@@ -11,7 +11,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const name = new authentik.StageAuthenticatorStatic("name", {});
+ * // Create a static TOTP Setup stage
+ * const name = new authentik.StageAuthenticatorStatic("name", {name: "static-totp-setup"});
  * ```
  */
 export class StageAuthenticatorStatic extends pulumi.CustomResource {

@@ -235,7 +235,9 @@ class StageAuthenticatorValidate(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create an Authenticator validations tage
         name = authentik.StageAuthenticatorValidate("name",
+            name="authenticator-validate",
             device_classes=["static"],
             not_configured_action="skip")
         ```
@@ -258,7 +260,9 @@ class StageAuthenticatorValidate(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create an Authenticator validations tage
         name = authentik.StageAuthenticatorValidate("name",
+            name="authenticator-validate",
             device_classes=["static"],
             not_configured_action="skip")
         ```

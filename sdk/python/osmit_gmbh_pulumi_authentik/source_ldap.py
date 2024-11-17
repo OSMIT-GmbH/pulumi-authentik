@@ -760,12 +760,14 @@ class SourceLdap(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create LDAP Source
         name = authentik.SourceLdap("name",
-            base_dn="dn=foo",
+            name="ldap-test",
+            slug="ldap-test",
+            server_uri="ldaps://1.2.3.4",
             bind_cn="foo",
             bind_password="bar",
-            server_uri="ldaps://1.2.3.4",
-            slug="ldap-test")
+            base_dn="dn=foo")
         ```
 
         :param str resource_name: The name of the resource.
@@ -799,12 +801,14 @@ class SourceLdap(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create LDAP Source
         name = authentik.SourceLdap("name",
-            base_dn="dn=foo",
+            name="ldap-test",
+            slug="ldap-test",
+            server_uri="ldaps://1.2.3.4",
             bind_cn="foo",
             bind_password="bar",
-            server_uri="ldaps://1.2.3.4",
-            slug="ldap-test")
+            base_dn="dn=foo")
         ```
 
         :param str resource_name: The name of the resource.

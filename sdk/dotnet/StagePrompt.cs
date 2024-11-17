@@ -31,9 +31,10 @@ namespace OSMIT_GmbH.Authentik
     /// 
     ///     var name = new Authentik.StagePrompt("name", new()
     ///     {
+    ///         Name = "test",
     ///         Fields = new[]
     ///         {
-    ///             resource.Authentik_stage_prompt_field.Field.Id,
+    ///             authentikStagePromptField.Field.Id,
     ///         },
     ///     });
     /// 

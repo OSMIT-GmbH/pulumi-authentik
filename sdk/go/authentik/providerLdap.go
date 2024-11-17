@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,29 +19,32 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create an LDAP Provider
 //			default_authentication_flow, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
 //				Slug: pulumi.StringRef("default-authentication-flow"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			nameProviderLdap, err := authentik.NewProviderLdap(ctx, "nameProviderLdap", &authentik.ProviderLdapArgs{
+//			name, err := authentik.NewProviderLdap(ctx, "name", &authentik.ProviderLdapArgs{
+//				Name:     pulumi.String("ldap-app"),
 //				BaseDn:   pulumi.String("dc=ldap,dc=goauthentik,dc=io"),
 //				BindFlow: pulumi.String(default_authentication_flow.Id),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = authentik.NewApplication(ctx, "nameApplication", &authentik.ApplicationArgs{
+//			_, err = authentik.NewApplication(ctx, "name", &authentik.ApplicationArgs{
+//				Name:             pulumi.String("ldap-app"),
 //				Slug:             pulumi.String("ldap-app"),
-//				ProtocolProvider: nameProviderLdap.ID(),
+//				ProtocolProvider: name.ID(),
 //			})
 //			if err != nil {
 //				return err

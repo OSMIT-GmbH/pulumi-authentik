@@ -25,6 +25,7 @@ namespace OSMIT_GmbH.Authentik
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
+        ///     // To get the name of a user by username
         ///     var akadmin = Authentik.GetUser.Invoke(new()
         ///     {
         ///         Username = "akadmin",
@@ -49,6 +50,7 @@ namespace OSMIT_GmbH.Authentik
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
+        ///     // To get the name of a user by username
         ///     var akadmin = Authentik.GetUser.Invoke(new()
         ///     {
         ///         Username = "akadmin",

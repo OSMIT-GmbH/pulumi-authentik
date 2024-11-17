@@ -12,6 +12,7 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // Create OAuth Source using an existing provider
  * const default-source-authentication = authentik.getFlow({
  *     slug: "default-source-authentication",
  * });
@@ -19,6 +20,7 @@ import * as utilities from "./utilities";
  *     slug: "default-source-enrollment",
  * });
  * const name = new authentik.SourceOauth("name", {
+ *     name: "discord",
  *     slug: "discord",
  *     authenticationFlow: default_source_authentication.then(default_source_authentication => default_source_authentication.id),
  *     enrollmentFlow: default_source_enrollment.then(default_source_enrollment => default_source_enrollment.id),

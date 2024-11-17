@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,20 +19,22 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create a Radius Provider
 //			default_authentication_flow, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
 //				Slug: pulumi.StringRef("default-authentication-flow"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			nameProviderRadius, err := authentik.NewProviderRadius(ctx, "nameProviderRadius", &authentik.ProviderRadiusArgs{
+//			name, err := authentik.NewProviderRadius(ctx, "name", &authentik.ProviderRadiusArgs{
+//				Name:              pulumi.String("radius-app"),
 //				AuthorizationFlow: pulumi.String(default_authentication_flow.Id),
 //				ClientNetworks:    pulumi.String("10.10.0.0/24"),
 //				SharedSecret:      pulumi.String("my-shared-secret"),
@@ -40,9 +42,10 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_, err = authentik.NewApplication(ctx, "nameApplication", &authentik.ApplicationArgs{
+//			_, err = authentik.NewApplication(ctx, "name", &authentik.ApplicationArgs{
+//				Name:             pulumi.String("radius-app"),
 //				Slug:             pulumi.String("radius-app"),
-//				ProtocolProvider: nameProviderRadius.ID(),
+//				ProtocolProvider: name.ID(),
 //			})
 //			if err != nil {
 //				return err

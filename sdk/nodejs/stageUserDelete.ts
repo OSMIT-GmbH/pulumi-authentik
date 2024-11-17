@@ -11,7 +11,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const name = new authentik.StageUserDelete("name", {});
+ * // Create a user deletion stage
+ * const name = new authentik.StageUserDelete("name", {name: "user-delete"});
  * ```
  */
 export class StageUserDelete extends pulumi.CustomResource {

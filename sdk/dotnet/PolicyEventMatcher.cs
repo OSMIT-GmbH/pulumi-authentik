@@ -21,8 +21,10 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create policy to match events
     ///     var name = new Authentik.PolicyEventMatcher("name", new()
     ///     {
+    ///         Name = "login-from-1.2.3.4",
     ///         Action = "login",
     ///         App = "authentik.events",
     ///         ClientIp = "1.2.3.4",

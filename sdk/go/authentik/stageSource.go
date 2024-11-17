@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -18,20 +18,22 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create OAuth Source using an existing provider
 //			default_authorization_flow, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
 //				Slug: pulumi.StringRef("default-provider-authorization-implicit-consent"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			nameSourceOauth, err := authentik.NewSourceOauth(ctx, "nameSourceOauth", &authentik.SourceOauthArgs{
+//			name, err := authentik.NewSourceOauth(ctx, "name", &authentik.SourceOauthArgs{
+//				Name:               pulumi.String("discord"),
 //				Slug:               pulumi.String("discord"),
 //				AuthenticationFlow: pulumi.String(default_authorization_flow.Id),
 //				EnrollmentFlow:     pulumi.String(default_authorization_flow.Id),
@@ -43,8 +45,9 @@ import (
 //				return err
 //			}
 //			// Create a source stage using the source defined above
-//			_, err = authentik.NewStageSource(ctx, "nameStageSource", &authentik.StageSourceArgs{
-//				Source: nameSourceOauth.ID(),
+//			_, err = authentik.NewStageSource(ctx, "name", &authentik.StageSourceArgs{
+//				Name:   pulumi.String("source-stage"),
+//				Source: name.ID(),
 //			})
 //			if err != nil {
 //				return err

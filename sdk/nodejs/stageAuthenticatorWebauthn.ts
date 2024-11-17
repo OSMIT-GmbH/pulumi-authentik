@@ -6,20 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@osmit-gmbh/pulumi-authentik";
- * import * as authentik from "@pulumi/authentik";
- *
- * // Create a WebAuthn setup stage
- * const nameStageAuthenticatorWebauthn = new authentik.StageAuthenticatorWebauthn("nameStageAuthenticatorWebauthn", {});
- * // Create a WebAuthn setup which allows limited WebAuthn device types
- * const yubikey = authentik.getWebauthnDeviceType({
- *     description: "YubiKey 5C",
- * });
- * const nameIndex_stageAuthenticatorWebauthnStageAuthenticatorWebauthn = new authentik.StageAuthenticatorWebauthn("nameIndex/stageAuthenticatorWebauthnStageAuthenticatorWebauthn", {deviceTypeRestrictions: [yubikey.then(yubikey => yubikey.aaguid)]});
- * ```
  */
 export class StageAuthenticatorWebauthn extends pulumi.CustomResource {
     /**

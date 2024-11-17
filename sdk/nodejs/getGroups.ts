@@ -15,7 +15,9 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // To get the complete groups list
  * const all = authentik.getGroups({});
+ * // Or, to filter according to a specific field
  * const admins = authentik.getGroups({
  *     isSuperuser: true,
  * });
@@ -80,7 +82,9 @@ export interface GetGroupsResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // To get the complete groups list
  * const all = authentik.getGroups({});
+ * // Or, to filter according to a specific field
  * const admins = authentik.getGroups({
  *     isSuperuser: true,
  * });

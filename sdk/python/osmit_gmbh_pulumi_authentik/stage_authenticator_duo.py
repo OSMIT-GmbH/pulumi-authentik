@@ -242,10 +242,12 @@ class StageAuthenticatorDuo(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create a duo setup stage
         name = authentik.StageAuthenticatorDuo("name",
-            api_hostname="http://foo.bar.baz",
+            name="duo-setup",
             client_id="foo",
-            client_secret="bar")
+            client_secret="bar",
+            api_hostname="http://foo.bar.baz")
         ```
 
         :param str resource_name: The name of the resource.
@@ -264,10 +266,12 @@ class StageAuthenticatorDuo(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create a duo setup stage
         name = authentik.StageAuthenticatorDuo("name",
-            api_hostname="http://foo.bar.baz",
+            name="duo-setup",
             client_id="foo",
-            client_secret="bar")
+            client_secret="bar",
+            api_hostname="http://foo.bar.baz")
         ```
 
         :param str resource_name: The name of the resource.

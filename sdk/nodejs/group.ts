@@ -12,8 +12,12 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
  * // Create a super-user group with a user
- * const name = new authentik.User("name", {username: "user"});
+ * const name = new authentik.User("name", {
+ *     username: "user",
+ *     name: "User",
+ * });
  * const group = new authentik.Group("group", {
+ *     name: "tf_admins",
  *     users: [name.id],
  *     isSuperuser: true,
  * });

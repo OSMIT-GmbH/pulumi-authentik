@@ -679,9 +679,11 @@ class SourceOauth(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create OAuth Source using an existing provider
         default_source_authentication = authentik.get_flow(slug="default-source-authentication")
         default_source_enrollment = authentik.get_flow(slug="default-source-enrollment")
         name = authentik.SourceOauth("name",
+            name="discord",
             slug="discord",
             authentication_flow=default_source_authentication.id,
             enrollment_flow=default_source_enrollment.id,
@@ -721,9 +723,11 @@ class SourceOauth(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create OAuth Source using an existing provider
         default_source_authentication = authentik.get_flow(slug="default-source-authentication")
         default_source_enrollment = authentik.get_flow(slug="default-source-enrollment")
         name = authentik.SourceOauth("name",
+            name="discord",
             slug="discord",
             authentication_flow=default_source_authentication.id,
             enrollment_flow=default_source_enrollment.id,

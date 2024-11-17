@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,20 +19,22 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create an application with a provider attached and policies applied
 //			default_authorization_flow, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
 //				Slug: pulumi.StringRef("default-provider-authorization-implicit-consent"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			nameProviderOauth2, err := authentik.NewProviderOauth2(ctx, "nameProviderOauth2", &authentik.ProviderOauth2Args{
+//			name, err := authentik.NewProviderOauth2(ctx, "name", &authentik.ProviderOauth2Args{
+//				Name:              pulumi.String("example-app"),
 //				ClientId:          pulumi.String("example-app"),
 //				ClientSecret:      pulumi.String("test"),
 //				AuthorizationFlow: pulumi.String(default_authorization_flow.Id),
@@ -41,14 +43,16 @@ import (
 //				return err
 //			}
 //			policy, err := authentik.NewPolicyExpression(ctx, "policy", &authentik.PolicyExpressionArgs{
+//				Name:       pulumi.String("example"),
 //				Expression: pulumi.String("return True"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			nameApplication, err := authentik.NewApplication(ctx, "nameApplication", &authentik.ApplicationArgs{
+//			nameApplication, err := authentik.NewApplication(ctx, "name", &authentik.ApplicationArgs{
+//				Name:             pulumi.String("example-app"),
 //				Slug:             pulumi.String("example-app"),
-//				ProtocolProvider: nameProviderOauth2.ID(),
+//				ProtocolProvider: name.ID(),
 //			})
 //			if err != nil {
 //				return err

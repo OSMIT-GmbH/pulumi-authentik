@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -27,11 +27,14 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			// Create a flow with a stage attached
-//			name, err := authentik.NewStageDummy(ctx, "name", nil)
+//			name, err := authentik.NewStageDummy(ctx, "name", &authentik.StageDummyArgs{
+//				Name: pulumi.String("test-stage"),
+//			})
 //			if err != nil {
 //				return err
 //			}
 //			flow, err := authentik.NewFlow(ctx, "flow", &authentik.FlowArgs{
+//				Name:        pulumi.String("test-flow"),
 //				Title:       pulumi.String("Test flow"),
 //				Slug:        pulumi.String("test-flow"),
 //				Designation: pulumi.String("authorization"),

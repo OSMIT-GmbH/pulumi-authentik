@@ -24,23 +24,27 @@ namespace OSMIT_GmbH.Authentik
     ///     // Create a local docker connection
     ///     var local = new Authentik.ServiceConnectionDocker("local", new()
     ///     {
+    ///         Name = "local",
     ///         Local = true,
     ///     });
     /// 
     ///     // Create a remote docker connection
     ///     var tls_auth = new Authentik.CertificateKeyPair("tls-auth", new()
     ///     {
+    ///         Name = "docker-tls-auth",
     ///         CertificateData = "...",
     ///         KeyData = "...",
     ///     });
     /// 
     ///     var tls_verification = new Authentik.CertificateKeyPair("tls-verification", new()
     ///     {
+    ///         Name = "docker-tls-verification",
     ///         CertificateData = "...",
     ///     });
     /// 
     ///     var remote_host = new Authentik.ServiceConnectionDocker("remote-host", new()
     ///     {
+    ///         Name = "remote-host",
     ///         Url = "http://1.2.3.4:2368",
     ///         TlsVerification = tls_auth.Id,
     ///         TlsAuthentication = tls_verification.Id,

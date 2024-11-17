@@ -525,10 +525,13 @@ class ProviderOauth2(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
 
         # Create an OAuth2 Provider
-        name_provider_oauth2 = authentik.ProviderOauth2("nameProviderOauth2", client_id="grafana")
-        name_application = authentik.Application("nameApplication",
+        name = authentik.ProviderOauth2("name",
+            name="grafana",
+            client_id="grafana")
+        name_application = authentik.Application("name",
+            name="test app",
             slug="test-app",
-            protocol_provider=name_provider_oauth2.id)
+            protocol_provider=name.id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -552,10 +555,13 @@ class ProviderOauth2(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
 
         # Create an OAuth2 Provider
-        name_provider_oauth2 = authentik.ProviderOauth2("nameProviderOauth2", client_id="grafana")
-        name_application = authentik.Application("nameApplication",
+        name = authentik.ProviderOauth2("name",
+            name="grafana",
+            client_id="grafana")
+        name_application = authentik.Application("name",
+            name="test app",
             slug="test-app",
-            protocol_provider=name_provider_oauth2.id)
+            protocol_provider=name.id)
         ```
 
         :param str resource_name: The name of the resource.

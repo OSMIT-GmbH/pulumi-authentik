@@ -127,7 +127,10 @@ class PolicyExpression(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.PolicyExpression("name", expression="return True")
+        # Create expression policys
+        name = authentik.PolicyExpression("name",
+            name="expression",
+            expression="return True")
         ```
 
         :param str resource_name: The name of the resource.
@@ -147,7 +150,10 @@ class PolicyExpression(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
-        name = authentik.PolicyExpression("name", expression="return True")
+        # Create expression policys
+        name = authentik.PolicyExpression("name",
+            name="expression",
+            expression="return True")
         ```
 
         :param str resource_name: The name of the resource.

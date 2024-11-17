@@ -12,35 +12,6 @@ namespace OSMIT_GmbH.Authentik
 {
     /// <summary>
     /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Authentik = OSMIT_GmbH.Authentik;
-    /// using Authentik = Pulumi.Authentik;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     // Create a WebAuthn setup stage
-    ///     var nameStageAuthenticatorWebauthn = new Authentik.StageAuthenticatorWebauthn("nameStageAuthenticatorWebauthn");
-    /// 
-    ///     // Create a WebAuthn setup which allows limited WebAuthn device types
-    ///     var yubikey = Authentik.GetWebauthnDeviceType.Invoke(new()
-    ///     {
-    ///         Description = "YubiKey 5C",
-    ///     });
-    /// 
-    ///     var nameIndex_stageAuthenticatorWebauthnStageAuthenticatorWebauthn = new Authentik.StageAuthenticatorWebauthn("nameIndex/stageAuthenticatorWebauthnStageAuthenticatorWebauthn", new()
-    ///     {
-    ///         DeviceTypeRestrictions = new[]
-    ///         {
-    ///             yubikey.Apply(getWebauthnDeviceTypeResult =&gt; getWebauthnDeviceTypeResult.Aaguid),
-    ///         },
-    ///     });
-    /// 
-    /// });
-    /// ```
     /// </summary>
     [AuthentikResourceType("authentik:index/stageAuthenticatorWebauthn:StageAuthenticatorWebauthn")]
     public partial class StageAuthenticatorWebauthn : global::Pulumi.CustomResource

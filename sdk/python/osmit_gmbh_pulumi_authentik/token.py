@@ -251,7 +251,9 @@ class Token(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
 
         # Create a token for a user
-        name = authentik.User("name", username="user")
+        name = authentik.User("name",
+            username="user",
+            name="User")
         default = authentik.Token("default",
             identifier="my-token",
             user=name.id,
@@ -277,7 +279,9 @@ class Token(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
 
         # Create a token for a user
-        name = authentik.User("name", username="user")
+        name = authentik.User("name",
+            username="user",
+            name="User")
         default = authentik.Token("default",
             identifier="my-token",
             user=name.id,

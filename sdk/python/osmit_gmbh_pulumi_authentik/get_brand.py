@@ -228,6 +228,7 @@ def get_brand(branding_favicon: Optional[str] = None,
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the details of a brand by domain
     authentik_default = authentik.get_brand(domain="authentik-default")
     ```
 
@@ -301,6 +302,7 @@ def get_brand_output(branding_favicon: Optional[pulumi.Input[Optional[str]]] = N
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the details of a brand by domain
     authentik_default = authentik.get_brand(domain="authentik-default")
     ```
 

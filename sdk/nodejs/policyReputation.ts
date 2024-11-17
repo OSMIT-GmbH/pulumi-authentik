@@ -11,7 +11,8 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const name = new authentik.PolicyReputation("name", {});
+ * // Create a reputation policy
+ * const name = new authentik.PolicyReputation("name", {name: "reputation"});
  * ```
  */
 export class PolicyReputation extends pulumi.CustomResource {

@@ -11,9 +11,11 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
+ * // Create a password policy to require 8 chars
  * const name = new authentik.PolicyPassword("name", {
- *     errorMessage: "foo",
+ *     name: "password",
  *     lengthMin: 8,
+ *     errorMessage: "foo",
  * });
  * ```
  */

@@ -17,7 +17,10 @@ import * as utilities from "./utilities";
  *     label: "Username",
  *     type: "username",
  * });
- * const name = new authentik.StagePrompt("name", {fields: [resource.authentik_stage_prompt_field.field.id]});
+ * const name = new authentik.StagePrompt("name", {
+ *     name: "test",
+ *     fields: [authentikStagePromptField.field.id],
+ * });
  * ```
  */
 export class StagePrompt extends pulumi.CustomResource {

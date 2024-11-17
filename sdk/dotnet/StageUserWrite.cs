@@ -21,8 +21,10 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create a user write stage
     ///     var name = new Authentik.StageUserWrite("name", new()
     ///     {
+    ///         Name = "user-write",
     ///         CreateUsersAsInactive = false,
     ///     });
     /// 

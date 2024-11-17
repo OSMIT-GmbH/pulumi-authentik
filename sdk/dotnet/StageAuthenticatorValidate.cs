@@ -21,8 +21,10 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create an Authenticator validations tage
     ///     var name = new Authentik.StageAuthenticatorValidate("name", new()
     ///     {
+    ///         Name = "authenticator-validate",
     ///         DeviceClasses = new[]
     ///         {
     ///             "static",

@@ -229,6 +229,7 @@ def get_user(pk: Optional[int] = None,
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the name of a user by username
     akadmin = authentik.get_user(username="akadmin")
     ```
 
@@ -270,6 +271,7 @@ def get_user_output(pk: Optional[pulumi.Input[Optional[int]]] = None,
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the name of a user by username
     akadmin = authentik.get_user(username="akadmin")
     ```
 

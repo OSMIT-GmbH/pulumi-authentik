@@ -12,44 +12,6 @@ namespace OSMIT_GmbH.Authentik
 {
     /// <summary>
     /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Authentik = OSMIT_GmbH.Authentik;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     // Assign a global permission to a role
-    ///     var my_roleRbacRole = new Authentik.RbacRole("my-roleRbacRole");
-    /// 
-    ///     var global_permissionRbacPermissionRole = new Authentik.RbacPermissionRole("global-permissionRbacPermissionRole", new()
-    ///     {
-    ///         Role = my_roleRbacRole.Id,
-    ///         Permission = "authentik_flows.inspect_flow",
-    ///     });
-    /// 
-    ///     // Assign an object permission to a role
-    ///     var flow = new Authentik.Flow("flow", new()
-    ///     {
-    ///         Title = "Test flow",
-    ///         Slug = "test-flow",
-    ///         Designation = "authorization",
-    ///     });
-    /// 
-    ///     var my_roleIndex_rbacRoleRbacRole = new Authentik.RbacRole("my-roleIndex/rbacRoleRbacRole");
-    /// 
-    ///     var global_permissionIndex_rbacPermissionRoleRbacPermissionRole = new Authentik.RbacPermissionRole("global-permissionIndex/rbacPermissionRoleRbacPermissionRole", new()
-    ///     {
-    ///         Role = my_roleRbacRole.Id,
-    ///         Model = "authentik_flows.flow",
-    ///         Permission = "inspect_flow",
-    ///         ObjectId = flow.Uuid,
-    ///     });
-    /// 
-    /// });
-    /// ```
     /// </summary>
     [AuthentikResourceType("authentik:index/rbacPermissionRole:RbacPermissionRole")]
     public partial class RbacPermissionRole : global::Pulumi.CustomResource

@@ -13,7 +13,11 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  *
- * const name = new authentik.PropertyMappingNotification("name", {expression: "return {\"foo\": context['foo']}"});
+ * // Create a custom Notification transport mapping
+ * const name = new authentik.PropertyMappingNotification("name", {
+ *     name: "custom-field",
+ *     expression: "return {\"foo\": context['foo']}",
+ * });
  * ```
  */
 export class PropertyMappingNotification extends pulumi.CustomResource {

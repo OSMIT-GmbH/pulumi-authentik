@@ -12,15 +12,20 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  * import * as authentik from "@pulumi/authentik";
  *
+ * // Create an outpost with a proxy provider
  * const default-authorization-flow = authentik.getFlow({
  *     slug: "default-provider-authorization-implicit-consent",
  * });
  * const proxy = new authentik.ProviderProxy("proxy", {
+ *     name: "proxy",
  *     authorizationFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
  *     externalHost: "http://foo.bar.baz",
  *     internalHost: "http://internal.local",
  * });
- * const outpost = new authentik.Outpost("outpost", {protocolProviders: [proxy.id]});
+ * const outpost = new authentik.Outpost("outpost", {
+ *     name: "test-outpost",
+ *     protocolProviders: [proxy.id],
+ * });
  * ```
  */
 export class Outpost extends pulumi.CustomResource {

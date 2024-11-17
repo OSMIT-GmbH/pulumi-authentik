@@ -12,50 +12,6 @@ namespace OSMIT_GmbH.Authentik
 {
     /// <summary>
     /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Authentik = OSMIT_GmbH.Authentik;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     // Assign a global permission to a user
-    ///     var nameUser = new Authentik.User("nameUser", new()
-    ///     {
-    ///         Username = "user",
-    ///     });
-    /// 
-    ///     var global_permissionRbacPermissionUser = new Authentik.RbacPermissionUser("global-permissionRbacPermissionUser", new()
-    ///     {
-    ///         User = nameUser.Id,
-    ///         Permission = "authentik_flows.inspect_flow",
-    ///     });
-    /// 
-    ///     // Assign an object permission to a user
-    ///     var flow = new Authentik.Flow("flow", new()
-    ///     {
-    ///         Title = "Test flow",
-    ///         Slug = "test-flow",
-    ///         Designation = "authorization",
-    ///     });
-    /// 
-    ///     var nameIndex_userUser = new Authentik.User("nameIndex/userUser", new()
-    ///     {
-    ///         Username = "user",
-    ///     });
-    /// 
-    ///     var global_permissionIndex_rbacPermissionUserRbacPermissionUser = new Authentik.RbacPermissionUser("global-permissionIndex/rbacPermissionUserRbacPermissionUser", new()
-    ///     {
-    ///         User = nameUser.Id,
-    ///         Model = "authentik_flows.flow",
-    ///         Permission = "inspect_flow",
-    ///         ObjectId = flow.Uuid,
-    ///     });
-    /// 
-    /// });
-    /// ```
     /// </summary>
     [AuthentikResourceType("authentik:index/rbacPermissionUser:RbacPermissionUser")]
     public partial class RbacPermissionUser : global::Pulumi.CustomResource

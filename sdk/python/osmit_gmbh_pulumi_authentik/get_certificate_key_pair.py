@@ -168,6 +168,7 @@ def get_certificate_key_pair(fetch_certificate: Optional[bool] = None,
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the the ID and other info about a certificate
     generated = authentik.get_certificate_key_pair(name="authentik Self-signed Certificate")
     ```
 
@@ -209,6 +210,7 @@ def get_certificate_key_pair_output(fetch_certificate: Optional[pulumi.Input[Opt
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the the ID and other info about a certificate
     generated = authentik.get_certificate_key_pair(name="authentik Self-signed Certificate")
     ```
 

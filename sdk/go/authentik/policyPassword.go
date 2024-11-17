@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,16 +19,18 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create a password policy to require 8 chars
 //			_, err := authentik.NewPolicyPassword(ctx, "name", &authentik.PolicyPasswordArgs{
-//				ErrorMessage: pulumi.String("foo"),
+//				Name:         pulumi.String("password"),
 //				LengthMin:    pulumi.Int(8),
+//				ErrorMessage: pulumi.String("foo"),
 //			})
 //			if err != nil {
 //				return err

@@ -358,13 +358,16 @@ class ProviderLdap(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create an LDAP Provider
         default_authentication_flow = authentik.get_flow(slug="default-authentication-flow")
-        name_provider_ldap = authentik.ProviderLdap("nameProviderLdap",
+        name = authentik.ProviderLdap("name",
+            name="ldap-app",
             base_dn="dc=ldap,dc=goauthentik,dc=io",
             bind_flow=default_authentication_flow.id)
-        name_application = authentik.Application("nameApplication",
+        name_application = authentik.Application("name",
+            name="ldap-app",
             slug="ldap-app",
-            protocol_provider=name_provider_ldap.id)
+            protocol_provider=name.id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -389,13 +392,16 @@ class ProviderLdap(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
         import pulumi_authentik as authentik
 
+        # Create an LDAP Provider
         default_authentication_flow = authentik.get_flow(slug="default-authentication-flow")
-        name_provider_ldap = authentik.ProviderLdap("nameProviderLdap",
+        name = authentik.ProviderLdap("name",
+            name="ldap-app",
             base_dn="dc=ldap,dc=goauthentik,dc=io",
             bind_flow=default_authentication_flow.id)
-        name_application = authentik.Application("nameApplication",
+        name_application = authentik.Application("name",
+            name="ldap-app",
             slug="ldap-app",
-            protocol_provider=name_provider_ldap.id)
+            protocol_provider=name.id)
         ```
 
         :param str resource_name: The name of the resource.

@@ -483,9 +483,11 @@ class PolicyPassword(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create a password policy to require 8 chars
         name = authentik.PolicyPassword("name",
-            error_message="foo",
-            length_min=8)
+            name="password",
+            length_min=8,
+            error_message="foo")
         ```
 
         :param str resource_name: The name of the resource.
@@ -512,9 +514,11 @@ class PolicyPassword(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create a password policy to require 8 chars
         name = authentik.PolicyPassword("name",
-            error_message="foo",
-            length_min=8)
+            name="password",
+            length_min=8,
+            error_message="foo")
         ```
 
         :param str resource_name: The name of the resource.

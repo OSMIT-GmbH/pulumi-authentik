@@ -8,7 +8,7 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,13 +19,14 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create a SAML Source
 //			default_source_pre_authentication, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
 //				Slug: pulumi.StringRef("default-source-pre-authentication"),
 //			}, nil)
@@ -45,6 +46,7 @@ import (
 //				return err
 //			}
 //			_, err = authentik.NewSourceSaml(ctx, "name", &authentik.SourceSamlArgs{
+//				Name:                  pulumi.String("test-source"),
 //				Slug:                  pulumi.String("test-source"),
 //				AuthenticationFlow:    pulumi.String(default_source_authentication.Id),
 //				EnrollmentFlow:        pulumi.String(default_source_enrollment.Id),

@@ -21,10 +21,12 @@ namespace OSMIT_GmbH.Authentik
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // Create a password policy to require 8 chars
     ///     var name = new Authentik.PolicyPassword("name", new()
     ///     {
-    ///         ErrorMessage = "foo",
+    ///         Name = "password",
     ///         LengthMin = 8,
+    ///         ErrorMessage = "foo",
     ///     });
     /// 
     /// });

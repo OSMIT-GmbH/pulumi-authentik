@@ -283,7 +283,9 @@ class StageCaptcha(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create a captcha stage
         name = authentik.StageCaptcha("name",
+            name="captcha",
             private_key="foo",
             public_key="bar")
         ```
@@ -309,7 +311,9 @@ class StageCaptcha(pulumi.CustomResource):
         import pulumi
         import osmit_gmbh_pulumi_authentik as authentik
 
+        # Create a captcha stage
         name = authentik.StageCaptcha("name",
+            name="captcha",
             private_key="foo",
             public_key="bar")
         ```

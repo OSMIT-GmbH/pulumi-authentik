@@ -220,8 +220,11 @@ class Group(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
 
         # Create a super-user group with a user
-        name = authentik.User("name", username="user")
+        name = authentik.User("name",
+            username="user",
+            name="User")
         group = authentik.Group("group",
+            name="tf_admins",
             users=[name.id],
             is_superuser=True)
         ```
@@ -246,8 +249,11 @@ class Group(pulumi.CustomResource):
         import osmit_gmbh_pulumi_authentik as authentik
 
         # Create a super-user group with a user
-        name = authentik.User("name", username="user")
+        name = authentik.User("name",
+            username="user",
+            name="User")
         group = authentik.Group("group",
+            name="tf_admins",
             users=[name.id],
             is_superuser=True)
         ```

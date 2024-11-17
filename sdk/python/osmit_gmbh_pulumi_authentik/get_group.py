@@ -174,6 +174,7 @@ def get_group(include_users: Optional[bool] = None,
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the ID of a group by name
     admins = authentik.get_group(name="authentik Admins")
     ```
     """
@@ -209,6 +210,7 @@ def get_group_output(include_users: Optional[pulumi.Input[Optional[bool]]] = Non
     import pulumi
     import pulumi_authentik as authentik
 
+    # To get the ID of a group by name
     admins = authentik.get_group(name="authentik Admins")
     ```
     """
