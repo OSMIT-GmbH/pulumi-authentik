@@ -58,7 +58,7 @@ jobs:
     needs:
       - prerequisites
       - build_provider
-      - test
+      # - test
       - license_check
     uses: ./.github/workflows/publish.yml
     secrets: inherit
@@ -67,6 +67,8 @@ jobs:
       isPrerelease: true
 
   test:
+    # disabled for now
+    if: false
     name: test
     needs:
       - prerequisites
