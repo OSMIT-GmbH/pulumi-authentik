@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -145,12 +144,6 @@ func (i *PolicyExpiry) ToPolicyExpiryOutputWithContext(ctx context.Context) Poli
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyExpiryOutput)
 }
 
-func (i *PolicyExpiry) ToOutput(ctx context.Context) pulumix.Output[*PolicyExpiry] {
-	return pulumix.Output[*PolicyExpiry]{
-		OutputState: i.ToPolicyExpiryOutputWithContext(ctx).OutputState,
-	}
-}
-
 // PolicyExpiryArrayInput is an input type that accepts PolicyExpiryArray and PolicyExpiryArrayOutput values.
 // You can construct a concrete instance of `PolicyExpiryArrayInput` via:
 //
@@ -174,12 +167,6 @@ func (i PolicyExpiryArray) ToPolicyExpiryArrayOutput() PolicyExpiryArrayOutput {
 
 func (i PolicyExpiryArray) ToPolicyExpiryArrayOutputWithContext(ctx context.Context) PolicyExpiryArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyExpiryArrayOutput)
-}
-
-func (i PolicyExpiryArray) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyExpiry] {
-	return pulumix.Output[[]*PolicyExpiry]{
-		OutputState: i.ToPolicyExpiryArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // PolicyExpiryMapInput is an input type that accepts PolicyExpiryMap and PolicyExpiryMapOutput values.
@@ -207,12 +194,6 @@ func (i PolicyExpiryMap) ToPolicyExpiryMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyExpiryMapOutput)
 }
 
-func (i PolicyExpiryMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyExpiry] {
-	return pulumix.Output[map[string]*PolicyExpiry]{
-		OutputState: i.ToPolicyExpiryMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type PolicyExpiryOutput struct{ *pulumi.OutputState }
 
 func (PolicyExpiryOutput) ElementType() reflect.Type {
@@ -225,12 +206,6 @@ func (o PolicyExpiryOutput) ToPolicyExpiryOutput() PolicyExpiryOutput {
 
 func (o PolicyExpiryOutput) ToPolicyExpiryOutputWithContext(ctx context.Context) PolicyExpiryOutput {
 	return o
-}
-
-func (o PolicyExpiryOutput) ToOutput(ctx context.Context) pulumix.Output[*PolicyExpiry] {
-	return pulumix.Output[*PolicyExpiry]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o PolicyExpiryOutput) Days() pulumi.IntOutput {
@@ -265,12 +240,6 @@ func (o PolicyExpiryArrayOutput) ToPolicyExpiryArrayOutputWithContext(ctx contex
 	return o
 }
 
-func (o PolicyExpiryArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyExpiry] {
-	return pulumix.Output[[]*PolicyExpiry]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o PolicyExpiryArrayOutput) Index(i pulumi.IntInput) PolicyExpiryOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PolicyExpiry {
 		return vs[0].([]*PolicyExpiry)[vs[1].(int)]
@@ -289,12 +258,6 @@ func (o PolicyExpiryMapOutput) ToPolicyExpiryMapOutput() PolicyExpiryMapOutput {
 
 func (o PolicyExpiryMapOutput) ToPolicyExpiryMapOutputWithContext(ctx context.Context) PolicyExpiryMapOutput {
 	return o
-}
-
-func (o PolicyExpiryMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyExpiry] {
-	return pulumix.Output[map[string]*PolicyExpiry]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o PolicyExpiryMapOutput) MapIndex(k pulumi.StringInput) PolicyExpiryOutput {

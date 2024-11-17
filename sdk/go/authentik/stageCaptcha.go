@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -44,11 +43,17 @@ type StageCaptcha struct {
 
 	// Defaults to `https://www.recaptcha.net/recaptcha/api/siteverify`.
 	ApiUrl pulumi.StringPtrOutput `pulumi:"apiUrl"`
+	// Defaults to `true`.
+	ErrorOnInvalidScore pulumi.BoolPtrOutput `pulumi:"errorOnInvalidScore"`
 	// Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
 	JsUrl      pulumi.StringPtrOutput `pulumi:"jsUrl"`
 	Name       pulumi.StringOutput    `pulumi:"name"`
 	PrivateKey pulumi.StringOutput    `pulumi:"privateKey"`
 	PublicKey  pulumi.StringOutput    `pulumi:"publicKey"`
+	// Defaults to `0.5`.
+	ScoreMaxThreshold pulumi.Float64PtrOutput `pulumi:"scoreMaxThreshold"`
+	// Defaults to `1`.
+	ScoreMinThreshold pulumi.Float64PtrOutput `pulumi:"scoreMinThreshold"`
 }
 
 // NewStageCaptcha registers a new resource with the given unique name, arguments, and options.
@@ -96,21 +101,33 @@ func GetStageCaptcha(ctx *pulumi.Context,
 type stageCaptchaState struct {
 	// Defaults to `https://www.recaptcha.net/recaptcha/api/siteverify`.
 	ApiUrl *string `pulumi:"apiUrl"`
+	// Defaults to `true`.
+	ErrorOnInvalidScore *bool `pulumi:"errorOnInvalidScore"`
 	// Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
 	JsUrl      *string `pulumi:"jsUrl"`
 	Name       *string `pulumi:"name"`
 	PrivateKey *string `pulumi:"privateKey"`
 	PublicKey  *string `pulumi:"publicKey"`
+	// Defaults to `0.5`.
+	ScoreMaxThreshold *float64 `pulumi:"scoreMaxThreshold"`
+	// Defaults to `1`.
+	ScoreMinThreshold *float64 `pulumi:"scoreMinThreshold"`
 }
 
 type StageCaptchaState struct {
 	// Defaults to `https://www.recaptcha.net/recaptcha/api/siteverify`.
 	ApiUrl pulumi.StringPtrInput
+	// Defaults to `true`.
+	ErrorOnInvalidScore pulumi.BoolPtrInput
 	// Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
 	JsUrl      pulumi.StringPtrInput
 	Name       pulumi.StringPtrInput
 	PrivateKey pulumi.StringPtrInput
 	PublicKey  pulumi.StringPtrInput
+	// Defaults to `0.5`.
+	ScoreMaxThreshold pulumi.Float64PtrInput
+	// Defaults to `1`.
+	ScoreMinThreshold pulumi.Float64PtrInput
 }
 
 func (StageCaptchaState) ElementType() reflect.Type {
@@ -120,22 +137,34 @@ func (StageCaptchaState) ElementType() reflect.Type {
 type stageCaptchaArgs struct {
 	// Defaults to `https://www.recaptcha.net/recaptcha/api/siteverify`.
 	ApiUrl *string `pulumi:"apiUrl"`
+	// Defaults to `true`.
+	ErrorOnInvalidScore *bool `pulumi:"errorOnInvalidScore"`
 	// Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
 	JsUrl      *string `pulumi:"jsUrl"`
 	Name       *string `pulumi:"name"`
 	PrivateKey string  `pulumi:"privateKey"`
 	PublicKey  string  `pulumi:"publicKey"`
+	// Defaults to `0.5`.
+	ScoreMaxThreshold *float64 `pulumi:"scoreMaxThreshold"`
+	// Defaults to `1`.
+	ScoreMinThreshold *float64 `pulumi:"scoreMinThreshold"`
 }
 
 // The set of arguments for constructing a StageCaptcha resource.
 type StageCaptchaArgs struct {
 	// Defaults to `https://www.recaptcha.net/recaptcha/api/siteverify`.
 	ApiUrl pulumi.StringPtrInput
+	// Defaults to `true`.
+	ErrorOnInvalidScore pulumi.BoolPtrInput
 	// Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
 	JsUrl      pulumi.StringPtrInput
 	Name       pulumi.StringPtrInput
 	PrivateKey pulumi.StringInput
 	PublicKey  pulumi.StringInput
+	// Defaults to `0.5`.
+	ScoreMaxThreshold pulumi.Float64PtrInput
+	// Defaults to `1`.
+	ScoreMinThreshold pulumi.Float64PtrInput
 }
 
 func (StageCaptchaArgs) ElementType() reflect.Type {
@@ -159,12 +188,6 @@ func (i *StageCaptcha) ToStageCaptchaOutput() StageCaptchaOutput {
 
 func (i *StageCaptcha) ToStageCaptchaOutputWithContext(ctx context.Context) StageCaptchaOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageCaptchaOutput)
-}
-
-func (i *StageCaptcha) ToOutput(ctx context.Context) pulumix.Output[*StageCaptcha] {
-	return pulumix.Output[*StageCaptcha]{
-		OutputState: i.ToStageCaptchaOutputWithContext(ctx).OutputState,
-	}
 }
 
 // StageCaptchaArrayInput is an input type that accepts StageCaptchaArray and StageCaptchaArrayOutput values.
@@ -192,12 +215,6 @@ func (i StageCaptchaArray) ToStageCaptchaArrayOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(StageCaptchaArrayOutput)
 }
 
-func (i StageCaptchaArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageCaptcha] {
-	return pulumix.Output[[]*StageCaptcha]{
-		OutputState: i.ToStageCaptchaArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 // StageCaptchaMapInput is an input type that accepts StageCaptchaMap and StageCaptchaMapOutput values.
 // You can construct a concrete instance of `StageCaptchaMapInput` via:
 //
@@ -223,12 +240,6 @@ func (i StageCaptchaMap) ToStageCaptchaMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(StageCaptchaMapOutput)
 }
 
-func (i StageCaptchaMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageCaptcha] {
-	return pulumix.Output[map[string]*StageCaptcha]{
-		OutputState: i.ToStageCaptchaMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type StageCaptchaOutput struct{ *pulumi.OutputState }
 
 func (StageCaptchaOutput) ElementType() reflect.Type {
@@ -243,15 +254,14 @@ func (o StageCaptchaOutput) ToStageCaptchaOutputWithContext(ctx context.Context)
 	return o
 }
 
-func (o StageCaptchaOutput) ToOutput(ctx context.Context) pulumix.Output[*StageCaptcha] {
-	return pulumix.Output[*StageCaptcha]{
-		OutputState: o.OutputState,
-	}
-}
-
 // Defaults to `https://www.recaptcha.net/recaptcha/api/siteverify`.
 func (o StageCaptchaOutput) ApiUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageCaptcha) pulumi.StringPtrOutput { return v.ApiUrl }).(pulumi.StringPtrOutput)
+}
+
+// Defaults to `true`.
+func (o StageCaptchaOutput) ErrorOnInvalidScore() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *StageCaptcha) pulumi.BoolPtrOutput { return v.ErrorOnInvalidScore }).(pulumi.BoolPtrOutput)
 }
 
 // Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
@@ -271,6 +281,16 @@ func (o StageCaptchaOutput) PublicKey() pulumi.StringOutput {
 	return o.ApplyT(func(v *StageCaptcha) pulumi.StringOutput { return v.PublicKey }).(pulumi.StringOutput)
 }
 
+// Defaults to `0.5`.
+func (o StageCaptchaOutput) ScoreMaxThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *StageCaptcha) pulumi.Float64PtrOutput { return v.ScoreMaxThreshold }).(pulumi.Float64PtrOutput)
+}
+
+// Defaults to `1`.
+func (o StageCaptchaOutput) ScoreMinThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *StageCaptcha) pulumi.Float64PtrOutput { return v.ScoreMinThreshold }).(pulumi.Float64PtrOutput)
+}
+
 type StageCaptchaArrayOutput struct{ *pulumi.OutputState }
 
 func (StageCaptchaArrayOutput) ElementType() reflect.Type {
@@ -283,12 +303,6 @@ func (o StageCaptchaArrayOutput) ToStageCaptchaArrayOutput() StageCaptchaArrayOu
 
 func (o StageCaptchaArrayOutput) ToStageCaptchaArrayOutputWithContext(ctx context.Context) StageCaptchaArrayOutput {
 	return o
-}
-
-func (o StageCaptchaArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageCaptcha] {
-	return pulumix.Output[[]*StageCaptcha]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageCaptchaArrayOutput) Index(i pulumi.IntInput) StageCaptchaOutput {
@@ -309,12 +323,6 @@ func (o StageCaptchaMapOutput) ToStageCaptchaMapOutput() StageCaptchaMapOutput {
 
 func (o StageCaptchaMapOutput) ToStageCaptchaMapOutputWithContext(ctx context.Context) StageCaptchaMapOutput {
 	return o
-}
-
-func (o StageCaptchaMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageCaptcha] {
-	return pulumix.Output[map[string]*StageCaptcha]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageCaptchaMapOutput) MapIndex(k pulumi.StringInput) StageCaptchaOutput {

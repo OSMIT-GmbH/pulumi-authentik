@@ -8,37 +8,13 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
-// ## Example Usage
+// Manage Scope Provider Property mappings
 //
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := authentik.NewScopeMapping(ctx, "name", &authentik.ScopeMappingArgs{
-//				Expression: pulumi.String("return {\n  \"policy\": \"readwrite\",\n}\n\n"),
-//				ScopeName:  pulumi.String("minio"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
+// > This resource is deprecated. Migrate to `PropertyMappingProviderScope`.
 type ScopeMapping struct {
 	pulumi.CustomResourceState
 
@@ -139,12 +115,6 @@ func (i *ScopeMapping) ToScopeMappingOutputWithContext(ctx context.Context) Scop
 	return pulumi.ToOutputWithContext(ctx, i).(ScopeMappingOutput)
 }
 
-func (i *ScopeMapping) ToOutput(ctx context.Context) pulumix.Output[*ScopeMapping] {
-	return pulumix.Output[*ScopeMapping]{
-		OutputState: i.ToScopeMappingOutputWithContext(ctx).OutputState,
-	}
-}
-
 // ScopeMappingArrayInput is an input type that accepts ScopeMappingArray and ScopeMappingArrayOutput values.
 // You can construct a concrete instance of `ScopeMappingArrayInput` via:
 //
@@ -168,12 +138,6 @@ func (i ScopeMappingArray) ToScopeMappingArrayOutput() ScopeMappingArrayOutput {
 
 func (i ScopeMappingArray) ToScopeMappingArrayOutputWithContext(ctx context.Context) ScopeMappingArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ScopeMappingArrayOutput)
-}
-
-func (i ScopeMappingArray) ToOutput(ctx context.Context) pulumix.Output[[]*ScopeMapping] {
-	return pulumix.Output[[]*ScopeMapping]{
-		OutputState: i.ToScopeMappingArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // ScopeMappingMapInput is an input type that accepts ScopeMappingMap and ScopeMappingMapOutput values.
@@ -201,12 +165,6 @@ func (i ScopeMappingMap) ToScopeMappingMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(ScopeMappingMapOutput)
 }
 
-func (i ScopeMappingMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ScopeMapping] {
-	return pulumix.Output[map[string]*ScopeMapping]{
-		OutputState: i.ToScopeMappingMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ScopeMappingOutput struct{ *pulumi.OutputState }
 
 func (ScopeMappingOutput) ElementType() reflect.Type {
@@ -219,12 +177,6 @@ func (o ScopeMappingOutput) ToScopeMappingOutput() ScopeMappingOutput {
 
 func (o ScopeMappingOutput) ToScopeMappingOutputWithContext(ctx context.Context) ScopeMappingOutput {
 	return o
-}
-
-func (o ScopeMappingOutput) ToOutput(ctx context.Context) pulumix.Output[*ScopeMapping] {
-	return pulumix.Output[*ScopeMapping]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ScopeMappingOutput) Description() pulumi.StringPtrOutput {
@@ -257,12 +209,6 @@ func (o ScopeMappingArrayOutput) ToScopeMappingArrayOutputWithContext(ctx contex
 	return o
 }
 
-func (o ScopeMappingArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ScopeMapping] {
-	return pulumix.Output[[]*ScopeMapping]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o ScopeMappingArrayOutput) Index(i pulumi.IntInput) ScopeMappingOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ScopeMapping {
 		return vs[0].([]*ScopeMapping)[vs[1].(int)]
@@ -281,12 +227,6 @@ func (o ScopeMappingMapOutput) ToScopeMappingMapOutput() ScopeMappingMapOutput {
 
 func (o ScopeMappingMapOutput) ToScopeMappingMapOutputWithContext(ctx context.Context) ScopeMappingMapOutput {
 	return o
-}
-
-func (o ScopeMappingMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ScopeMapping] {
-	return pulumix.Output[map[string]*ScopeMapping]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ScopeMappingMapOutput) MapIndex(k pulumi.StringInput) ScopeMappingOutput {

@@ -35,7 +35,7 @@ export class EnterpriseLicense extends pulumi.CustomResource {
     /**
      * Generated.
      */
-    public /*out*/ readonly expiry!: pulumi.Output<string>;
+    public /*out*/ readonly expiry!: pulumi.Output<number>;
     /**
      * Generated.
      */
@@ -93,7 +93,7 @@ export interface EnterpriseLicenseState {
     /**
      * Generated.
      */
-    expiry?: pulumi.Input<string>;
+    expiry?: pulumi.Input<number>;
     /**
      * Generated.
      */

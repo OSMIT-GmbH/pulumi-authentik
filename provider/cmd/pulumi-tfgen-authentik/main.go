@@ -15,9 +15,10 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
 	authentik "github.com/OSMIT-GmbH/pulumi-authentik/provider"
 	"github.com/OSMIT-GmbH/pulumi-authentik/provider/pkg/version"
+
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
 )
 
 func main() {

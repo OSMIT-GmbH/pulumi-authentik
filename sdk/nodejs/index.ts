@@ -15,6 +15,11 @@ export type Blueprint = import("./blueprint").Blueprint;
 export const Blueprint: typeof import("./blueprint").Blueprint = null as any;
 utilities.lazyLoad(exports, ["Blueprint"], () => require("./blueprint"));
 
+export { BrandArgs, BrandState } from "./brand";
+export type Brand = import("./brand").Brand;
+export const Brand: typeof import("./brand").Brand = null as any;
+utilities.lazyLoad(exports, ["Brand"], () => require("./brand"));
+
 export { CertificateKeyPairArgs, CertificateKeyPairState } from "./certificateKeyPair";
 export type CertificateKeyPair = import("./certificateKeyPair").CertificateKeyPair;
 export const CertificateKeyPair: typeof import("./certificateKeyPair").CertificateKeyPair = null as any;
@@ -45,6 +50,11 @@ export type FlowStageBinding = import("./flowStageBinding").FlowStageBinding;
 export const FlowStageBinding: typeof import("./flowStageBinding").FlowStageBinding = null as any;
 utilities.lazyLoad(exports, ["FlowStageBinding"], () => require("./flowStageBinding"));
 
+export { GetBrandArgs, GetBrandResult, GetBrandOutputArgs } from "./getBrand";
+export const getBrand: typeof import("./getBrand").getBrand = null as any;
+export const getBrandOutput: typeof import("./getBrand").getBrandOutput = null as any;
+utilities.lazyLoad(exports, ["getBrand","getBrandOutput"], () => require("./getBrand"));
+
 export { GetCertificateKeyPairArgs, GetCertificateKeyPairResult, GetCertificateKeyPairOutputArgs } from "./getCertificateKeyPair";
 export const getCertificateKeyPair: typeof import("./getCertificateKeyPair").getCertificateKeyPair = null as any;
 export const getCertificateKeyPairOutput: typeof import("./getCertificateKeyPair").getCertificateKeyPairOutput = null as any;
@@ -65,20 +75,35 @@ export const getGroups: typeof import("./getGroups").getGroups = null as any;
 export const getGroupsOutput: typeof import("./getGroups").getGroupsOutput = null as any;
 utilities.lazyLoad(exports, ["getGroups","getGroupsOutput"], () => require("./getGroups"));
 
-export { GetPropertyMappingLdapArgs, GetPropertyMappingLdapResult, GetPropertyMappingLdapOutputArgs } from "./getPropertyMappingLdap";
-export const getPropertyMappingLdap: typeof import("./getPropertyMappingLdap").getPropertyMappingLdap = null as any;
-export const getPropertyMappingLdapOutput: typeof import("./getPropertyMappingLdap").getPropertyMappingLdapOutput = null as any;
-utilities.lazyLoad(exports, ["getPropertyMappingLdap","getPropertyMappingLdapOutput"], () => require("./getPropertyMappingLdap"));
+export { GetPropertyMappingProviderRacArgs, GetPropertyMappingProviderRacResult, GetPropertyMappingProviderRacOutputArgs } from "./getPropertyMappingProviderRac";
+export const getPropertyMappingProviderRac: typeof import("./getPropertyMappingProviderRac").getPropertyMappingProviderRac = null as any;
+export const getPropertyMappingProviderRacOutput: typeof import("./getPropertyMappingProviderRac").getPropertyMappingProviderRacOutput = null as any;
+utilities.lazyLoad(exports, ["getPropertyMappingProviderRac","getPropertyMappingProviderRacOutput"], () => require("./getPropertyMappingProviderRac"));
 
-export { GetPropertyMappingSamlArgs, GetPropertyMappingSamlResult, GetPropertyMappingSamlOutputArgs } from "./getPropertyMappingSaml";
-export const getPropertyMappingSaml: typeof import("./getPropertyMappingSaml").getPropertyMappingSaml = null as any;
-export const getPropertyMappingSamlOutput: typeof import("./getPropertyMappingSaml").getPropertyMappingSamlOutput = null as any;
-utilities.lazyLoad(exports, ["getPropertyMappingSaml","getPropertyMappingSamlOutput"], () => require("./getPropertyMappingSaml"));
+export { GetPropertyMappingProviderRadiusArgs, GetPropertyMappingProviderRadiusResult, GetPropertyMappingProviderRadiusOutputArgs } from "./getPropertyMappingProviderRadius";
+export const getPropertyMappingProviderRadius: typeof import("./getPropertyMappingProviderRadius").getPropertyMappingProviderRadius = null as any;
+export const getPropertyMappingProviderRadiusOutput: typeof import("./getPropertyMappingProviderRadius").getPropertyMappingProviderRadiusOutput = null as any;
+utilities.lazyLoad(exports, ["getPropertyMappingProviderRadius","getPropertyMappingProviderRadiusOutput"], () => require("./getPropertyMappingProviderRadius"));
 
-export { GetPropertyMappingScimArgs, GetPropertyMappingScimResult, GetPropertyMappingScimOutputArgs } from "./getPropertyMappingScim";
-export const getPropertyMappingScim: typeof import("./getPropertyMappingScim").getPropertyMappingScim = null as any;
-export const getPropertyMappingScimOutput: typeof import("./getPropertyMappingScim").getPropertyMappingScimOutput = null as any;
-utilities.lazyLoad(exports, ["getPropertyMappingScim","getPropertyMappingScimOutput"], () => require("./getPropertyMappingScim"));
+export { GetPropertyMappingProviderSamlArgs, GetPropertyMappingProviderSamlResult, GetPropertyMappingProviderSamlOutputArgs } from "./getPropertyMappingProviderSaml";
+export const getPropertyMappingProviderSaml: typeof import("./getPropertyMappingProviderSaml").getPropertyMappingProviderSaml = null as any;
+export const getPropertyMappingProviderSamlOutput: typeof import("./getPropertyMappingProviderSaml").getPropertyMappingProviderSamlOutput = null as any;
+utilities.lazyLoad(exports, ["getPropertyMappingProviderSaml","getPropertyMappingProviderSamlOutput"], () => require("./getPropertyMappingProviderSaml"));
+
+export { GetPropertyMappingProviderScimArgs, GetPropertyMappingProviderScimResult, GetPropertyMappingProviderScimOutputArgs } from "./getPropertyMappingProviderScim";
+export const getPropertyMappingProviderScim: typeof import("./getPropertyMappingProviderScim").getPropertyMappingProviderScim = null as any;
+export const getPropertyMappingProviderScimOutput: typeof import("./getPropertyMappingProviderScim").getPropertyMappingProviderScimOutput = null as any;
+utilities.lazyLoad(exports, ["getPropertyMappingProviderScim","getPropertyMappingProviderScimOutput"], () => require("./getPropertyMappingProviderScim"));
+
+export { GetPropertyMappingProviderScopeArgs, GetPropertyMappingProviderScopeResult, GetPropertyMappingProviderScopeOutputArgs } from "./getPropertyMappingProviderScope";
+export const getPropertyMappingProviderScope: typeof import("./getPropertyMappingProviderScope").getPropertyMappingProviderScope = null as any;
+export const getPropertyMappingProviderScopeOutput: typeof import("./getPropertyMappingProviderScope").getPropertyMappingProviderScopeOutput = null as any;
+utilities.lazyLoad(exports, ["getPropertyMappingProviderScope","getPropertyMappingProviderScopeOutput"], () => require("./getPropertyMappingProviderScope"));
+
+export { GetPropertyMappingSourceLdapArgs, GetPropertyMappingSourceLdapResult, GetPropertyMappingSourceLdapOutputArgs } from "./getPropertyMappingSourceLdap";
+export const getPropertyMappingSourceLdap: typeof import("./getPropertyMappingSourceLdap").getPropertyMappingSourceLdap = null as any;
+export const getPropertyMappingSourceLdapOutput: typeof import("./getPropertyMappingSourceLdap").getPropertyMappingSourceLdapOutput = null as any;
+utilities.lazyLoad(exports, ["getPropertyMappingSourceLdap","getPropertyMappingSourceLdapOutput"], () => require("./getPropertyMappingSourceLdap"));
 
 export { GetProviderOauth2ConfigArgs, GetProviderOauth2ConfigResult, GetProviderOauth2ConfigOutputArgs } from "./getProviderOauth2Config";
 export const getProviderOauth2Config: typeof import("./getProviderOauth2Config").getProviderOauth2Config = null as any;
@@ -90,11 +115,6 @@ export const getProviderSamlMetadata: typeof import("./getProviderSamlMetadata")
 export const getProviderSamlMetadataOutput: typeof import("./getProviderSamlMetadata").getProviderSamlMetadataOutput = null as any;
 utilities.lazyLoad(exports, ["getProviderSamlMetadata","getProviderSamlMetadataOutput"], () => require("./getProviderSamlMetadata"));
 
-export { GetScopeMappingArgs, GetScopeMappingResult, GetScopeMappingOutputArgs } from "./getScopeMapping";
-export const getScopeMapping: typeof import("./getScopeMapping").getScopeMapping = null as any;
-export const getScopeMappingOutput: typeof import("./getScopeMapping").getScopeMappingOutput = null as any;
-utilities.lazyLoad(exports, ["getScopeMapping","getScopeMappingOutput"], () => require("./getScopeMapping"));
-
 export { GetSourceArgs, GetSourceResult, GetSourceOutputArgs } from "./getSource";
 export const getSource: typeof import("./getSource").getSource = null as any;
 export const getSourceOutput: typeof import("./getSource").getSourceOutput = null as any;
@@ -105,11 +125,6 @@ export const getStage: typeof import("./getStage").getStage = null as any;
 export const getStageOutput: typeof import("./getStage").getStageOutput = null as any;
 utilities.lazyLoad(exports, ["getStage","getStageOutput"], () => require("./getStage"));
 
-export { GetTenantArgs, GetTenantResult, GetTenantOutputArgs } from "./getTenant";
-export const getTenant: typeof import("./getTenant").getTenant = null as any;
-export const getTenantOutput: typeof import("./getTenant").getTenantOutput = null as any;
-utilities.lazyLoad(exports, ["getTenant","getTenantOutput"], () => require("./getTenant"));
-
 export { GetUserArgs, GetUserResult, GetUserOutputArgs } from "./getUser";
 export const getUser: typeof import("./getUser").getUser = null as any;
 export const getUserOutput: typeof import("./getUser").getUserOutput = null as any;
@@ -119,6 +134,11 @@ export { GetUsersArgs, GetUsersResult, GetUsersOutputArgs } from "./getUsers";
 export const getUsers: typeof import("./getUsers").getUsers = null as any;
 export const getUsersOutput: typeof import("./getUsers").getUsersOutput = null as any;
 utilities.lazyLoad(exports, ["getUsers","getUsersOutput"], () => require("./getUsers"));
+
+export { GetWebauthnDeviceTypeArgs, GetWebauthnDeviceTypeResult, GetWebauthnDeviceTypeOutputArgs } from "./getWebauthnDeviceType";
+export const getWebauthnDeviceType: typeof import("./getWebauthnDeviceType").getWebauthnDeviceType = null as any;
+export const getWebauthnDeviceTypeOutput: typeof import("./getWebauthnDeviceType").getWebauthnDeviceTypeOutput = null as any;
+utilities.lazyLoad(exports, ["getWebauthnDeviceType","getWebauthnDeviceTypeOutput"], () => require("./getWebauthnDeviceType"));
 
 export { GroupArgs, GroupState } from "./group";
 export type Group = import("./group").Group;
@@ -155,6 +175,11 @@ export type PolicyExpression = import("./policyExpression").PolicyExpression;
 export const PolicyExpression: typeof import("./policyExpression").PolicyExpression = null as any;
 utilities.lazyLoad(exports, ["PolicyExpression"], () => require("./policyExpression"));
 
+export { PolicyGeoipArgs, PolicyGeoipState } from "./policyGeoip";
+export type PolicyGeoip = import("./policyGeoip").PolicyGeoip;
+export const PolicyGeoip: typeof import("./policyGeoip").PolicyGeoip = null as any;
+utilities.lazyLoad(exports, ["PolicyGeoip"], () => require("./policyGeoip"));
+
 export { PolicyPasswordArgs, PolicyPasswordState } from "./policyPassword";
 export type PolicyPassword = import("./policyPassword").PolicyPassword;
 export const PolicyPassword: typeof import("./policyPassword").PolicyPassword = null as any;
@@ -165,15 +190,70 @@ export type PolicyReputation = import("./policyReputation").PolicyReputation;
 export const PolicyReputation: typeof import("./policyReputation").PolicyReputation = null as any;
 utilities.lazyLoad(exports, ["PolicyReputation"], () => require("./policyReputation"));
 
+export { PropertyMappingGoogleWorkspaceArgs, PropertyMappingGoogleWorkspaceState } from "./propertyMappingGoogleWorkspace";
+export type PropertyMappingGoogleWorkspace = import("./propertyMappingGoogleWorkspace").PropertyMappingGoogleWorkspace;
+export const PropertyMappingGoogleWorkspace: typeof import("./propertyMappingGoogleWorkspace").PropertyMappingGoogleWorkspace = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingGoogleWorkspace"], () => require("./propertyMappingGoogleWorkspace"));
+
 export { PropertyMappingLdapArgs, PropertyMappingLdapState } from "./propertyMappingLdap";
 export type PropertyMappingLdap = import("./propertyMappingLdap").PropertyMappingLdap;
 export const PropertyMappingLdap: typeof import("./propertyMappingLdap").PropertyMappingLdap = null as any;
 utilities.lazyLoad(exports, ["PropertyMappingLdap"], () => require("./propertyMappingLdap"));
 
+export { PropertyMappingMicrosoftEntraArgs, PropertyMappingMicrosoftEntraState } from "./propertyMappingMicrosoftEntra";
+export type PropertyMappingMicrosoftEntra = import("./propertyMappingMicrosoftEntra").PropertyMappingMicrosoftEntra;
+export const PropertyMappingMicrosoftEntra: typeof import("./propertyMappingMicrosoftEntra").PropertyMappingMicrosoftEntra = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingMicrosoftEntra"], () => require("./propertyMappingMicrosoftEntra"));
+
 export { PropertyMappingNotificationArgs, PropertyMappingNotificationState } from "./propertyMappingNotification";
 export type PropertyMappingNotification = import("./propertyMappingNotification").PropertyMappingNotification;
 export const PropertyMappingNotification: typeof import("./propertyMappingNotification").PropertyMappingNotification = null as any;
 utilities.lazyLoad(exports, ["PropertyMappingNotification"], () => require("./propertyMappingNotification"));
+
+export { PropertyMappingProviderGoogleWorkspaceArgs, PropertyMappingProviderGoogleWorkspaceState } from "./propertyMappingProviderGoogleWorkspace";
+export type PropertyMappingProviderGoogleWorkspace = import("./propertyMappingProviderGoogleWorkspace").PropertyMappingProviderGoogleWorkspace;
+export const PropertyMappingProviderGoogleWorkspace: typeof import("./propertyMappingProviderGoogleWorkspace").PropertyMappingProviderGoogleWorkspace = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingProviderGoogleWorkspace"], () => require("./propertyMappingProviderGoogleWorkspace"));
+
+export { PropertyMappingProviderMicrosoftEntraArgs, PropertyMappingProviderMicrosoftEntraState } from "./propertyMappingProviderMicrosoftEntra";
+export type PropertyMappingProviderMicrosoftEntra = import("./propertyMappingProviderMicrosoftEntra").PropertyMappingProviderMicrosoftEntra;
+export const PropertyMappingProviderMicrosoftEntra: typeof import("./propertyMappingProviderMicrosoftEntra").PropertyMappingProviderMicrosoftEntra = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingProviderMicrosoftEntra"], () => require("./propertyMappingProviderMicrosoftEntra"));
+
+export { PropertyMappingProviderRacArgs, PropertyMappingProviderRacState } from "./propertyMappingProviderRac";
+export type PropertyMappingProviderRac = import("./propertyMappingProviderRac").PropertyMappingProviderRac;
+export const PropertyMappingProviderRac: typeof import("./propertyMappingProviderRac").PropertyMappingProviderRac = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingProviderRac"], () => require("./propertyMappingProviderRac"));
+
+export { PropertyMappingProviderRadiusArgs, PropertyMappingProviderRadiusState } from "./propertyMappingProviderRadius";
+export type PropertyMappingProviderRadius = import("./propertyMappingProviderRadius").PropertyMappingProviderRadius;
+export const PropertyMappingProviderRadius: typeof import("./propertyMappingProviderRadius").PropertyMappingProviderRadius = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingProviderRadius"], () => require("./propertyMappingProviderRadius"));
+
+export { PropertyMappingProviderSamlArgs, PropertyMappingProviderSamlState } from "./propertyMappingProviderSaml";
+export type PropertyMappingProviderSaml = import("./propertyMappingProviderSaml").PropertyMappingProviderSaml;
+export const PropertyMappingProviderSaml: typeof import("./propertyMappingProviderSaml").PropertyMappingProviderSaml = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingProviderSaml"], () => require("./propertyMappingProviderSaml"));
+
+export { PropertyMappingProviderScimArgs, PropertyMappingProviderScimState } from "./propertyMappingProviderScim";
+export type PropertyMappingProviderScim = import("./propertyMappingProviderScim").PropertyMappingProviderScim;
+export const PropertyMappingProviderScim: typeof import("./propertyMappingProviderScim").PropertyMappingProviderScim = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingProviderScim"], () => require("./propertyMappingProviderScim"));
+
+export { PropertyMappingProviderScopeArgs, PropertyMappingProviderScopeState } from "./propertyMappingProviderScope";
+export type PropertyMappingProviderScope = import("./propertyMappingProviderScope").PropertyMappingProviderScope;
+export const PropertyMappingProviderScope: typeof import("./propertyMappingProviderScope").PropertyMappingProviderScope = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingProviderScope"], () => require("./propertyMappingProviderScope"));
+
+export { PropertyMappingRacArgs, PropertyMappingRacState } from "./propertyMappingRac";
+export type PropertyMappingRac = import("./propertyMappingRac").PropertyMappingRac;
+export const PropertyMappingRac: typeof import("./propertyMappingRac").PropertyMappingRac = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingRac"], () => require("./propertyMappingRac"));
+
+export { PropertyMappingRadiusArgs, PropertyMappingRadiusState } from "./propertyMappingRadius";
+export type PropertyMappingRadius = import("./propertyMappingRadius").PropertyMappingRadius;
+export const PropertyMappingRadius: typeof import("./propertyMappingRadius").PropertyMappingRadius = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingRadius"], () => require("./propertyMappingRadius"));
 
 export { PropertyMappingSamlArgs, PropertyMappingSamlState } from "./propertyMappingSaml";
 export type PropertyMappingSaml = import("./propertyMappingSaml").PropertyMappingSaml;
@@ -185,15 +265,55 @@ export type PropertyMappingScim = import("./propertyMappingScim").PropertyMappin
 export const PropertyMappingScim: typeof import("./propertyMappingScim").PropertyMappingScim = null as any;
 utilities.lazyLoad(exports, ["PropertyMappingScim"], () => require("./propertyMappingScim"));
 
+export { PropertyMappingSourceKerberosArgs, PropertyMappingSourceKerberosState } from "./propertyMappingSourceKerberos";
+export type PropertyMappingSourceKerberos = import("./propertyMappingSourceKerberos").PropertyMappingSourceKerberos;
+export const PropertyMappingSourceKerberos: typeof import("./propertyMappingSourceKerberos").PropertyMappingSourceKerberos = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingSourceKerberos"], () => require("./propertyMappingSourceKerberos"));
+
+export { PropertyMappingSourceLdapArgs, PropertyMappingSourceLdapState } from "./propertyMappingSourceLdap";
+export type PropertyMappingSourceLdap = import("./propertyMappingSourceLdap").PropertyMappingSourceLdap;
+export const PropertyMappingSourceLdap: typeof import("./propertyMappingSourceLdap").PropertyMappingSourceLdap = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingSourceLdap"], () => require("./propertyMappingSourceLdap"));
+
+export { PropertyMappingSourceOauthArgs, PropertyMappingSourceOauthState } from "./propertyMappingSourceOauth";
+export type PropertyMappingSourceOauth = import("./propertyMappingSourceOauth").PropertyMappingSourceOauth;
+export const PropertyMappingSourceOauth: typeof import("./propertyMappingSourceOauth").PropertyMappingSourceOauth = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingSourceOauth"], () => require("./propertyMappingSourceOauth"));
+
+export { PropertyMappingSourcePlexArgs, PropertyMappingSourcePlexState } from "./propertyMappingSourcePlex";
+export type PropertyMappingSourcePlex = import("./propertyMappingSourcePlex").PropertyMappingSourcePlex;
+export const PropertyMappingSourcePlex: typeof import("./propertyMappingSourcePlex").PropertyMappingSourcePlex = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingSourcePlex"], () => require("./propertyMappingSourcePlex"));
+
+export { PropertyMappingSourceSamlArgs, PropertyMappingSourceSamlState } from "./propertyMappingSourceSaml";
+export type PropertyMappingSourceSaml = import("./propertyMappingSourceSaml").PropertyMappingSourceSaml;
+export const PropertyMappingSourceSaml: typeof import("./propertyMappingSourceSaml").PropertyMappingSourceSaml = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingSourceSaml"], () => require("./propertyMappingSourceSaml"));
+
+export { PropertyMappingSourceScimArgs, PropertyMappingSourceScimState } from "./propertyMappingSourceScim";
+export type PropertyMappingSourceScim = import("./propertyMappingSourceScim").PropertyMappingSourceScim;
+export const PropertyMappingSourceScim: typeof import("./propertyMappingSourceScim").PropertyMappingSourceScim = null as any;
+utilities.lazyLoad(exports, ["PropertyMappingSourceScim"], () => require("./propertyMappingSourceScim"));
+
 export { ProviderArgs } from "./provider";
 export type Provider = import("./provider").Provider;
 export const Provider: typeof import("./provider").Provider = null as any;
 utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
 
+export { ProviderGoogleWorkspaceArgs, ProviderGoogleWorkspaceState } from "./providerGoogleWorkspace";
+export type ProviderGoogleWorkspace = import("./providerGoogleWorkspace").ProviderGoogleWorkspace;
+export const ProviderGoogleWorkspace: typeof import("./providerGoogleWorkspace").ProviderGoogleWorkspace = null as any;
+utilities.lazyLoad(exports, ["ProviderGoogleWorkspace"], () => require("./providerGoogleWorkspace"));
+
 export { ProviderLdapArgs, ProviderLdapState } from "./providerLdap";
 export type ProviderLdap = import("./providerLdap").ProviderLdap;
 export const ProviderLdap: typeof import("./providerLdap").ProviderLdap = null as any;
 utilities.lazyLoad(exports, ["ProviderLdap"], () => require("./providerLdap"));
+
+export { ProviderMicrosoftEntraArgs, ProviderMicrosoftEntraState } from "./providerMicrosoftEntra";
+export type ProviderMicrosoftEntra = import("./providerMicrosoftEntra").ProviderMicrosoftEntra;
+export const ProviderMicrosoftEntra: typeof import("./providerMicrosoftEntra").ProviderMicrosoftEntra = null as any;
+utilities.lazyLoad(exports, ["ProviderMicrosoftEntra"], () => require("./providerMicrosoftEntra"));
 
 export { ProviderOauth2Args, ProviderOauth2State } from "./providerOauth2";
 export type ProviderOauth2 = import("./providerOauth2").ProviderOauth2;
@@ -204,6 +324,11 @@ export { ProviderProxyArgs, ProviderProxyState } from "./providerProxy";
 export type ProviderProxy = import("./providerProxy").ProviderProxy;
 export const ProviderProxy: typeof import("./providerProxy").ProviderProxy = null as any;
 utilities.lazyLoad(exports, ["ProviderProxy"], () => require("./providerProxy"));
+
+export { ProviderRacArgs, ProviderRacState } from "./providerRac";
+export type ProviderRac = import("./providerRac").ProviderRac;
+export const ProviderRac: typeof import("./providerRac").ProviderRac = null as any;
+utilities.lazyLoad(exports, ["ProviderRac"], () => require("./providerRac"));
 
 export { ProviderRadiusArgs, ProviderRadiusState } from "./providerRadius";
 export type ProviderRadius = import("./providerRadius").ProviderRadius;
@@ -220,6 +345,26 @@ export type ProviderScim = import("./providerScim").ProviderScim;
 export const ProviderScim: typeof import("./providerScim").ProviderScim = null as any;
 utilities.lazyLoad(exports, ["ProviderScim"], () => require("./providerScim"));
 
+export { RacEndpointArgs, RacEndpointState } from "./racEndpoint";
+export type RacEndpoint = import("./racEndpoint").RacEndpoint;
+export const RacEndpoint: typeof import("./racEndpoint").RacEndpoint = null as any;
+utilities.lazyLoad(exports, ["RacEndpoint"], () => require("./racEndpoint"));
+
+export { RbacPermissionRoleArgs, RbacPermissionRoleState } from "./rbacPermissionRole";
+export type RbacPermissionRole = import("./rbacPermissionRole").RbacPermissionRole;
+export const RbacPermissionRole: typeof import("./rbacPermissionRole").RbacPermissionRole = null as any;
+utilities.lazyLoad(exports, ["RbacPermissionRole"], () => require("./rbacPermissionRole"));
+
+export { RbacPermissionUserArgs, RbacPermissionUserState } from "./rbacPermissionUser";
+export type RbacPermissionUser = import("./rbacPermissionUser").RbacPermissionUser;
+export const RbacPermissionUser: typeof import("./rbacPermissionUser").RbacPermissionUser = null as any;
+utilities.lazyLoad(exports, ["RbacPermissionUser"], () => require("./rbacPermissionUser"));
+
+export { RbacRoleArgs, RbacRoleState } from "./rbacRole";
+export type RbacRole = import("./rbacRole").RbacRole;
+export const RbacRole: typeof import("./rbacRole").RbacRole = null as any;
+utilities.lazyLoad(exports, ["RbacRole"], () => require("./rbacRole"));
+
 export { ScopeMappingArgs, ScopeMappingState } from "./scopeMapping";
 export type ScopeMapping = import("./scopeMapping").ScopeMapping;
 export const ScopeMapping: typeof import("./scopeMapping").ScopeMapping = null as any;
@@ -234,6 +379,11 @@ export { ServiceConnectionKubernetesArgs, ServiceConnectionKubernetesState } fro
 export type ServiceConnectionKubernetes = import("./serviceConnectionKubernetes").ServiceConnectionKubernetes;
 export const ServiceConnectionKubernetes: typeof import("./serviceConnectionKubernetes").ServiceConnectionKubernetes = null as any;
 utilities.lazyLoad(exports, ["ServiceConnectionKubernetes"], () => require("./serviceConnectionKubernetes"));
+
+export { SourceKerberosArgs, SourceKerberosState } from "./sourceKerberos";
+export type SourceKerberos = import("./sourceKerberos").SourceKerberos;
+export const SourceKerberos: typeof import("./sourceKerberos").SourceKerberos = null as any;
+utilities.lazyLoad(exports, ["SourceKerberos"], () => require("./sourceKerberos"));
 
 export { SourceLdapArgs, SourceLdapState } from "./sourceLdap";
 export type SourceLdap = import("./sourceLdap").SourceLdap;
@@ -259,6 +409,11 @@ export { StageAuthenticatorDuoArgs, StageAuthenticatorDuoState } from "./stageAu
 export type StageAuthenticatorDuo = import("./stageAuthenticatorDuo").StageAuthenticatorDuo;
 export const StageAuthenticatorDuo: typeof import("./stageAuthenticatorDuo").StageAuthenticatorDuo = null as any;
 utilities.lazyLoad(exports, ["StageAuthenticatorDuo"], () => require("./stageAuthenticatorDuo"));
+
+export { StageAuthenticatorEndpointGdtcArgs, StageAuthenticatorEndpointGdtcState } from "./stageAuthenticatorEndpointGdtc";
+export type StageAuthenticatorEndpointGdtc = import("./stageAuthenticatorEndpointGdtc").StageAuthenticatorEndpointGdtc;
+export const StageAuthenticatorEndpointGdtc: typeof import("./stageAuthenticatorEndpointGdtc").StageAuthenticatorEndpointGdtc = null as any;
+utilities.lazyLoad(exports, ["StageAuthenticatorEndpointGdtc"], () => require("./stageAuthenticatorEndpointGdtc"));
 
 export { StageAuthenticatorSmsArgs, StageAuthenticatorSmsState } from "./stageAuthenticatorSms";
 export type StageAuthenticatorSms = import("./stageAuthenticatorSms").StageAuthenticatorSms;
@@ -335,6 +490,11 @@ export type StagePromptField = import("./stagePromptField").StagePromptField;
 export const StagePromptField: typeof import("./stagePromptField").StagePromptField = null as any;
 utilities.lazyLoad(exports, ["StagePromptField"], () => require("./stagePromptField"));
 
+export { StageSourceArgs, StageSourceState } from "./stageSource";
+export type StageSource = import("./stageSource").StageSource;
+export const StageSource: typeof import("./stageSource").StageSource = null as any;
+utilities.lazyLoad(exports, ["StageSource"], () => require("./stageSource"));
+
 export { StageUserDeleteArgs, StageUserDeleteState } from "./stageUserDelete";
 export type StageUserDelete = import("./stageUserDelete").StageUserDelete;
 export const StageUserDelete: typeof import("./stageUserDelete").StageUserDelete = null as any;
@@ -355,10 +515,10 @@ export type StageUserWrite = import("./stageUserWrite").StageUserWrite;
 export const StageUserWrite: typeof import("./stageUserWrite").StageUserWrite = null as any;
 utilities.lazyLoad(exports, ["StageUserWrite"], () => require("./stageUserWrite"));
 
-export { TenantArgs, TenantState } from "./tenant";
-export type Tenant = import("./tenant").Tenant;
-export const Tenant: typeof import("./tenant").Tenant = null as any;
-utilities.lazyLoad(exports, ["Tenant"], () => require("./tenant"));
+export { SystemSettingsArgs, SystemSettingsState } from "./systemSettings";
+export type SystemSettings = import("./systemSettings").SystemSettings;
+export const SystemSettings: typeof import("./systemSettings").SystemSettings = null as any;
+utilities.lazyLoad(exports, ["SystemSettings"], () => require("./systemSettings"));
 
 export { TokenArgs, TokenState } from "./token";
 export type Token = import("./token").Token;
@@ -388,6 +548,8 @@ const _module = {
                 return new Application(name, <any>undefined, { urn })
             case "authentik:index/blueprint:Blueprint":
                 return new Blueprint(name, <any>undefined, { urn })
+            case "authentik:index/brand:Brand":
+                return new Brand(name, <any>undefined, { urn })
             case "authentik:index/certificateKeyPair:CertificateKeyPair":
                 return new CertificateKeyPair(name, <any>undefined, { urn })
             case "authentik:index/enterpriseLicense:EnterpriseLicense":
@@ -414,36 +576,88 @@ const _module = {
                 return new PolicyExpiry(name, <any>undefined, { urn })
             case "authentik:index/policyExpression:PolicyExpression":
                 return new PolicyExpression(name, <any>undefined, { urn })
+            case "authentik:index/policyGeoip:PolicyGeoip":
+                return new PolicyGeoip(name, <any>undefined, { urn })
             case "authentik:index/policyPassword:PolicyPassword":
                 return new PolicyPassword(name, <any>undefined, { urn })
             case "authentik:index/policyReputation:PolicyReputation":
                 return new PolicyReputation(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingGoogleWorkspace:PropertyMappingGoogleWorkspace":
+                return new PropertyMappingGoogleWorkspace(name, <any>undefined, { urn })
             case "authentik:index/propertyMappingLdap:PropertyMappingLdap":
                 return new PropertyMappingLdap(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingMicrosoftEntra:PropertyMappingMicrosoftEntra":
+                return new PropertyMappingMicrosoftEntra(name, <any>undefined, { urn })
             case "authentik:index/propertyMappingNotification:PropertyMappingNotification":
                 return new PropertyMappingNotification(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingProviderGoogleWorkspace:PropertyMappingProviderGoogleWorkspace":
+                return new PropertyMappingProviderGoogleWorkspace(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingProviderMicrosoftEntra:PropertyMappingProviderMicrosoftEntra":
+                return new PropertyMappingProviderMicrosoftEntra(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingProviderRac:PropertyMappingProviderRac":
+                return new PropertyMappingProviderRac(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingProviderRadius:PropertyMappingProviderRadius":
+                return new PropertyMappingProviderRadius(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingProviderSaml:PropertyMappingProviderSaml":
+                return new PropertyMappingProviderSaml(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingProviderScim:PropertyMappingProviderScim":
+                return new PropertyMappingProviderScim(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingProviderScope:PropertyMappingProviderScope":
+                return new PropertyMappingProviderScope(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingRac:PropertyMappingRac":
+                return new PropertyMappingRac(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingRadius:PropertyMappingRadius":
+                return new PropertyMappingRadius(name, <any>undefined, { urn })
             case "authentik:index/propertyMappingSaml:PropertyMappingSaml":
                 return new PropertyMappingSaml(name, <any>undefined, { urn })
             case "authentik:index/propertyMappingScim:PropertyMappingScim":
                 return new PropertyMappingScim(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingSourceKerberos:PropertyMappingSourceKerberos":
+                return new PropertyMappingSourceKerberos(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingSourceLdap:PropertyMappingSourceLdap":
+                return new PropertyMappingSourceLdap(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingSourceOauth:PropertyMappingSourceOauth":
+                return new PropertyMappingSourceOauth(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingSourcePlex:PropertyMappingSourcePlex":
+                return new PropertyMappingSourcePlex(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingSourceSaml:PropertyMappingSourceSaml":
+                return new PropertyMappingSourceSaml(name, <any>undefined, { urn })
+            case "authentik:index/propertyMappingSourceScim:PropertyMappingSourceScim":
+                return new PropertyMappingSourceScim(name, <any>undefined, { urn })
+            case "authentik:index/providerGoogleWorkspace:ProviderGoogleWorkspace":
+                return new ProviderGoogleWorkspace(name, <any>undefined, { urn })
             case "authentik:index/providerLdap:ProviderLdap":
                 return new ProviderLdap(name, <any>undefined, { urn })
+            case "authentik:index/providerMicrosoftEntra:ProviderMicrosoftEntra":
+                return new ProviderMicrosoftEntra(name, <any>undefined, { urn })
             case "authentik:index/providerOauth2:ProviderOauth2":
                 return new ProviderOauth2(name, <any>undefined, { urn })
             case "authentik:index/providerProxy:ProviderProxy":
                 return new ProviderProxy(name, <any>undefined, { urn })
+            case "authentik:index/providerRac:ProviderRac":
+                return new ProviderRac(name, <any>undefined, { urn })
             case "authentik:index/providerRadius:ProviderRadius":
                 return new ProviderRadius(name, <any>undefined, { urn })
             case "authentik:index/providerSaml:ProviderSaml":
                 return new ProviderSaml(name, <any>undefined, { urn })
             case "authentik:index/providerScim:ProviderScim":
                 return new ProviderScim(name, <any>undefined, { urn })
+            case "authentik:index/racEndpoint:RacEndpoint":
+                return new RacEndpoint(name, <any>undefined, { urn })
+            case "authentik:index/rbacPermissionRole:RbacPermissionRole":
+                return new RbacPermissionRole(name, <any>undefined, { urn })
+            case "authentik:index/rbacPermissionUser:RbacPermissionUser":
+                return new RbacPermissionUser(name, <any>undefined, { urn })
+            case "authentik:index/rbacRole:RbacRole":
+                return new RbacRole(name, <any>undefined, { urn })
             case "authentik:index/scopeMapping:ScopeMapping":
                 return new ScopeMapping(name, <any>undefined, { urn })
             case "authentik:index/serviceConnectionDocker:ServiceConnectionDocker":
                 return new ServiceConnectionDocker(name, <any>undefined, { urn })
             case "authentik:index/serviceConnectionKubernetes:ServiceConnectionKubernetes":
                 return new ServiceConnectionKubernetes(name, <any>undefined, { urn })
+            case "authentik:index/sourceKerberos:SourceKerberos":
+                return new SourceKerberos(name, <any>undefined, { urn })
             case "authentik:index/sourceLdap:SourceLdap":
                 return new SourceLdap(name, <any>undefined, { urn })
             case "authentik:index/sourceOauth:SourceOauth":
@@ -454,6 +668,8 @@ const _module = {
                 return new SourceSaml(name, <any>undefined, { urn })
             case "authentik:index/stageAuthenticatorDuo:StageAuthenticatorDuo":
                 return new StageAuthenticatorDuo(name, <any>undefined, { urn })
+            case "authentik:index/stageAuthenticatorEndpointGdtc:StageAuthenticatorEndpointGdtc":
+                return new StageAuthenticatorEndpointGdtc(name, <any>undefined, { urn })
             case "authentik:index/stageAuthenticatorSms:StageAuthenticatorSms":
                 return new StageAuthenticatorSms(name, <any>undefined, { urn })
             case "authentik:index/stageAuthenticatorStatic:StageAuthenticatorStatic":
@@ -484,6 +700,8 @@ const _module = {
                 return new StagePrompt(name, <any>undefined, { urn })
             case "authentik:index/stagePromptField:StagePromptField":
                 return new StagePromptField(name, <any>undefined, { urn })
+            case "authentik:index/stageSource:StageSource":
+                return new StageSource(name, <any>undefined, { urn })
             case "authentik:index/stageUserDelete:StageUserDelete":
                 return new StageUserDelete(name, <any>undefined, { urn })
             case "authentik:index/stageUserLogin:StageUserLogin":
@@ -492,8 +710,8 @@ const _module = {
                 return new StageUserLogout(name, <any>undefined, { urn })
             case "authentik:index/stageUserWrite:StageUserWrite":
                 return new StageUserWrite(name, <any>undefined, { urn })
-            case "authentik:index/tenant:Tenant":
-                return new Tenant(name, <any>undefined, { urn })
+            case "authentik:index/systemSettings:SystemSettings":
+                return new SystemSettings(name, <any>undefined, { urn })
             case "authentik:index/token:Token":
                 return new Token(name, <any>undefined, { urn })
             case "authentik:index/user:User":
@@ -505,6 +723,7 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("authentik", "index/application", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/blueprint", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/brand", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/certificateKeyPair", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/enterpriseLicense", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/eventRule", _module)
@@ -518,26 +737,53 @@ pulumi.runtime.registerResourceModule("authentik", "index/policyDummy", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/policyEventMatcher", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/policyExpiry", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/policyExpression", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/policyGeoip", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/policyPassword", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/policyReputation", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingGoogleWorkspace", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingLdap", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingMicrosoftEntra", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingNotification", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingProviderGoogleWorkspace", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingProviderMicrosoftEntra", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingProviderRac", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingProviderRadius", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingProviderSaml", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingProviderScim", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingProviderScope", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingRac", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingRadius", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingSaml", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingScim", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingSourceKerberos", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingSourceLdap", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingSourceOauth", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingSourcePlex", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingSourceSaml", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/propertyMappingSourceScim", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/providerGoogleWorkspace", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/providerLdap", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/providerMicrosoftEntra", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/providerOauth2", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/providerProxy", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/providerRac", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/providerRadius", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/providerSaml", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/providerScim", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/racEndpoint", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/rbacPermissionRole", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/rbacPermissionUser", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/rbacRole", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/scopeMapping", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/serviceConnectionDocker", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/serviceConnectionKubernetes", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/sourceKerberos", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/sourceLdap", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/sourceOauth", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/sourcePlex", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/sourceSaml", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/stageAuthenticatorDuo", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/stageAuthenticatorEndpointGdtc", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/stageAuthenticatorSms", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/stageAuthenticatorStatic", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/stageAuthenticatorTotp", _module)
@@ -553,11 +799,12 @@ pulumi.runtime.registerResourceModule("authentik", "index/stageInvitation", _mod
 pulumi.runtime.registerResourceModule("authentik", "index/stagePassword", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/stagePrompt", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/stagePromptField", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/stageSource", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/stageUserDelete", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/stageUserLogin", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/stageUserLogout", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/stageUserWrite", _module)
-pulumi.runtime.registerResourceModule("authentik", "index/tenant", _module)
+pulumi.runtime.registerResourceModule("authentik", "index/systemSettings", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/token", _module)
 pulumi.runtime.registerResourceModule("authentik", "index/user", _module)
 pulumi.runtime.registerResourcePackage("authentik", {

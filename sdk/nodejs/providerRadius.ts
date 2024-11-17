@@ -59,7 +59,13 @@ export class ProviderRadius extends pulumi.CustomResource {
      * Defaults to `0.0.0.0/0, ::/0`.
      */
     public readonly clientNetworks!: pulumi.Output<string | undefined>;
+    public readonly invalidationFlow!: pulumi.Output<string>;
+    /**
+     * Defaults to `true`.
+     */
+    public readonly mfaSupport!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
+    public readonly propertyMappings!: pulumi.Output<string[] | undefined>;
     public readonly sharedSecret!: pulumi.Output<string>;
 
     /**
@@ -77,19 +83,28 @@ export class ProviderRadius extends pulumi.CustomResource {
             const state = argsOrState as ProviderRadiusState | undefined;
             resourceInputs["authorizationFlow"] = state ? state.authorizationFlow : undefined;
             resourceInputs["clientNetworks"] = state ? state.clientNetworks : undefined;
+            resourceInputs["invalidationFlow"] = state ? state.invalidationFlow : undefined;
+            resourceInputs["mfaSupport"] = state ? state.mfaSupport : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["propertyMappings"] = state ? state.propertyMappings : undefined;
             resourceInputs["sharedSecret"] = state ? state.sharedSecret : undefined;
         } else {
             const args = argsOrState as ProviderRadiusArgs | undefined;
             if ((!args || args.authorizationFlow === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'authorizationFlow'");
             }
+            if ((!args || args.invalidationFlow === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'invalidationFlow'");
+            }
             if ((!args || args.sharedSecret === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'sharedSecret'");
             }
             resourceInputs["authorizationFlow"] = args ? args.authorizationFlow : undefined;
             resourceInputs["clientNetworks"] = args ? args.clientNetworks : undefined;
+            resourceInputs["invalidationFlow"] = args ? args.invalidationFlow : undefined;
+            resourceInputs["mfaSupport"] = args ? args.mfaSupport : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["propertyMappings"] = args ? args.propertyMappings : undefined;
             resourceInputs["sharedSecret"] = args?.sharedSecret ? pulumi.secret(args.sharedSecret) : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -108,7 +123,13 @@ export interface ProviderRadiusState {
      * Defaults to `0.0.0.0/0, ::/0`.
      */
     clientNetworks?: pulumi.Input<string>;
+    invalidationFlow?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
+    mfaSupport?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
+    propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
     sharedSecret?: pulumi.Input<string>;
 }
 
@@ -121,6 +142,12 @@ export interface ProviderRadiusArgs {
      * Defaults to `0.0.0.0/0, ::/0`.
      */
     clientNetworks?: pulumi.Input<string>;
+    invalidationFlow: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
+    mfaSupport?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
+    propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
     sharedSecret: pulumi.Input<string>;
 }

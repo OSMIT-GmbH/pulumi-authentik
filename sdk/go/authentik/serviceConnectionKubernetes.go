@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -51,6 +50,8 @@ type ServiceConnectionKubernetes struct {
 	// Defaults to `false`.
 	Local pulumi.BoolPtrOutput `pulumi:"local"`
 	Name  pulumi.StringOutput  `pulumi:"name"`
+	// Defaults to `true`.
+	VerifySsl pulumi.BoolPtrOutput `pulumi:"verifySsl"`
 }
 
 // NewServiceConnectionKubernetes registers a new resource with the given unique name, arguments, and options.
@@ -95,6 +96,8 @@ type serviceConnectionKubernetesState struct {
 	// Defaults to `false`.
 	Local *bool   `pulumi:"local"`
 	Name  *string `pulumi:"name"`
+	// Defaults to `true`.
+	VerifySsl *bool `pulumi:"verifySsl"`
 }
 
 type ServiceConnectionKubernetesState struct {
@@ -103,6 +106,8 @@ type ServiceConnectionKubernetesState struct {
 	// Defaults to `false`.
 	Local pulumi.BoolPtrInput
 	Name  pulumi.StringPtrInput
+	// Defaults to `true`.
+	VerifySsl pulumi.BoolPtrInput
 }
 
 func (ServiceConnectionKubernetesState) ElementType() reflect.Type {
@@ -115,6 +120,8 @@ type serviceConnectionKubernetesArgs struct {
 	// Defaults to `false`.
 	Local *bool   `pulumi:"local"`
 	Name  *string `pulumi:"name"`
+	// Defaults to `true`.
+	VerifySsl *bool `pulumi:"verifySsl"`
 }
 
 // The set of arguments for constructing a ServiceConnectionKubernetes resource.
@@ -124,6 +131,8 @@ type ServiceConnectionKubernetesArgs struct {
 	// Defaults to `false`.
 	Local pulumi.BoolPtrInput
 	Name  pulumi.StringPtrInput
+	// Defaults to `true`.
+	VerifySsl pulumi.BoolPtrInput
 }
 
 func (ServiceConnectionKubernetesArgs) ElementType() reflect.Type {
@@ -147,12 +156,6 @@ func (i *ServiceConnectionKubernetes) ToServiceConnectionKubernetesOutput() Serv
 
 func (i *ServiceConnectionKubernetes) ToServiceConnectionKubernetesOutputWithContext(ctx context.Context) ServiceConnectionKubernetesOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceConnectionKubernetesOutput)
-}
-
-func (i *ServiceConnectionKubernetes) ToOutput(ctx context.Context) pulumix.Output[*ServiceConnectionKubernetes] {
-	return pulumix.Output[*ServiceConnectionKubernetes]{
-		OutputState: i.ToServiceConnectionKubernetesOutputWithContext(ctx).OutputState,
-	}
 }
 
 // ServiceConnectionKubernetesArrayInput is an input type that accepts ServiceConnectionKubernetesArray and ServiceConnectionKubernetesArrayOutput values.
@@ -180,12 +183,6 @@ func (i ServiceConnectionKubernetesArray) ToServiceConnectionKubernetesArrayOutp
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceConnectionKubernetesArrayOutput)
 }
 
-func (i ServiceConnectionKubernetesArray) ToOutput(ctx context.Context) pulumix.Output[[]*ServiceConnectionKubernetes] {
-	return pulumix.Output[[]*ServiceConnectionKubernetes]{
-		OutputState: i.ToServiceConnectionKubernetesArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 // ServiceConnectionKubernetesMapInput is an input type that accepts ServiceConnectionKubernetesMap and ServiceConnectionKubernetesMapOutput values.
 // You can construct a concrete instance of `ServiceConnectionKubernetesMapInput` via:
 //
@@ -211,12 +208,6 @@ func (i ServiceConnectionKubernetesMap) ToServiceConnectionKubernetesMapOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceConnectionKubernetesMapOutput)
 }
 
-func (i ServiceConnectionKubernetesMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ServiceConnectionKubernetes] {
-	return pulumix.Output[map[string]*ServiceConnectionKubernetes]{
-		OutputState: i.ToServiceConnectionKubernetesMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ServiceConnectionKubernetesOutput struct{ *pulumi.OutputState }
 
 func (ServiceConnectionKubernetesOutput) ElementType() reflect.Type {
@@ -229,12 +220,6 @@ func (o ServiceConnectionKubernetesOutput) ToServiceConnectionKubernetesOutput()
 
 func (o ServiceConnectionKubernetesOutput) ToServiceConnectionKubernetesOutputWithContext(ctx context.Context) ServiceConnectionKubernetesOutput {
 	return o
-}
-
-func (o ServiceConnectionKubernetesOutput) ToOutput(ctx context.Context) pulumix.Output[*ServiceConnectionKubernetes] {
-	return pulumix.Output[*ServiceConnectionKubernetes]{
-		OutputState: o.OutputState,
-	}
 }
 
 // JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
@@ -251,6 +236,11 @@ func (o ServiceConnectionKubernetesOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *ServiceConnectionKubernetes) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// Defaults to `true`.
+func (o ServiceConnectionKubernetesOutput) VerifySsl() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ServiceConnectionKubernetes) pulumi.BoolPtrOutput { return v.VerifySsl }).(pulumi.BoolPtrOutput)
+}
+
 type ServiceConnectionKubernetesArrayOutput struct{ *pulumi.OutputState }
 
 func (ServiceConnectionKubernetesArrayOutput) ElementType() reflect.Type {
@@ -263,12 +253,6 @@ func (o ServiceConnectionKubernetesArrayOutput) ToServiceConnectionKubernetesArr
 
 func (o ServiceConnectionKubernetesArrayOutput) ToServiceConnectionKubernetesArrayOutputWithContext(ctx context.Context) ServiceConnectionKubernetesArrayOutput {
 	return o
-}
-
-func (o ServiceConnectionKubernetesArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ServiceConnectionKubernetes] {
-	return pulumix.Output[[]*ServiceConnectionKubernetes]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ServiceConnectionKubernetesArrayOutput) Index(i pulumi.IntInput) ServiceConnectionKubernetesOutput {
@@ -289,12 +273,6 @@ func (o ServiceConnectionKubernetesMapOutput) ToServiceConnectionKubernetesMapOu
 
 func (o ServiceConnectionKubernetesMapOutput) ToServiceConnectionKubernetesMapOutputWithContext(ctx context.Context) ServiceConnectionKubernetesMapOutput {
 	return o
-}
-
-func (o ServiceConnectionKubernetesMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ServiceConnectionKubernetes] {
-	return pulumix.Output[map[string]*ServiceConnectionKubernetes]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ServiceConnectionKubernetesMapOutput) MapIndex(k pulumi.StringInput) ServiceConnectionKubernetesOutput {

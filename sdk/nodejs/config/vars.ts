@@ -8,6 +8,17 @@ declare var exports: any;
 const __config = new pulumi.Config("authentik");
 
 /**
+ * Optional HTTP headers sent with every request
+ */
+export declare const headers: {[key: string]: string} | undefined;
+Object.defineProperty(exports, "headers", {
+    get() {
+        return __config.getObject<{[key: string]: string}>("headers");
+    },
+    enumerable: true,
+});
+
+/**
  * Whether to skip TLS verification, can optionally be passed as `AUTHENTIK_INSECURE` environmental variable
  */
 export declare const insecure: boolean | undefined;

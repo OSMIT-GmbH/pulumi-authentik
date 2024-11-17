@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,13 +19,14 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create an OAuth2 Provider
 //			nameProviderOauth2, err := authentik.NewProviderOauth2(ctx, "nameProviderOauth2", &authentik.ProviderOauth2Args{
 //				ClientId: pulumi.String("grafana"),
 //			})
@@ -48,30 +48,27 @@ import (
 type ProviderOauth2 struct {
 	pulumi.CustomResourceState
 
-	// Defaults to `minutes=1`.
-	AccessCodeValidity pulumi.StringPtrOutput `pulumi:"accessCodeValidity"`
-	// Defaults to `minutes=10`.
+	AccessCodeValidity  pulumi.StringPtrOutput `pulumi:"accessCodeValidity"`
 	AccessTokenValidity pulumi.StringPtrOutput `pulumi:"accessTokenValidity"`
 	AuthenticationFlow  pulumi.StringPtrOutput `pulumi:"authenticationFlow"`
 	AuthorizationFlow   pulumi.StringOutput    `pulumi:"authorizationFlow"`
 	ClientId            pulumi.StringOutput    `pulumi:"clientId"`
-	// Generated.
-	ClientSecret pulumi.StringOutput `pulumi:"clientSecret"`
-	// Defaults to `confidential`.
-	ClientType pulumi.StringPtrOutput `pulumi:"clientType"`
-	// Defaults to `true`.
-	IncludeClaimsInIdToken pulumi.BoolPtrOutput `pulumi:"includeClaimsInIdToken"`
-	// Defaults to `perProvider`.
+	ClientSecret        pulumi.StringOutput    `pulumi:"clientSecret"`
+	// Allowed values: - `confidential` - `public`
+	ClientType             pulumi.StringPtrOutput `pulumi:"clientType"`
+	EncryptionKey          pulumi.StringPtrOutput `pulumi:"encryptionKey"`
+	IncludeClaimsInIdToken pulumi.BoolPtrOutput   `pulumi:"includeClaimsInIdToken"`
+	InvalidationFlow       pulumi.StringOutput    `pulumi:"invalidationFlow"`
+	// Allowed values: - `global` - `perProvider`
 	IssuerMode pulumi.StringPtrOutput `pulumi:"issuerMode"`
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
-	JwksSources      pulumi.StringArrayOutput `pulumi:"jwksSources"`
-	Name             pulumi.StringOutput      `pulumi:"name"`
-	PropertyMappings pulumi.StringArrayOutput `pulumi:"propertyMappings"`
-	RedirectUris     pulumi.StringArrayOutput `pulumi:"redirectUris"`
-	// Defaults to `days=30`.
-	RefreshTokenValidity pulumi.StringPtrOutput `pulumi:"refreshTokenValidity"`
-	SigningKey           pulumi.StringPtrOutput `pulumi:"signingKey"`
-	// Defaults to `hashedUserId`.
+	JwksSources          pulumi.StringArrayOutput `pulumi:"jwksSources"`
+	Name                 pulumi.StringOutput      `pulumi:"name"`
+	PropertyMappings     pulumi.StringArrayOutput `pulumi:"propertyMappings"`
+	RedirectUris         pulumi.StringArrayOutput `pulumi:"redirectUris"`
+	RefreshTokenValidity pulumi.StringPtrOutput   `pulumi:"refreshTokenValidity"`
+	SigningKey           pulumi.StringPtrOutput   `pulumi:"signingKey"`
+	// Allowed values: - `hashedUserId` - `userId` - `userUuid` - `userUsername` - `userEmail` - `userUpn`
 	SubMode pulumi.StringPtrOutput `pulumi:"subMode"`
 }
 
@@ -87,6 +84,9 @@ func NewProviderOauth2(ctx *pulumi.Context,
 	}
 	if args.ClientId == nil {
 		return nil, errors.New("invalid value for required argument 'ClientId'")
+	}
+	if args.InvalidationFlow == nil {
+		return nil, errors.New("invalid value for required argument 'InvalidationFlow'")
 	}
 	if args.ClientSecret != nil {
 		args.ClientSecret = pulumi.ToSecret(args.ClientSecret).(pulumi.StringPtrInput)
@@ -118,58 +118,52 @@ func GetProviderOauth2(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ProviderOauth2 resources.
 type providerOauth2State struct {
-	// Defaults to `minutes=1`.
-	AccessCodeValidity *string `pulumi:"accessCodeValidity"`
-	// Defaults to `minutes=10`.
+	AccessCodeValidity  *string `pulumi:"accessCodeValidity"`
 	AccessTokenValidity *string `pulumi:"accessTokenValidity"`
 	AuthenticationFlow  *string `pulumi:"authenticationFlow"`
 	AuthorizationFlow   *string `pulumi:"authorizationFlow"`
 	ClientId            *string `pulumi:"clientId"`
-	// Generated.
-	ClientSecret *string `pulumi:"clientSecret"`
-	// Defaults to `confidential`.
-	ClientType *string `pulumi:"clientType"`
-	// Defaults to `true`.
-	IncludeClaimsInIdToken *bool `pulumi:"includeClaimsInIdToken"`
-	// Defaults to `perProvider`.
+	ClientSecret        *string `pulumi:"clientSecret"`
+	// Allowed values: - `confidential` - `public`
+	ClientType             *string `pulumi:"clientType"`
+	EncryptionKey          *string `pulumi:"encryptionKey"`
+	IncludeClaimsInIdToken *bool   `pulumi:"includeClaimsInIdToken"`
+	InvalidationFlow       *string `pulumi:"invalidationFlow"`
+	// Allowed values: - `global` - `perProvider`
 	IssuerMode *string `pulumi:"issuerMode"`
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
-	JwksSources      []string `pulumi:"jwksSources"`
-	Name             *string  `pulumi:"name"`
-	PropertyMappings []string `pulumi:"propertyMappings"`
-	RedirectUris     []string `pulumi:"redirectUris"`
-	// Defaults to `days=30`.
-	RefreshTokenValidity *string `pulumi:"refreshTokenValidity"`
-	SigningKey           *string `pulumi:"signingKey"`
-	// Defaults to `hashedUserId`.
+	JwksSources          []string `pulumi:"jwksSources"`
+	Name                 *string  `pulumi:"name"`
+	PropertyMappings     []string `pulumi:"propertyMappings"`
+	RedirectUris         []string `pulumi:"redirectUris"`
+	RefreshTokenValidity *string  `pulumi:"refreshTokenValidity"`
+	SigningKey           *string  `pulumi:"signingKey"`
+	// Allowed values: - `hashedUserId` - `userId` - `userUuid` - `userUsername` - `userEmail` - `userUpn`
 	SubMode *string `pulumi:"subMode"`
 }
 
 type ProviderOauth2State struct {
-	// Defaults to `minutes=1`.
-	AccessCodeValidity pulumi.StringPtrInput
-	// Defaults to `minutes=10`.
+	AccessCodeValidity  pulumi.StringPtrInput
 	AccessTokenValidity pulumi.StringPtrInput
 	AuthenticationFlow  pulumi.StringPtrInput
 	AuthorizationFlow   pulumi.StringPtrInput
 	ClientId            pulumi.StringPtrInput
-	// Generated.
-	ClientSecret pulumi.StringPtrInput
-	// Defaults to `confidential`.
-	ClientType pulumi.StringPtrInput
-	// Defaults to `true`.
+	ClientSecret        pulumi.StringPtrInput
+	// Allowed values: - `confidential` - `public`
+	ClientType             pulumi.StringPtrInput
+	EncryptionKey          pulumi.StringPtrInput
 	IncludeClaimsInIdToken pulumi.BoolPtrInput
-	// Defaults to `perProvider`.
+	InvalidationFlow       pulumi.StringPtrInput
+	// Allowed values: - `global` - `perProvider`
 	IssuerMode pulumi.StringPtrInput
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
-	JwksSources      pulumi.StringArrayInput
-	Name             pulumi.StringPtrInput
-	PropertyMappings pulumi.StringArrayInput
-	RedirectUris     pulumi.StringArrayInput
-	// Defaults to `days=30`.
+	JwksSources          pulumi.StringArrayInput
+	Name                 pulumi.StringPtrInput
+	PropertyMappings     pulumi.StringArrayInput
+	RedirectUris         pulumi.StringArrayInput
 	RefreshTokenValidity pulumi.StringPtrInput
 	SigningKey           pulumi.StringPtrInput
-	// Defaults to `hashedUserId`.
+	// Allowed values: - `hashedUserId` - `userId` - `userUuid` - `userUsername` - `userEmail` - `userUpn`
 	SubMode pulumi.StringPtrInput
 }
 
@@ -178,59 +172,53 @@ func (ProviderOauth2State) ElementType() reflect.Type {
 }
 
 type providerOauth2Args struct {
-	// Defaults to `minutes=1`.
-	AccessCodeValidity *string `pulumi:"accessCodeValidity"`
-	// Defaults to `minutes=10`.
+	AccessCodeValidity  *string `pulumi:"accessCodeValidity"`
 	AccessTokenValidity *string `pulumi:"accessTokenValidity"`
 	AuthenticationFlow  *string `pulumi:"authenticationFlow"`
 	AuthorizationFlow   string  `pulumi:"authorizationFlow"`
 	ClientId            string  `pulumi:"clientId"`
-	// Generated.
-	ClientSecret *string `pulumi:"clientSecret"`
-	// Defaults to `confidential`.
-	ClientType *string `pulumi:"clientType"`
-	// Defaults to `true`.
-	IncludeClaimsInIdToken *bool `pulumi:"includeClaimsInIdToken"`
-	// Defaults to `perProvider`.
+	ClientSecret        *string `pulumi:"clientSecret"`
+	// Allowed values: - `confidential` - `public`
+	ClientType             *string `pulumi:"clientType"`
+	EncryptionKey          *string `pulumi:"encryptionKey"`
+	IncludeClaimsInIdToken *bool   `pulumi:"includeClaimsInIdToken"`
+	InvalidationFlow       string  `pulumi:"invalidationFlow"`
+	// Allowed values: - `global` - `perProvider`
 	IssuerMode *string `pulumi:"issuerMode"`
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
-	JwksSources      []string `pulumi:"jwksSources"`
-	Name             *string  `pulumi:"name"`
-	PropertyMappings []string `pulumi:"propertyMappings"`
-	RedirectUris     []string `pulumi:"redirectUris"`
-	// Defaults to `days=30`.
-	RefreshTokenValidity *string `pulumi:"refreshTokenValidity"`
-	SigningKey           *string `pulumi:"signingKey"`
-	// Defaults to `hashedUserId`.
+	JwksSources          []string `pulumi:"jwksSources"`
+	Name                 *string  `pulumi:"name"`
+	PropertyMappings     []string `pulumi:"propertyMappings"`
+	RedirectUris         []string `pulumi:"redirectUris"`
+	RefreshTokenValidity *string  `pulumi:"refreshTokenValidity"`
+	SigningKey           *string  `pulumi:"signingKey"`
+	// Allowed values: - `hashedUserId` - `userId` - `userUuid` - `userUsername` - `userEmail` - `userUpn`
 	SubMode *string `pulumi:"subMode"`
 }
 
 // The set of arguments for constructing a ProviderOauth2 resource.
 type ProviderOauth2Args struct {
-	// Defaults to `minutes=1`.
-	AccessCodeValidity pulumi.StringPtrInput
-	// Defaults to `minutes=10`.
+	AccessCodeValidity  pulumi.StringPtrInput
 	AccessTokenValidity pulumi.StringPtrInput
 	AuthenticationFlow  pulumi.StringPtrInput
 	AuthorizationFlow   pulumi.StringInput
 	ClientId            pulumi.StringInput
-	// Generated.
-	ClientSecret pulumi.StringPtrInput
-	// Defaults to `confidential`.
-	ClientType pulumi.StringPtrInput
-	// Defaults to `true`.
+	ClientSecret        pulumi.StringPtrInput
+	// Allowed values: - `confidential` - `public`
+	ClientType             pulumi.StringPtrInput
+	EncryptionKey          pulumi.StringPtrInput
 	IncludeClaimsInIdToken pulumi.BoolPtrInput
-	// Defaults to `perProvider`.
+	InvalidationFlow       pulumi.StringInput
+	// Allowed values: - `global` - `perProvider`
 	IssuerMode pulumi.StringPtrInput
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
-	JwksSources      pulumi.StringArrayInput
-	Name             pulumi.StringPtrInput
-	PropertyMappings pulumi.StringArrayInput
-	RedirectUris     pulumi.StringArrayInput
-	// Defaults to `days=30`.
+	JwksSources          pulumi.StringArrayInput
+	Name                 pulumi.StringPtrInput
+	PropertyMappings     pulumi.StringArrayInput
+	RedirectUris         pulumi.StringArrayInput
 	RefreshTokenValidity pulumi.StringPtrInput
 	SigningKey           pulumi.StringPtrInput
-	// Defaults to `hashedUserId`.
+	// Allowed values: - `hashedUserId` - `userId` - `userUuid` - `userUsername` - `userEmail` - `userUpn`
 	SubMode pulumi.StringPtrInput
 }
 
@@ -255,12 +243,6 @@ func (i *ProviderOauth2) ToProviderOauth2Output() ProviderOauth2Output {
 
 func (i *ProviderOauth2) ToProviderOauth2OutputWithContext(ctx context.Context) ProviderOauth2Output {
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderOauth2Output)
-}
-
-func (i *ProviderOauth2) ToOutput(ctx context.Context) pulumix.Output[*ProviderOauth2] {
-	return pulumix.Output[*ProviderOauth2]{
-		OutputState: i.ToProviderOauth2OutputWithContext(ctx).OutputState,
-	}
 }
 
 // ProviderOauth2ArrayInput is an input type that accepts ProviderOauth2Array and ProviderOauth2ArrayOutput values.
@@ -288,12 +270,6 @@ func (i ProviderOauth2Array) ToProviderOauth2ArrayOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderOauth2ArrayOutput)
 }
 
-func (i ProviderOauth2Array) ToOutput(ctx context.Context) pulumix.Output[[]*ProviderOauth2] {
-	return pulumix.Output[[]*ProviderOauth2]{
-		OutputState: i.ToProviderOauth2ArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 // ProviderOauth2MapInput is an input type that accepts ProviderOauth2Map and ProviderOauth2MapOutput values.
 // You can construct a concrete instance of `ProviderOauth2MapInput` via:
 //
@@ -319,12 +295,6 @@ func (i ProviderOauth2Map) ToProviderOauth2MapOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderOauth2MapOutput)
 }
 
-func (i ProviderOauth2Map) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProviderOauth2] {
-	return pulumix.Output[map[string]*ProviderOauth2]{
-		OutputState: i.ToProviderOauth2MapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ProviderOauth2Output struct{ *pulumi.OutputState }
 
 func (ProviderOauth2Output) ElementType() reflect.Type {
@@ -339,18 +309,10 @@ func (o ProviderOauth2Output) ToProviderOauth2OutputWithContext(ctx context.Cont
 	return o
 }
 
-func (o ProviderOauth2Output) ToOutput(ctx context.Context) pulumix.Output[*ProviderOauth2] {
-	return pulumix.Output[*ProviderOauth2]{
-		OutputState: o.OutputState,
-	}
-}
-
-// Defaults to `minutes=1`.
 func (o ProviderOauth2Output) AccessCodeValidity() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringPtrOutput { return v.AccessCodeValidity }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `minutes=10`.
 func (o ProviderOauth2Output) AccessTokenValidity() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringPtrOutput { return v.AccessTokenValidity }).(pulumi.StringPtrOutput)
 }
@@ -367,22 +329,28 @@ func (o ProviderOauth2Output) ClientId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringOutput { return v.ClientId }).(pulumi.StringOutput)
 }
 
-// Generated.
 func (o ProviderOauth2Output) ClientSecret() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringOutput { return v.ClientSecret }).(pulumi.StringOutput)
 }
 
-// Defaults to `confidential`.
+// Allowed values: - `confidential` - `public`
 func (o ProviderOauth2Output) ClientType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringPtrOutput { return v.ClientType }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `true`.
+func (o ProviderOauth2Output) EncryptionKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringPtrOutput { return v.EncryptionKey }).(pulumi.StringPtrOutput)
+}
+
 func (o ProviderOauth2Output) IncludeClaimsInIdToken() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProviderOauth2) pulumi.BoolPtrOutput { return v.IncludeClaimsInIdToken }).(pulumi.BoolPtrOutput)
 }
 
-// Defaults to `perProvider`.
+func (o ProviderOauth2Output) InvalidationFlow() pulumi.StringOutput {
+	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringOutput { return v.InvalidationFlow }).(pulumi.StringOutput)
+}
+
+// Allowed values: - `global` - `perProvider`
 func (o ProviderOauth2Output) IssuerMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringPtrOutput { return v.IssuerMode }).(pulumi.StringPtrOutput)
 }
@@ -404,7 +372,6 @@ func (o ProviderOauth2Output) RedirectUris() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringArrayOutput { return v.RedirectUris }).(pulumi.StringArrayOutput)
 }
 
-// Defaults to `days=30`.
 func (o ProviderOauth2Output) RefreshTokenValidity() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringPtrOutput { return v.RefreshTokenValidity }).(pulumi.StringPtrOutput)
 }
@@ -413,7 +380,7 @@ func (o ProviderOauth2Output) SigningKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringPtrOutput { return v.SigningKey }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `hashedUserId`.
+// Allowed values: - `hashedUserId` - `userId` - `userUuid` - `userUsername` - `userEmail` - `userUpn`
 func (o ProviderOauth2Output) SubMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringPtrOutput { return v.SubMode }).(pulumi.StringPtrOutput)
 }
@@ -430,12 +397,6 @@ func (o ProviderOauth2ArrayOutput) ToProviderOauth2ArrayOutput() ProviderOauth2A
 
 func (o ProviderOauth2ArrayOutput) ToProviderOauth2ArrayOutputWithContext(ctx context.Context) ProviderOauth2ArrayOutput {
 	return o
-}
-
-func (o ProviderOauth2ArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ProviderOauth2] {
-	return pulumix.Output[[]*ProviderOauth2]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ProviderOauth2ArrayOutput) Index(i pulumi.IntInput) ProviderOauth2Output {
@@ -456,12 +417,6 @@ func (o ProviderOauth2MapOutput) ToProviderOauth2MapOutput() ProviderOauth2MapOu
 
 func (o ProviderOauth2MapOutput) ToProviderOauth2MapOutputWithContext(ctx context.Context) ProviderOauth2MapOutput {
 	return o
-}
-
-func (o ProviderOauth2MapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProviderOauth2] {
-	return pulumix.Output[map[string]*ProviderOauth2]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ProviderOauth2MapOutput) MapIndex(k pulumi.StringInput) ProviderOauth2Output {

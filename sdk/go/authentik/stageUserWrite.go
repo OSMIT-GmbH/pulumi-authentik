@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -40,14 +39,14 @@ import (
 type StageUserWrite struct {
 	pulumi.CustomResourceState
 
-	// Defaults to `true`.
 	CreateUsersAsInactive pulumi.BoolPtrOutput   `pulumi:"createUsersAsInactive"`
 	CreateUsersGroup      pulumi.StringPtrOutput `pulumi:"createUsersGroup"`
 	Name                  pulumi.StringOutput    `pulumi:"name"`
-	// Defaults to `createWhenRequired`.
+	// Allowed values: - `neverCreate` - `createWhenRequired` - `alwaysCreate`
 	UserCreationMode pulumi.StringPtrOutput `pulumi:"userCreationMode"`
-	// Defaults to ``.
 	UserPathTemplate pulumi.StringPtrOutput `pulumi:"userPathTemplate"`
+	// Allowed values: - `internal` - `external` - `serviceAccount`
+	UserType pulumi.StringPtrOutput `pulumi:"userType"`
 }
 
 // NewStageUserWrite registers a new resource with the given unique name, arguments, and options.
@@ -80,25 +79,25 @@ func GetStageUserWrite(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering StageUserWrite resources.
 type stageUserWriteState struct {
-	// Defaults to `true`.
 	CreateUsersAsInactive *bool   `pulumi:"createUsersAsInactive"`
 	CreateUsersGroup      *string `pulumi:"createUsersGroup"`
 	Name                  *string `pulumi:"name"`
-	// Defaults to `createWhenRequired`.
+	// Allowed values: - `neverCreate` - `createWhenRequired` - `alwaysCreate`
 	UserCreationMode *string `pulumi:"userCreationMode"`
-	// Defaults to ``.
 	UserPathTemplate *string `pulumi:"userPathTemplate"`
+	// Allowed values: - `internal` - `external` - `serviceAccount`
+	UserType *string `pulumi:"userType"`
 }
 
 type StageUserWriteState struct {
-	// Defaults to `true`.
 	CreateUsersAsInactive pulumi.BoolPtrInput
 	CreateUsersGroup      pulumi.StringPtrInput
 	Name                  pulumi.StringPtrInput
-	// Defaults to `createWhenRequired`.
+	// Allowed values: - `neverCreate` - `createWhenRequired` - `alwaysCreate`
 	UserCreationMode pulumi.StringPtrInput
-	// Defaults to ``.
 	UserPathTemplate pulumi.StringPtrInput
+	// Allowed values: - `internal` - `external` - `serviceAccount`
+	UserType pulumi.StringPtrInput
 }
 
 func (StageUserWriteState) ElementType() reflect.Type {
@@ -106,26 +105,26 @@ func (StageUserWriteState) ElementType() reflect.Type {
 }
 
 type stageUserWriteArgs struct {
-	// Defaults to `true`.
 	CreateUsersAsInactive *bool   `pulumi:"createUsersAsInactive"`
 	CreateUsersGroup      *string `pulumi:"createUsersGroup"`
 	Name                  *string `pulumi:"name"`
-	// Defaults to `createWhenRequired`.
+	// Allowed values: - `neverCreate` - `createWhenRequired` - `alwaysCreate`
 	UserCreationMode *string `pulumi:"userCreationMode"`
-	// Defaults to ``.
 	UserPathTemplate *string `pulumi:"userPathTemplate"`
+	// Allowed values: - `internal` - `external` - `serviceAccount`
+	UserType *string `pulumi:"userType"`
 }
 
 // The set of arguments for constructing a StageUserWrite resource.
 type StageUserWriteArgs struct {
-	// Defaults to `true`.
 	CreateUsersAsInactive pulumi.BoolPtrInput
 	CreateUsersGroup      pulumi.StringPtrInput
 	Name                  pulumi.StringPtrInput
-	// Defaults to `createWhenRequired`.
+	// Allowed values: - `neverCreate` - `createWhenRequired` - `alwaysCreate`
 	UserCreationMode pulumi.StringPtrInput
-	// Defaults to ``.
 	UserPathTemplate pulumi.StringPtrInput
+	// Allowed values: - `internal` - `external` - `serviceAccount`
+	UserType pulumi.StringPtrInput
 }
 
 func (StageUserWriteArgs) ElementType() reflect.Type {
@@ -149,12 +148,6 @@ func (i *StageUserWrite) ToStageUserWriteOutput() StageUserWriteOutput {
 
 func (i *StageUserWrite) ToStageUserWriteOutputWithContext(ctx context.Context) StageUserWriteOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageUserWriteOutput)
-}
-
-func (i *StageUserWrite) ToOutput(ctx context.Context) pulumix.Output[*StageUserWrite] {
-	return pulumix.Output[*StageUserWrite]{
-		OutputState: i.ToStageUserWriteOutputWithContext(ctx).OutputState,
-	}
 }
 
 // StageUserWriteArrayInput is an input type that accepts StageUserWriteArray and StageUserWriteArrayOutput values.
@@ -182,12 +175,6 @@ func (i StageUserWriteArray) ToStageUserWriteArrayOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(StageUserWriteArrayOutput)
 }
 
-func (i StageUserWriteArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageUserWrite] {
-	return pulumix.Output[[]*StageUserWrite]{
-		OutputState: i.ToStageUserWriteArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 // StageUserWriteMapInput is an input type that accepts StageUserWriteMap and StageUserWriteMapOutput values.
 // You can construct a concrete instance of `StageUserWriteMapInput` via:
 //
@@ -213,12 +200,6 @@ func (i StageUserWriteMap) ToStageUserWriteMapOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(StageUserWriteMapOutput)
 }
 
-func (i StageUserWriteMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageUserWrite] {
-	return pulumix.Output[map[string]*StageUserWrite]{
-		OutputState: i.ToStageUserWriteMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type StageUserWriteOutput struct{ *pulumi.OutputState }
 
 func (StageUserWriteOutput) ElementType() reflect.Type {
@@ -233,13 +214,6 @@ func (o StageUserWriteOutput) ToStageUserWriteOutputWithContext(ctx context.Cont
 	return o
 }
 
-func (o StageUserWriteOutput) ToOutput(ctx context.Context) pulumix.Output[*StageUserWrite] {
-	return pulumix.Output[*StageUserWrite]{
-		OutputState: o.OutputState,
-	}
-}
-
-// Defaults to `true`.
 func (o StageUserWriteOutput) CreateUsersAsInactive() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *StageUserWrite) pulumi.BoolPtrOutput { return v.CreateUsersAsInactive }).(pulumi.BoolPtrOutput)
 }
@@ -252,14 +226,18 @@ func (o StageUserWriteOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *StageUserWrite) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Defaults to `createWhenRequired`.
+// Allowed values: - `neverCreate` - `createWhenRequired` - `alwaysCreate`
 func (o StageUserWriteOutput) UserCreationMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageUserWrite) pulumi.StringPtrOutput { return v.UserCreationMode }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to “.
 func (o StageUserWriteOutput) UserPathTemplate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageUserWrite) pulumi.StringPtrOutput { return v.UserPathTemplate }).(pulumi.StringPtrOutput)
+}
+
+// Allowed values: - `internal` - `external` - `serviceAccount`
+func (o StageUserWriteOutput) UserType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *StageUserWrite) pulumi.StringPtrOutput { return v.UserType }).(pulumi.StringPtrOutput)
 }
 
 type StageUserWriteArrayOutput struct{ *pulumi.OutputState }
@@ -274,12 +252,6 @@ func (o StageUserWriteArrayOutput) ToStageUserWriteArrayOutput() StageUserWriteA
 
 func (o StageUserWriteArrayOutput) ToStageUserWriteArrayOutputWithContext(ctx context.Context) StageUserWriteArrayOutput {
 	return o
-}
-
-func (o StageUserWriteArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageUserWrite] {
-	return pulumix.Output[[]*StageUserWrite]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageUserWriteArrayOutput) Index(i pulumi.IntInput) StageUserWriteOutput {
@@ -300,12 +272,6 @@ func (o StageUserWriteMapOutput) ToStageUserWriteMapOutput() StageUserWriteMapOu
 
 func (o StageUserWriteMapOutput) ToStageUserWriteMapOutputWithContext(ctx context.Context) StageUserWriteMapOutput {
 	return o
-}
-
-func (o StageUserWriteMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageUserWrite] {
-	return pulumix.Output[map[string]*StageUserWrite]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageUserWriteMapOutput) MapIndex(k pulumi.StringInput) StageUserWriteOutput {

@@ -42,20 +42,18 @@ export class StageUserWrite extends pulumi.CustomResource {
         return obj['__pulumiType'] === StageUserWrite.__pulumiType;
     }
 
-    /**
-     * Defaults to `true`.
-     */
     public readonly createUsersAsInactive!: pulumi.Output<boolean | undefined>;
     public readonly createUsersGroup!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     /**
-     * Defaults to `createWhenRequired`.
+     * Allowed values: - `neverCreate` - `createWhenRequired` - `alwaysCreate`
      */
     public readonly userCreationMode!: pulumi.Output<string | undefined>;
-    /**
-     * Defaults to ``.
-     */
     public readonly userPathTemplate!: pulumi.Output<string | undefined>;
+    /**
+     * Allowed values: - `internal` - `external` - `serviceAccount`
+     */
+    public readonly userType!: pulumi.Output<string | undefined>;
 
     /**
      * Create a StageUserWrite resource with the given unique name, arguments, and options.
@@ -75,6 +73,7 @@ export class StageUserWrite extends pulumi.CustomResource {
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["userCreationMode"] = state ? state.userCreationMode : undefined;
             resourceInputs["userPathTemplate"] = state ? state.userPathTemplate : undefined;
+            resourceInputs["userType"] = state ? state.userType : undefined;
         } else {
             const args = argsOrState as StageUserWriteArgs | undefined;
             resourceInputs["createUsersAsInactive"] = args ? args.createUsersAsInactive : undefined;
@@ -82,6 +81,7 @@ export class StageUserWrite extends pulumi.CustomResource {
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["userCreationMode"] = args ? args.userCreationMode : undefined;
             resourceInputs["userPathTemplate"] = args ? args.userPathTemplate : undefined;
+            resourceInputs["userType"] = args ? args.userType : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(StageUserWrite.__pulumiType, name, resourceInputs, opts);
@@ -92,38 +92,34 @@ export class StageUserWrite extends pulumi.CustomResource {
  * Input properties used for looking up and filtering StageUserWrite resources.
  */
 export interface StageUserWriteState {
-    /**
-     * Defaults to `true`.
-     */
     createUsersAsInactive?: pulumi.Input<boolean>;
     createUsersGroup?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     /**
-     * Defaults to `createWhenRequired`.
+     * Allowed values: - `neverCreate` - `createWhenRequired` - `alwaysCreate`
      */
     userCreationMode?: pulumi.Input<string>;
-    /**
-     * Defaults to ``.
-     */
     userPathTemplate?: pulumi.Input<string>;
+    /**
+     * Allowed values: - `internal` - `external` - `serviceAccount`
+     */
+    userType?: pulumi.Input<string>;
 }
 
 /**
  * The set of arguments for constructing a StageUserWrite resource.
  */
 export interface StageUserWriteArgs {
-    /**
-     * Defaults to `true`.
-     */
     createUsersAsInactive?: pulumi.Input<boolean>;
     createUsersGroup?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     /**
-     * Defaults to `createWhenRequired`.
+     * Allowed values: - `neverCreate` - `createWhenRequired` - `alwaysCreate`
      */
     userCreationMode?: pulumi.Input<string>;
-    /**
-     * Defaults to ``.
-     */
     userPathTemplate?: pulumi.Input<string>;
+    /**
+     * Allowed values: - `internal` - `external` - `serviceAccount`
+     */
+    userType?: pulumi.Input<string>;
 }

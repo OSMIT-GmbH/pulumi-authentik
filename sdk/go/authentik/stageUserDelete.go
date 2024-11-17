@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -114,12 +113,6 @@ func (i *StageUserDelete) ToStageUserDeleteOutputWithContext(ctx context.Context
 	return pulumi.ToOutputWithContext(ctx, i).(StageUserDeleteOutput)
 }
 
-func (i *StageUserDelete) ToOutput(ctx context.Context) pulumix.Output[*StageUserDelete] {
-	return pulumix.Output[*StageUserDelete]{
-		OutputState: i.ToStageUserDeleteOutputWithContext(ctx).OutputState,
-	}
-}
-
 // StageUserDeleteArrayInput is an input type that accepts StageUserDeleteArray and StageUserDeleteArrayOutput values.
 // You can construct a concrete instance of `StageUserDeleteArrayInput` via:
 //
@@ -143,12 +136,6 @@ func (i StageUserDeleteArray) ToStageUserDeleteArrayOutput() StageUserDeleteArra
 
 func (i StageUserDeleteArray) ToStageUserDeleteArrayOutputWithContext(ctx context.Context) StageUserDeleteArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageUserDeleteArrayOutput)
-}
-
-func (i StageUserDeleteArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageUserDelete] {
-	return pulumix.Output[[]*StageUserDelete]{
-		OutputState: i.ToStageUserDeleteArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // StageUserDeleteMapInput is an input type that accepts StageUserDeleteMap and StageUserDeleteMapOutput values.
@@ -176,12 +163,6 @@ func (i StageUserDeleteMap) ToStageUserDeleteMapOutputWithContext(ctx context.Co
 	return pulumi.ToOutputWithContext(ctx, i).(StageUserDeleteMapOutput)
 }
 
-func (i StageUserDeleteMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageUserDelete] {
-	return pulumix.Output[map[string]*StageUserDelete]{
-		OutputState: i.ToStageUserDeleteMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type StageUserDeleteOutput struct{ *pulumi.OutputState }
 
 func (StageUserDeleteOutput) ElementType() reflect.Type {
@@ -194,12 +175,6 @@ func (o StageUserDeleteOutput) ToStageUserDeleteOutput() StageUserDeleteOutput {
 
 func (o StageUserDeleteOutput) ToStageUserDeleteOutputWithContext(ctx context.Context) StageUserDeleteOutput {
 	return o
-}
-
-func (o StageUserDeleteOutput) ToOutput(ctx context.Context) pulumix.Output[*StageUserDelete] {
-	return pulumix.Output[*StageUserDelete]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageUserDeleteOutput) Name() pulumi.StringOutput {
@@ -220,12 +195,6 @@ func (o StageUserDeleteArrayOutput) ToStageUserDeleteArrayOutputWithContext(ctx 
 	return o
 }
 
-func (o StageUserDeleteArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageUserDelete] {
-	return pulumix.Output[[]*StageUserDelete]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o StageUserDeleteArrayOutput) Index(i pulumi.IntInput) StageUserDeleteOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StageUserDelete {
 		return vs[0].([]*StageUserDelete)[vs[1].(int)]
@@ -244,12 +213,6 @@ func (o StageUserDeleteMapOutput) ToStageUserDeleteMapOutput() StageUserDeleteMa
 
 func (o StageUserDeleteMapOutput) ToStageUserDeleteMapOutputWithContext(ctx context.Context) StageUserDeleteMapOutput {
 	return o
-}
-
-func (o StageUserDeleteMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageUserDelete] {
-	return pulumix.Output[map[string]*StageUserDelete]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageUserDeleteMapOutput) MapIndex(k pulumi.StringInput) StageUserDeleteOutput {

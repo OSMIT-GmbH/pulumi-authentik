@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -38,7 +37,8 @@ import (
 type StageDeny struct {
 	pulumi.CustomResourceState
 
-	Name pulumi.StringOutput `pulumi:"name"`
+	DenyMessage pulumi.StringPtrOutput `pulumi:"denyMessage"`
+	Name        pulumi.StringOutput    `pulumi:"name"`
 }
 
 // NewStageDeny registers a new resource with the given unique name, arguments, and options.
@@ -71,11 +71,13 @@ func GetStageDeny(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering StageDeny resources.
 type stageDenyState struct {
-	Name *string `pulumi:"name"`
+	DenyMessage *string `pulumi:"denyMessage"`
+	Name        *string `pulumi:"name"`
 }
 
 type StageDenyState struct {
-	Name pulumi.StringPtrInput
+	DenyMessage pulumi.StringPtrInput
+	Name        pulumi.StringPtrInput
 }
 
 func (StageDenyState) ElementType() reflect.Type {
@@ -83,12 +85,14 @@ func (StageDenyState) ElementType() reflect.Type {
 }
 
 type stageDenyArgs struct {
-	Name *string `pulumi:"name"`
+	DenyMessage *string `pulumi:"denyMessage"`
+	Name        *string `pulumi:"name"`
 }
 
 // The set of arguments for constructing a StageDeny resource.
 type StageDenyArgs struct {
-	Name pulumi.StringPtrInput
+	DenyMessage pulumi.StringPtrInput
+	Name        pulumi.StringPtrInput
 }
 
 func (StageDenyArgs) ElementType() reflect.Type {
@@ -112,12 +116,6 @@ func (i *StageDeny) ToStageDenyOutput() StageDenyOutput {
 
 func (i *StageDeny) ToStageDenyOutputWithContext(ctx context.Context) StageDenyOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageDenyOutput)
-}
-
-func (i *StageDeny) ToOutput(ctx context.Context) pulumix.Output[*StageDeny] {
-	return pulumix.Output[*StageDeny]{
-		OutputState: i.ToStageDenyOutputWithContext(ctx).OutputState,
-	}
 }
 
 // StageDenyArrayInput is an input type that accepts StageDenyArray and StageDenyArrayOutput values.
@@ -145,12 +143,6 @@ func (i StageDenyArray) ToStageDenyArrayOutputWithContext(ctx context.Context) S
 	return pulumi.ToOutputWithContext(ctx, i).(StageDenyArrayOutput)
 }
 
-func (i StageDenyArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageDeny] {
-	return pulumix.Output[[]*StageDeny]{
-		OutputState: i.ToStageDenyArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 // StageDenyMapInput is an input type that accepts StageDenyMap and StageDenyMapOutput values.
 // You can construct a concrete instance of `StageDenyMapInput` via:
 //
@@ -176,12 +168,6 @@ func (i StageDenyMap) ToStageDenyMapOutputWithContext(ctx context.Context) Stage
 	return pulumi.ToOutputWithContext(ctx, i).(StageDenyMapOutput)
 }
 
-func (i StageDenyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageDeny] {
-	return pulumix.Output[map[string]*StageDeny]{
-		OutputState: i.ToStageDenyMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type StageDenyOutput struct{ *pulumi.OutputState }
 
 func (StageDenyOutput) ElementType() reflect.Type {
@@ -196,10 +182,8 @@ func (o StageDenyOutput) ToStageDenyOutputWithContext(ctx context.Context) Stage
 	return o
 }
 
-func (o StageDenyOutput) ToOutput(ctx context.Context) pulumix.Output[*StageDeny] {
-	return pulumix.Output[*StageDeny]{
-		OutputState: o.OutputState,
-	}
+func (o StageDenyOutput) DenyMessage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *StageDeny) pulumi.StringPtrOutput { return v.DenyMessage }).(pulumi.StringPtrOutput)
 }
 
 func (o StageDenyOutput) Name() pulumi.StringOutput {
@@ -220,12 +204,6 @@ func (o StageDenyArrayOutput) ToStageDenyArrayOutputWithContext(ctx context.Cont
 	return o
 }
 
-func (o StageDenyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageDeny] {
-	return pulumix.Output[[]*StageDeny]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o StageDenyArrayOutput) Index(i pulumi.IntInput) StageDenyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StageDeny {
 		return vs[0].([]*StageDeny)[vs[1].(int)]
@@ -244,12 +222,6 @@ func (o StageDenyMapOutput) ToStageDenyMapOutput() StageDenyMapOutput {
 
 func (o StageDenyMapOutput) ToStageDenyMapOutputWithContext(ctx context.Context) StageDenyMapOutput {
 	return o
-}
-
-func (o StageDenyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageDeny] {
-	return pulumix.Output[map[string]*StageDeny]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageDenyMapOutput) MapIndex(k pulumi.StringInput) StageDenyOutput {

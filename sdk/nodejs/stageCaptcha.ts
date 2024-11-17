@@ -50,12 +50,24 @@ export class StageCaptcha extends pulumi.CustomResource {
      */
     public readonly apiUrl!: pulumi.Output<string | undefined>;
     /**
+     * Defaults to `true`.
+     */
+    public readonly errorOnInvalidScore!: pulumi.Output<boolean | undefined>;
+    /**
      * Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
      */
     public readonly jsUrl!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly privateKey!: pulumi.Output<string>;
     public readonly publicKey!: pulumi.Output<string>;
+    /**
+     * Defaults to `0.5`.
+     */
+    public readonly scoreMaxThreshold!: pulumi.Output<number | undefined>;
+    /**
+     * Defaults to `1`.
+     */
+    public readonly scoreMinThreshold!: pulumi.Output<number | undefined>;
 
     /**
      * Create a StageCaptcha resource with the given unique name, arguments, and options.
@@ -71,10 +83,13 @@ export class StageCaptcha extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as StageCaptchaState | undefined;
             resourceInputs["apiUrl"] = state ? state.apiUrl : undefined;
+            resourceInputs["errorOnInvalidScore"] = state ? state.errorOnInvalidScore : undefined;
             resourceInputs["jsUrl"] = state ? state.jsUrl : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["privateKey"] = state ? state.privateKey : undefined;
             resourceInputs["publicKey"] = state ? state.publicKey : undefined;
+            resourceInputs["scoreMaxThreshold"] = state ? state.scoreMaxThreshold : undefined;
+            resourceInputs["scoreMinThreshold"] = state ? state.scoreMinThreshold : undefined;
         } else {
             const args = argsOrState as StageCaptchaArgs | undefined;
             if ((!args || args.privateKey === undefined) && !opts.urn) {
@@ -84,10 +99,13 @@ export class StageCaptcha extends pulumi.CustomResource {
                 throw new Error("Missing required property 'publicKey'");
             }
             resourceInputs["apiUrl"] = args ? args.apiUrl : undefined;
+            resourceInputs["errorOnInvalidScore"] = args ? args.errorOnInvalidScore : undefined;
             resourceInputs["jsUrl"] = args ? args.jsUrl : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["privateKey"] = args?.privateKey ? pulumi.secret(args.privateKey) : undefined;
             resourceInputs["publicKey"] = args ? args.publicKey : undefined;
+            resourceInputs["scoreMaxThreshold"] = args ? args.scoreMaxThreshold : undefined;
+            resourceInputs["scoreMinThreshold"] = args ? args.scoreMinThreshold : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["privateKey"] };
@@ -105,12 +123,24 @@ export interface StageCaptchaState {
      */
     apiUrl?: pulumi.Input<string>;
     /**
+     * Defaults to `true`.
+     */
+    errorOnInvalidScore?: pulumi.Input<boolean>;
+    /**
      * Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
      */
     jsUrl?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     privateKey?: pulumi.Input<string>;
     publicKey?: pulumi.Input<string>;
+    /**
+     * Defaults to `0.5`.
+     */
+    scoreMaxThreshold?: pulumi.Input<number>;
+    /**
+     * Defaults to `1`.
+     */
+    scoreMinThreshold?: pulumi.Input<number>;
 }
 
 /**
@@ -122,10 +152,22 @@ export interface StageCaptchaArgs {
      */
     apiUrl?: pulumi.Input<string>;
     /**
+     * Defaults to `true`.
+     */
+    errorOnInvalidScore?: pulumi.Input<boolean>;
+    /**
      * Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
      */
     jsUrl?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     privateKey: pulumi.Input<string>;
     publicKey: pulumi.Input<string>;
+    /**
+     * Defaults to `0.5`.
+     */
+    scoreMaxThreshold?: pulumi.Input<number>;
+    /**
+     * Defaults to `1`.
+     */
+    scoreMinThreshold?: pulumi.Input<number>;
 }

@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -154,12 +153,6 @@ func (i *PolicyReputation) ToPolicyReputationOutputWithContext(ctx context.Conte
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyReputationOutput)
 }
 
-func (i *PolicyReputation) ToOutput(ctx context.Context) pulumix.Output[*PolicyReputation] {
-	return pulumix.Output[*PolicyReputation]{
-		OutputState: i.ToPolicyReputationOutputWithContext(ctx).OutputState,
-	}
-}
-
 // PolicyReputationArrayInput is an input type that accepts PolicyReputationArray and PolicyReputationArrayOutput values.
 // You can construct a concrete instance of `PolicyReputationArrayInput` via:
 //
@@ -183,12 +176,6 @@ func (i PolicyReputationArray) ToPolicyReputationArrayOutput() PolicyReputationA
 
 func (i PolicyReputationArray) ToPolicyReputationArrayOutputWithContext(ctx context.Context) PolicyReputationArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyReputationArrayOutput)
-}
-
-func (i PolicyReputationArray) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyReputation] {
-	return pulumix.Output[[]*PolicyReputation]{
-		OutputState: i.ToPolicyReputationArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // PolicyReputationMapInput is an input type that accepts PolicyReputationMap and PolicyReputationMapOutput values.
@@ -216,12 +203,6 @@ func (i PolicyReputationMap) ToPolicyReputationMapOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyReputationMapOutput)
 }
 
-func (i PolicyReputationMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyReputation] {
-	return pulumix.Output[map[string]*PolicyReputation]{
-		OutputState: i.ToPolicyReputationMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type PolicyReputationOutput struct{ *pulumi.OutputState }
 
 func (PolicyReputationOutput) ElementType() reflect.Type {
@@ -234,12 +215,6 @@ func (o PolicyReputationOutput) ToPolicyReputationOutput() PolicyReputationOutpu
 
 func (o PolicyReputationOutput) ToPolicyReputationOutputWithContext(ctx context.Context) PolicyReputationOutput {
 	return o
-}
-
-func (o PolicyReputationOutput) ToOutput(ctx context.Context) pulumix.Output[*PolicyReputation] {
-	return pulumix.Output[*PolicyReputation]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Defaults to `true`.
@@ -280,12 +255,6 @@ func (o PolicyReputationArrayOutput) ToPolicyReputationArrayOutputWithContext(ct
 	return o
 }
 
-func (o PolicyReputationArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyReputation] {
-	return pulumix.Output[[]*PolicyReputation]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o PolicyReputationArrayOutput) Index(i pulumi.IntInput) PolicyReputationOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PolicyReputation {
 		return vs[0].([]*PolicyReputation)[vs[1].(int)]
@@ -304,12 +273,6 @@ func (o PolicyReputationMapOutput) ToPolicyReputationMapOutput() PolicyReputatio
 
 func (o PolicyReputationMapOutput) ToPolicyReputationMapOutputWithContext(ctx context.Context) PolicyReputationMapOutput {
 	return o
-}
-
-func (o PolicyReputationMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyReputation] {
-	return pulumix.Output[map[string]*PolicyReputation]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o PolicyReputationMapOutput) MapIndex(k pulumi.StringInput) PolicyReputationOutput {

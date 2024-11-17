@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,13 +19,14 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create a user
 //			_, err := authentik.NewUser(ctx, "nameUser", &authentik.UserArgs{
 //				Username: pulumi.String("user"),
 //			})
@@ -54,18 +54,16 @@ import (
 type User struct {
 	pulumi.CustomResourceState
 
-	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
-	Attributes pulumi.StringPtrOutput `pulumi:"attributes"`
-	Email      pulumi.StringPtrOutput `pulumi:"email"`
-	// Generated.
-	Groups pulumi.StringArrayOutput `pulumi:"groups"`
-	// Defaults to `true`.
-	IsActive pulumi.BoolPtrOutput `pulumi:"isActive"`
-	// Defaults to ``.
-	Name pulumi.StringOutput `pulumi:"name"`
-	// Defaults to `users`.
-	Path pulumi.StringPtrOutput `pulumi:"path"`
-	// Defaults to `internal`.
+	// JSON format expected. Use jsonencode() to pass objects.
+	Attributes pulumi.StringPtrOutput   `pulumi:"attributes"`
+	Email      pulumi.StringPtrOutput   `pulumi:"email"`
+	Groups     pulumi.StringArrayOutput `pulumi:"groups"`
+	IsActive   pulumi.BoolPtrOutput     `pulumi:"isActive"`
+	Name       pulumi.StringOutput      `pulumi:"name"`
+	// Optionally set the user's password. Changing the password in authentik will not trigger an update here.
+	Password pulumi.StringPtrOutput `pulumi:"password"`
+	Path     pulumi.StringPtrOutput `pulumi:"path"`
+	// Allowed values: - `internal` - `external` - `serviceAccount` - `internalServiceAccount`
 	Type     pulumi.StringPtrOutput `pulumi:"type"`
 	Username pulumi.StringOutput    `pulumi:"username"`
 }
@@ -80,6 +78,13 @@ func NewUser(ctx *pulumi.Context,
 	if args.Username == nil {
 		return nil, errors.New("invalid value for required argument 'Username'")
 	}
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource User
 	err := ctx.RegisterResource("authentik:index/user:User", name, args, &resource, opts...)
@@ -103,35 +108,31 @@ func GetUser(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering User resources.
 type userState struct {
-	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
-	Attributes *string `pulumi:"attributes"`
-	Email      *string `pulumi:"email"`
-	// Generated.
-	Groups []string `pulumi:"groups"`
-	// Defaults to `true`.
-	IsActive *bool `pulumi:"isActive"`
-	// Defaults to ``.
-	Name *string `pulumi:"name"`
-	// Defaults to `users`.
-	Path *string `pulumi:"path"`
-	// Defaults to `internal`.
+	// JSON format expected. Use jsonencode() to pass objects.
+	Attributes *string  `pulumi:"attributes"`
+	Email      *string  `pulumi:"email"`
+	Groups     []string `pulumi:"groups"`
+	IsActive   *bool    `pulumi:"isActive"`
+	Name       *string  `pulumi:"name"`
+	// Optionally set the user's password. Changing the password in authentik will not trigger an update here.
+	Password *string `pulumi:"password"`
+	Path     *string `pulumi:"path"`
+	// Allowed values: - `internal` - `external` - `serviceAccount` - `internalServiceAccount`
 	Type     *string `pulumi:"type"`
 	Username *string `pulumi:"username"`
 }
 
 type UserState struct {
-	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
+	// JSON format expected. Use jsonencode() to pass objects.
 	Attributes pulumi.StringPtrInput
 	Email      pulumi.StringPtrInput
-	// Generated.
-	Groups pulumi.StringArrayInput
-	// Defaults to `true`.
-	IsActive pulumi.BoolPtrInput
-	// Defaults to ``.
-	Name pulumi.StringPtrInput
-	// Defaults to `users`.
-	Path pulumi.StringPtrInput
-	// Defaults to `internal`.
+	Groups     pulumi.StringArrayInput
+	IsActive   pulumi.BoolPtrInput
+	Name       pulumi.StringPtrInput
+	// Optionally set the user's password. Changing the password in authentik will not trigger an update here.
+	Password pulumi.StringPtrInput
+	Path     pulumi.StringPtrInput
+	// Allowed values: - `internal` - `external` - `serviceAccount` - `internalServiceAccount`
 	Type     pulumi.StringPtrInput
 	Username pulumi.StringPtrInput
 }
@@ -141,36 +142,32 @@ func (UserState) ElementType() reflect.Type {
 }
 
 type userArgs struct {
-	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
-	Attributes *string `pulumi:"attributes"`
-	Email      *string `pulumi:"email"`
-	// Generated.
-	Groups []string `pulumi:"groups"`
-	// Defaults to `true`.
-	IsActive *bool `pulumi:"isActive"`
-	// Defaults to ``.
-	Name *string `pulumi:"name"`
-	// Defaults to `users`.
-	Path *string `pulumi:"path"`
-	// Defaults to `internal`.
+	// JSON format expected. Use jsonencode() to pass objects.
+	Attributes *string  `pulumi:"attributes"`
+	Email      *string  `pulumi:"email"`
+	Groups     []string `pulumi:"groups"`
+	IsActive   *bool    `pulumi:"isActive"`
+	Name       *string  `pulumi:"name"`
+	// Optionally set the user's password. Changing the password in authentik will not trigger an update here.
+	Password *string `pulumi:"password"`
+	Path     *string `pulumi:"path"`
+	// Allowed values: - `internal` - `external` - `serviceAccount` - `internalServiceAccount`
 	Type     *string `pulumi:"type"`
 	Username string  `pulumi:"username"`
 }
 
 // The set of arguments for constructing a User resource.
 type UserArgs struct {
-	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
+	// JSON format expected. Use jsonencode() to pass objects.
 	Attributes pulumi.StringPtrInput
 	Email      pulumi.StringPtrInput
-	// Generated.
-	Groups pulumi.StringArrayInput
-	// Defaults to `true`.
-	IsActive pulumi.BoolPtrInput
-	// Defaults to ``.
-	Name pulumi.StringPtrInput
-	// Defaults to `users`.
-	Path pulumi.StringPtrInput
-	// Defaults to `internal`.
+	Groups     pulumi.StringArrayInput
+	IsActive   pulumi.BoolPtrInput
+	Name       pulumi.StringPtrInput
+	// Optionally set the user's password. Changing the password in authentik will not trigger an update here.
+	Password pulumi.StringPtrInput
+	Path     pulumi.StringPtrInput
+	// Allowed values: - `internal` - `external` - `serviceAccount` - `internalServiceAccount`
 	Type     pulumi.StringPtrInput
 	Username pulumi.StringInput
 }
@@ -198,12 +195,6 @@ func (i *User) ToUserOutputWithContext(ctx context.Context) UserOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(UserOutput)
 }
 
-func (i *User) ToOutput(ctx context.Context) pulumix.Output[*User] {
-	return pulumix.Output[*User]{
-		OutputState: i.ToUserOutputWithContext(ctx).OutputState,
-	}
-}
-
 // UserArrayInput is an input type that accepts UserArray and UserArrayOutput values.
 // You can construct a concrete instance of `UserArrayInput` via:
 //
@@ -227,12 +218,6 @@ func (i UserArray) ToUserArrayOutput() UserArrayOutput {
 
 func (i UserArray) ToUserArrayOutputWithContext(ctx context.Context) UserArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(UserArrayOutput)
-}
-
-func (i UserArray) ToOutput(ctx context.Context) pulumix.Output[[]*User] {
-	return pulumix.Output[[]*User]{
-		OutputState: i.ToUserArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // UserMapInput is an input type that accepts UserMap and UserMapOutput values.
@@ -260,12 +245,6 @@ func (i UserMap) ToUserMapOutputWithContext(ctx context.Context) UserMapOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(UserMapOutput)
 }
 
-func (i UserMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*User] {
-	return pulumix.Output[map[string]*User]{
-		OutputState: i.ToUserMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type UserOutput struct{ *pulumi.OutputState }
 
 func (UserOutput) ElementType() reflect.Type {
@@ -280,13 +259,7 @@ func (o UserOutput) ToUserOutputWithContext(ctx context.Context) UserOutput {
 	return o
 }
 
-func (o UserOutput) ToOutput(ctx context.Context) pulumix.Output[*User] {
-	return pulumix.Output[*User]{
-		OutputState: o.OutputState,
-	}
-}
-
-// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
+// JSON format expected. Use jsonencode() to pass objects.
 func (o UserOutput) Attributes() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.Attributes }).(pulumi.StringPtrOutput)
 }
@@ -295,27 +268,28 @@ func (o UserOutput) Email() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.Email }).(pulumi.StringPtrOutput)
 }
 
-// Generated.
 func (o UserOutput) Groups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *User) pulumi.StringArrayOutput { return v.Groups }).(pulumi.StringArrayOutput)
 }
 
-// Defaults to `true`.
 func (o UserOutput) IsActive() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.BoolPtrOutput { return v.IsActive }).(pulumi.BoolPtrOutput)
 }
 
-// Defaults to “.
 func (o UserOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *User) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Defaults to `users`.
+// Optionally set the user's password. Changing the password in authentik will not trigger an update here.
+func (o UserOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.Password }).(pulumi.StringPtrOutput)
+}
+
 func (o UserOutput) Path() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.Path }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `internal`.
+// Allowed values: - `internal` - `external` - `serviceAccount` - `internalServiceAccount`
 func (o UserOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -338,12 +312,6 @@ func (o UserArrayOutput) ToUserArrayOutputWithContext(ctx context.Context) UserA
 	return o
 }
 
-func (o UserArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*User] {
-	return pulumix.Output[[]*User]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o UserArrayOutput) Index(i pulumi.IntInput) UserOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *User {
 		return vs[0].([]*User)[vs[1].(int)]
@@ -362,12 +330,6 @@ func (o UserMapOutput) ToUserMapOutput() UserMapOutput {
 
 func (o UserMapOutput) ToUserMapOutputWithContext(ctx context.Context) UserMapOutput {
 	return o
-}
-
-func (o UserMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*User] {
-	return pulumix.Output[map[string]*User]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o UserMapOutput) MapIndex(k pulumi.StringInput) UserOutput {

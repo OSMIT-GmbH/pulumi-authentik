@@ -47,11 +47,11 @@ export class EventTransport extends pulumi.CustomResource {
         return obj['__pulumiType'] === EventTransport.__pulumiType;
     }
 
+    /**
+     * Allowed values: - `local` - `webhook` - `webhookSlack` - `email`
+     */
     public readonly mode!: pulumi.Output<string>;
     public readonly name!: pulumi.Output<string>;
-    /**
-     * Defaults to `true`.
-     */
     public readonly sendOnce!: pulumi.Output<boolean | undefined>;
     public readonly webhookMapping!: pulumi.Output<string | undefined>;
     public readonly webhookUrl!: pulumi.Output<string | undefined>;
@@ -94,11 +94,11 @@ export class EventTransport extends pulumi.CustomResource {
  * Input properties used for looking up and filtering EventTransport resources.
  */
 export interface EventTransportState {
+    /**
+     * Allowed values: - `local` - `webhook` - `webhookSlack` - `email`
+     */
     mode?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
-    /**
-     * Defaults to `true`.
-     */
     sendOnce?: pulumi.Input<boolean>;
     webhookMapping?: pulumi.Input<string>;
     webhookUrl?: pulumi.Input<string>;
@@ -108,11 +108,11 @@ export interface EventTransportState {
  * The set of arguments for constructing a EventTransport resource.
  */
 export interface EventTransportArgs {
+    /**
+     * Allowed values: - `local` - `webhook` - `webhookSlack` - `email`
+     */
     mode: pulumi.Input<string>;
     name?: pulumi.Input<string>;
-    /**
-     * Defaults to `true`.
-     */
     sendOnce?: pulumi.Input<boolean>;
     webhookMapping?: pulumi.Input<string>;
     webhookUrl?: pulumi.Input<string>;

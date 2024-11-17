@@ -50,28 +50,20 @@ export class User extends pulumi.CustomResource {
     }
 
     /**
-     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
+     * JSON format expected. Use jsonencode() to pass objects.
      */
     public readonly attributes!: pulumi.Output<string | undefined>;
     public readonly email!: pulumi.Output<string | undefined>;
-    /**
-     * Generated.
-     */
     public readonly groups!: pulumi.Output<string[]>;
-    /**
-     * Defaults to `true`.
-     */
     public readonly isActive!: pulumi.Output<boolean | undefined>;
-    /**
-     * Defaults to ``.
-     */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Defaults to `users`.
+     * Optionally set the user's password. Changing the password in authentik will not trigger an update here.
      */
+    public readonly password!: pulumi.Output<string | undefined>;
     public readonly path!: pulumi.Output<string | undefined>;
     /**
-     * Defaults to `internal`.
+     * Allowed values: - `internal` - `external` - `serviceAccount` - `internalServiceAccount`
      */
     public readonly type!: pulumi.Output<string | undefined>;
     public readonly username!: pulumi.Output<string>;
@@ -94,6 +86,7 @@ export class User extends pulumi.CustomResource {
             resourceInputs["groups"] = state ? state.groups : undefined;
             resourceInputs["isActive"] = state ? state.isActive : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["path"] = state ? state.path : undefined;
             resourceInputs["type"] = state ? state.type : undefined;
             resourceInputs["username"] = state ? state.username : undefined;
@@ -107,11 +100,14 @@ export class User extends pulumi.CustomResource {
             resourceInputs["groups"] = args ? args.groups : undefined;
             resourceInputs["isActive"] = args ? args.isActive : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["path"] = args ? args.path : undefined;
             resourceInputs["type"] = args ? args.type : undefined;
             resourceInputs["username"] = args ? args.username : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(User.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -121,28 +117,20 @@ export class User extends pulumi.CustomResource {
  */
 export interface UserState {
     /**
-     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
+     * JSON format expected. Use jsonencode() to pass objects.
      */
     attributes?: pulumi.Input<string>;
     email?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     groups?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * Defaults to `true`.
-     */
     isActive?: pulumi.Input<boolean>;
-    /**
-     * Defaults to ``.
-     */
     name?: pulumi.Input<string>;
     /**
-     * Defaults to `users`.
+     * Optionally set the user's password. Changing the password in authentik will not trigger an update here.
      */
+    password?: pulumi.Input<string>;
     path?: pulumi.Input<string>;
     /**
-     * Defaults to `internal`.
+     * Allowed values: - `internal` - `external` - `serviceAccount` - `internalServiceAccount`
      */
     type?: pulumi.Input<string>;
     username?: pulumi.Input<string>;
@@ -153,28 +141,20 @@ export interface UserState {
  */
 export interface UserArgs {
     /**
-     * JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
+     * JSON format expected. Use jsonencode() to pass objects.
      */
     attributes?: pulumi.Input<string>;
     email?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     groups?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * Defaults to `true`.
-     */
     isActive?: pulumi.Input<boolean>;
-    /**
-     * Defaults to ``.
-     */
     name?: pulumi.Input<string>;
     /**
-     * Defaults to `users`.
+     * Optionally set the user's password. Changing the password in authentik will not trigger an update here.
      */
+    password?: pulumi.Input<string>;
     path?: pulumi.Input<string>;
     /**
-     * Defaults to `internal`.
+     * Allowed values: - `internal` - `external` - `serviceAccount` - `internalServiceAccount`
      */
     type?: pulumi.Input<string>;
     username: pulumi.Input<string>;

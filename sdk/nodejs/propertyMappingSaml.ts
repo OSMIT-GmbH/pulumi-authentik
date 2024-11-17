@@ -5,17 +5,9 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * ## Example Usage
+ * Manage SAML Provider Property mappings
  *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@osmit-gmbh/pulumi-authentik";
- *
- * const saml_aws_rolessessionname = new authentik.PropertyMappingSaml("saml-aws-rolessessionname", {
- *     expression: "return user.email",
- *     samlName: "https://aws.amazon.com/SAML/Attributes/RoleSessionName",
- * });
- * ```
+ * > This resource is deprecated. Migrate to `authentik.PropertyMappingProviderSaml`.
  */
 export class PropertyMappingSaml extends pulumi.CustomResource {
     /**

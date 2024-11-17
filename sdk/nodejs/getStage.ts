@@ -20,7 +20,6 @@ import * as utilities from "./utilities";
  */
 export function getStage(args?: GetStageArgs, opts?: pulumi.InvokeOptions): Promise<GetStageResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("authentik:index/getStage:getStage", {
         "name": args.name,
@@ -65,7 +64,11 @@ export interface GetStageResult {
  * ```
  */
 export function getStageOutput(args?: GetStageOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetStageResult> {
-    return pulumi.output(args).apply((a: any) => getStage(a, opts))
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("authentik:index/getStage:getStage", {
+        "name": args.name,
+    }, opts);
 }
 
 /**

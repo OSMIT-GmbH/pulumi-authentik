@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -144,12 +143,6 @@ func (i *StageAuthenticatorStatic) ToStageAuthenticatorStaticOutputWithContext(c
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorStaticOutput)
 }
 
-func (i *StageAuthenticatorStatic) ToOutput(ctx context.Context) pulumix.Output[*StageAuthenticatorStatic] {
-	return pulumix.Output[*StageAuthenticatorStatic]{
-		OutputState: i.ToStageAuthenticatorStaticOutputWithContext(ctx).OutputState,
-	}
-}
-
 // StageAuthenticatorStaticArrayInput is an input type that accepts StageAuthenticatorStaticArray and StageAuthenticatorStaticArrayOutput values.
 // You can construct a concrete instance of `StageAuthenticatorStaticArrayInput` via:
 //
@@ -173,12 +166,6 @@ func (i StageAuthenticatorStaticArray) ToStageAuthenticatorStaticArrayOutput() S
 
 func (i StageAuthenticatorStaticArray) ToStageAuthenticatorStaticArrayOutputWithContext(ctx context.Context) StageAuthenticatorStaticArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorStaticArrayOutput)
-}
-
-func (i StageAuthenticatorStaticArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageAuthenticatorStatic] {
-	return pulumix.Output[[]*StageAuthenticatorStatic]{
-		OutputState: i.ToStageAuthenticatorStaticArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // StageAuthenticatorStaticMapInput is an input type that accepts StageAuthenticatorStaticMap and StageAuthenticatorStaticMapOutput values.
@@ -206,12 +193,6 @@ func (i StageAuthenticatorStaticMap) ToStageAuthenticatorStaticMapOutputWithCont
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorStaticMapOutput)
 }
 
-func (i StageAuthenticatorStaticMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageAuthenticatorStatic] {
-	return pulumix.Output[map[string]*StageAuthenticatorStatic]{
-		OutputState: i.ToStageAuthenticatorStaticMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type StageAuthenticatorStaticOutput struct{ *pulumi.OutputState }
 
 func (StageAuthenticatorStaticOutput) ElementType() reflect.Type {
@@ -224,12 +205,6 @@ func (o StageAuthenticatorStaticOutput) ToStageAuthenticatorStaticOutput() Stage
 
 func (o StageAuthenticatorStaticOutput) ToStageAuthenticatorStaticOutputWithContext(ctx context.Context) StageAuthenticatorStaticOutput {
 	return o
-}
-
-func (o StageAuthenticatorStaticOutput) ToOutput(ctx context.Context) pulumix.Output[*StageAuthenticatorStatic] {
-	return pulumix.Output[*StageAuthenticatorStatic]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageAuthenticatorStaticOutput) ConfigureFlow() pulumi.StringPtrOutput {
@@ -268,12 +243,6 @@ func (o StageAuthenticatorStaticArrayOutput) ToStageAuthenticatorStaticArrayOutp
 	return o
 }
 
-func (o StageAuthenticatorStaticArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageAuthenticatorStatic] {
-	return pulumix.Output[[]*StageAuthenticatorStatic]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o StageAuthenticatorStaticArrayOutput) Index(i pulumi.IntInput) StageAuthenticatorStaticOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StageAuthenticatorStatic {
 		return vs[0].([]*StageAuthenticatorStatic)[vs[1].(int)]
@@ -292,12 +261,6 @@ func (o StageAuthenticatorStaticMapOutput) ToStageAuthenticatorStaticMapOutput()
 
 func (o StageAuthenticatorStaticMapOutput) ToStageAuthenticatorStaticMapOutputWithContext(ctx context.Context) StageAuthenticatorStaticMapOutput {
 	return o
-}
-
-func (o StageAuthenticatorStaticMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageAuthenticatorStatic] {
-	return pulumix.Output[map[string]*StageAuthenticatorStatic]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageAuthenticatorStaticMapOutput) MapIndex(k pulumi.StringInput) StageAuthenticatorStaticOutput {

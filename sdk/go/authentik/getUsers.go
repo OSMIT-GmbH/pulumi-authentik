@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Get users list
@@ -21,14 +20,14 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := authentik.GetUsers(ctx, nil, nil)
+//			_, err := authentik.GetUsers(ctx, &authentik.GetUsersArgs{}, nil)
 //			if err != nil {
 //				return err
 //			}
@@ -93,14 +92,20 @@ type GetUsersResult struct {
 
 func GetUsersOutput(ctx *pulumi.Context, args GetUsersOutputArgs, opts ...pulumi.InvokeOption) GetUsersResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetUsersResult, error) {
+		ApplyT(func(v interface{}) (GetUsersResultOutput, error) {
 			args := v.(GetUsersArgs)
-			r, err := GetUsers(ctx, &args, opts...)
-			var s GetUsersResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv GetUsersResult
+			secret, err := ctx.InvokePackageRaw("authentik:index/getUsers:getUsers", args, &rv, "", opts...)
+			if err != nil {
+				return GetUsersResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(GetUsersResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(GetUsersResultOutput), nil
+			}
+			return output, nil
 		}).(GetUsersResultOutput)
 }
 
@@ -138,12 +143,6 @@ func (o GetUsersResultOutput) ToGetUsersResultOutput() GetUsersResultOutput {
 
 func (o GetUsersResultOutput) ToGetUsersResultOutputWithContext(ctx context.Context) GetUsersResultOutput {
 	return o
-}
-
-func (o GetUsersResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetUsersResult] {
-	return pulumix.Output[GetUsersResult]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o GetUsersResultOutput) Attributes() pulumi.StringPtrOutput {

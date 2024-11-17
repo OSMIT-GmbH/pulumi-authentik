@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -38,13 +37,14 @@ import (
 type StageUserLogin struct {
 	pulumi.CustomResourceState
 
-	Name pulumi.StringOutput `pulumi:"name"`
-	// Defaults to `seconds=0`.
-	RememberMeOffset pulumi.StringPtrOutput `pulumi:"rememberMeOffset"`
-	// Defaults to `seconds=0`.
-	SessionDuration pulumi.StringPtrOutput `pulumi:"sessionDuration"`
-	// Defaults to `false`.
-	TerminateOtherSessions pulumi.BoolPtrOutput `pulumi:"terminateOtherSessions"`
+	// Allowed values: - `noBinding` - `bindContinent` - `bindContinentCountry` - `bindContinentCountryCity`
+	GeoipBinding pulumi.StringPtrOutput `pulumi:"geoipBinding"`
+	Name         pulumi.StringOutput    `pulumi:"name"`
+	// Allowed values: - `noBinding` - `bindAsn` - `bindAsnNetwork` - `bindAsnNetworkIp`
+	NetworkBinding         pulumi.StringPtrOutput `pulumi:"networkBinding"`
+	RememberMeOffset       pulumi.StringPtrOutput `pulumi:"rememberMeOffset"`
+	SessionDuration        pulumi.StringPtrOutput `pulumi:"sessionDuration"`
+	TerminateOtherSessions pulumi.BoolPtrOutput   `pulumi:"terminateOtherSessions"`
 }
 
 // NewStageUserLogin registers a new resource with the given unique name, arguments, and options.
@@ -77,22 +77,24 @@ func GetStageUserLogin(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering StageUserLogin resources.
 type stageUserLoginState struct {
-	Name *string `pulumi:"name"`
-	// Defaults to `seconds=0`.
-	RememberMeOffset *string `pulumi:"rememberMeOffset"`
-	// Defaults to `seconds=0`.
-	SessionDuration *string `pulumi:"sessionDuration"`
-	// Defaults to `false`.
-	TerminateOtherSessions *bool `pulumi:"terminateOtherSessions"`
+	// Allowed values: - `noBinding` - `bindContinent` - `bindContinentCountry` - `bindContinentCountryCity`
+	GeoipBinding *string `pulumi:"geoipBinding"`
+	Name         *string `pulumi:"name"`
+	// Allowed values: - `noBinding` - `bindAsn` - `bindAsnNetwork` - `bindAsnNetworkIp`
+	NetworkBinding         *string `pulumi:"networkBinding"`
+	RememberMeOffset       *string `pulumi:"rememberMeOffset"`
+	SessionDuration        *string `pulumi:"sessionDuration"`
+	TerminateOtherSessions *bool   `pulumi:"terminateOtherSessions"`
 }
 
 type StageUserLoginState struct {
-	Name pulumi.StringPtrInput
-	// Defaults to `seconds=0`.
-	RememberMeOffset pulumi.StringPtrInput
-	// Defaults to `seconds=0`.
-	SessionDuration pulumi.StringPtrInput
-	// Defaults to `false`.
+	// Allowed values: - `noBinding` - `bindContinent` - `bindContinentCountry` - `bindContinentCountryCity`
+	GeoipBinding pulumi.StringPtrInput
+	Name         pulumi.StringPtrInput
+	// Allowed values: - `noBinding` - `bindAsn` - `bindAsnNetwork` - `bindAsnNetworkIp`
+	NetworkBinding         pulumi.StringPtrInput
+	RememberMeOffset       pulumi.StringPtrInput
+	SessionDuration        pulumi.StringPtrInput
 	TerminateOtherSessions pulumi.BoolPtrInput
 }
 
@@ -101,23 +103,25 @@ func (StageUserLoginState) ElementType() reflect.Type {
 }
 
 type stageUserLoginArgs struct {
-	Name *string `pulumi:"name"`
-	// Defaults to `seconds=0`.
-	RememberMeOffset *string `pulumi:"rememberMeOffset"`
-	// Defaults to `seconds=0`.
-	SessionDuration *string `pulumi:"sessionDuration"`
-	// Defaults to `false`.
-	TerminateOtherSessions *bool `pulumi:"terminateOtherSessions"`
+	// Allowed values: - `noBinding` - `bindContinent` - `bindContinentCountry` - `bindContinentCountryCity`
+	GeoipBinding *string `pulumi:"geoipBinding"`
+	Name         *string `pulumi:"name"`
+	// Allowed values: - `noBinding` - `bindAsn` - `bindAsnNetwork` - `bindAsnNetworkIp`
+	NetworkBinding         *string `pulumi:"networkBinding"`
+	RememberMeOffset       *string `pulumi:"rememberMeOffset"`
+	SessionDuration        *string `pulumi:"sessionDuration"`
+	TerminateOtherSessions *bool   `pulumi:"terminateOtherSessions"`
 }
 
 // The set of arguments for constructing a StageUserLogin resource.
 type StageUserLoginArgs struct {
-	Name pulumi.StringPtrInput
-	// Defaults to `seconds=0`.
-	RememberMeOffset pulumi.StringPtrInput
-	// Defaults to `seconds=0`.
-	SessionDuration pulumi.StringPtrInput
-	// Defaults to `false`.
+	// Allowed values: - `noBinding` - `bindContinent` - `bindContinentCountry` - `bindContinentCountryCity`
+	GeoipBinding pulumi.StringPtrInput
+	Name         pulumi.StringPtrInput
+	// Allowed values: - `noBinding` - `bindAsn` - `bindAsnNetwork` - `bindAsnNetworkIp`
+	NetworkBinding         pulumi.StringPtrInput
+	RememberMeOffset       pulumi.StringPtrInput
+	SessionDuration        pulumi.StringPtrInput
 	TerminateOtherSessions pulumi.BoolPtrInput
 }
 
@@ -142,12 +146,6 @@ func (i *StageUserLogin) ToStageUserLoginOutput() StageUserLoginOutput {
 
 func (i *StageUserLogin) ToStageUserLoginOutputWithContext(ctx context.Context) StageUserLoginOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageUserLoginOutput)
-}
-
-func (i *StageUserLogin) ToOutput(ctx context.Context) pulumix.Output[*StageUserLogin] {
-	return pulumix.Output[*StageUserLogin]{
-		OutputState: i.ToStageUserLoginOutputWithContext(ctx).OutputState,
-	}
 }
 
 // StageUserLoginArrayInput is an input type that accepts StageUserLoginArray and StageUserLoginArrayOutput values.
@@ -175,12 +173,6 @@ func (i StageUserLoginArray) ToStageUserLoginArrayOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(StageUserLoginArrayOutput)
 }
 
-func (i StageUserLoginArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageUserLogin] {
-	return pulumix.Output[[]*StageUserLogin]{
-		OutputState: i.ToStageUserLoginArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 // StageUserLoginMapInput is an input type that accepts StageUserLoginMap and StageUserLoginMapOutput values.
 // You can construct a concrete instance of `StageUserLoginMapInput` via:
 //
@@ -206,12 +198,6 @@ func (i StageUserLoginMap) ToStageUserLoginMapOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(StageUserLoginMapOutput)
 }
 
-func (i StageUserLoginMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageUserLogin] {
-	return pulumix.Output[map[string]*StageUserLogin]{
-		OutputState: i.ToStageUserLoginMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type StageUserLoginOutput struct{ *pulumi.OutputState }
 
 func (StageUserLoginOutput) ElementType() reflect.Type {
@@ -226,27 +212,28 @@ func (o StageUserLoginOutput) ToStageUserLoginOutputWithContext(ctx context.Cont
 	return o
 }
 
-func (o StageUserLoginOutput) ToOutput(ctx context.Context) pulumix.Output[*StageUserLogin] {
-	return pulumix.Output[*StageUserLogin]{
-		OutputState: o.OutputState,
-	}
+// Allowed values: - `noBinding` - `bindContinent` - `bindContinentCountry` - `bindContinentCountryCity`
+func (o StageUserLoginOutput) GeoipBinding() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *StageUserLogin) pulumi.StringPtrOutput { return v.GeoipBinding }).(pulumi.StringPtrOutput)
 }
 
 func (o StageUserLoginOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *StageUserLogin) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Defaults to `seconds=0`.
+// Allowed values: - `noBinding` - `bindAsn` - `bindAsnNetwork` - `bindAsnNetworkIp`
+func (o StageUserLoginOutput) NetworkBinding() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *StageUserLogin) pulumi.StringPtrOutput { return v.NetworkBinding }).(pulumi.StringPtrOutput)
+}
+
 func (o StageUserLoginOutput) RememberMeOffset() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageUserLogin) pulumi.StringPtrOutput { return v.RememberMeOffset }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `seconds=0`.
 func (o StageUserLoginOutput) SessionDuration() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageUserLogin) pulumi.StringPtrOutput { return v.SessionDuration }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `false`.
 func (o StageUserLoginOutput) TerminateOtherSessions() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *StageUserLogin) pulumi.BoolPtrOutput { return v.TerminateOtherSessions }).(pulumi.BoolPtrOutput)
 }
@@ -263,12 +250,6 @@ func (o StageUserLoginArrayOutput) ToStageUserLoginArrayOutput() StageUserLoginA
 
 func (o StageUserLoginArrayOutput) ToStageUserLoginArrayOutputWithContext(ctx context.Context) StageUserLoginArrayOutput {
 	return o
-}
-
-func (o StageUserLoginArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageUserLogin] {
-	return pulumix.Output[[]*StageUserLogin]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageUserLoginArrayOutput) Index(i pulumi.IntInput) StageUserLoginOutput {
@@ -289,12 +270,6 @@ func (o StageUserLoginMapOutput) ToStageUserLoginMapOutput() StageUserLoginMapOu
 
 func (o StageUserLoginMapOutput) ToStageUserLoginMapOutputWithContext(ctx context.Context) StageUserLoginMapOutput {
 	return o
-}
-
-func (o StageUserLoginMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageUserLogin] {
-	return pulumix.Output[map[string]*StageUserLogin]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageUserLoginMapOutput) MapIndex(k pulumi.StringInput) StageUserLoginOutput {

@@ -4,6 +4,11 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * Manage SCIM Provider Property mappings
+ *
+ * > This resource is deprecated. Migrate to `authentik.PropertyMappingProviderScim`.
+ */
 export class PropertyMappingScim extends pulumi.CustomResource {
     /**
      * Get an existing PropertyMappingScim resource's state with the given name, ID, and optional extra

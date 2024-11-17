@@ -8,16 +8,15 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 type EnterpriseLicense struct {
 	pulumi.CustomResourceState
 
 	// Generated.
-	Expiry pulumi.StringOutput `pulumi:"expiry"`
+	Expiry pulumi.IntOutput `pulumi:"expiry"`
 	// Generated.
 	ExternalUsers pulumi.IntOutput `pulumi:"externalUsers"`
 	// Generated.
@@ -68,7 +67,7 @@ func GetEnterpriseLicense(ctx *pulumi.Context,
 // Input properties used for looking up and filtering EnterpriseLicense resources.
 type enterpriseLicenseState struct {
 	// Generated.
-	Expiry *string `pulumi:"expiry"`
+	Expiry *int `pulumi:"expiry"`
 	// Generated.
 	ExternalUsers *int `pulumi:"externalUsers"`
 	// Generated.
@@ -80,7 +79,7 @@ type enterpriseLicenseState struct {
 
 type EnterpriseLicenseState struct {
 	// Generated.
-	Expiry pulumi.StringPtrInput
+	Expiry pulumi.IntPtrInput
 	// Generated.
 	ExternalUsers pulumi.IntPtrInput
 	// Generated.
@@ -126,12 +125,6 @@ func (i *EnterpriseLicense) ToEnterpriseLicenseOutputWithContext(ctx context.Con
 	return pulumi.ToOutputWithContext(ctx, i).(EnterpriseLicenseOutput)
 }
 
-func (i *EnterpriseLicense) ToOutput(ctx context.Context) pulumix.Output[*EnterpriseLicense] {
-	return pulumix.Output[*EnterpriseLicense]{
-		OutputState: i.ToEnterpriseLicenseOutputWithContext(ctx).OutputState,
-	}
-}
-
 // EnterpriseLicenseArrayInput is an input type that accepts EnterpriseLicenseArray and EnterpriseLicenseArrayOutput values.
 // You can construct a concrete instance of `EnterpriseLicenseArrayInput` via:
 //
@@ -155,12 +148,6 @@ func (i EnterpriseLicenseArray) ToEnterpriseLicenseArrayOutput() EnterpriseLicen
 
 func (i EnterpriseLicenseArray) ToEnterpriseLicenseArrayOutputWithContext(ctx context.Context) EnterpriseLicenseArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(EnterpriseLicenseArrayOutput)
-}
-
-func (i EnterpriseLicenseArray) ToOutput(ctx context.Context) pulumix.Output[[]*EnterpriseLicense] {
-	return pulumix.Output[[]*EnterpriseLicense]{
-		OutputState: i.ToEnterpriseLicenseArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // EnterpriseLicenseMapInput is an input type that accepts EnterpriseLicenseMap and EnterpriseLicenseMapOutput values.
@@ -188,12 +175,6 @@ func (i EnterpriseLicenseMap) ToEnterpriseLicenseMapOutputWithContext(ctx contex
 	return pulumi.ToOutputWithContext(ctx, i).(EnterpriseLicenseMapOutput)
 }
 
-func (i EnterpriseLicenseMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*EnterpriseLicense] {
-	return pulumix.Output[map[string]*EnterpriseLicense]{
-		OutputState: i.ToEnterpriseLicenseMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type EnterpriseLicenseOutput struct{ *pulumi.OutputState }
 
 func (EnterpriseLicenseOutput) ElementType() reflect.Type {
@@ -208,15 +189,9 @@ func (o EnterpriseLicenseOutput) ToEnterpriseLicenseOutputWithContext(ctx contex
 	return o
 }
 
-func (o EnterpriseLicenseOutput) ToOutput(ctx context.Context) pulumix.Output[*EnterpriseLicense] {
-	return pulumix.Output[*EnterpriseLicense]{
-		OutputState: o.OutputState,
-	}
-}
-
 // Generated.
-func (o EnterpriseLicenseOutput) Expiry() pulumi.StringOutput {
-	return o.ApplyT(func(v *EnterpriseLicense) pulumi.StringOutput { return v.Expiry }).(pulumi.StringOutput)
+func (o EnterpriseLicenseOutput) Expiry() pulumi.IntOutput {
+	return o.ApplyT(func(v *EnterpriseLicense) pulumi.IntOutput { return v.Expiry }).(pulumi.IntOutput)
 }
 
 // Generated.
@@ -252,12 +227,6 @@ func (o EnterpriseLicenseArrayOutput) ToEnterpriseLicenseArrayOutputWithContext(
 	return o
 }
 
-func (o EnterpriseLicenseArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*EnterpriseLicense] {
-	return pulumix.Output[[]*EnterpriseLicense]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o EnterpriseLicenseArrayOutput) Index(i pulumi.IntInput) EnterpriseLicenseOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *EnterpriseLicense {
 		return vs[0].([]*EnterpriseLicense)[vs[1].(int)]
@@ -276,12 +245,6 @@ func (o EnterpriseLicenseMapOutput) ToEnterpriseLicenseMapOutput() EnterpriseLic
 
 func (o EnterpriseLicenseMapOutput) ToEnterpriseLicenseMapOutputWithContext(ctx context.Context) EnterpriseLicenseMapOutput {
 	return o
-}
-
-func (o EnterpriseLicenseMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*EnterpriseLicense] {
-	return pulumix.Output[map[string]*EnterpriseLicense]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o EnterpriseLicenseMapOutput) MapIndex(k pulumi.StringInput) EnterpriseLicenseOutput {

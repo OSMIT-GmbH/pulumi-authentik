@@ -18,11 +18,12 @@ import (
 	"fmt"
 	"path/filepath"
 
+	"github.com/OSMIT-GmbH/pulumi-authentik/provider/pkg/version"
+	authentikShim "github.com/OSMIT-GmbH/terraform-provider-authentik/shim"
+
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
-	"github.com/OSMIT-GmbH/pulumi-authentik/provider/pkg/version"
-	authentikShim "github.com/OSMIT-GmbH/terraform-provider-authentik/shim"
 )
 
 // all of the token components used below.
@@ -132,9 +133,12 @@ func Provider() tfbridge.ProviderInfo {
 		},
 	}
 
-	// These are new API's that you may opt to use to automatically compute resource tokens,
-	// and apply auto aliasing for full backwards compatibility.
-	// For more information, please reference: https://pkg.go.dev/github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge#ProviderInfo.ComputeTokens
+	// MustComputeTokens maps all resources and datasources from the upstream provider into Pulumi.
+	//
+	// tokens.SingleModule puts every upstream item into your provider's main module.
+	//
+	// You shouldn't need to override anything, but if you do, use the [tfbridge.ProviderInfo.Resources]
+	// and [tfbridge.ProviderInfo.DataSources].
 	prov.MustComputeTokens(tokens.SingleModule("authentik_", mainMod,
 		tokens.MakeStandard(mainPkg)))
 	// prov.MustApplyAutoAliases()

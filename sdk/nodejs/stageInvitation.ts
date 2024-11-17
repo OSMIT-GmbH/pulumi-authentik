@@ -43,7 +43,7 @@ export class StageInvitation extends pulumi.CustomResource {
     }
 
     /**
-     * Defaults to `true`.
+     * Defaults to `false`.
      */
     public readonly continueFlowWithoutInvitation!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
@@ -78,7 +78,7 @@ export class StageInvitation extends pulumi.CustomResource {
  */
 export interface StageInvitationState {
     /**
-     * Defaults to `true`.
+     * Defaults to `false`.
      */
     continueFlowWithoutInvitation?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
@@ -89,7 +89,7 @@ export interface StageInvitationState {
  */
 export interface StageInvitationArgs {
     /**
-     * Defaults to `true`.
+     * Defaults to `false`.
      */
     continueFlowWithoutInvitation?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;

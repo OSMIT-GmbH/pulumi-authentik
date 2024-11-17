@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -231,12 +230,6 @@ func (i *StageEmail) ToStageEmailOutputWithContext(ctx context.Context) StageEma
 	return pulumi.ToOutputWithContext(ctx, i).(StageEmailOutput)
 }
 
-func (i *StageEmail) ToOutput(ctx context.Context) pulumix.Output[*StageEmail] {
-	return pulumix.Output[*StageEmail]{
-		OutputState: i.ToStageEmailOutputWithContext(ctx).OutputState,
-	}
-}
-
 // StageEmailArrayInput is an input type that accepts StageEmailArray and StageEmailArrayOutput values.
 // You can construct a concrete instance of `StageEmailArrayInput` via:
 //
@@ -260,12 +253,6 @@ func (i StageEmailArray) ToStageEmailArrayOutput() StageEmailArrayOutput {
 
 func (i StageEmailArray) ToStageEmailArrayOutputWithContext(ctx context.Context) StageEmailArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageEmailArrayOutput)
-}
-
-func (i StageEmailArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageEmail] {
-	return pulumix.Output[[]*StageEmail]{
-		OutputState: i.ToStageEmailArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // StageEmailMapInput is an input type that accepts StageEmailMap and StageEmailMapOutput values.
@@ -293,12 +280,6 @@ func (i StageEmailMap) ToStageEmailMapOutputWithContext(ctx context.Context) Sta
 	return pulumi.ToOutputWithContext(ctx, i).(StageEmailMapOutput)
 }
 
-func (i StageEmailMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageEmail] {
-	return pulumix.Output[map[string]*StageEmail]{
-		OutputState: i.ToStageEmailMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type StageEmailOutput struct{ *pulumi.OutputState }
 
 func (StageEmailOutput) ElementType() reflect.Type {
@@ -311,12 +292,6 @@ func (o StageEmailOutput) ToStageEmailOutput() StageEmailOutput {
 
 func (o StageEmailOutput) ToStageEmailOutputWithContext(ctx context.Context) StageEmailOutput {
 	return o
-}
-
-func (o StageEmailOutput) ToOutput(ctx context.Context) pulumix.Output[*StageEmail] {
-	return pulumix.Output[*StageEmail]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Defaults to `false`.
@@ -398,12 +373,6 @@ func (o StageEmailArrayOutput) ToStageEmailArrayOutputWithContext(ctx context.Co
 	return o
 }
 
-func (o StageEmailArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageEmail] {
-	return pulumix.Output[[]*StageEmail]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o StageEmailArrayOutput) Index(i pulumi.IntInput) StageEmailOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StageEmail {
 		return vs[0].([]*StageEmail)[vs[1].(int)]
@@ -422,12 +391,6 @@ func (o StageEmailMapOutput) ToStageEmailMapOutput() StageEmailMapOutput {
 
 func (o StageEmailMapOutput) ToStageEmailMapOutputWithContext(ctx context.Context) StageEmailMapOutput {
 	return o
-}
-
-func (o StageEmailMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageEmail] {
-	return pulumix.Output[map[string]*StageEmail]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageEmailMapOutput) MapIndex(k pulumi.StringInput) StageEmailOutput {

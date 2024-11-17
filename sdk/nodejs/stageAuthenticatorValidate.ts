@@ -47,14 +47,15 @@ export class StageAuthenticatorValidate extends pulumi.CustomResource {
 
     public readonly configurationStages!: pulumi.Output<string[] | undefined>;
     public readonly deviceClasses!: pulumi.Output<string[] | undefined>;
-    /**
-     * Defaults to `seconds=0`.
-     */
     public readonly lastAuthThreshold!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
-    public readonly notConfiguredAction!: pulumi.Output<string>;
     /**
-     * Defaults to `preferred`.
+     * Allowed values: - `skip` - `deny` - `configure`
+     */
+    public readonly notConfiguredAction!: pulumi.Output<string>;
+    public readonly webauthnAllowedDeviceTypes!: pulumi.Output<string[] | undefined>;
+    /**
+     * Allowed values: - `required` - `preferred` - `discouraged`
      */
     public readonly webauthnUserVerification!: pulumi.Output<string | undefined>;
 
@@ -76,6 +77,7 @@ export class StageAuthenticatorValidate extends pulumi.CustomResource {
             resourceInputs["lastAuthThreshold"] = state ? state.lastAuthThreshold : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["notConfiguredAction"] = state ? state.notConfiguredAction : undefined;
+            resourceInputs["webauthnAllowedDeviceTypes"] = state ? state.webauthnAllowedDeviceTypes : undefined;
             resourceInputs["webauthnUserVerification"] = state ? state.webauthnUserVerification : undefined;
         } else {
             const args = argsOrState as StageAuthenticatorValidateArgs | undefined;
@@ -87,6 +89,7 @@ export class StageAuthenticatorValidate extends pulumi.CustomResource {
             resourceInputs["lastAuthThreshold"] = args ? args.lastAuthThreshold : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["notConfiguredAction"] = args ? args.notConfiguredAction : undefined;
+            resourceInputs["webauthnAllowedDeviceTypes"] = args ? args.webauthnAllowedDeviceTypes : undefined;
             resourceInputs["webauthnUserVerification"] = args ? args.webauthnUserVerification : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -100,14 +103,15 @@ export class StageAuthenticatorValidate extends pulumi.CustomResource {
 export interface StageAuthenticatorValidateState {
     configurationStages?: pulumi.Input<pulumi.Input<string>[]>;
     deviceClasses?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * Defaults to `seconds=0`.
-     */
     lastAuthThreshold?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
-    notConfiguredAction?: pulumi.Input<string>;
     /**
-     * Defaults to `preferred`.
+     * Allowed values: - `skip` - `deny` - `configure`
+     */
+    notConfiguredAction?: pulumi.Input<string>;
+    webauthnAllowedDeviceTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Allowed values: - `required` - `preferred` - `discouraged`
      */
     webauthnUserVerification?: pulumi.Input<string>;
 }
@@ -118,14 +122,15 @@ export interface StageAuthenticatorValidateState {
 export interface StageAuthenticatorValidateArgs {
     configurationStages?: pulumi.Input<pulumi.Input<string>[]>;
     deviceClasses?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * Defaults to `seconds=0`.
-     */
     lastAuthThreshold?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
-    notConfiguredAction: pulumi.Input<string>;
     /**
-     * Defaults to `preferred`.
+     * Allowed values: - `skip` - `deny` - `configure`
+     */
+    notConfiguredAction: pulumi.Input<string>;
+    webauthnAllowedDeviceTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Allowed values: - `required` - `preferred` - `discouraged`
      */
     webauthnUserVerification?: pulumi.Input<string>;
 }

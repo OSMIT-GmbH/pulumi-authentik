@@ -8,63 +8,21 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			user, err := authentik.LookupPropertyMappingScim(ctx, &authentik.LookupPropertyMappingScimArgs{
-//				Managed: pulumi.StringRef("goauthentik.io/providers/scim/user"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			group, err := authentik.LookupPropertyMappingScim(ctx, &authentik.LookupPropertyMappingScimArgs{
-//				Managed: pulumi.StringRef("goauthentik.io/providers/scim/group"),
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = authentik.NewProviderScim(ctx, "name", &authentik.ProviderScimArgs{
-//				Url:   pulumi.String("http://localhost"),
-//				Token: pulumi.String("foo"),
-//				PropertyMappings: pulumi.StringArray{
-//					*pulumi.String(user.Id),
-//				},
-//				PropertyMappingsGroups: pulumi.StringArray{
-//					*pulumi.String(group.Id),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
 type ProviderScim struct {
 	pulumi.CustomResourceState
 
-	Name                   pulumi.StringOutput      `pulumi:"name"`
-	PropertyMappings       pulumi.StringArrayOutput `pulumi:"propertyMappings"`
-	PropertyMappingsGroups pulumi.StringArrayOutput `pulumi:"propertyMappingsGroups"`
-	Token                  pulumi.StringOutput      `pulumi:"token"`
-	Url                    pulumi.StringOutput      `pulumi:"url"`
+	ExcludeUsersServiceAccount pulumi.BoolPtrOutput     `pulumi:"excludeUsersServiceAccount"`
+	FilterGroup                pulumi.StringPtrOutput   `pulumi:"filterGroup"`
+	Name                       pulumi.StringOutput      `pulumi:"name"`
+	PropertyMappings           pulumi.StringArrayOutput `pulumi:"propertyMappings"`
+	PropertyMappingsGroups     pulumi.StringArrayOutput `pulumi:"propertyMappingsGroups"`
+	Token                      pulumi.StringOutput      `pulumi:"token"`
+	Url                        pulumi.StringOutput      `pulumi:"url"`
 }
 
 // NewProviderScim registers a new resource with the given unique name, arguments, and options.
@@ -110,19 +68,23 @@ func GetProviderScim(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ProviderScim resources.
 type providerScimState struct {
-	Name                   *string  `pulumi:"name"`
-	PropertyMappings       []string `pulumi:"propertyMappings"`
-	PropertyMappingsGroups []string `pulumi:"propertyMappingsGroups"`
-	Token                  *string  `pulumi:"token"`
-	Url                    *string  `pulumi:"url"`
+	ExcludeUsersServiceAccount *bool    `pulumi:"excludeUsersServiceAccount"`
+	FilterGroup                *string  `pulumi:"filterGroup"`
+	Name                       *string  `pulumi:"name"`
+	PropertyMappings           []string `pulumi:"propertyMappings"`
+	PropertyMappingsGroups     []string `pulumi:"propertyMappingsGroups"`
+	Token                      *string  `pulumi:"token"`
+	Url                        *string  `pulumi:"url"`
 }
 
 type ProviderScimState struct {
-	Name                   pulumi.StringPtrInput
-	PropertyMappings       pulumi.StringArrayInput
-	PropertyMappingsGroups pulumi.StringArrayInput
-	Token                  pulumi.StringPtrInput
-	Url                    pulumi.StringPtrInput
+	ExcludeUsersServiceAccount pulumi.BoolPtrInput
+	FilterGroup                pulumi.StringPtrInput
+	Name                       pulumi.StringPtrInput
+	PropertyMappings           pulumi.StringArrayInput
+	PropertyMappingsGroups     pulumi.StringArrayInput
+	Token                      pulumi.StringPtrInput
+	Url                        pulumi.StringPtrInput
 }
 
 func (ProviderScimState) ElementType() reflect.Type {
@@ -130,20 +92,24 @@ func (ProviderScimState) ElementType() reflect.Type {
 }
 
 type providerScimArgs struct {
-	Name                   *string  `pulumi:"name"`
-	PropertyMappings       []string `pulumi:"propertyMappings"`
-	PropertyMappingsGroups []string `pulumi:"propertyMappingsGroups"`
-	Token                  string   `pulumi:"token"`
-	Url                    string   `pulumi:"url"`
+	ExcludeUsersServiceAccount *bool    `pulumi:"excludeUsersServiceAccount"`
+	FilterGroup                *string  `pulumi:"filterGroup"`
+	Name                       *string  `pulumi:"name"`
+	PropertyMappings           []string `pulumi:"propertyMappings"`
+	PropertyMappingsGroups     []string `pulumi:"propertyMappingsGroups"`
+	Token                      string   `pulumi:"token"`
+	Url                        string   `pulumi:"url"`
 }
 
 // The set of arguments for constructing a ProviderScim resource.
 type ProviderScimArgs struct {
-	Name                   pulumi.StringPtrInput
-	PropertyMappings       pulumi.StringArrayInput
-	PropertyMappingsGroups pulumi.StringArrayInput
-	Token                  pulumi.StringInput
-	Url                    pulumi.StringInput
+	ExcludeUsersServiceAccount pulumi.BoolPtrInput
+	FilterGroup                pulumi.StringPtrInput
+	Name                       pulumi.StringPtrInput
+	PropertyMappings           pulumi.StringArrayInput
+	PropertyMappingsGroups     pulumi.StringArrayInput
+	Token                      pulumi.StringInput
+	Url                        pulumi.StringInput
 }
 
 func (ProviderScimArgs) ElementType() reflect.Type {
@@ -167,12 +133,6 @@ func (i *ProviderScim) ToProviderScimOutput() ProviderScimOutput {
 
 func (i *ProviderScim) ToProviderScimOutputWithContext(ctx context.Context) ProviderScimOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderScimOutput)
-}
-
-func (i *ProviderScim) ToOutput(ctx context.Context) pulumix.Output[*ProviderScim] {
-	return pulumix.Output[*ProviderScim]{
-		OutputState: i.ToProviderScimOutputWithContext(ctx).OutputState,
-	}
 }
 
 // ProviderScimArrayInput is an input type that accepts ProviderScimArray and ProviderScimArrayOutput values.
@@ -200,12 +160,6 @@ func (i ProviderScimArray) ToProviderScimArrayOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderScimArrayOutput)
 }
 
-func (i ProviderScimArray) ToOutput(ctx context.Context) pulumix.Output[[]*ProviderScim] {
-	return pulumix.Output[[]*ProviderScim]{
-		OutputState: i.ToProviderScimArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 // ProviderScimMapInput is an input type that accepts ProviderScimMap and ProviderScimMapOutput values.
 // You can construct a concrete instance of `ProviderScimMapInput` via:
 //
@@ -231,12 +185,6 @@ func (i ProviderScimMap) ToProviderScimMapOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderScimMapOutput)
 }
 
-func (i ProviderScimMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProviderScim] {
-	return pulumix.Output[map[string]*ProviderScim]{
-		OutputState: i.ToProviderScimMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ProviderScimOutput struct{ *pulumi.OutputState }
 
 func (ProviderScimOutput) ElementType() reflect.Type {
@@ -251,10 +199,12 @@ func (o ProviderScimOutput) ToProviderScimOutputWithContext(ctx context.Context)
 	return o
 }
 
-func (o ProviderScimOutput) ToOutput(ctx context.Context) pulumix.Output[*ProviderScim] {
-	return pulumix.Output[*ProviderScim]{
-		OutputState: o.OutputState,
-	}
+func (o ProviderScimOutput) ExcludeUsersServiceAccount() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ProviderScim) pulumi.BoolPtrOutput { return v.ExcludeUsersServiceAccount }).(pulumi.BoolPtrOutput)
+}
+
+func (o ProviderScimOutput) FilterGroup() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ProviderScim) pulumi.StringPtrOutput { return v.FilterGroup }).(pulumi.StringPtrOutput)
 }
 
 func (o ProviderScimOutput) Name() pulumi.StringOutput {
@@ -291,12 +241,6 @@ func (o ProviderScimArrayOutput) ToProviderScimArrayOutputWithContext(ctx contex
 	return o
 }
 
-func (o ProviderScimArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ProviderScim] {
-	return pulumix.Output[[]*ProviderScim]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o ProviderScimArrayOutput) Index(i pulumi.IntInput) ProviderScimOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ProviderScim {
 		return vs[0].([]*ProviderScim)[vs[1].(int)]
@@ -315,12 +259,6 @@ func (o ProviderScimMapOutput) ToProviderScimMapOutput() ProviderScimMapOutput {
 
 func (o ProviderScimMapOutput) ToProviderScimMapOutputWithContext(ctx context.Context) ProviderScimMapOutput {
 	return o
-}
-
-func (o ProviderScimMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProviderScim] {
-	return pulumix.Output[map[string]*ProviderScim]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ProviderScimMapOutput) MapIndex(k pulumi.StringInput) ProviderScimOutput {

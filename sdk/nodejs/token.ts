@@ -4,6 +4,23 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
+/**
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ *
+ * // Create a token for a user
+ * const name = new authentik.User("name", {username: "user"});
+ * const _default = new authentik.Token("default", {
+ *     identifier: "my-token",
+ *     user: name.id,
+ *     description: "My secret token",
+ *     expires: "2025-01-01T15:04:05Z",
+ * });
+ * ```
+ */
 export class Token extends pulumi.CustomResource {
     /**
      * Get an existing Token resource's state with the given name, ID, and optional extra
@@ -34,26 +51,14 @@ export class Token extends pulumi.CustomResource {
 
     public readonly description!: pulumi.Output<string | undefined>;
     public readonly expires!: pulumi.Output<string | undefined>;
-    /**
-     * Generated.
-     */
     public /*out*/ readonly expiresIn!: pulumi.Output<number>;
-    /**
-     * Defaults to `true`.
-     */
     public readonly expiring!: pulumi.Output<boolean | undefined>;
     public readonly identifier!: pulumi.Output<string>;
     /**
-     * Defaults to `api`.
+     * Allowed values: - `verification` - `api` - `recovery` - `appPassword`
      */
     public readonly intent!: pulumi.Output<string | undefined>;
-    /**
-     * Generated.
-     */
     public /*out*/ readonly key!: pulumi.Output<string>;
-    /**
-     * Defaults to `false`.
-     */
     public readonly retrieveKey!: pulumi.Output<boolean | undefined>;
     public readonly user!: pulumi.Output<number>;
 
@@ -110,26 +115,14 @@ export class Token extends pulumi.CustomResource {
 export interface TokenState {
     description?: pulumi.Input<string>;
     expires?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     expiresIn?: pulumi.Input<number>;
-    /**
-     * Defaults to `true`.
-     */
     expiring?: pulumi.Input<boolean>;
     identifier?: pulumi.Input<string>;
     /**
-     * Defaults to `api`.
+     * Allowed values: - `verification` - `api` - `recovery` - `appPassword`
      */
     intent?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     key?: pulumi.Input<string>;
-    /**
-     * Defaults to `false`.
-     */
     retrieveKey?: pulumi.Input<boolean>;
     user?: pulumi.Input<number>;
 }
@@ -140,18 +133,12 @@ export interface TokenState {
 export interface TokenArgs {
     description?: pulumi.Input<string>;
     expires?: pulumi.Input<string>;
-    /**
-     * Defaults to `true`.
-     */
     expiring?: pulumi.Input<boolean>;
     identifier: pulumi.Input<string>;
     /**
-     * Defaults to `api`.
+     * Allowed values: - `verification` - `api` - `recovery` - `appPassword`
      */
     intent?: pulumi.Input<string>;
-    /**
-     * Defaults to `false`.
-     */
     retrieveKey?: pulumi.Input<boolean>;
     user: pulumi.Input<number>;
 }

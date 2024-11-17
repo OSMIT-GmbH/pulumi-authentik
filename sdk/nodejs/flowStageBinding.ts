@@ -53,22 +53,16 @@ export class FlowStageBinding extends pulumi.CustomResource {
         return obj['__pulumiType'] === FlowStageBinding.__pulumiType;
     }
 
-    /**
-     * Defaults to `true`.
-     */
     public readonly evaluateOnPlan!: pulumi.Output<boolean | undefined>;
     /**
-     * Defaults to `retry`.
+     * Allowed values: - `retry` - `restart` - `restartWithContext`
      */
     public readonly invalidResponseAction!: pulumi.Output<string | undefined>;
     public readonly order!: pulumi.Output<number>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     public readonly policyEngineMode!: pulumi.Output<string | undefined>;
-    /**
-     * Defaults to `false`.
-     */
     public readonly reEvaluatePolicies!: pulumi.Output<boolean | undefined>;
     public readonly stage!: pulumi.Output<string>;
     public readonly target!: pulumi.Output<string>;
@@ -121,22 +115,16 @@ export class FlowStageBinding extends pulumi.CustomResource {
  * Input properties used for looking up and filtering FlowStageBinding resources.
  */
 export interface FlowStageBindingState {
-    /**
-     * Defaults to `true`.
-     */
     evaluateOnPlan?: pulumi.Input<boolean>;
     /**
-     * Defaults to `retry`.
+     * Allowed values: - `retry` - `restart` - `restartWithContext`
      */
     invalidResponseAction?: pulumi.Input<string>;
     order?: pulumi.Input<number>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     policyEngineMode?: pulumi.Input<string>;
-    /**
-     * Defaults to `false`.
-     */
     reEvaluatePolicies?: pulumi.Input<boolean>;
     stage?: pulumi.Input<string>;
     target?: pulumi.Input<string>;
@@ -146,22 +134,16 @@ export interface FlowStageBindingState {
  * The set of arguments for constructing a FlowStageBinding resource.
  */
 export interface FlowStageBindingArgs {
-    /**
-     * Defaults to `true`.
-     */
     evaluateOnPlan?: pulumi.Input<boolean>;
     /**
-     * Defaults to `retry`.
+     * Allowed values: - `retry` - `restart` - `restartWithContext`
      */
     invalidResponseAction?: pulumi.Input<string>;
     order: pulumi.Input<number>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     policyEngineMode?: pulumi.Input<string>;
-    /**
-     * Defaults to `false`.
-     */
     reEvaluatePolicies?: pulumi.Input<boolean>;
     stage: pulumi.Input<string>;
     target: pulumi.Input<string>;

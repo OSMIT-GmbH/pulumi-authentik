@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -154,12 +153,6 @@ func (i *PolicyDummy) ToPolicyDummyOutputWithContext(ctx context.Context) Policy
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyDummyOutput)
 }
 
-func (i *PolicyDummy) ToOutput(ctx context.Context) pulumix.Output[*PolicyDummy] {
-	return pulumix.Output[*PolicyDummy]{
-		OutputState: i.ToPolicyDummyOutputWithContext(ctx).OutputState,
-	}
-}
-
 // PolicyDummyArrayInput is an input type that accepts PolicyDummyArray and PolicyDummyArrayOutput values.
 // You can construct a concrete instance of `PolicyDummyArrayInput` via:
 //
@@ -183,12 +176,6 @@ func (i PolicyDummyArray) ToPolicyDummyArrayOutput() PolicyDummyArrayOutput {
 
 func (i PolicyDummyArray) ToPolicyDummyArrayOutputWithContext(ctx context.Context) PolicyDummyArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyDummyArrayOutput)
-}
-
-func (i PolicyDummyArray) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyDummy] {
-	return pulumix.Output[[]*PolicyDummy]{
-		OutputState: i.ToPolicyDummyArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // PolicyDummyMapInput is an input type that accepts PolicyDummyMap and PolicyDummyMapOutput values.
@@ -216,12 +203,6 @@ func (i PolicyDummyMap) ToPolicyDummyMapOutputWithContext(ctx context.Context) P
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyDummyMapOutput)
 }
 
-func (i PolicyDummyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyDummy] {
-	return pulumix.Output[map[string]*PolicyDummy]{
-		OutputState: i.ToPolicyDummyMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type PolicyDummyOutput struct{ *pulumi.OutputState }
 
 func (PolicyDummyOutput) ElementType() reflect.Type {
@@ -234,12 +215,6 @@ func (o PolicyDummyOutput) ToPolicyDummyOutput() PolicyDummyOutput {
 
 func (o PolicyDummyOutput) ToPolicyDummyOutputWithContext(ctx context.Context) PolicyDummyOutput {
 	return o
-}
-
-func (o PolicyDummyOutput) ToOutput(ctx context.Context) pulumix.Output[*PolicyDummy] {
-	return pulumix.Output[*PolicyDummy]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Defaults to `false`.
@@ -280,12 +255,6 @@ func (o PolicyDummyArrayOutput) ToPolicyDummyArrayOutputWithContext(ctx context.
 	return o
 }
 
-func (o PolicyDummyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyDummy] {
-	return pulumix.Output[[]*PolicyDummy]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o PolicyDummyArrayOutput) Index(i pulumi.IntInput) PolicyDummyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PolicyDummy {
 		return vs[0].([]*PolicyDummy)[vs[1].(int)]
@@ -304,12 +273,6 @@ func (o PolicyDummyMapOutput) ToPolicyDummyMapOutput() PolicyDummyMapOutput {
 
 func (o PolicyDummyMapOutput) ToPolicyDummyMapOutputWithContext(ctx context.Context) PolicyDummyMapOutput {
 	return o
-}
-
-func (o PolicyDummyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyDummy] {
-	return pulumix.Output[map[string]*PolicyDummy]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o PolicyDummyMapOutput) MapIndex(k pulumi.StringInput) PolicyDummyOutput {

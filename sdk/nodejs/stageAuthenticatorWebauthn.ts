@@ -10,8 +10,15 @@ import * as utilities from "./utilities";
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
+ * import * as authentik from "@pulumi/authentik";
  *
- * const name = new authentik.StageAuthenticatorWebauthn("name", {});
+ * // Create a WebAuthn setup stage
+ * const nameStageAuthenticatorWebauthn = new authentik.StageAuthenticatorWebauthn("nameStageAuthenticatorWebauthn", {});
+ * // Create a WebAuthn setup which allows limited WebAuthn device types
+ * const yubikey = authentik.getWebauthnDeviceType({
+ *     description: "YubiKey 5C",
+ * });
+ * const nameIndex_stageAuthenticatorWebauthnStageAuthenticatorWebauthn = new authentik.StageAuthenticatorWebauthn("nameIndex/stageAuthenticatorWebauthnStageAuthenticatorWebauthn", {deviceTypeRestrictions: [yubikey.then(yubikey => yubikey.aaguid)]});
  * ```
  */
 export class StageAuthenticatorWebauthn extends pulumi.CustomResource {
@@ -42,16 +49,20 @@ export class StageAuthenticatorWebauthn extends pulumi.CustomResource {
         return obj['__pulumiType'] === StageAuthenticatorWebauthn.__pulumiType;
     }
 
+    /**
+     * Allowed values: - `platform` - `cross-platform`
+     */
     public readonly authenticatorAttachment!: pulumi.Output<string | undefined>;
     public readonly configureFlow!: pulumi.Output<string | undefined>;
+    public readonly deviceTypeRestrictions!: pulumi.Output<string[] | undefined>;
     public readonly friendlyName!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     /**
-     * Defaults to `preferred`.
+     * Allowed values: - `discouraged` - `preferred` - `required`
      */
     public readonly residentKeyRequirement!: pulumi.Output<string | undefined>;
     /**
-     * Defaults to `preferred`.
+     * Allowed values: - `required` - `preferred` - `discouraged`
      */
     public readonly userVerification!: pulumi.Output<string | undefined>;
 
@@ -70,6 +81,7 @@ export class StageAuthenticatorWebauthn extends pulumi.CustomResource {
             const state = argsOrState as StageAuthenticatorWebauthnState | undefined;
             resourceInputs["authenticatorAttachment"] = state ? state.authenticatorAttachment : undefined;
             resourceInputs["configureFlow"] = state ? state.configureFlow : undefined;
+            resourceInputs["deviceTypeRestrictions"] = state ? state.deviceTypeRestrictions : undefined;
             resourceInputs["friendlyName"] = state ? state.friendlyName : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["residentKeyRequirement"] = state ? state.residentKeyRequirement : undefined;
@@ -78,6 +90,7 @@ export class StageAuthenticatorWebauthn extends pulumi.CustomResource {
             const args = argsOrState as StageAuthenticatorWebauthnArgs | undefined;
             resourceInputs["authenticatorAttachment"] = args ? args.authenticatorAttachment : undefined;
             resourceInputs["configureFlow"] = args ? args.configureFlow : undefined;
+            resourceInputs["deviceTypeRestrictions"] = args ? args.deviceTypeRestrictions : undefined;
             resourceInputs["friendlyName"] = args ? args.friendlyName : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["residentKeyRequirement"] = args ? args.residentKeyRequirement : undefined;
@@ -92,16 +105,20 @@ export class StageAuthenticatorWebauthn extends pulumi.CustomResource {
  * Input properties used for looking up and filtering StageAuthenticatorWebauthn resources.
  */
 export interface StageAuthenticatorWebauthnState {
+    /**
+     * Allowed values: - `platform` - `cross-platform`
+     */
     authenticatorAttachment?: pulumi.Input<string>;
     configureFlow?: pulumi.Input<string>;
+    deviceTypeRestrictions?: pulumi.Input<pulumi.Input<string>[]>;
     friendlyName?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     /**
-     * Defaults to `preferred`.
+     * Allowed values: - `discouraged` - `preferred` - `required`
      */
     residentKeyRequirement?: pulumi.Input<string>;
     /**
-     * Defaults to `preferred`.
+     * Allowed values: - `required` - `preferred` - `discouraged`
      */
     userVerification?: pulumi.Input<string>;
 }
@@ -110,16 +127,20 @@ export interface StageAuthenticatorWebauthnState {
  * The set of arguments for constructing a StageAuthenticatorWebauthn resource.
  */
 export interface StageAuthenticatorWebauthnArgs {
+    /**
+     * Allowed values: - `platform` - `cross-platform`
+     */
     authenticatorAttachment?: pulumi.Input<string>;
     configureFlow?: pulumi.Input<string>;
+    deviceTypeRestrictions?: pulumi.Input<pulumi.Input<string>[]>;
     friendlyName?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     /**
-     * Defaults to `preferred`.
+     * Allowed values: - `discouraged` - `preferred` - `required`
      */
     residentKeyRequirement?: pulumi.Input<string>;
     /**
-     * Defaults to `preferred`.
+     * Allowed values: - `required` - `preferred` - `discouraged`
      */
     userVerification?: pulumi.Input<string>;
 }

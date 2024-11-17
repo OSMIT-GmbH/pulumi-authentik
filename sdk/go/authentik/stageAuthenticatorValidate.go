@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -46,11 +45,12 @@ type StageAuthenticatorValidate struct {
 
 	ConfigurationStages pulumi.StringArrayOutput `pulumi:"configurationStages"`
 	DeviceClasses       pulumi.StringArrayOutput `pulumi:"deviceClasses"`
-	// Defaults to `seconds=0`.
-	LastAuthThreshold   pulumi.StringPtrOutput `pulumi:"lastAuthThreshold"`
-	Name                pulumi.StringOutput    `pulumi:"name"`
-	NotConfiguredAction pulumi.StringOutput    `pulumi:"notConfiguredAction"`
-	// Defaults to `preferred`.
+	LastAuthThreshold   pulumi.StringPtrOutput   `pulumi:"lastAuthThreshold"`
+	Name                pulumi.StringOutput      `pulumi:"name"`
+	// Allowed values: - `skip` - `deny` - `configure`
+	NotConfiguredAction        pulumi.StringOutput      `pulumi:"notConfiguredAction"`
+	WebauthnAllowedDeviceTypes pulumi.StringArrayOutput `pulumi:"webauthnAllowedDeviceTypes"`
+	// Allowed values: - `required` - `preferred` - `discouraged`
 	WebauthnUserVerification pulumi.StringPtrOutput `pulumi:"webauthnUserVerification"`
 }
 
@@ -89,22 +89,24 @@ func GetStageAuthenticatorValidate(ctx *pulumi.Context,
 type stageAuthenticatorValidateState struct {
 	ConfigurationStages []string `pulumi:"configurationStages"`
 	DeviceClasses       []string `pulumi:"deviceClasses"`
-	// Defaults to `seconds=0`.
-	LastAuthThreshold   *string `pulumi:"lastAuthThreshold"`
-	Name                *string `pulumi:"name"`
-	NotConfiguredAction *string `pulumi:"notConfiguredAction"`
-	// Defaults to `preferred`.
+	LastAuthThreshold   *string  `pulumi:"lastAuthThreshold"`
+	Name                *string  `pulumi:"name"`
+	// Allowed values: - `skip` - `deny` - `configure`
+	NotConfiguredAction        *string  `pulumi:"notConfiguredAction"`
+	WebauthnAllowedDeviceTypes []string `pulumi:"webauthnAllowedDeviceTypes"`
+	// Allowed values: - `required` - `preferred` - `discouraged`
 	WebauthnUserVerification *string `pulumi:"webauthnUserVerification"`
 }
 
 type StageAuthenticatorValidateState struct {
 	ConfigurationStages pulumi.StringArrayInput
 	DeviceClasses       pulumi.StringArrayInput
-	// Defaults to `seconds=0`.
 	LastAuthThreshold   pulumi.StringPtrInput
 	Name                pulumi.StringPtrInput
-	NotConfiguredAction pulumi.StringPtrInput
-	// Defaults to `preferred`.
+	// Allowed values: - `skip` - `deny` - `configure`
+	NotConfiguredAction        pulumi.StringPtrInput
+	WebauthnAllowedDeviceTypes pulumi.StringArrayInput
+	// Allowed values: - `required` - `preferred` - `discouraged`
 	WebauthnUserVerification pulumi.StringPtrInput
 }
 
@@ -115,11 +117,12 @@ func (StageAuthenticatorValidateState) ElementType() reflect.Type {
 type stageAuthenticatorValidateArgs struct {
 	ConfigurationStages []string `pulumi:"configurationStages"`
 	DeviceClasses       []string `pulumi:"deviceClasses"`
-	// Defaults to `seconds=0`.
-	LastAuthThreshold   *string `pulumi:"lastAuthThreshold"`
-	Name                *string `pulumi:"name"`
-	NotConfiguredAction string  `pulumi:"notConfiguredAction"`
-	// Defaults to `preferred`.
+	LastAuthThreshold   *string  `pulumi:"lastAuthThreshold"`
+	Name                *string  `pulumi:"name"`
+	// Allowed values: - `skip` - `deny` - `configure`
+	NotConfiguredAction        string   `pulumi:"notConfiguredAction"`
+	WebauthnAllowedDeviceTypes []string `pulumi:"webauthnAllowedDeviceTypes"`
+	// Allowed values: - `required` - `preferred` - `discouraged`
 	WebauthnUserVerification *string `pulumi:"webauthnUserVerification"`
 }
 
@@ -127,11 +130,12 @@ type stageAuthenticatorValidateArgs struct {
 type StageAuthenticatorValidateArgs struct {
 	ConfigurationStages pulumi.StringArrayInput
 	DeviceClasses       pulumi.StringArrayInput
-	// Defaults to `seconds=0`.
 	LastAuthThreshold   pulumi.StringPtrInput
 	Name                pulumi.StringPtrInput
-	NotConfiguredAction pulumi.StringInput
-	// Defaults to `preferred`.
+	// Allowed values: - `skip` - `deny` - `configure`
+	NotConfiguredAction        pulumi.StringInput
+	WebauthnAllowedDeviceTypes pulumi.StringArrayInput
+	// Allowed values: - `required` - `preferred` - `discouraged`
 	WebauthnUserVerification pulumi.StringPtrInput
 }
 
@@ -156,12 +160,6 @@ func (i *StageAuthenticatorValidate) ToStageAuthenticatorValidateOutput() StageA
 
 func (i *StageAuthenticatorValidate) ToStageAuthenticatorValidateOutputWithContext(ctx context.Context) StageAuthenticatorValidateOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorValidateOutput)
-}
-
-func (i *StageAuthenticatorValidate) ToOutput(ctx context.Context) pulumix.Output[*StageAuthenticatorValidate] {
-	return pulumix.Output[*StageAuthenticatorValidate]{
-		OutputState: i.ToStageAuthenticatorValidateOutputWithContext(ctx).OutputState,
-	}
 }
 
 // StageAuthenticatorValidateArrayInput is an input type that accepts StageAuthenticatorValidateArray and StageAuthenticatorValidateArrayOutput values.
@@ -189,12 +187,6 @@ func (i StageAuthenticatorValidateArray) ToStageAuthenticatorValidateArrayOutput
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorValidateArrayOutput)
 }
 
-func (i StageAuthenticatorValidateArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageAuthenticatorValidate] {
-	return pulumix.Output[[]*StageAuthenticatorValidate]{
-		OutputState: i.ToStageAuthenticatorValidateArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 // StageAuthenticatorValidateMapInput is an input type that accepts StageAuthenticatorValidateMap and StageAuthenticatorValidateMapOutput values.
 // You can construct a concrete instance of `StageAuthenticatorValidateMapInput` via:
 //
@@ -220,12 +212,6 @@ func (i StageAuthenticatorValidateMap) ToStageAuthenticatorValidateMapOutputWith
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorValidateMapOutput)
 }
 
-func (i StageAuthenticatorValidateMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageAuthenticatorValidate] {
-	return pulumix.Output[map[string]*StageAuthenticatorValidate]{
-		OutputState: i.ToStageAuthenticatorValidateMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type StageAuthenticatorValidateOutput struct{ *pulumi.OutputState }
 
 func (StageAuthenticatorValidateOutput) ElementType() reflect.Type {
@@ -240,12 +226,6 @@ func (o StageAuthenticatorValidateOutput) ToStageAuthenticatorValidateOutputWith
 	return o
 }
 
-func (o StageAuthenticatorValidateOutput) ToOutput(ctx context.Context) pulumix.Output[*StageAuthenticatorValidate] {
-	return pulumix.Output[*StageAuthenticatorValidate]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o StageAuthenticatorValidateOutput) ConfigurationStages() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *StageAuthenticatorValidate) pulumi.StringArrayOutput { return v.ConfigurationStages }).(pulumi.StringArrayOutput)
 }
@@ -254,7 +234,6 @@ func (o StageAuthenticatorValidateOutput) DeviceClasses() pulumi.StringArrayOutp
 	return o.ApplyT(func(v *StageAuthenticatorValidate) pulumi.StringArrayOutput { return v.DeviceClasses }).(pulumi.StringArrayOutput)
 }
 
-// Defaults to `seconds=0`.
 func (o StageAuthenticatorValidateOutput) LastAuthThreshold() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageAuthenticatorValidate) pulumi.StringPtrOutput { return v.LastAuthThreshold }).(pulumi.StringPtrOutput)
 }
@@ -263,11 +242,16 @@ func (o StageAuthenticatorValidateOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *StageAuthenticatorValidate) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// Allowed values: - `skip` - `deny` - `configure`
 func (o StageAuthenticatorValidateOutput) NotConfiguredAction() pulumi.StringOutput {
 	return o.ApplyT(func(v *StageAuthenticatorValidate) pulumi.StringOutput { return v.NotConfiguredAction }).(pulumi.StringOutput)
 }
 
-// Defaults to `preferred`.
+func (o StageAuthenticatorValidateOutput) WebauthnAllowedDeviceTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *StageAuthenticatorValidate) pulumi.StringArrayOutput { return v.WebauthnAllowedDeviceTypes }).(pulumi.StringArrayOutput)
+}
+
+// Allowed values: - `required` - `preferred` - `discouraged`
 func (o StageAuthenticatorValidateOutput) WebauthnUserVerification() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageAuthenticatorValidate) pulumi.StringPtrOutput { return v.WebauthnUserVerification }).(pulumi.StringPtrOutput)
 }
@@ -284,12 +268,6 @@ func (o StageAuthenticatorValidateArrayOutput) ToStageAuthenticatorValidateArray
 
 func (o StageAuthenticatorValidateArrayOutput) ToStageAuthenticatorValidateArrayOutputWithContext(ctx context.Context) StageAuthenticatorValidateArrayOutput {
 	return o
-}
-
-func (o StageAuthenticatorValidateArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageAuthenticatorValidate] {
-	return pulumix.Output[[]*StageAuthenticatorValidate]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageAuthenticatorValidateArrayOutput) Index(i pulumi.IntInput) StageAuthenticatorValidateOutput {
@@ -310,12 +288,6 @@ func (o StageAuthenticatorValidateMapOutput) ToStageAuthenticatorValidateMapOutp
 
 func (o StageAuthenticatorValidateMapOutput) ToStageAuthenticatorValidateMapOutputWithContext(ctx context.Context) StageAuthenticatorValidateMapOutput {
 	return o
-}
-
-func (o StageAuthenticatorValidateMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageAuthenticatorValidate] {
-	return pulumix.Output[map[string]*StageAuthenticatorValidate]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageAuthenticatorValidateMapOutput) MapIndex(k pulumi.StringInput) StageAuthenticatorValidateOutput {

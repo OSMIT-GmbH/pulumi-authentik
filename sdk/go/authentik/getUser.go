@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Get users by pk or username
@@ -21,7 +20,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -87,18 +86,26 @@ type LookupUserResult struct {
 	Uid string `pulumi:"uid"`
 	// Generated.
 	Username string `pulumi:"username"`
+	// Generated.
+	Uuid string `pulumi:"uuid"`
 }
 
 func LookupUserOutput(ctx *pulumi.Context, args LookupUserOutputArgs, opts ...pulumi.InvokeOption) LookupUserResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupUserResult, error) {
+		ApplyT(func(v interface{}) (LookupUserResultOutput, error) {
 			args := v.(LookupUserArgs)
-			r, err := LookupUser(ctx, &args, opts...)
-			var s LookupUserResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv LookupUserResult
+			secret, err := ctx.InvokePackageRaw("authentik:index/getUser:getUser", args, &rv, "", opts...)
+			if err != nil {
+				return LookupUserResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(LookupUserResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(LookupUserResultOutput), nil
+			}
+			return output, nil
 		}).(LookupUserResultOutput)
 }
 
@@ -127,12 +134,6 @@ func (o LookupUserResultOutput) ToLookupUserResultOutput() LookupUserResultOutpu
 
 func (o LookupUserResultOutput) ToLookupUserResultOutputWithContext(ctx context.Context) LookupUserResultOutput {
 	return o
-}
-
-func (o LookupUserResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupUserResult] {
-	return pulumix.Output[LookupUserResult]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Generated.
@@ -203,6 +204,11 @@ func (o LookupUserResultOutput) Uid() pulumi.StringOutput {
 // Generated.
 func (o LookupUserResultOutput) Username() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupUserResult) string { return v.Username }).(pulumi.StringOutput)
+}
+
+// Generated.
+func (o LookupUserResultOutput) Uuid() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupUserResult) string { return v.Uuid }).(pulumi.StringOutput)
 }
 
 func init() {

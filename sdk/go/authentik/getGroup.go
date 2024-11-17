@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Get groups by pk or name
@@ -21,7 +20,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -51,8 +50,9 @@ func LookupGroup(ctx *pulumi.Context, args *LookupGroupArgs, opts ...pulumi.Invo
 
 // A collection of arguments for invoking getGroup.
 type LookupGroupArgs struct {
-	Name *string `pulumi:"name"`
-	Pk   *string `pulumi:"pk"`
+	IncludeUsers *bool   `pulumi:"includeUsers"`
+	Name         *string `pulumi:"name"`
+	Pk           *string `pulumi:"pk"`
 }
 
 // A collection of values returned by getGroup.
@@ -60,7 +60,8 @@ type LookupGroupResult struct {
 	// Generated.
 	Attributes string `pulumi:"attributes"`
 	// The provider-assigned unique ID for this managed resource.
-	Id string `pulumi:"id"`
+	Id           string `pulumi:"id"`
+	IncludeUsers *bool  `pulumi:"includeUsers"`
 	// Generated.
 	IsSuperuser bool    `pulumi:"isSuperuser"`
 	Name        *string `pulumi:"name"`
@@ -79,21 +80,28 @@ type LookupGroupResult struct {
 
 func LookupGroupOutput(ctx *pulumi.Context, args LookupGroupOutputArgs, opts ...pulumi.InvokeOption) LookupGroupResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupGroupResult, error) {
+		ApplyT(func(v interface{}) (LookupGroupResultOutput, error) {
 			args := v.(LookupGroupArgs)
-			r, err := LookupGroup(ctx, &args, opts...)
-			var s LookupGroupResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv LookupGroupResult
+			secret, err := ctx.InvokePackageRaw("authentik:index/getGroup:getGroup", args, &rv, "", opts...)
+			if err != nil {
+				return LookupGroupResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(LookupGroupResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(LookupGroupResultOutput), nil
+			}
+			return output, nil
 		}).(LookupGroupResultOutput)
 }
 
 // A collection of arguments for invoking getGroup.
 type LookupGroupOutputArgs struct {
-	Name pulumi.StringPtrInput `pulumi:"name"`
-	Pk   pulumi.StringPtrInput `pulumi:"pk"`
+	IncludeUsers pulumi.BoolPtrInput   `pulumi:"includeUsers"`
+	Name         pulumi.StringPtrInput `pulumi:"name"`
+	Pk           pulumi.StringPtrInput `pulumi:"pk"`
 }
 
 func (LookupGroupOutputArgs) ElementType() reflect.Type {
@@ -115,12 +123,6 @@ func (o LookupGroupResultOutput) ToLookupGroupResultOutputWithContext(ctx contex
 	return o
 }
 
-func (o LookupGroupResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupGroupResult] {
-	return pulumix.Output[LookupGroupResult]{
-		OutputState: o.OutputState,
-	}
-}
-
 // Generated.
 func (o LookupGroupResultOutput) Attributes() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupGroupResult) string { return v.Attributes }).(pulumi.StringOutput)
@@ -129,6 +131,10 @@ func (o LookupGroupResultOutput) Attributes() pulumi.StringOutput {
 // The provider-assigned unique ID for this managed resource.
 func (o LookupGroupResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupGroupResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+func (o LookupGroupResultOutput) IncludeUsers() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v LookupGroupResult) *bool { return v.IncludeUsers }).(pulumi.BoolPtrOutput)
 }
 
 // Generated.

@@ -20,7 +20,6 @@ import * as utilities from "./utilities";
  */
 export function getSource(args?: GetSourceArgs, opts?: pulumi.InvokeOptions): Promise<GetSourceResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("authentik:index/getSource:getSource", {
         "managed": args.managed,
@@ -82,7 +81,12 @@ export interface GetSourceResult {
  * ```
  */
 export function getSourceOutput(args?: GetSourceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSourceResult> {
-    return pulumi.output(args).apply((a: any) => getSource(a, opts))
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("authentik:index/getSource:getSource", {
+        "managed": args.managed,
+        "slug": args.slug,
+    }, opts);
 }
 
 /**

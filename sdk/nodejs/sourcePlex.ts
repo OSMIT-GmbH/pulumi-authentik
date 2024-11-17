@@ -52,36 +52,28 @@ export class SourcePlex extends pulumi.CustomResource {
         return obj['__pulumiType'] === SourcePlex.__pulumiType;
     }
 
-    /**
-     * Defaults to `true`.
-     */
     public readonly allowFriends!: pulumi.Output<boolean | undefined>;
     public readonly allowedServers!: pulumi.Output<string[] | undefined>;
-    public readonly authenticationFlow!: pulumi.Output<string>;
+    public readonly authenticationFlow!: pulumi.Output<string | undefined>;
     public readonly clientId!: pulumi.Output<string>;
-    /**
-     * Defaults to `true`.
-     */
     public readonly enabled!: pulumi.Output<boolean | undefined>;
-    public readonly enrollmentFlow!: pulumi.Output<string>;
+    public readonly enrollmentFlow!: pulumi.Output<string | undefined>;
+    /**
+     * Allowed values: - `identifier` - `nameLink` - `nameDeny`
+     */
+    public readonly groupMatchingMode!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly plexToken!: pulumi.Output<string>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     public readonly policyEngineMode!: pulumi.Output<string | undefined>;
     public readonly slug!: pulumi.Output<string>;
     /**
-     * Defaults to `identifier`.
+     * Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
      */
     public readonly userMatchingMode!: pulumi.Output<string | undefined>;
-    /**
-     * Defaults to `goauthentik.io/sources/%(slug)s`.
-     */
     public readonly userPathTemplate!: pulumi.Output<string | undefined>;
-    /**
-     * Generated.
-     */
     public readonly uuid!: pulumi.Output<string>;
 
     /**
@@ -103,6 +95,7 @@ export class SourcePlex extends pulumi.CustomResource {
             resourceInputs["clientId"] = state ? state.clientId : undefined;
             resourceInputs["enabled"] = state ? state.enabled : undefined;
             resourceInputs["enrollmentFlow"] = state ? state.enrollmentFlow : undefined;
+            resourceInputs["groupMatchingMode"] = state ? state.groupMatchingMode : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["plexToken"] = state ? state.plexToken : undefined;
             resourceInputs["policyEngineMode"] = state ? state.policyEngineMode : undefined;
@@ -112,14 +105,8 @@ export class SourcePlex extends pulumi.CustomResource {
             resourceInputs["uuid"] = state ? state.uuid : undefined;
         } else {
             const args = argsOrState as SourcePlexArgs | undefined;
-            if ((!args || args.authenticationFlow === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'authenticationFlow'");
-            }
             if ((!args || args.clientId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'clientId'");
-            }
-            if ((!args || args.enrollmentFlow === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'enrollmentFlow'");
             }
             if ((!args || args.plexToken === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'plexToken'");
@@ -133,6 +120,7 @@ export class SourcePlex extends pulumi.CustomResource {
             resourceInputs["clientId"] = args ? args.clientId : undefined;
             resourceInputs["enabled"] = args ? args.enabled : undefined;
             resourceInputs["enrollmentFlow"] = args ? args.enrollmentFlow : undefined;
+            resourceInputs["groupMatchingMode"] = args ? args.groupMatchingMode : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["plexToken"] = args?.plexToken ? pulumi.secret(args.plexToken) : undefined;
             resourceInputs["policyEngineMode"] = args ? args.policyEngineMode : undefined;
@@ -152,36 +140,28 @@ export class SourcePlex extends pulumi.CustomResource {
  * Input properties used for looking up and filtering SourcePlex resources.
  */
 export interface SourcePlexState {
-    /**
-     * Defaults to `true`.
-     */
     allowFriends?: pulumi.Input<boolean>;
     allowedServers?: pulumi.Input<pulumi.Input<string>[]>;
     authenticationFlow?: pulumi.Input<string>;
     clientId?: pulumi.Input<string>;
-    /**
-     * Defaults to `true`.
-     */
     enabled?: pulumi.Input<boolean>;
     enrollmentFlow?: pulumi.Input<string>;
+    /**
+     * Allowed values: - `identifier` - `nameLink` - `nameDeny`
+     */
+    groupMatchingMode?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     plexToken?: pulumi.Input<string>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     policyEngineMode?: pulumi.Input<string>;
     slug?: pulumi.Input<string>;
     /**
-     * Defaults to `identifier`.
+     * Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
      */
     userMatchingMode?: pulumi.Input<string>;
-    /**
-     * Defaults to `goauthentik.io/sources/%(slug)s`.
-     */
     userPathTemplate?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     uuid?: pulumi.Input<string>;
 }
 
@@ -189,35 +169,27 @@ export interface SourcePlexState {
  * The set of arguments for constructing a SourcePlex resource.
  */
 export interface SourcePlexArgs {
-    /**
-     * Defaults to `true`.
-     */
     allowFriends?: pulumi.Input<boolean>;
     allowedServers?: pulumi.Input<pulumi.Input<string>[]>;
-    authenticationFlow: pulumi.Input<string>;
+    authenticationFlow?: pulumi.Input<string>;
     clientId: pulumi.Input<string>;
-    /**
-     * Defaults to `true`.
-     */
     enabled?: pulumi.Input<boolean>;
-    enrollmentFlow: pulumi.Input<string>;
+    enrollmentFlow?: pulumi.Input<string>;
+    /**
+     * Allowed values: - `identifier` - `nameLink` - `nameDeny`
+     */
+    groupMatchingMode?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     plexToken: pulumi.Input<string>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     policyEngineMode?: pulumi.Input<string>;
     slug: pulumi.Input<string>;
     /**
-     * Defaults to `identifier`.
+     * Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
      */
     userMatchingMode?: pulumi.Input<string>;
-    /**
-     * Defaults to `goauthentik.io/sources/%(slug)s`.
-     */
     userPathTemplate?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     uuid?: pulumi.Input<string>;
 }

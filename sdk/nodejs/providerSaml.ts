@@ -54,63 +54,43 @@ export class ProviderSaml extends pulumi.CustomResource {
     }
 
     public readonly acsUrl!: pulumi.Output<string>;
-    /**
-     * Defaults to `minutes=-5`.
-     */
     public readonly assertionValidNotBefore!: pulumi.Output<string | undefined>;
-    /**
-     * Defaults to `minutes=5`.
-     */
     public readonly assertionValidNotOnOrAfter!: pulumi.Output<string | undefined>;
-    /**
-     * Defaults to ``.
-     */
     public readonly audience!: pulumi.Output<string | undefined>;
     public readonly authenticationFlow!: pulumi.Output<string | undefined>;
     public readonly authorizationFlow!: pulumi.Output<string>;
+    public readonly defaultRelayState!: pulumi.Output<string | undefined>;
     /**
-     * Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+     * Allowed values: - `http://www.w3.org/2000/09/xmldsig#sha1` - `http://www.w3.org/2001/04/xmlenc#sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#sha384` - `http://www.w3.org/2001/04/xmlenc#sha512`
      */
     public readonly digestAlgorithm!: pulumi.Output<string | undefined>;
-    /**
-     * Defaults to `authentik`.
-     */
+    public readonly encryptionKp!: pulumi.Output<string | undefined>;
+    public readonly invalidationFlow!: pulumi.Output<string>;
     public readonly issuer!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly nameIdMapping!: pulumi.Output<string | undefined>;
     public readonly propertyMappings!: pulumi.Output<string[] | undefined>;
-    /**
-     * Defaults to `minutes=86400`.
-     */
     public readonly sessionValidNotOnOrAfter!: pulumi.Output<string | undefined>;
+    public readonly signAssertion!: pulumi.Output<boolean | undefined>;
+    public readonly signResponse!: pulumi.Output<boolean | undefined>;
     /**
-     * Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+     * Allowed values: - `http://www.w3.org/2000/09/xmldsig#rsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512` -
+     * `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512` -
+     * `http://www.w3.org/2000/09/xmldsig#dsa-sha1`
      */
     public readonly signatureAlgorithm!: pulumi.Output<string | undefined>;
     public readonly signingKp!: pulumi.Output<string | undefined>;
     /**
-     * Defaults to `redirect`.
+     * Allowed values: - `redirect` - `post`
      */
     public readonly spBinding!: pulumi.Output<string | undefined>;
-    /**
-     * Generated.
-     */
     public readonly urlSloPost!: pulumi.Output<string>;
-    /**
-     * Generated.
-     */
     public readonly urlSloRedirect!: pulumi.Output<string>;
-    /**
-     * Generated.
-     */
     public readonly urlSsoInit!: pulumi.Output<string>;
-    /**
-     * Generated.
-     */
     public readonly urlSsoPost!: pulumi.Output<string>;
-    /**
-     * Generated.
-     */
     public readonly urlSsoRedirect!: pulumi.Output<string>;
     public readonly verificationKp!: pulumi.Output<string | undefined>;
 
@@ -133,12 +113,17 @@ export class ProviderSaml extends pulumi.CustomResource {
             resourceInputs["audience"] = state ? state.audience : undefined;
             resourceInputs["authenticationFlow"] = state ? state.authenticationFlow : undefined;
             resourceInputs["authorizationFlow"] = state ? state.authorizationFlow : undefined;
+            resourceInputs["defaultRelayState"] = state ? state.defaultRelayState : undefined;
             resourceInputs["digestAlgorithm"] = state ? state.digestAlgorithm : undefined;
+            resourceInputs["encryptionKp"] = state ? state.encryptionKp : undefined;
+            resourceInputs["invalidationFlow"] = state ? state.invalidationFlow : undefined;
             resourceInputs["issuer"] = state ? state.issuer : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["nameIdMapping"] = state ? state.nameIdMapping : undefined;
             resourceInputs["propertyMappings"] = state ? state.propertyMappings : undefined;
             resourceInputs["sessionValidNotOnOrAfter"] = state ? state.sessionValidNotOnOrAfter : undefined;
+            resourceInputs["signAssertion"] = state ? state.signAssertion : undefined;
+            resourceInputs["signResponse"] = state ? state.signResponse : undefined;
             resourceInputs["signatureAlgorithm"] = state ? state.signatureAlgorithm : undefined;
             resourceInputs["signingKp"] = state ? state.signingKp : undefined;
             resourceInputs["spBinding"] = state ? state.spBinding : undefined;
@@ -156,18 +141,26 @@ export class ProviderSaml extends pulumi.CustomResource {
             if ((!args || args.authorizationFlow === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'authorizationFlow'");
             }
+            if ((!args || args.invalidationFlow === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'invalidationFlow'");
+            }
             resourceInputs["acsUrl"] = args ? args.acsUrl : undefined;
             resourceInputs["assertionValidNotBefore"] = args ? args.assertionValidNotBefore : undefined;
             resourceInputs["assertionValidNotOnOrAfter"] = args ? args.assertionValidNotOnOrAfter : undefined;
             resourceInputs["audience"] = args ? args.audience : undefined;
             resourceInputs["authenticationFlow"] = args ? args.authenticationFlow : undefined;
             resourceInputs["authorizationFlow"] = args ? args.authorizationFlow : undefined;
+            resourceInputs["defaultRelayState"] = args ? args.defaultRelayState : undefined;
             resourceInputs["digestAlgorithm"] = args ? args.digestAlgorithm : undefined;
+            resourceInputs["encryptionKp"] = args ? args.encryptionKp : undefined;
+            resourceInputs["invalidationFlow"] = args ? args.invalidationFlow : undefined;
             resourceInputs["issuer"] = args ? args.issuer : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["nameIdMapping"] = args ? args.nameIdMapping : undefined;
             resourceInputs["propertyMappings"] = args ? args.propertyMappings : undefined;
             resourceInputs["sessionValidNotOnOrAfter"] = args ? args.sessionValidNotOnOrAfter : undefined;
+            resourceInputs["signAssertion"] = args ? args.signAssertion : undefined;
+            resourceInputs["signResponse"] = args ? args.signResponse : undefined;
             resourceInputs["signatureAlgorithm"] = args ? args.signatureAlgorithm : undefined;
             resourceInputs["signingKp"] = args ? args.signingKp : undefined;
             resourceInputs["spBinding"] = args ? args.spBinding : undefined;
@@ -188,63 +181,43 @@ export class ProviderSaml extends pulumi.CustomResource {
  */
 export interface ProviderSamlState {
     acsUrl?: pulumi.Input<string>;
-    /**
-     * Defaults to `minutes=-5`.
-     */
     assertionValidNotBefore?: pulumi.Input<string>;
-    /**
-     * Defaults to `minutes=5`.
-     */
     assertionValidNotOnOrAfter?: pulumi.Input<string>;
-    /**
-     * Defaults to ``.
-     */
     audience?: pulumi.Input<string>;
     authenticationFlow?: pulumi.Input<string>;
     authorizationFlow?: pulumi.Input<string>;
+    defaultRelayState?: pulumi.Input<string>;
     /**
-     * Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+     * Allowed values: - `http://www.w3.org/2000/09/xmldsig#sha1` - `http://www.w3.org/2001/04/xmlenc#sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#sha384` - `http://www.w3.org/2001/04/xmlenc#sha512`
      */
     digestAlgorithm?: pulumi.Input<string>;
-    /**
-     * Defaults to `authentik`.
-     */
+    encryptionKp?: pulumi.Input<string>;
+    invalidationFlow?: pulumi.Input<string>;
     issuer?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     nameIdMapping?: pulumi.Input<string>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * Defaults to `minutes=86400`.
-     */
     sessionValidNotOnOrAfter?: pulumi.Input<string>;
+    signAssertion?: pulumi.Input<boolean>;
+    signResponse?: pulumi.Input<boolean>;
     /**
-     * Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+     * Allowed values: - `http://www.w3.org/2000/09/xmldsig#rsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512` -
+     * `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512` -
+     * `http://www.w3.org/2000/09/xmldsig#dsa-sha1`
      */
     signatureAlgorithm?: pulumi.Input<string>;
     signingKp?: pulumi.Input<string>;
     /**
-     * Defaults to `redirect`.
+     * Allowed values: - `redirect` - `post`
      */
     spBinding?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     urlSloPost?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     urlSloRedirect?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     urlSsoInit?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     urlSsoPost?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     urlSsoRedirect?: pulumi.Input<string>;
     verificationKp?: pulumi.Input<string>;
 }
@@ -254,63 +227,43 @@ export interface ProviderSamlState {
  */
 export interface ProviderSamlArgs {
     acsUrl: pulumi.Input<string>;
-    /**
-     * Defaults to `minutes=-5`.
-     */
     assertionValidNotBefore?: pulumi.Input<string>;
-    /**
-     * Defaults to `minutes=5`.
-     */
     assertionValidNotOnOrAfter?: pulumi.Input<string>;
-    /**
-     * Defaults to ``.
-     */
     audience?: pulumi.Input<string>;
     authenticationFlow?: pulumi.Input<string>;
     authorizationFlow: pulumi.Input<string>;
+    defaultRelayState?: pulumi.Input<string>;
     /**
-     * Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+     * Allowed values: - `http://www.w3.org/2000/09/xmldsig#sha1` - `http://www.w3.org/2001/04/xmlenc#sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#sha384` - `http://www.w3.org/2001/04/xmlenc#sha512`
      */
     digestAlgorithm?: pulumi.Input<string>;
-    /**
-     * Defaults to `authentik`.
-     */
+    encryptionKp?: pulumi.Input<string>;
+    invalidationFlow: pulumi.Input<string>;
     issuer?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     nameIdMapping?: pulumi.Input<string>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * Defaults to `minutes=86400`.
-     */
     sessionValidNotOnOrAfter?: pulumi.Input<string>;
+    signAssertion?: pulumi.Input<boolean>;
+    signResponse?: pulumi.Input<boolean>;
     /**
-     * Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+     * Allowed values: - `http://www.w3.org/2000/09/xmldsig#rsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512` -
+     * `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512` -
+     * `http://www.w3.org/2000/09/xmldsig#dsa-sha1`
      */
     signatureAlgorithm?: pulumi.Input<string>;
     signingKp?: pulumi.Input<string>;
     /**
-     * Defaults to `redirect`.
+     * Allowed values: - `redirect` - `post`
      */
     spBinding?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     urlSloPost?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     urlSloRedirect?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     urlSsoInit?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     urlSsoPost?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     urlSsoRedirect?: pulumi.Input<string>;
     verificationKp?: pulumi.Input<string>;
 }

@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,23 +19,29 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			default_authorization_flow, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
-//				Slug: pulumi.StringRef("default-provider-authorization-implicit-consent"),
+//			default_source_authentication, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
+//				Slug: pulumi.StringRef("default-source-authentication"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			default_source_enrollment, err := authentik.LookupFlow(ctx, &authentik.LookupFlowArgs{
+//				Slug: pulumi.StringRef("default-source-enrollment"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
 //			_, err = authentik.NewSourceOauth(ctx, "name", &authentik.SourceOauthArgs{
 //				Slug:               pulumi.String("discord"),
-//				AuthenticationFlow: *pulumi.String(default_authorization_flow.Id),
-//				EnrollmentFlow:     *pulumi.String(default_authorization_flow.Id),
+//				AuthenticationFlow: pulumi.String(default_source_authentication.Id),
+//				EnrollmentFlow:     pulumi.String(default_source_enrollment.Id),
 //				ProviderType:       pulumi.String("discord"),
 //				ConsumerKey:        pulumi.String("foo"),
 //				ConsumerSecret:     pulumi.String("bar"),
@@ -55,37 +60,39 @@ type SourceOauth struct {
 	// Only required for OAuth1.
 	AccessTokenUrl     pulumi.StringPtrOutput `pulumi:"accessTokenUrl"`
 	AdditionalScopes   pulumi.StringPtrOutput `pulumi:"additionalScopes"`
-	AuthenticationFlow pulumi.StringOutput    `pulumi:"authenticationFlow"`
+	AuthenticationFlow pulumi.StringPtrOutput `pulumi:"authenticationFlow"`
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
 	AuthorizationUrl pulumi.StringPtrOutput `pulumi:"authorizationUrl"`
-	// Generated.
-	CallbackUri    pulumi.StringOutput `pulumi:"callbackUri"`
-	ConsumerKey    pulumi.StringOutput `pulumi:"consumerKey"`
-	ConsumerSecret pulumi.StringOutput `pulumi:"consumerSecret"`
-	// Defaults to `true`.
-	Enabled        pulumi.BoolPtrOutput `pulumi:"enabled"`
-	EnrollmentFlow pulumi.StringOutput  `pulumi:"enrollmentFlow"`
-	Name           pulumi.StringOutput  `pulumi:"name"`
-	// Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to pass objects. Generated.
+	CallbackUri      pulumi.StringOutput    `pulumi:"callbackUri"`
+	ConsumerKey      pulumi.StringOutput    `pulumi:"consumerKey"`
+	ConsumerSecret   pulumi.StringOutput    `pulumi:"consumerSecret"`
+	Enabled          pulumi.BoolPtrOutput   `pulumi:"enabled"`
+	EnrollmentFlow   pulumi.StringPtrOutput `pulumi:"enrollmentFlow"`
+	// Allowed values: - `identifier` - `nameLink` - `nameDeny`
+	GroupMatchingMode pulumi.StringPtrOutput `pulumi:"groupMatchingMode"`
+	Name              pulumi.StringOutput    `pulumi:"name"`
+	// Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to
+	// pass objects.
 	OidcJwks pulumi.StringOutput `pulumi:"oidcJwks"`
 	// Automatically configure JWKS if not specified by `oidcWellKnownUrl`.
 	OidcJwksUrl pulumi.StringPtrOutput `pulumi:"oidcJwksUrl"`
-	// Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with `.well-known/openid-configuration`.
+	// Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with
+	// `.well-known/openid-configuration`.
 	OidcWellKnownUrl pulumi.StringPtrOutput `pulumi:"oidcWellKnownUrl"`
-	// Defaults to `any`.
+	// Allowed values: - `all` - `any`
 	PolicyEngineMode pulumi.StringPtrOutput `pulumi:"policyEngineMode"`
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
-	ProfileUrl   pulumi.StringPtrOutput `pulumi:"profileUrl"`
-	ProviderType pulumi.StringOutput    `pulumi:"providerType"`
+	ProfileUrl pulumi.StringPtrOutput `pulumi:"profileUrl"`
+	// Allowed values: - `apple` - `openidconnect` - `azuread` - `discord` - `facebook` - `github` - `gitlab` - `google` -
+	// `mailcow` - `okta` - `patreon` - `reddit` - `twitch` - `twitter`
+	ProviderType pulumi.StringOutput `pulumi:"providerType"`
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
 	RequestTokenUrl pulumi.StringPtrOutput `pulumi:"requestTokenUrl"`
 	Slug            pulumi.StringOutput    `pulumi:"slug"`
-	// Defaults to `identifier`.
+	// Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
 	UserMatchingMode pulumi.StringPtrOutput `pulumi:"userMatchingMode"`
-	// Defaults to `goauthentik.io/sources/%(slug)s`.
 	UserPathTemplate pulumi.StringPtrOutput `pulumi:"userPathTemplate"`
-	// Generated.
-	Uuid pulumi.StringOutput `pulumi:"uuid"`
+	Uuid             pulumi.StringOutput    `pulumi:"uuid"`
 }
 
 // NewSourceOauth registers a new resource with the given unique name, arguments, and options.
@@ -95,17 +102,11 @@ func NewSourceOauth(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.AuthenticationFlow == nil {
-		return nil, errors.New("invalid value for required argument 'AuthenticationFlow'")
-	}
 	if args.ConsumerKey == nil {
 		return nil, errors.New("invalid value for required argument 'ConsumerKey'")
 	}
 	if args.ConsumerSecret == nil {
 		return nil, errors.New("invalid value for required argument 'ConsumerSecret'")
-	}
-	if args.EnrollmentFlow == nil {
-		return nil, errors.New("invalid value for required argument 'EnrollmentFlow'")
 	}
 	if args.ProviderType == nil {
 		return nil, errors.New("invalid value for required argument 'ProviderType'")
@@ -149,34 +150,36 @@ type sourceOauthState struct {
 	AuthenticationFlow *string `pulumi:"authenticationFlow"`
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
 	AuthorizationUrl *string `pulumi:"authorizationUrl"`
-	// Generated.
-	CallbackUri    *string `pulumi:"callbackUri"`
-	ConsumerKey    *string `pulumi:"consumerKey"`
-	ConsumerSecret *string `pulumi:"consumerSecret"`
-	// Defaults to `true`.
-	Enabled        *bool   `pulumi:"enabled"`
-	EnrollmentFlow *string `pulumi:"enrollmentFlow"`
-	Name           *string `pulumi:"name"`
-	// Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to pass objects. Generated.
+	CallbackUri      *string `pulumi:"callbackUri"`
+	ConsumerKey      *string `pulumi:"consumerKey"`
+	ConsumerSecret   *string `pulumi:"consumerSecret"`
+	Enabled          *bool   `pulumi:"enabled"`
+	EnrollmentFlow   *string `pulumi:"enrollmentFlow"`
+	// Allowed values: - `identifier` - `nameLink` - `nameDeny`
+	GroupMatchingMode *string `pulumi:"groupMatchingMode"`
+	Name              *string `pulumi:"name"`
+	// Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to
+	// pass objects.
 	OidcJwks *string `pulumi:"oidcJwks"`
 	// Automatically configure JWKS if not specified by `oidcWellKnownUrl`.
 	OidcJwksUrl *string `pulumi:"oidcJwksUrl"`
-	// Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with `.well-known/openid-configuration`.
+	// Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with
+	// `.well-known/openid-configuration`.
 	OidcWellKnownUrl *string `pulumi:"oidcWellKnownUrl"`
-	// Defaults to `any`.
+	// Allowed values: - `all` - `any`
 	PolicyEngineMode *string `pulumi:"policyEngineMode"`
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
-	ProfileUrl   *string `pulumi:"profileUrl"`
+	ProfileUrl *string `pulumi:"profileUrl"`
+	// Allowed values: - `apple` - `openidconnect` - `azuread` - `discord` - `facebook` - `github` - `gitlab` - `google` -
+	// `mailcow` - `okta` - `patreon` - `reddit` - `twitch` - `twitter`
 	ProviderType *string `pulumi:"providerType"`
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
 	RequestTokenUrl *string `pulumi:"requestTokenUrl"`
 	Slug            *string `pulumi:"slug"`
-	// Defaults to `identifier`.
+	// Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
 	UserMatchingMode *string `pulumi:"userMatchingMode"`
-	// Defaults to `goauthentik.io/sources/%(slug)s`.
 	UserPathTemplate *string `pulumi:"userPathTemplate"`
-	// Generated.
-	Uuid *string `pulumi:"uuid"`
+	Uuid             *string `pulumi:"uuid"`
 }
 
 type SourceOauthState struct {
@@ -186,34 +189,36 @@ type SourceOauthState struct {
 	AuthenticationFlow pulumi.StringPtrInput
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
 	AuthorizationUrl pulumi.StringPtrInput
-	// Generated.
-	CallbackUri    pulumi.StringPtrInput
-	ConsumerKey    pulumi.StringPtrInput
-	ConsumerSecret pulumi.StringPtrInput
-	// Defaults to `true`.
-	Enabled        pulumi.BoolPtrInput
-	EnrollmentFlow pulumi.StringPtrInput
-	Name           pulumi.StringPtrInput
-	// Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to pass objects. Generated.
+	CallbackUri      pulumi.StringPtrInput
+	ConsumerKey      pulumi.StringPtrInput
+	ConsumerSecret   pulumi.StringPtrInput
+	Enabled          pulumi.BoolPtrInput
+	EnrollmentFlow   pulumi.StringPtrInput
+	// Allowed values: - `identifier` - `nameLink` - `nameDeny`
+	GroupMatchingMode pulumi.StringPtrInput
+	Name              pulumi.StringPtrInput
+	// Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to
+	// pass objects.
 	OidcJwks pulumi.StringPtrInput
 	// Automatically configure JWKS if not specified by `oidcWellKnownUrl`.
 	OidcJwksUrl pulumi.StringPtrInput
-	// Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with `.well-known/openid-configuration`.
+	// Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with
+	// `.well-known/openid-configuration`.
 	OidcWellKnownUrl pulumi.StringPtrInput
-	// Defaults to `any`.
+	// Allowed values: - `all` - `any`
 	PolicyEngineMode pulumi.StringPtrInput
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
-	ProfileUrl   pulumi.StringPtrInput
+	ProfileUrl pulumi.StringPtrInput
+	// Allowed values: - `apple` - `openidconnect` - `azuread` - `discord` - `facebook` - `github` - `gitlab` - `google` -
+	// `mailcow` - `okta` - `patreon` - `reddit` - `twitch` - `twitter`
 	ProviderType pulumi.StringPtrInput
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
 	RequestTokenUrl pulumi.StringPtrInput
 	Slug            pulumi.StringPtrInput
-	// Defaults to `identifier`.
+	// Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
 	UserMatchingMode pulumi.StringPtrInput
-	// Defaults to `goauthentik.io/sources/%(slug)s`.
 	UserPathTemplate pulumi.StringPtrInput
-	// Generated.
-	Uuid pulumi.StringPtrInput
+	Uuid             pulumi.StringPtrInput
 }
 
 func (SourceOauthState) ElementType() reflect.Type {
@@ -224,35 +229,38 @@ type sourceOauthArgs struct {
 	// Only required for OAuth1.
 	AccessTokenUrl     *string `pulumi:"accessTokenUrl"`
 	AdditionalScopes   *string `pulumi:"additionalScopes"`
-	AuthenticationFlow string  `pulumi:"authenticationFlow"`
+	AuthenticationFlow *string `pulumi:"authenticationFlow"`
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
 	AuthorizationUrl *string `pulumi:"authorizationUrl"`
 	ConsumerKey      string  `pulumi:"consumerKey"`
 	ConsumerSecret   string  `pulumi:"consumerSecret"`
-	// Defaults to `true`.
-	Enabled        *bool   `pulumi:"enabled"`
-	EnrollmentFlow string  `pulumi:"enrollmentFlow"`
-	Name           *string `pulumi:"name"`
-	// Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to pass objects. Generated.
+	Enabled          *bool   `pulumi:"enabled"`
+	EnrollmentFlow   *string `pulumi:"enrollmentFlow"`
+	// Allowed values: - `identifier` - `nameLink` - `nameDeny`
+	GroupMatchingMode *string `pulumi:"groupMatchingMode"`
+	Name              *string `pulumi:"name"`
+	// Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to
+	// pass objects.
 	OidcJwks *string `pulumi:"oidcJwks"`
 	// Automatically configure JWKS if not specified by `oidcWellKnownUrl`.
 	OidcJwksUrl *string `pulumi:"oidcJwksUrl"`
-	// Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with `.well-known/openid-configuration`.
+	// Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with
+	// `.well-known/openid-configuration`.
 	OidcWellKnownUrl *string `pulumi:"oidcWellKnownUrl"`
-	// Defaults to `any`.
+	// Allowed values: - `all` - `any`
 	PolicyEngineMode *string `pulumi:"policyEngineMode"`
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
-	ProfileUrl   *string `pulumi:"profileUrl"`
-	ProviderType string  `pulumi:"providerType"`
+	ProfileUrl *string `pulumi:"profileUrl"`
+	// Allowed values: - `apple` - `openidconnect` - `azuread` - `discord` - `facebook` - `github` - `gitlab` - `google` -
+	// `mailcow` - `okta` - `patreon` - `reddit` - `twitch` - `twitter`
+	ProviderType string `pulumi:"providerType"`
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
 	RequestTokenUrl *string `pulumi:"requestTokenUrl"`
 	Slug            string  `pulumi:"slug"`
-	// Defaults to `identifier`.
+	// Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
 	UserMatchingMode *string `pulumi:"userMatchingMode"`
-	// Defaults to `goauthentik.io/sources/%(slug)s`.
 	UserPathTemplate *string `pulumi:"userPathTemplate"`
-	// Generated.
-	Uuid *string `pulumi:"uuid"`
+	Uuid             *string `pulumi:"uuid"`
 }
 
 // The set of arguments for constructing a SourceOauth resource.
@@ -260,35 +268,38 @@ type SourceOauthArgs struct {
 	// Only required for OAuth1.
 	AccessTokenUrl     pulumi.StringPtrInput
 	AdditionalScopes   pulumi.StringPtrInput
-	AuthenticationFlow pulumi.StringInput
+	AuthenticationFlow pulumi.StringPtrInput
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
 	AuthorizationUrl pulumi.StringPtrInput
 	ConsumerKey      pulumi.StringInput
 	ConsumerSecret   pulumi.StringInput
-	// Defaults to `true`.
-	Enabled        pulumi.BoolPtrInput
-	EnrollmentFlow pulumi.StringInput
-	Name           pulumi.StringPtrInput
-	// Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to pass objects. Generated.
+	Enabled          pulumi.BoolPtrInput
+	EnrollmentFlow   pulumi.StringPtrInput
+	// Allowed values: - `identifier` - `nameLink` - `nameDeny`
+	GroupMatchingMode pulumi.StringPtrInput
+	Name              pulumi.StringPtrInput
+	// Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to
+	// pass objects.
 	OidcJwks pulumi.StringPtrInput
 	// Automatically configure JWKS if not specified by `oidcWellKnownUrl`.
 	OidcJwksUrl pulumi.StringPtrInput
-	// Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with `.well-known/openid-configuration`.
+	// Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with
+	// `.well-known/openid-configuration`.
 	OidcWellKnownUrl pulumi.StringPtrInput
-	// Defaults to `any`.
+	// Allowed values: - `all` - `any`
 	PolicyEngineMode pulumi.StringPtrInput
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
-	ProfileUrl   pulumi.StringPtrInput
+	ProfileUrl pulumi.StringPtrInput
+	// Allowed values: - `apple` - `openidconnect` - `azuread` - `discord` - `facebook` - `github` - `gitlab` - `google` -
+	// `mailcow` - `okta` - `patreon` - `reddit` - `twitch` - `twitter`
 	ProviderType pulumi.StringInput
 	// Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
 	RequestTokenUrl pulumi.StringPtrInput
 	Slug            pulumi.StringInput
-	// Defaults to `identifier`.
+	// Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
 	UserMatchingMode pulumi.StringPtrInput
-	// Defaults to `goauthentik.io/sources/%(slug)s`.
 	UserPathTemplate pulumi.StringPtrInput
-	// Generated.
-	Uuid pulumi.StringPtrInput
+	Uuid             pulumi.StringPtrInput
 }
 
 func (SourceOauthArgs) ElementType() reflect.Type {
@@ -312,12 +323,6 @@ func (i *SourceOauth) ToSourceOauthOutput() SourceOauthOutput {
 
 func (i *SourceOauth) ToSourceOauthOutputWithContext(ctx context.Context) SourceOauthOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(SourceOauthOutput)
-}
-
-func (i *SourceOauth) ToOutput(ctx context.Context) pulumix.Output[*SourceOauth] {
-	return pulumix.Output[*SourceOauth]{
-		OutputState: i.ToSourceOauthOutputWithContext(ctx).OutputState,
-	}
 }
 
 // SourceOauthArrayInput is an input type that accepts SourceOauthArray and SourceOauthArrayOutput values.
@@ -345,12 +350,6 @@ func (i SourceOauthArray) ToSourceOauthArrayOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(SourceOauthArrayOutput)
 }
 
-func (i SourceOauthArray) ToOutput(ctx context.Context) pulumix.Output[[]*SourceOauth] {
-	return pulumix.Output[[]*SourceOauth]{
-		OutputState: i.ToSourceOauthArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 // SourceOauthMapInput is an input type that accepts SourceOauthMap and SourceOauthMapOutput values.
 // You can construct a concrete instance of `SourceOauthMapInput` via:
 //
@@ -376,12 +375,6 @@ func (i SourceOauthMap) ToSourceOauthMapOutputWithContext(ctx context.Context) S
 	return pulumi.ToOutputWithContext(ctx, i).(SourceOauthMapOutput)
 }
 
-func (i SourceOauthMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*SourceOauth] {
-	return pulumix.Output[map[string]*SourceOauth]{
-		OutputState: i.ToSourceOauthMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SourceOauthOutput struct{ *pulumi.OutputState }
 
 func (SourceOauthOutput) ElementType() reflect.Type {
@@ -396,12 +389,6 @@ func (o SourceOauthOutput) ToSourceOauthOutputWithContext(ctx context.Context) S
 	return o
 }
 
-func (o SourceOauthOutput) ToOutput(ctx context.Context) pulumix.Output[*SourceOauth] {
-	return pulumix.Output[*SourceOauth]{
-		OutputState: o.OutputState,
-	}
-}
-
 // Only required for OAuth1.
 func (o SourceOauthOutput) AccessTokenUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringPtrOutput { return v.AccessTokenUrl }).(pulumi.StringPtrOutput)
@@ -411,8 +398,8 @@ func (o SourceOauthOutput) AdditionalScopes() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringPtrOutput { return v.AdditionalScopes }).(pulumi.StringPtrOutput)
 }
 
-func (o SourceOauthOutput) AuthenticationFlow() pulumi.StringOutput {
-	return o.ApplyT(func(v *SourceOauth) pulumi.StringOutput { return v.AuthenticationFlow }).(pulumi.StringOutput)
+func (o SourceOauthOutput) AuthenticationFlow() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SourceOauth) pulumi.StringPtrOutput { return v.AuthenticationFlow }).(pulumi.StringPtrOutput)
 }
 
 // Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
@@ -420,7 +407,6 @@ func (o SourceOauthOutput) AuthorizationUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringPtrOutput { return v.AuthorizationUrl }).(pulumi.StringPtrOutput)
 }
 
-// Generated.
 func (o SourceOauthOutput) CallbackUri() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringOutput { return v.CallbackUri }).(pulumi.StringOutput)
 }
@@ -433,20 +419,25 @@ func (o SourceOauthOutput) ConsumerSecret() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringOutput { return v.ConsumerSecret }).(pulumi.StringOutput)
 }
 
-// Defaults to `true`.
 func (o SourceOauthOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.BoolPtrOutput { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
-func (o SourceOauthOutput) EnrollmentFlow() pulumi.StringOutput {
-	return o.ApplyT(func(v *SourceOauth) pulumi.StringOutput { return v.EnrollmentFlow }).(pulumi.StringOutput)
+func (o SourceOauthOutput) EnrollmentFlow() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SourceOauth) pulumi.StringPtrOutput { return v.EnrollmentFlow }).(pulumi.StringPtrOutput)
+}
+
+// Allowed values: - `identifier` - `nameLink` - `nameDeny`
+func (o SourceOauthOutput) GroupMatchingMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SourceOauth) pulumi.StringPtrOutput { return v.GroupMatchingMode }).(pulumi.StringPtrOutput)
 }
 
 func (o SourceOauthOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to pass objects. Generated.
+// Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to
+// pass objects.
 func (o SourceOauthOutput) OidcJwks() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringOutput { return v.OidcJwks }).(pulumi.StringOutput)
 }
@@ -456,12 +447,13 @@ func (o SourceOauthOutput) OidcJwksUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringPtrOutput { return v.OidcJwksUrl }).(pulumi.StringPtrOutput)
 }
 
-// Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with `.well-known/openid-configuration`.
+// Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with
+// `.well-known/openid-configuration`.
 func (o SourceOauthOutput) OidcWellKnownUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringPtrOutput { return v.OidcWellKnownUrl }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `any`.
+// Allowed values: - `all` - `any`
 func (o SourceOauthOutput) PolicyEngineMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringPtrOutput { return v.PolicyEngineMode }).(pulumi.StringPtrOutput)
 }
@@ -471,6 +463,8 @@ func (o SourceOauthOutput) ProfileUrl() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringPtrOutput { return v.ProfileUrl }).(pulumi.StringPtrOutput)
 }
 
+// Allowed values: - `apple` - `openidconnect` - `azuread` - `discord` - `facebook` - `github` - `gitlab` - `google` -
+// `mailcow` - `okta` - `patreon` - `reddit` - `twitch` - `twitter`
 func (o SourceOauthOutput) ProviderType() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringOutput { return v.ProviderType }).(pulumi.StringOutput)
 }
@@ -484,17 +478,15 @@ func (o SourceOauthOutput) Slug() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringOutput { return v.Slug }).(pulumi.StringOutput)
 }
 
-// Defaults to `identifier`.
+// Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
 func (o SourceOauthOutput) UserMatchingMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringPtrOutput { return v.UserMatchingMode }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `goauthentik.io/sources/%(slug)s`.
 func (o SourceOauthOutput) UserPathTemplate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringPtrOutput { return v.UserPathTemplate }).(pulumi.StringPtrOutput)
 }
 
-// Generated.
 func (o SourceOauthOutput) Uuid() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceOauth) pulumi.StringOutput { return v.Uuid }).(pulumi.StringOutput)
 }
@@ -511,12 +503,6 @@ func (o SourceOauthArrayOutput) ToSourceOauthArrayOutput() SourceOauthArrayOutpu
 
 func (o SourceOauthArrayOutput) ToSourceOauthArrayOutputWithContext(ctx context.Context) SourceOauthArrayOutput {
 	return o
-}
-
-func (o SourceOauthArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*SourceOauth] {
-	return pulumix.Output[[]*SourceOauth]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SourceOauthArrayOutput) Index(i pulumi.IntInput) SourceOauthOutput {
@@ -537,12 +523,6 @@ func (o SourceOauthMapOutput) ToSourceOauthMapOutput() SourceOauthMapOutput {
 
 func (o SourceOauthMapOutput) ToSourceOauthMapOutputWithContext(ctx context.Context) SourceOauthMapOutput {
 	return o
-}
-
-func (o SourceOauthMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*SourceOauth] {
-	return pulumix.Output[map[string]*SourceOauth]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SourceOauthMapOutput) MapIndex(k pulumi.StringInput) SourceOauthOutput {

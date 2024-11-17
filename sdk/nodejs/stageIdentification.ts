@@ -59,11 +59,16 @@ export class StageIdentification extends pulumi.CustomResource {
         return obj['__pulumiType'] === StageIdentification.__pulumiType;
     }
 
+    public readonly captchaStage!: pulumi.Output<string | undefined>;
     public readonly caseInsensitiveMatching!: pulumi.Output<boolean | undefined>;
     public readonly enrollmentFlow!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly passwordStage!: pulumi.Output<string | undefined>;
     public readonly passwordlessFlow!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `true`.
+     */
+    public readonly pretendUserExists!: pulumi.Output<boolean | undefined>;
     public readonly recoveryFlow!: pulumi.Output<string | undefined>;
     /**
      * Defaults to `true`.
@@ -89,11 +94,13 @@ export class StageIdentification extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as StageIdentificationState | undefined;
+            resourceInputs["captchaStage"] = state ? state.captchaStage : undefined;
             resourceInputs["caseInsensitiveMatching"] = state ? state.caseInsensitiveMatching : undefined;
             resourceInputs["enrollmentFlow"] = state ? state.enrollmentFlow : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["passwordStage"] = state ? state.passwordStage : undefined;
             resourceInputs["passwordlessFlow"] = state ? state.passwordlessFlow : undefined;
+            resourceInputs["pretendUserExists"] = state ? state.pretendUserExists : undefined;
             resourceInputs["recoveryFlow"] = state ? state.recoveryFlow : undefined;
             resourceInputs["showMatchedUser"] = state ? state.showMatchedUser : undefined;
             resourceInputs["showSourceLabels"] = state ? state.showSourceLabels : undefined;
@@ -101,11 +108,13 @@ export class StageIdentification extends pulumi.CustomResource {
             resourceInputs["userFields"] = state ? state.userFields : undefined;
         } else {
             const args = argsOrState as StageIdentificationArgs | undefined;
+            resourceInputs["captchaStage"] = args ? args.captchaStage : undefined;
             resourceInputs["caseInsensitiveMatching"] = args ? args.caseInsensitiveMatching : undefined;
             resourceInputs["enrollmentFlow"] = args ? args.enrollmentFlow : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["passwordStage"] = args ? args.passwordStage : undefined;
             resourceInputs["passwordlessFlow"] = args ? args.passwordlessFlow : undefined;
+            resourceInputs["pretendUserExists"] = args ? args.pretendUserExists : undefined;
             resourceInputs["recoveryFlow"] = args ? args.recoveryFlow : undefined;
             resourceInputs["showMatchedUser"] = args ? args.showMatchedUser : undefined;
             resourceInputs["showSourceLabels"] = args ? args.showSourceLabels : undefined;
@@ -121,11 +130,16 @@ export class StageIdentification extends pulumi.CustomResource {
  * Input properties used for looking up and filtering StageIdentification resources.
  */
 export interface StageIdentificationState {
+    captchaStage?: pulumi.Input<string>;
     caseInsensitiveMatching?: pulumi.Input<boolean>;
     enrollmentFlow?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     passwordStage?: pulumi.Input<string>;
     passwordlessFlow?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
+    pretendUserExists?: pulumi.Input<boolean>;
     recoveryFlow?: pulumi.Input<string>;
     /**
      * Defaults to `true`.
@@ -143,11 +157,16 @@ export interface StageIdentificationState {
  * The set of arguments for constructing a StageIdentification resource.
  */
 export interface StageIdentificationArgs {
+    captchaStage?: pulumi.Input<string>;
     caseInsensitiveMatching?: pulumi.Input<boolean>;
     enrollmentFlow?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     passwordStage?: pulumi.Input<string>;
     passwordlessFlow?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
+    pretendUserExists?: pulumi.Input<boolean>;
     recoveryFlow?: pulumi.Input<string>;
     /**
      * Defaults to `true`.

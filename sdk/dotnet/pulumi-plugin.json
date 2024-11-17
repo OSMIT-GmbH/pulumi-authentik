@@ -1,0 +1,5 @@
+{
+  "resource": true,
+  "name": "authentik",
+  "server": "https://github.com/OSMIT-GmbH/pulumi-authentik/releases/download/v${VERSION}"
+}

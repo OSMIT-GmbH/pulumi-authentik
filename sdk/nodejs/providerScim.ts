@@ -6,25 +6,6 @@ import * as utilities from "./utilities";
 
 /**
  * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@osmit-gmbh/pulumi-authentik";
- * import * as authentik from "@pulumi/authentik";
- *
- * const user = authentik.getPropertyMappingScim({
- *     managed: "goauthentik.io/providers/scim/user",
- * });
- * const group = authentik.getPropertyMappingScim({
- *     managed: "goauthentik.io/providers/scim/group",
- * });
- * const name = new authentik.ProviderScim("name", {
- *     url: "http://localhost",
- *     token: "foo",
- *     propertyMappings: [user.then(user => user.id)],
- *     propertyMappingsGroups: [group.then(group => group.id)],
- * });
- * ```
  */
 export class ProviderScim extends pulumi.CustomResource {
     /**
@@ -54,6 +35,8 @@ export class ProviderScim extends pulumi.CustomResource {
         return obj['__pulumiType'] === ProviderScim.__pulumiType;
     }
 
+    public readonly excludeUsersServiceAccount!: pulumi.Output<boolean | undefined>;
+    public readonly filterGroup!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly propertyMappings!: pulumi.Output<string[] | undefined>;
     public readonly propertyMappingsGroups!: pulumi.Output<string[] | undefined>;
@@ -73,6 +56,8 @@ export class ProviderScim extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ProviderScimState | undefined;
+            resourceInputs["excludeUsersServiceAccount"] = state ? state.excludeUsersServiceAccount : undefined;
+            resourceInputs["filterGroup"] = state ? state.filterGroup : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["propertyMappings"] = state ? state.propertyMappings : undefined;
             resourceInputs["propertyMappingsGroups"] = state ? state.propertyMappingsGroups : undefined;
@@ -86,6 +71,8 @@ export class ProviderScim extends pulumi.CustomResource {
             if ((!args || args.url === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'url'");
             }
+            resourceInputs["excludeUsersServiceAccount"] = args ? args.excludeUsersServiceAccount : undefined;
+            resourceInputs["filterGroup"] = args ? args.filterGroup : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["propertyMappings"] = args ? args.propertyMappings : undefined;
             resourceInputs["propertyMappingsGroups"] = args ? args.propertyMappingsGroups : undefined;
@@ -103,6 +90,8 @@ export class ProviderScim extends pulumi.CustomResource {
  * Input properties used for looking up and filtering ProviderScim resources.
  */
 export interface ProviderScimState {
+    excludeUsersServiceAccount?: pulumi.Input<boolean>;
+    filterGroup?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
     propertyMappingsGroups?: pulumi.Input<pulumi.Input<string>[]>;
@@ -114,6 +103,8 @@ export interface ProviderScimState {
  * The set of arguments for constructing a ProviderScim resource.
  */
 export interface ProviderScimArgs {
+    excludeUsersServiceAccount?: pulumi.Input<boolean>;
+    filterGroup?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
     propertyMappingsGroups?: pulumi.Input<pulumi.Input<string>[]>;

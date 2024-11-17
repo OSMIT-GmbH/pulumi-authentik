@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -174,12 +173,6 @@ func (i *StageAuthenticatorDuo) ToStageAuthenticatorDuoOutputWithContext(ctx con
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorDuoOutput)
 }
 
-func (i *StageAuthenticatorDuo) ToOutput(ctx context.Context) pulumix.Output[*StageAuthenticatorDuo] {
-	return pulumix.Output[*StageAuthenticatorDuo]{
-		OutputState: i.ToStageAuthenticatorDuoOutputWithContext(ctx).OutputState,
-	}
-}
-
 // StageAuthenticatorDuoArrayInput is an input type that accepts StageAuthenticatorDuoArray and StageAuthenticatorDuoArrayOutput values.
 // You can construct a concrete instance of `StageAuthenticatorDuoArrayInput` via:
 //
@@ -203,12 +196,6 @@ func (i StageAuthenticatorDuoArray) ToStageAuthenticatorDuoArrayOutput() StageAu
 
 func (i StageAuthenticatorDuoArray) ToStageAuthenticatorDuoArrayOutputWithContext(ctx context.Context) StageAuthenticatorDuoArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorDuoArrayOutput)
-}
-
-func (i StageAuthenticatorDuoArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageAuthenticatorDuo] {
-	return pulumix.Output[[]*StageAuthenticatorDuo]{
-		OutputState: i.ToStageAuthenticatorDuoArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // StageAuthenticatorDuoMapInput is an input type that accepts StageAuthenticatorDuoMap and StageAuthenticatorDuoMapOutput values.
@@ -236,12 +223,6 @@ func (i StageAuthenticatorDuoMap) ToStageAuthenticatorDuoMapOutputWithContext(ct
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorDuoMapOutput)
 }
 
-func (i StageAuthenticatorDuoMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageAuthenticatorDuo] {
-	return pulumix.Output[map[string]*StageAuthenticatorDuo]{
-		OutputState: i.ToStageAuthenticatorDuoMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type StageAuthenticatorDuoOutput struct{ *pulumi.OutputState }
 
 func (StageAuthenticatorDuoOutput) ElementType() reflect.Type {
@@ -254,12 +235,6 @@ func (o StageAuthenticatorDuoOutput) ToStageAuthenticatorDuoOutput() StageAuthen
 
 func (o StageAuthenticatorDuoOutput) ToStageAuthenticatorDuoOutputWithContext(ctx context.Context) StageAuthenticatorDuoOutput {
 	return o
-}
-
-func (o StageAuthenticatorDuoOutput) ToOutput(ctx context.Context) pulumix.Output[*StageAuthenticatorDuo] {
-	return pulumix.Output[*StageAuthenticatorDuo]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageAuthenticatorDuoOutput) AdminIntegrationKey() pulumi.StringPtrOutput {
@@ -308,12 +283,6 @@ func (o StageAuthenticatorDuoArrayOutput) ToStageAuthenticatorDuoArrayOutputWith
 	return o
 }
 
-func (o StageAuthenticatorDuoArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageAuthenticatorDuo] {
-	return pulumix.Output[[]*StageAuthenticatorDuo]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o StageAuthenticatorDuoArrayOutput) Index(i pulumi.IntInput) StageAuthenticatorDuoOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StageAuthenticatorDuo {
 		return vs[0].([]*StageAuthenticatorDuo)[vs[1].(int)]
@@ -332,12 +301,6 @@ func (o StageAuthenticatorDuoMapOutput) ToStageAuthenticatorDuoMapOutput() Stage
 
 func (o StageAuthenticatorDuoMapOutput) ToStageAuthenticatorDuoMapOutputWithContext(ctx context.Context) StageAuthenticatorDuoMapOutput {
 	return o
-}
-
-func (o StageAuthenticatorDuoMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageAuthenticatorDuo] {
-	return pulumix.Output[map[string]*StageAuthenticatorDuo]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageAuthenticatorDuoMapOutput) MapIndex(k pulumi.StringInput) StageAuthenticatorDuoOutput {

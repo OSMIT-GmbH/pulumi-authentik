@@ -8,11 +8,13 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Manage SCIM Provider Property mappings
+//
+// > This resource is deprecated. Migrate to `PropertyMappingProviderScim`.
 type PropertyMappingScim struct {
 	pulumi.CustomResourceState
 
@@ -100,12 +102,6 @@ func (i *PropertyMappingScim) ToPropertyMappingScimOutputWithContext(ctx context
 	return pulumi.ToOutputWithContext(ctx, i).(PropertyMappingScimOutput)
 }
 
-func (i *PropertyMappingScim) ToOutput(ctx context.Context) pulumix.Output[*PropertyMappingScim] {
-	return pulumix.Output[*PropertyMappingScim]{
-		OutputState: i.ToPropertyMappingScimOutputWithContext(ctx).OutputState,
-	}
-}
-
 // PropertyMappingScimArrayInput is an input type that accepts PropertyMappingScimArray and PropertyMappingScimArrayOutput values.
 // You can construct a concrete instance of `PropertyMappingScimArrayInput` via:
 //
@@ -129,12 +125,6 @@ func (i PropertyMappingScimArray) ToPropertyMappingScimArrayOutput() PropertyMap
 
 func (i PropertyMappingScimArray) ToPropertyMappingScimArrayOutputWithContext(ctx context.Context) PropertyMappingScimArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PropertyMappingScimArrayOutput)
-}
-
-func (i PropertyMappingScimArray) ToOutput(ctx context.Context) pulumix.Output[[]*PropertyMappingScim] {
-	return pulumix.Output[[]*PropertyMappingScim]{
-		OutputState: i.ToPropertyMappingScimArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // PropertyMappingScimMapInput is an input type that accepts PropertyMappingScimMap and PropertyMappingScimMapOutput values.
@@ -162,12 +152,6 @@ func (i PropertyMappingScimMap) ToPropertyMappingScimMapOutputWithContext(ctx co
 	return pulumi.ToOutputWithContext(ctx, i).(PropertyMappingScimMapOutput)
 }
 
-func (i PropertyMappingScimMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PropertyMappingScim] {
-	return pulumix.Output[map[string]*PropertyMappingScim]{
-		OutputState: i.ToPropertyMappingScimMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type PropertyMappingScimOutput struct{ *pulumi.OutputState }
 
 func (PropertyMappingScimOutput) ElementType() reflect.Type {
@@ -180,12 +164,6 @@ func (o PropertyMappingScimOutput) ToPropertyMappingScimOutput() PropertyMapping
 
 func (o PropertyMappingScimOutput) ToPropertyMappingScimOutputWithContext(ctx context.Context) PropertyMappingScimOutput {
 	return o
-}
-
-func (o PropertyMappingScimOutput) ToOutput(ctx context.Context) pulumix.Output[*PropertyMappingScim] {
-	return pulumix.Output[*PropertyMappingScim]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o PropertyMappingScimOutput) Expression() pulumi.StringOutput {
@@ -210,12 +188,6 @@ func (o PropertyMappingScimArrayOutput) ToPropertyMappingScimArrayOutputWithCont
 	return o
 }
 
-func (o PropertyMappingScimArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PropertyMappingScim] {
-	return pulumix.Output[[]*PropertyMappingScim]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o PropertyMappingScimArrayOutput) Index(i pulumi.IntInput) PropertyMappingScimOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PropertyMappingScim {
 		return vs[0].([]*PropertyMappingScim)[vs[1].(int)]
@@ -234,12 +206,6 @@ func (o PropertyMappingScimMapOutput) ToPropertyMappingScimMapOutput() PropertyM
 
 func (o PropertyMappingScimMapOutput) ToPropertyMappingScimMapOutputWithContext(ctx context.Context) PropertyMappingScimMapOutput {
 	return o
-}
-
-func (o PropertyMappingScimMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PropertyMappingScim] {
-	return pulumix.Output[map[string]*PropertyMappingScim]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o PropertyMappingScimMapOutput) MapIndex(k pulumi.StringInput) PropertyMappingScimOutput {

@@ -19,7 +19,6 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getCertificateKeyPair(args: GetCertificateKeyPairArgs, opts?: pulumi.InvokeOptions): Promise<GetCertificateKeyPairResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("authentik:index/getCertificateKeyPair:getCertificateKeyPair", {
         "fetchCertificate": args.fetchCertificate,
@@ -105,7 +104,13 @@ export interface GetCertificateKeyPairResult {
  * ```
  */
 export function getCertificateKeyPairOutput(args: GetCertificateKeyPairOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCertificateKeyPairResult> {
-    return pulumi.output(args).apply((a: any) => getCertificateKeyPair(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("authentik:index/getCertificateKeyPair:getCertificateKeyPair", {
+        "fetchCertificate": args.fetchCertificate,
+        "fetchKey": args.fetchKey,
+        "keyData": args.keyData,
+        "name": args.name,
+    }, opts);
 }
 
 /**

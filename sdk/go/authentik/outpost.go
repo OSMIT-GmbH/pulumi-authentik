@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -34,7 +33,7 @@ import (
 //				return err
 //			}
 //			proxy, err := authentik.NewProviderProxy(ctx, "proxy", &authentik.ProviderProxyArgs{
-//				AuthorizationFlow: *pulumi.String(default_authorization_flow.Id),
+//				AuthorizationFlow: pulumi.String(default_authorization_flow.Id),
 //				ExternalHost:      pulumi.String("http://foo.bar.baz"),
 //				InternalHost:      pulumi.String("http://internal.local"),
 //			})
@@ -57,12 +56,12 @@ import (
 type Outpost struct {
 	pulumi.CustomResourceState
 
-	// JSON format expected. Use jsonencode() to pass objects. Generated.
+	// JSON format expected. Use jsonencode() to pass objects.
 	Config            pulumi.StringOutput    `pulumi:"config"`
 	Name              pulumi.StringOutput    `pulumi:"name"`
 	ProtocolProviders pulumi.IntArrayOutput  `pulumi:"protocolProviders"`
 	ServiceConnection pulumi.StringPtrOutput `pulumi:"serviceConnection"`
-	// Defaults to `proxy`.
+	// Allowed values: - `proxy` - `ldap` - `radius` - `rac`
 	Type pulumi.StringPtrOutput `pulumi:"type"`
 }
 
@@ -99,22 +98,22 @@ func GetOutpost(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Outpost resources.
 type outpostState struct {
-	// JSON format expected. Use jsonencode() to pass objects. Generated.
+	// JSON format expected. Use jsonencode() to pass objects.
 	Config            *string `pulumi:"config"`
 	Name              *string `pulumi:"name"`
 	ProtocolProviders []int   `pulumi:"protocolProviders"`
 	ServiceConnection *string `pulumi:"serviceConnection"`
-	// Defaults to `proxy`.
+	// Allowed values: - `proxy` - `ldap` - `radius` - `rac`
 	Type *string `pulumi:"type"`
 }
 
 type OutpostState struct {
-	// JSON format expected. Use jsonencode() to pass objects. Generated.
+	// JSON format expected. Use jsonencode() to pass objects.
 	Config            pulumi.StringPtrInput
 	Name              pulumi.StringPtrInput
 	ProtocolProviders pulumi.IntArrayInput
 	ServiceConnection pulumi.StringPtrInput
-	// Defaults to `proxy`.
+	// Allowed values: - `proxy` - `ldap` - `radius` - `rac`
 	Type pulumi.StringPtrInput
 }
 
@@ -123,23 +122,23 @@ func (OutpostState) ElementType() reflect.Type {
 }
 
 type outpostArgs struct {
-	// JSON format expected. Use jsonencode() to pass objects. Generated.
+	// JSON format expected. Use jsonencode() to pass objects.
 	Config            *string `pulumi:"config"`
 	Name              *string `pulumi:"name"`
 	ProtocolProviders []int   `pulumi:"protocolProviders"`
 	ServiceConnection *string `pulumi:"serviceConnection"`
-	// Defaults to `proxy`.
+	// Allowed values: - `proxy` - `ldap` - `radius` - `rac`
 	Type *string `pulumi:"type"`
 }
 
 // The set of arguments for constructing a Outpost resource.
 type OutpostArgs struct {
-	// JSON format expected. Use jsonencode() to pass objects. Generated.
+	// JSON format expected. Use jsonencode() to pass objects.
 	Config            pulumi.StringPtrInput
 	Name              pulumi.StringPtrInput
 	ProtocolProviders pulumi.IntArrayInput
 	ServiceConnection pulumi.StringPtrInput
-	// Defaults to `proxy`.
+	// Allowed values: - `proxy` - `ldap` - `radius` - `rac`
 	Type pulumi.StringPtrInput
 }
 
@@ -164,12 +163,6 @@ func (i *Outpost) ToOutpostOutput() OutpostOutput {
 
 func (i *Outpost) ToOutpostOutputWithContext(ctx context.Context) OutpostOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(OutpostOutput)
-}
-
-func (i *Outpost) ToOutput(ctx context.Context) pulumix.Output[*Outpost] {
-	return pulumix.Output[*Outpost]{
-		OutputState: i.ToOutpostOutputWithContext(ctx).OutputState,
-	}
 }
 
 // OutpostArrayInput is an input type that accepts OutpostArray and OutpostArrayOutput values.
@@ -197,12 +190,6 @@ func (i OutpostArray) ToOutpostArrayOutputWithContext(ctx context.Context) Outpo
 	return pulumi.ToOutputWithContext(ctx, i).(OutpostArrayOutput)
 }
 
-func (i OutpostArray) ToOutput(ctx context.Context) pulumix.Output[[]*Outpost] {
-	return pulumix.Output[[]*Outpost]{
-		OutputState: i.ToOutpostArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 // OutpostMapInput is an input type that accepts OutpostMap and OutpostMapOutput values.
 // You can construct a concrete instance of `OutpostMapInput` via:
 //
@@ -228,12 +215,6 @@ func (i OutpostMap) ToOutpostMapOutputWithContext(ctx context.Context) OutpostMa
 	return pulumi.ToOutputWithContext(ctx, i).(OutpostMapOutput)
 }
 
-func (i OutpostMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Outpost] {
-	return pulumix.Output[map[string]*Outpost]{
-		OutputState: i.ToOutpostMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type OutpostOutput struct{ *pulumi.OutputState }
 
 func (OutpostOutput) ElementType() reflect.Type {
@@ -248,13 +229,7 @@ func (o OutpostOutput) ToOutpostOutputWithContext(ctx context.Context) OutpostOu
 	return o
 }
 
-func (o OutpostOutput) ToOutput(ctx context.Context) pulumix.Output[*Outpost] {
-	return pulumix.Output[*Outpost]{
-		OutputState: o.OutputState,
-	}
-}
-
-// JSON format expected. Use jsonencode() to pass objects. Generated.
+// JSON format expected. Use jsonencode() to pass objects.
 func (o OutpostOutput) Config() pulumi.StringOutput {
 	return o.ApplyT(func(v *Outpost) pulumi.StringOutput { return v.Config }).(pulumi.StringOutput)
 }
@@ -271,7 +246,7 @@ func (o OutpostOutput) ServiceConnection() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Outpost) pulumi.StringPtrOutput { return v.ServiceConnection }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `proxy`.
+// Allowed values: - `proxy` - `ldap` - `radius` - `rac`
 func (o OutpostOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Outpost) pulumi.StringPtrOutput { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -288,12 +263,6 @@ func (o OutpostArrayOutput) ToOutpostArrayOutput() OutpostArrayOutput {
 
 func (o OutpostArrayOutput) ToOutpostArrayOutputWithContext(ctx context.Context) OutpostArrayOutput {
 	return o
-}
-
-func (o OutpostArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Outpost] {
-	return pulumix.Output[[]*Outpost]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o OutpostArrayOutput) Index(i pulumi.IntInput) OutpostOutput {
@@ -314,12 +283,6 @@ func (o OutpostMapOutput) ToOutpostMapOutput() OutpostMapOutput {
 
 func (o OutpostMapOutput) ToOutpostMapOutputWithContext(ctx context.Context) OutpostMapOutput {
 	return o
-}
-
-func (o OutpostMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Outpost] {
-	return pulumix.Output[map[string]*Outpost]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o OutpostMapOutput) MapIndex(k pulumi.StringInput) OutpostOutput {

@@ -5,17 +5,9 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * ## Example Usage
+ * Manage LDAP Source Property mappings
  *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@osmit-gmbh/pulumi-authentik";
- *
- * const name = new authentik.PropertyMappingLdap("name", {
- *     expression: "return ldap.get('sAMAccountName')",
- *     objectField: "username",
- * });
- * ```
+ * > This resource is deprecated. Migrate to `authentik.PropertyMappingSourceLdap`.
  */
 export class PropertyMappingLdap extends pulumi.CustomResource {
     /**
@@ -47,7 +39,6 @@ export class PropertyMappingLdap extends pulumi.CustomResource {
 
     public readonly expression!: pulumi.Output<string>;
     public readonly name!: pulumi.Output<string>;
-    public readonly objectField!: pulumi.Output<string>;
 
     /**
      * Create a PropertyMappingLdap resource with the given unique name, arguments, and options.
@@ -64,18 +55,13 @@ export class PropertyMappingLdap extends pulumi.CustomResource {
             const state = argsOrState as PropertyMappingLdapState | undefined;
             resourceInputs["expression"] = state ? state.expression : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["objectField"] = state ? state.objectField : undefined;
         } else {
             const args = argsOrState as PropertyMappingLdapArgs | undefined;
             if ((!args || args.expression === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'expression'");
             }
-            if ((!args || args.objectField === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'objectField'");
-            }
             resourceInputs["expression"] = args ? args.expression : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["objectField"] = args ? args.objectField : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(PropertyMappingLdap.__pulumiType, name, resourceInputs, opts);
@@ -88,7 +74,6 @@ export class PropertyMappingLdap extends pulumi.CustomResource {
 export interface PropertyMappingLdapState {
     expression?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
-    objectField?: pulumi.Input<string>;
 }
 
 /**
@@ -97,5 +82,4 @@ export interface PropertyMappingLdapState {
 export interface PropertyMappingLdapArgs {
     expression: pulumi.Input<string>;
     name?: pulumi.Input<string>;
-    objectField: pulumi.Input<string>;
 }

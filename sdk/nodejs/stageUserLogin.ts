@@ -42,18 +42,17 @@ export class StageUserLogin extends pulumi.CustomResource {
         return obj['__pulumiType'] === StageUserLogin.__pulumiType;
     }
 
+    /**
+     * Allowed values: - `noBinding` - `bindContinent` - `bindContinentCountry` - `bindContinentCountryCity`
+     */
+    public readonly geoipBinding!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     /**
-     * Defaults to `seconds=0`.
+     * Allowed values: - `noBinding` - `bindAsn` - `bindAsnNetwork` - `bindAsnNetworkIp`
      */
+    public readonly networkBinding!: pulumi.Output<string | undefined>;
     public readonly rememberMeOffset!: pulumi.Output<string | undefined>;
-    /**
-     * Defaults to `seconds=0`.
-     */
     public readonly sessionDuration!: pulumi.Output<string | undefined>;
-    /**
-     * Defaults to `false`.
-     */
     public readonly terminateOtherSessions!: pulumi.Output<boolean | undefined>;
 
     /**
@@ -69,13 +68,17 @@ export class StageUserLogin extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as StageUserLoginState | undefined;
+            resourceInputs["geoipBinding"] = state ? state.geoipBinding : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["networkBinding"] = state ? state.networkBinding : undefined;
             resourceInputs["rememberMeOffset"] = state ? state.rememberMeOffset : undefined;
             resourceInputs["sessionDuration"] = state ? state.sessionDuration : undefined;
             resourceInputs["terminateOtherSessions"] = state ? state.terminateOtherSessions : undefined;
         } else {
             const args = argsOrState as StageUserLoginArgs | undefined;
+            resourceInputs["geoipBinding"] = args ? args.geoipBinding : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["networkBinding"] = args ? args.networkBinding : undefined;
             resourceInputs["rememberMeOffset"] = args ? args.rememberMeOffset : undefined;
             resourceInputs["sessionDuration"] = args ? args.sessionDuration : undefined;
             resourceInputs["terminateOtherSessions"] = args ? args.terminateOtherSessions : undefined;
@@ -89,18 +92,17 @@ export class StageUserLogin extends pulumi.CustomResource {
  * Input properties used for looking up and filtering StageUserLogin resources.
  */
 export interface StageUserLoginState {
+    /**
+     * Allowed values: - `noBinding` - `bindContinent` - `bindContinentCountry` - `bindContinentCountryCity`
+     */
+    geoipBinding?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     /**
-     * Defaults to `seconds=0`.
+     * Allowed values: - `noBinding` - `bindAsn` - `bindAsnNetwork` - `bindAsnNetworkIp`
      */
+    networkBinding?: pulumi.Input<string>;
     rememberMeOffset?: pulumi.Input<string>;
-    /**
-     * Defaults to `seconds=0`.
-     */
     sessionDuration?: pulumi.Input<string>;
-    /**
-     * Defaults to `false`.
-     */
     terminateOtherSessions?: pulumi.Input<boolean>;
 }
 
@@ -108,17 +110,16 @@ export interface StageUserLoginState {
  * The set of arguments for constructing a StageUserLogin resource.
  */
 export interface StageUserLoginArgs {
+    /**
+     * Allowed values: - `noBinding` - `bindContinent` - `bindContinentCountry` - `bindContinentCountryCity`
+     */
+    geoipBinding?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     /**
-     * Defaults to `seconds=0`.
+     * Allowed values: - `noBinding` - `bindAsn` - `bindAsnNetwork` - `bindAsnNetworkIp`
      */
+    networkBinding?: pulumi.Input<string>;
     rememberMeOffset?: pulumi.Input<string>;
-    /**
-     * Defaults to `seconds=0`.
-     */
     sessionDuration?: pulumi.Input<string>;
-    /**
-     * Defaults to `false`.
-     */
     terminateOtherSessions?: pulumi.Input<boolean>;
 }

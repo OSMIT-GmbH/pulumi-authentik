@@ -8,28 +8,58 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create a token for a user
+//			name, err := authentik.NewUser(ctx, "name", &authentik.UserArgs{
+//				Username: pulumi.String("user"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewToken(ctx, "default", &authentik.TokenArgs{
+//				Identifier:  pulumi.String("my-token"),
+//				User:        name.ID(),
+//				Description: pulumi.String("My secret token"),
+//				Expires:     pulumi.String("2025-01-01T15:04:05Z"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type Token struct {
 	pulumi.CustomResourceState
 
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	Expires     pulumi.StringPtrOutput `pulumi:"expires"`
-	// Generated.
-	ExpiresIn pulumi.IntOutput `pulumi:"expiresIn"`
-	// Defaults to `true`.
-	Expiring   pulumi.BoolPtrOutput `pulumi:"expiring"`
-	Identifier pulumi.StringOutput  `pulumi:"identifier"`
-	// Defaults to `api`.
-	Intent pulumi.StringPtrOutput `pulumi:"intent"`
-	// Generated.
-	Key pulumi.StringOutput `pulumi:"key"`
-	// Defaults to `false`.
-	RetrieveKey pulumi.BoolPtrOutput `pulumi:"retrieveKey"`
-	User        pulumi.IntOutput     `pulumi:"user"`
+	ExpiresIn   pulumi.IntOutput       `pulumi:"expiresIn"`
+	Expiring    pulumi.BoolPtrOutput   `pulumi:"expiring"`
+	Identifier  pulumi.StringOutput    `pulumi:"identifier"`
+	// Allowed values: - `verification` - `api` - `recovery` - `appPassword`
+	Intent      pulumi.StringPtrOutput `pulumi:"intent"`
+	Key         pulumi.StringOutput    `pulumi:"key"`
+	RetrieveKey pulumi.BoolPtrOutput   `pulumi:"retrieveKey"`
+	User        pulumi.IntOutput       `pulumi:"user"`
 }
 
 // NewToken registers a new resource with the given unique name, arguments, and options.
@@ -74,33 +104,25 @@ func GetToken(ctx *pulumi.Context,
 type tokenState struct {
 	Description *string `pulumi:"description"`
 	Expires     *string `pulumi:"expires"`
-	// Generated.
-	ExpiresIn *int `pulumi:"expiresIn"`
-	// Defaults to `true`.
-	Expiring   *bool   `pulumi:"expiring"`
-	Identifier *string `pulumi:"identifier"`
-	// Defaults to `api`.
-	Intent *string `pulumi:"intent"`
-	// Generated.
-	Key *string `pulumi:"key"`
-	// Defaults to `false`.
-	RetrieveKey *bool `pulumi:"retrieveKey"`
-	User        *int  `pulumi:"user"`
+	ExpiresIn   *int    `pulumi:"expiresIn"`
+	Expiring    *bool   `pulumi:"expiring"`
+	Identifier  *string `pulumi:"identifier"`
+	// Allowed values: - `verification` - `api` - `recovery` - `appPassword`
+	Intent      *string `pulumi:"intent"`
+	Key         *string `pulumi:"key"`
+	RetrieveKey *bool   `pulumi:"retrieveKey"`
+	User        *int    `pulumi:"user"`
 }
 
 type TokenState struct {
 	Description pulumi.StringPtrInput
 	Expires     pulumi.StringPtrInput
-	// Generated.
-	ExpiresIn pulumi.IntPtrInput
-	// Defaults to `true`.
-	Expiring   pulumi.BoolPtrInput
-	Identifier pulumi.StringPtrInput
-	// Defaults to `api`.
-	Intent pulumi.StringPtrInput
-	// Generated.
-	Key pulumi.StringPtrInput
-	// Defaults to `false`.
+	ExpiresIn   pulumi.IntPtrInput
+	Expiring    pulumi.BoolPtrInput
+	Identifier  pulumi.StringPtrInput
+	// Allowed values: - `verification` - `api` - `recovery` - `appPassword`
+	Intent      pulumi.StringPtrInput
+	Key         pulumi.StringPtrInput
 	RetrieveKey pulumi.BoolPtrInput
 	User        pulumi.IntPtrInput
 }
@@ -112,26 +134,22 @@ func (TokenState) ElementType() reflect.Type {
 type tokenArgs struct {
 	Description *string `pulumi:"description"`
 	Expires     *string `pulumi:"expires"`
-	// Defaults to `true`.
-	Expiring   *bool  `pulumi:"expiring"`
-	Identifier string `pulumi:"identifier"`
-	// Defaults to `api`.
-	Intent *string `pulumi:"intent"`
-	// Defaults to `false`.
-	RetrieveKey *bool `pulumi:"retrieveKey"`
-	User        int   `pulumi:"user"`
+	Expiring    *bool   `pulumi:"expiring"`
+	Identifier  string  `pulumi:"identifier"`
+	// Allowed values: - `verification` - `api` - `recovery` - `appPassword`
+	Intent      *string `pulumi:"intent"`
+	RetrieveKey *bool   `pulumi:"retrieveKey"`
+	User        int     `pulumi:"user"`
 }
 
 // The set of arguments for constructing a Token resource.
 type TokenArgs struct {
 	Description pulumi.StringPtrInput
 	Expires     pulumi.StringPtrInput
-	// Defaults to `true`.
-	Expiring   pulumi.BoolPtrInput
-	Identifier pulumi.StringInput
-	// Defaults to `api`.
-	Intent pulumi.StringPtrInput
-	// Defaults to `false`.
+	Expiring    pulumi.BoolPtrInput
+	Identifier  pulumi.StringInput
+	// Allowed values: - `verification` - `api` - `recovery` - `appPassword`
+	Intent      pulumi.StringPtrInput
 	RetrieveKey pulumi.BoolPtrInput
 	User        pulumi.IntInput
 }
@@ -159,12 +177,6 @@ func (i *Token) ToTokenOutputWithContext(ctx context.Context) TokenOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(TokenOutput)
 }
 
-func (i *Token) ToOutput(ctx context.Context) pulumix.Output[*Token] {
-	return pulumix.Output[*Token]{
-		OutputState: i.ToTokenOutputWithContext(ctx).OutputState,
-	}
-}
-
 // TokenArrayInput is an input type that accepts TokenArray and TokenArrayOutput values.
 // You can construct a concrete instance of `TokenArrayInput` via:
 //
@@ -188,12 +200,6 @@ func (i TokenArray) ToTokenArrayOutput() TokenArrayOutput {
 
 func (i TokenArray) ToTokenArrayOutputWithContext(ctx context.Context) TokenArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(TokenArrayOutput)
-}
-
-func (i TokenArray) ToOutput(ctx context.Context) pulumix.Output[[]*Token] {
-	return pulumix.Output[[]*Token]{
-		OutputState: i.ToTokenArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // TokenMapInput is an input type that accepts TokenMap and TokenMapOutput values.
@@ -221,12 +227,6 @@ func (i TokenMap) ToTokenMapOutputWithContext(ctx context.Context) TokenMapOutpu
 	return pulumi.ToOutputWithContext(ctx, i).(TokenMapOutput)
 }
 
-func (i TokenMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Token] {
-	return pulumix.Output[map[string]*Token]{
-		OutputState: i.ToTokenMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type TokenOutput struct{ *pulumi.OutputState }
 
 func (TokenOutput) ElementType() reflect.Type {
@@ -241,12 +241,6 @@ func (o TokenOutput) ToTokenOutputWithContext(ctx context.Context) TokenOutput {
 	return o
 }
 
-func (o TokenOutput) ToOutput(ctx context.Context) pulumix.Output[*Token] {
-	return pulumix.Output[*Token]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o TokenOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Token) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
@@ -255,12 +249,10 @@ func (o TokenOutput) Expires() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Token) pulumi.StringPtrOutput { return v.Expires }).(pulumi.StringPtrOutput)
 }
 
-// Generated.
 func (o TokenOutput) ExpiresIn() pulumi.IntOutput {
 	return o.ApplyT(func(v *Token) pulumi.IntOutput { return v.ExpiresIn }).(pulumi.IntOutput)
 }
 
-// Defaults to `true`.
 func (o TokenOutput) Expiring() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Token) pulumi.BoolPtrOutput { return v.Expiring }).(pulumi.BoolPtrOutput)
 }
@@ -269,17 +261,15 @@ func (o TokenOutput) Identifier() pulumi.StringOutput {
 	return o.ApplyT(func(v *Token) pulumi.StringOutput { return v.Identifier }).(pulumi.StringOutput)
 }
 
-// Defaults to `api`.
+// Allowed values: - `verification` - `api` - `recovery` - `appPassword`
 func (o TokenOutput) Intent() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Token) pulumi.StringPtrOutput { return v.Intent }).(pulumi.StringPtrOutput)
 }
 
-// Generated.
 func (o TokenOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v *Token) pulumi.StringOutput { return v.Key }).(pulumi.StringOutput)
 }
 
-// Defaults to `false`.
 func (o TokenOutput) RetrieveKey() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Token) pulumi.BoolPtrOutput { return v.RetrieveKey }).(pulumi.BoolPtrOutput)
 }
@@ -302,12 +292,6 @@ func (o TokenArrayOutput) ToTokenArrayOutputWithContext(ctx context.Context) Tok
 	return o
 }
 
-func (o TokenArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Token] {
-	return pulumix.Output[[]*Token]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o TokenArrayOutput) Index(i pulumi.IntInput) TokenOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Token {
 		return vs[0].([]*Token)[vs[1].(int)]
@@ -326,12 +310,6 @@ func (o TokenMapOutput) ToTokenMapOutput() TokenMapOutput {
 
 func (o TokenMapOutput) ToTokenMapOutputWithContext(ctx context.Context) TokenMapOutput {
 	return o
-}
-
-func (o TokenMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Token] {
-	return pulumix.Output[map[string]*Token]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o TokenMapOutput) MapIndex(k pulumi.StringInput) TokenOutput {

@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // The provider type for the authentik package. By default, resources use package-wide configuration
@@ -39,6 +38,9 @@ func NewProvider(ctx *pulumi.Context,
 	if args.Url == nil {
 		return nil, errors.New("invalid value for required argument 'Url'")
 	}
+	if args.Headers != nil {
+		args.Headers = pulumi.ToSecret(args.Headers).(pulumi.StringMapInput)
+	}
 	if args.Token != nil {
 		args.Token = pulumi.ToSecret(args.Token).(pulumi.StringInput)
 	}
@@ -56,6 +58,8 @@ func NewProvider(ctx *pulumi.Context,
 }
 
 type providerArgs struct {
+	// Optional HTTP headers sent with every request
+	Headers map[string]string `pulumi:"headers"`
 	// Whether to skip TLS verification, can optionally be passed as `AUTHENTIK_INSECURE` environmental variable
 	Insecure *bool `pulumi:"insecure"`
 	// The authentik API token, can optionally be passed as `AUTHENTIK_TOKEN` environmental variable
@@ -66,6 +70,8 @@ type providerArgs struct {
 
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
+	// Optional HTTP headers sent with every request
+	Headers pulumi.StringMapInput
 	// Whether to skip TLS verification, can optionally be passed as `AUTHENTIK_INSECURE` environmental variable
 	Insecure pulumi.BoolPtrInput
 	// The authentik API token, can optionally be passed as `AUTHENTIK_TOKEN` environmental variable
@@ -97,12 +103,6 @@ func (i *Provider) ToProviderOutputWithContext(ctx context.Context) ProviderOutp
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderOutput)
 }
 
-func (i *Provider) ToOutput(ctx context.Context) pulumix.Output[*Provider] {
-	return pulumix.Output[*Provider]{
-		OutputState: i.ToProviderOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ProviderOutput struct{ *pulumi.OutputState }
 
 func (ProviderOutput) ElementType() reflect.Type {
@@ -115,12 +115,6 @@ func (o ProviderOutput) ToProviderOutput() ProviderOutput {
 
 func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) ProviderOutput {
 	return o
-}
-
-func (o ProviderOutput) ToOutput(ctx context.Context) pulumix.Output[*Provider] {
-	return pulumix.Output[*Provider]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The authentik API token, can optionally be passed as `AUTHENTIK_TOKEN` environmental variable

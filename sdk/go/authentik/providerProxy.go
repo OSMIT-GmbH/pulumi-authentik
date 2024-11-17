@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -36,7 +35,7 @@ import (
 //			nameProviderProxy, err := authentik.NewProviderProxy(ctx, "nameProviderProxy", &authentik.ProviderProxyArgs{
 //				InternalHost:      pulumi.String("http://foo.bar.baz"),
 //				ExternalHost:      pulumi.String("http://internal.service"),
-//				AuthorizationFlow: *pulumi.String(default_authorization_flow.Id),
+//				AuthorizationFlow: pulumi.String(default_authorization_flow.Id),
 //			})
 //			if err != nil {
 //				return err
@@ -56,32 +55,27 @@ import (
 type ProviderProxy struct {
 	pulumi.CustomResourceState
 
-	// Defaults to `minutes=10`.
-	AccessTokenValidity pulumi.StringPtrOutput `pulumi:"accessTokenValidity"`
-	AuthenticationFlow  pulumi.StringPtrOutput `pulumi:"authenticationFlow"`
-	AuthorizationFlow   pulumi.StringOutput    `pulumi:"authorizationFlow"`
-	// Defaults to `false`.
+	AccessTokenValidity        pulumi.StringPtrOutput `pulumi:"accessTokenValidity"`
+	AuthenticationFlow         pulumi.StringPtrOutput `pulumi:"authenticationFlow"`
+	AuthorizationFlow          pulumi.StringOutput    `pulumi:"authorizationFlow"`
 	BasicAuthEnabled           pulumi.BoolPtrOutput   `pulumi:"basicAuthEnabled"`
 	BasicAuthPasswordAttribute pulumi.StringPtrOutput `pulumi:"basicAuthPasswordAttribute"`
 	BasicAuthUsernameAttribute pulumi.StringPtrOutput `pulumi:"basicAuthUsernameAttribute"`
-	// Generated.
-	ClientId     pulumi.StringOutput    `pulumi:"clientId"`
-	CookieDomain pulumi.StringPtrOutput `pulumi:"cookieDomain"`
-	ExternalHost pulumi.StringOutput    `pulumi:"externalHost"`
-	// Defaults to `true`.
-	InterceptHeaderAuth pulumi.BoolPtrOutput   `pulumi:"interceptHeaderAuth"`
-	InternalHost        pulumi.StringPtrOutput `pulumi:"internalHost"`
-	// Defaults to `true`.
-	InternalHostSslValidation pulumi.BoolPtrOutput `pulumi:"internalHostSslValidation"`
+	ClientId                   pulumi.StringOutput    `pulumi:"clientId"`
+	CookieDomain               pulumi.StringPtrOutput `pulumi:"cookieDomain"`
+	ExternalHost               pulumi.StringOutput    `pulumi:"externalHost"`
+	InterceptHeaderAuth        pulumi.BoolPtrOutput   `pulumi:"interceptHeaderAuth"`
+	InternalHost               pulumi.StringPtrOutput `pulumi:"internalHost"`
+	InternalHostSslValidation  pulumi.BoolPtrOutput   `pulumi:"internalHostSslValidation"`
+	InvalidationFlow           pulumi.StringOutput    `pulumi:"invalidationFlow"`
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	JwksSources pulumi.StringArrayOutput `pulumi:"jwksSources"`
-	// Defaults to `proxy`.
-	Mode             pulumi.StringPtrOutput   `pulumi:"mode"`
-	Name             pulumi.StringOutput      `pulumi:"name"`
-	PropertyMappings pulumi.StringArrayOutput `pulumi:"propertyMappings"`
-	// Defaults to `days=30`.
-	RefreshTokenValidity pulumi.StringPtrOutput `pulumi:"refreshTokenValidity"`
-	SkipPathRegex        pulumi.StringPtrOutput `pulumi:"skipPathRegex"`
+	// Allowed values: - `proxy` - `forwardSingle` - `forwardDomain`
+	Mode                 pulumi.StringPtrOutput   `pulumi:"mode"`
+	Name                 pulumi.StringOutput      `pulumi:"name"`
+	PropertyMappings     pulumi.StringArrayOutput `pulumi:"propertyMappings"`
+	RefreshTokenValidity pulumi.StringPtrOutput   `pulumi:"refreshTokenValidity"`
+	SkipPathRegex        pulumi.StringPtrOutput   `pulumi:"skipPathRegex"`
 }
 
 // NewProviderProxy registers a new resource with the given unique name, arguments, and options.
@@ -96,6 +90,9 @@ func NewProviderProxy(ctx *pulumi.Context,
 	}
 	if args.ExternalHost == nil {
 		return nil, errors.New("invalid value for required argument 'ExternalHost'")
+	}
+	if args.InvalidationFlow == nil {
+		return nil, errors.New("invalid value for required argument 'InvalidationFlow'")
 	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProviderProxy
@@ -120,59 +117,49 @@ func GetProviderProxy(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ProviderProxy resources.
 type providerProxyState struct {
-	// Defaults to `minutes=10`.
-	AccessTokenValidity *string `pulumi:"accessTokenValidity"`
-	AuthenticationFlow  *string `pulumi:"authenticationFlow"`
-	AuthorizationFlow   *string `pulumi:"authorizationFlow"`
-	// Defaults to `false`.
+	AccessTokenValidity        *string `pulumi:"accessTokenValidity"`
+	AuthenticationFlow         *string `pulumi:"authenticationFlow"`
+	AuthorizationFlow          *string `pulumi:"authorizationFlow"`
 	BasicAuthEnabled           *bool   `pulumi:"basicAuthEnabled"`
 	BasicAuthPasswordAttribute *string `pulumi:"basicAuthPasswordAttribute"`
 	BasicAuthUsernameAttribute *string `pulumi:"basicAuthUsernameAttribute"`
-	// Generated.
-	ClientId     *string `pulumi:"clientId"`
-	CookieDomain *string `pulumi:"cookieDomain"`
-	ExternalHost *string `pulumi:"externalHost"`
-	// Defaults to `true`.
-	InterceptHeaderAuth *bool   `pulumi:"interceptHeaderAuth"`
-	InternalHost        *string `pulumi:"internalHost"`
-	// Defaults to `true`.
-	InternalHostSslValidation *bool `pulumi:"internalHostSslValidation"`
+	ClientId                   *string `pulumi:"clientId"`
+	CookieDomain               *string `pulumi:"cookieDomain"`
+	ExternalHost               *string `pulumi:"externalHost"`
+	InterceptHeaderAuth        *bool   `pulumi:"interceptHeaderAuth"`
+	InternalHost               *string `pulumi:"internalHost"`
+	InternalHostSslValidation  *bool   `pulumi:"internalHostSslValidation"`
+	InvalidationFlow           *string `pulumi:"invalidationFlow"`
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	JwksSources []string `pulumi:"jwksSources"`
-	// Defaults to `proxy`.
-	Mode             *string  `pulumi:"mode"`
-	Name             *string  `pulumi:"name"`
-	PropertyMappings []string `pulumi:"propertyMappings"`
-	// Defaults to `days=30`.
-	RefreshTokenValidity *string `pulumi:"refreshTokenValidity"`
-	SkipPathRegex        *string `pulumi:"skipPathRegex"`
+	// Allowed values: - `proxy` - `forwardSingle` - `forwardDomain`
+	Mode                 *string  `pulumi:"mode"`
+	Name                 *string  `pulumi:"name"`
+	PropertyMappings     []string `pulumi:"propertyMappings"`
+	RefreshTokenValidity *string  `pulumi:"refreshTokenValidity"`
+	SkipPathRegex        *string  `pulumi:"skipPathRegex"`
 }
 
 type ProviderProxyState struct {
-	// Defaults to `minutes=10`.
-	AccessTokenValidity pulumi.StringPtrInput
-	AuthenticationFlow  pulumi.StringPtrInput
-	AuthorizationFlow   pulumi.StringPtrInput
-	// Defaults to `false`.
+	AccessTokenValidity        pulumi.StringPtrInput
+	AuthenticationFlow         pulumi.StringPtrInput
+	AuthorizationFlow          pulumi.StringPtrInput
 	BasicAuthEnabled           pulumi.BoolPtrInput
 	BasicAuthPasswordAttribute pulumi.StringPtrInput
 	BasicAuthUsernameAttribute pulumi.StringPtrInput
-	// Generated.
-	ClientId     pulumi.StringPtrInput
-	CookieDomain pulumi.StringPtrInput
-	ExternalHost pulumi.StringPtrInput
-	// Defaults to `true`.
-	InterceptHeaderAuth pulumi.BoolPtrInput
-	InternalHost        pulumi.StringPtrInput
-	// Defaults to `true`.
-	InternalHostSslValidation pulumi.BoolPtrInput
+	ClientId                   pulumi.StringPtrInput
+	CookieDomain               pulumi.StringPtrInput
+	ExternalHost               pulumi.StringPtrInput
+	InterceptHeaderAuth        pulumi.BoolPtrInput
+	InternalHost               pulumi.StringPtrInput
+	InternalHostSslValidation  pulumi.BoolPtrInput
+	InvalidationFlow           pulumi.StringPtrInput
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	JwksSources pulumi.StringArrayInput
-	// Defaults to `proxy`.
-	Mode             pulumi.StringPtrInput
-	Name             pulumi.StringPtrInput
-	PropertyMappings pulumi.StringArrayInput
-	// Defaults to `days=30`.
+	// Allowed values: - `proxy` - `forwardSingle` - `forwardDomain`
+	Mode                 pulumi.StringPtrInput
+	Name                 pulumi.StringPtrInput
+	PropertyMappings     pulumi.StringArrayInput
 	RefreshTokenValidity pulumi.StringPtrInput
 	SkipPathRegex        pulumi.StringPtrInput
 }
@@ -182,56 +169,48 @@ func (ProviderProxyState) ElementType() reflect.Type {
 }
 
 type providerProxyArgs struct {
-	// Defaults to `minutes=10`.
-	AccessTokenValidity *string `pulumi:"accessTokenValidity"`
-	AuthenticationFlow  *string `pulumi:"authenticationFlow"`
-	AuthorizationFlow   string  `pulumi:"authorizationFlow"`
-	// Defaults to `false`.
+	AccessTokenValidity        *string `pulumi:"accessTokenValidity"`
+	AuthenticationFlow         *string `pulumi:"authenticationFlow"`
+	AuthorizationFlow          string  `pulumi:"authorizationFlow"`
 	BasicAuthEnabled           *bool   `pulumi:"basicAuthEnabled"`
 	BasicAuthPasswordAttribute *string `pulumi:"basicAuthPasswordAttribute"`
 	BasicAuthUsernameAttribute *string `pulumi:"basicAuthUsernameAttribute"`
 	CookieDomain               *string `pulumi:"cookieDomain"`
 	ExternalHost               string  `pulumi:"externalHost"`
-	// Defaults to `true`.
-	InterceptHeaderAuth *bool   `pulumi:"interceptHeaderAuth"`
-	InternalHost        *string `pulumi:"internalHost"`
-	// Defaults to `true`.
-	InternalHostSslValidation *bool `pulumi:"internalHostSslValidation"`
+	InterceptHeaderAuth        *bool   `pulumi:"interceptHeaderAuth"`
+	InternalHost               *string `pulumi:"internalHost"`
+	InternalHostSslValidation  *bool   `pulumi:"internalHostSslValidation"`
+	InvalidationFlow           string  `pulumi:"invalidationFlow"`
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	JwksSources []string `pulumi:"jwksSources"`
-	// Defaults to `proxy`.
-	Mode             *string  `pulumi:"mode"`
-	Name             *string  `pulumi:"name"`
-	PropertyMappings []string `pulumi:"propertyMappings"`
-	// Defaults to `days=30`.
-	RefreshTokenValidity *string `pulumi:"refreshTokenValidity"`
-	SkipPathRegex        *string `pulumi:"skipPathRegex"`
+	// Allowed values: - `proxy` - `forwardSingle` - `forwardDomain`
+	Mode                 *string  `pulumi:"mode"`
+	Name                 *string  `pulumi:"name"`
+	PropertyMappings     []string `pulumi:"propertyMappings"`
+	RefreshTokenValidity *string  `pulumi:"refreshTokenValidity"`
+	SkipPathRegex        *string  `pulumi:"skipPathRegex"`
 }
 
 // The set of arguments for constructing a ProviderProxy resource.
 type ProviderProxyArgs struct {
-	// Defaults to `minutes=10`.
-	AccessTokenValidity pulumi.StringPtrInput
-	AuthenticationFlow  pulumi.StringPtrInput
-	AuthorizationFlow   pulumi.StringInput
-	// Defaults to `false`.
+	AccessTokenValidity        pulumi.StringPtrInput
+	AuthenticationFlow         pulumi.StringPtrInput
+	AuthorizationFlow          pulumi.StringInput
 	BasicAuthEnabled           pulumi.BoolPtrInput
 	BasicAuthPasswordAttribute pulumi.StringPtrInput
 	BasicAuthUsernameAttribute pulumi.StringPtrInput
 	CookieDomain               pulumi.StringPtrInput
 	ExternalHost               pulumi.StringInput
-	// Defaults to `true`.
-	InterceptHeaderAuth pulumi.BoolPtrInput
-	InternalHost        pulumi.StringPtrInput
-	// Defaults to `true`.
-	InternalHostSslValidation pulumi.BoolPtrInput
+	InterceptHeaderAuth        pulumi.BoolPtrInput
+	InternalHost               pulumi.StringPtrInput
+	InternalHostSslValidation  pulumi.BoolPtrInput
+	InvalidationFlow           pulumi.StringInput
 	// JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
 	JwksSources pulumi.StringArrayInput
-	// Defaults to `proxy`.
-	Mode             pulumi.StringPtrInput
-	Name             pulumi.StringPtrInput
-	PropertyMappings pulumi.StringArrayInput
-	// Defaults to `days=30`.
+	// Allowed values: - `proxy` - `forwardSingle` - `forwardDomain`
+	Mode                 pulumi.StringPtrInput
+	Name                 pulumi.StringPtrInput
+	PropertyMappings     pulumi.StringArrayInput
 	RefreshTokenValidity pulumi.StringPtrInput
 	SkipPathRegex        pulumi.StringPtrInput
 }
@@ -259,12 +238,6 @@ func (i *ProviderProxy) ToProviderProxyOutputWithContext(ctx context.Context) Pr
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderProxyOutput)
 }
 
-func (i *ProviderProxy) ToOutput(ctx context.Context) pulumix.Output[*ProviderProxy] {
-	return pulumix.Output[*ProviderProxy]{
-		OutputState: i.ToProviderProxyOutputWithContext(ctx).OutputState,
-	}
-}
-
 // ProviderProxyArrayInput is an input type that accepts ProviderProxyArray and ProviderProxyArrayOutput values.
 // You can construct a concrete instance of `ProviderProxyArrayInput` via:
 //
@@ -288,12 +261,6 @@ func (i ProviderProxyArray) ToProviderProxyArrayOutput() ProviderProxyArrayOutpu
 
 func (i ProviderProxyArray) ToProviderProxyArrayOutputWithContext(ctx context.Context) ProviderProxyArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderProxyArrayOutput)
-}
-
-func (i ProviderProxyArray) ToOutput(ctx context.Context) pulumix.Output[[]*ProviderProxy] {
-	return pulumix.Output[[]*ProviderProxy]{
-		OutputState: i.ToProviderProxyArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // ProviderProxyMapInput is an input type that accepts ProviderProxyMap and ProviderProxyMapOutput values.
@@ -321,12 +288,6 @@ func (i ProviderProxyMap) ToProviderProxyMapOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(ProviderProxyMapOutput)
 }
 
-func (i ProviderProxyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProviderProxy] {
-	return pulumix.Output[map[string]*ProviderProxy]{
-		OutputState: i.ToProviderProxyMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ProviderProxyOutput struct{ *pulumi.OutputState }
 
 func (ProviderProxyOutput) ElementType() reflect.Type {
@@ -341,13 +302,6 @@ func (o ProviderProxyOutput) ToProviderProxyOutputWithContext(ctx context.Contex
 	return o
 }
 
-func (o ProviderProxyOutput) ToOutput(ctx context.Context) pulumix.Output[*ProviderProxy] {
-	return pulumix.Output[*ProviderProxy]{
-		OutputState: o.OutputState,
-	}
-}
-
-// Defaults to `minutes=10`.
 func (o ProviderProxyOutput) AccessTokenValidity() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderProxy) pulumi.StringPtrOutput { return v.AccessTokenValidity }).(pulumi.StringPtrOutput)
 }
@@ -360,7 +314,6 @@ func (o ProviderProxyOutput) AuthorizationFlow() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderProxy) pulumi.StringOutput { return v.AuthorizationFlow }).(pulumi.StringOutput)
 }
 
-// Defaults to `false`.
 func (o ProviderProxyOutput) BasicAuthEnabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProviderProxy) pulumi.BoolPtrOutput { return v.BasicAuthEnabled }).(pulumi.BoolPtrOutput)
 }
@@ -373,7 +326,6 @@ func (o ProviderProxyOutput) BasicAuthUsernameAttribute() pulumi.StringPtrOutput
 	return o.ApplyT(func(v *ProviderProxy) pulumi.StringPtrOutput { return v.BasicAuthUsernameAttribute }).(pulumi.StringPtrOutput)
 }
 
-// Generated.
 func (o ProviderProxyOutput) ClientId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderProxy) pulumi.StringOutput { return v.ClientId }).(pulumi.StringOutput)
 }
@@ -386,7 +338,6 @@ func (o ProviderProxyOutput) ExternalHost() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProviderProxy) pulumi.StringOutput { return v.ExternalHost }).(pulumi.StringOutput)
 }
 
-// Defaults to `true`.
 func (o ProviderProxyOutput) InterceptHeaderAuth() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProviderProxy) pulumi.BoolPtrOutput { return v.InterceptHeaderAuth }).(pulumi.BoolPtrOutput)
 }
@@ -395,9 +346,12 @@ func (o ProviderProxyOutput) InternalHost() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderProxy) pulumi.StringPtrOutput { return v.InternalHost }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `true`.
 func (o ProviderProxyOutput) InternalHostSslValidation() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ProviderProxy) pulumi.BoolPtrOutput { return v.InternalHostSslValidation }).(pulumi.BoolPtrOutput)
+}
+
+func (o ProviderProxyOutput) InvalidationFlow() pulumi.StringOutput {
+	return o.ApplyT(func(v *ProviderProxy) pulumi.StringOutput { return v.InvalidationFlow }).(pulumi.StringOutput)
 }
 
 // JWTs issued by keys configured in any of the selected sources can be used to authenticate on behalf of this provider.
@@ -405,7 +359,7 @@ func (o ProviderProxyOutput) JwksSources() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProviderProxy) pulumi.StringArrayOutput { return v.JwksSources }).(pulumi.StringArrayOutput)
 }
 
-// Defaults to `proxy`.
+// Allowed values: - `proxy` - `forwardSingle` - `forwardDomain`
 func (o ProviderProxyOutput) Mode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderProxy) pulumi.StringPtrOutput { return v.Mode }).(pulumi.StringPtrOutput)
 }
@@ -418,7 +372,6 @@ func (o ProviderProxyOutput) PropertyMappings() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProviderProxy) pulumi.StringArrayOutput { return v.PropertyMappings }).(pulumi.StringArrayOutput)
 }
 
-// Defaults to `days=30`.
 func (o ProviderProxyOutput) RefreshTokenValidity() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderProxy) pulumi.StringPtrOutput { return v.RefreshTokenValidity }).(pulumi.StringPtrOutput)
 }
@@ -441,12 +394,6 @@ func (o ProviderProxyArrayOutput) ToProviderProxyArrayOutputWithContext(ctx cont
 	return o
 }
 
-func (o ProviderProxyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ProviderProxy] {
-	return pulumix.Output[[]*ProviderProxy]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o ProviderProxyArrayOutput) Index(i pulumi.IntInput) ProviderProxyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ProviderProxy {
 		return vs[0].([]*ProviderProxy)[vs[1].(int)]
@@ -465,12 +412,6 @@ func (o ProviderProxyMapOutput) ToProviderProxyMapOutput() ProviderProxyMapOutpu
 
 func (o ProviderProxyMapOutput) ToProviderProxyMapOutputWithContext(ctx context.Context) ProviderProxyMapOutput {
 	return o
-}
-
-func (o ProviderProxyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ProviderProxy] {
-	return pulumix.Output[map[string]*ProviderProxy]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ProviderProxyMapOutput) MapIndex(k pulumi.StringInput) ProviderProxyOutput {

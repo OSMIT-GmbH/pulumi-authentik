@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,13 +19,14 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create a prompt stage with 1 field
 //			_, err := authentik.NewStagePromptField(ctx, "field", &authentik.StagePromptFieldArgs{
 //				FieldKey: pulumi.String("username"),
 //				Label:    pulumi.String("Username"),
@@ -140,12 +140,6 @@ func (i *StagePrompt) ToStagePromptOutputWithContext(ctx context.Context) StageP
 	return pulumi.ToOutputWithContext(ctx, i).(StagePromptOutput)
 }
 
-func (i *StagePrompt) ToOutput(ctx context.Context) pulumix.Output[*StagePrompt] {
-	return pulumix.Output[*StagePrompt]{
-		OutputState: i.ToStagePromptOutputWithContext(ctx).OutputState,
-	}
-}
-
 // StagePromptArrayInput is an input type that accepts StagePromptArray and StagePromptArrayOutput values.
 // You can construct a concrete instance of `StagePromptArrayInput` via:
 //
@@ -169,12 +163,6 @@ func (i StagePromptArray) ToStagePromptArrayOutput() StagePromptArrayOutput {
 
 func (i StagePromptArray) ToStagePromptArrayOutputWithContext(ctx context.Context) StagePromptArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StagePromptArrayOutput)
-}
-
-func (i StagePromptArray) ToOutput(ctx context.Context) pulumix.Output[[]*StagePrompt] {
-	return pulumix.Output[[]*StagePrompt]{
-		OutputState: i.ToStagePromptArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // StagePromptMapInput is an input type that accepts StagePromptMap and StagePromptMapOutput values.
@@ -202,12 +190,6 @@ func (i StagePromptMap) ToStagePromptMapOutputWithContext(ctx context.Context) S
 	return pulumi.ToOutputWithContext(ctx, i).(StagePromptMapOutput)
 }
 
-func (i StagePromptMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StagePrompt] {
-	return pulumix.Output[map[string]*StagePrompt]{
-		OutputState: i.ToStagePromptMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type StagePromptOutput struct{ *pulumi.OutputState }
 
 func (StagePromptOutput) ElementType() reflect.Type {
@@ -220,12 +202,6 @@ func (o StagePromptOutput) ToStagePromptOutput() StagePromptOutput {
 
 func (o StagePromptOutput) ToStagePromptOutputWithContext(ctx context.Context) StagePromptOutput {
 	return o
-}
-
-func (o StagePromptOutput) ToOutput(ctx context.Context) pulumix.Output[*StagePrompt] {
-	return pulumix.Output[*StagePrompt]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StagePromptOutput) Fields() pulumi.StringArrayOutput {
@@ -254,12 +230,6 @@ func (o StagePromptArrayOutput) ToStagePromptArrayOutputWithContext(ctx context.
 	return o
 }
 
-func (o StagePromptArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StagePrompt] {
-	return pulumix.Output[[]*StagePrompt]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o StagePromptArrayOutput) Index(i pulumi.IntInput) StagePromptOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StagePrompt {
 		return vs[0].([]*StagePrompt)[vs[1].(int)]
@@ -278,12 +248,6 @@ func (o StagePromptMapOutput) ToStagePromptMapOutput() StagePromptMapOutput {
 
 func (o StagePromptMapOutput) ToStagePromptMapOutputWithContext(ctx context.Context) StagePromptMapOutput {
 	return o
-}
-
-func (o StagePromptMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StagePrompt] {
-	return pulumix.Output[map[string]*StagePrompt]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StagePromptMapOutput) MapIndex(k pulumi.StringInput) StagePromptOutput {

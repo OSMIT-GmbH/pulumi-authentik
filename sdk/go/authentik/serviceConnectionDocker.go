@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,13 +18,14 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create a local docker connection
 //			_, err := authentik.NewServiceConnectionDocker(ctx, "local", &authentik.ServiceConnectionDockerArgs{
 //				Local: pulumi.Bool(true),
 //			})
@@ -167,12 +167,6 @@ func (i *ServiceConnectionDocker) ToServiceConnectionDockerOutputWithContext(ctx
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceConnectionDockerOutput)
 }
 
-func (i *ServiceConnectionDocker) ToOutput(ctx context.Context) pulumix.Output[*ServiceConnectionDocker] {
-	return pulumix.Output[*ServiceConnectionDocker]{
-		OutputState: i.ToServiceConnectionDockerOutputWithContext(ctx).OutputState,
-	}
-}
-
 // ServiceConnectionDockerArrayInput is an input type that accepts ServiceConnectionDockerArray and ServiceConnectionDockerArrayOutput values.
 // You can construct a concrete instance of `ServiceConnectionDockerArrayInput` via:
 //
@@ -196,12 +190,6 @@ func (i ServiceConnectionDockerArray) ToServiceConnectionDockerArrayOutput() Ser
 
 func (i ServiceConnectionDockerArray) ToServiceConnectionDockerArrayOutputWithContext(ctx context.Context) ServiceConnectionDockerArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceConnectionDockerArrayOutput)
-}
-
-func (i ServiceConnectionDockerArray) ToOutput(ctx context.Context) pulumix.Output[[]*ServiceConnectionDocker] {
-	return pulumix.Output[[]*ServiceConnectionDocker]{
-		OutputState: i.ToServiceConnectionDockerArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // ServiceConnectionDockerMapInput is an input type that accepts ServiceConnectionDockerMap and ServiceConnectionDockerMapOutput values.
@@ -229,12 +217,6 @@ func (i ServiceConnectionDockerMap) ToServiceConnectionDockerMapOutputWithContex
 	return pulumi.ToOutputWithContext(ctx, i).(ServiceConnectionDockerMapOutput)
 }
 
-func (i ServiceConnectionDockerMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*ServiceConnectionDocker] {
-	return pulumix.Output[map[string]*ServiceConnectionDocker]{
-		OutputState: i.ToServiceConnectionDockerMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type ServiceConnectionDockerOutput struct{ *pulumi.OutputState }
 
 func (ServiceConnectionDockerOutput) ElementType() reflect.Type {
@@ -247,12 +229,6 @@ func (o ServiceConnectionDockerOutput) ToServiceConnectionDockerOutput() Service
 
 func (o ServiceConnectionDockerOutput) ToServiceConnectionDockerOutputWithContext(ctx context.Context) ServiceConnectionDockerOutput {
 	return o
-}
-
-func (o ServiceConnectionDockerOutput) ToOutput(ctx context.Context) pulumix.Output[*ServiceConnectionDocker] {
-	return pulumix.Output[*ServiceConnectionDocker]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Defaults to `false`.
@@ -291,12 +267,6 @@ func (o ServiceConnectionDockerArrayOutput) ToServiceConnectionDockerArrayOutput
 	return o
 }
 
-func (o ServiceConnectionDockerArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*ServiceConnectionDocker] {
-	return pulumix.Output[[]*ServiceConnectionDocker]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o ServiceConnectionDockerArrayOutput) Index(i pulumi.IntInput) ServiceConnectionDockerOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *ServiceConnectionDocker {
 		return vs[0].([]*ServiceConnectionDocker)[vs[1].(int)]
@@ -315,12 +285,6 @@ func (o ServiceConnectionDockerMapOutput) ToServiceConnectionDockerMapOutput() S
 
 func (o ServiceConnectionDockerMapOutput) ToServiceConnectionDockerMapOutputWithContext(ctx context.Context) ServiceConnectionDockerMapOutput {
 	return o
-}
-
-func (o ServiceConnectionDockerMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*ServiceConnectionDocker] {
-	return pulumix.Output[map[string]*ServiceConnectionDocker]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o ServiceConnectionDockerMapOutput) MapIndex(k pulumi.StringInput) ServiceConnectionDockerOutput {

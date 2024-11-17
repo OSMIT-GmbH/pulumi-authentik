@@ -65,6 +65,10 @@ export class PolicyBinding extends pulumi.CustomResource {
      */
     public readonly enabled!: pulumi.Output<boolean | undefined>;
     /**
+     * Defaults to `false`.
+     */
+    public readonly failureResult!: pulumi.Output<boolean | undefined>;
+    /**
      * UUID of the group
      */
     public readonly group!: pulumi.Output<string | undefined>;
@@ -104,6 +108,7 @@ export class PolicyBinding extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as PolicyBindingState | undefined;
             resourceInputs["enabled"] = state ? state.enabled : undefined;
+            resourceInputs["failureResult"] = state ? state.failureResult : undefined;
             resourceInputs["group"] = state ? state.group : undefined;
             resourceInputs["negate"] = state ? state.negate : undefined;
             resourceInputs["order"] = state ? state.order : undefined;
@@ -120,6 +125,7 @@ export class PolicyBinding extends pulumi.CustomResource {
                 throw new Error("Missing required property 'target'");
             }
             resourceInputs["enabled"] = args ? args.enabled : undefined;
+            resourceInputs["failureResult"] = args ? args.failureResult : undefined;
             resourceInputs["group"] = args ? args.group : undefined;
             resourceInputs["negate"] = args ? args.negate : undefined;
             resourceInputs["order"] = args ? args.order : undefined;
@@ -141,6 +147,10 @@ export interface PolicyBindingState {
      * Defaults to `true`.
      */
     enabled?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `false`.
+     */
+    failureResult?: pulumi.Input<boolean>;
     /**
      * UUID of the group
      */
@@ -176,6 +186,10 @@ export interface PolicyBindingArgs {
      * Defaults to `true`.
      */
     enabled?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `false`.
+     */
+    failureResult?: pulumi.Input<boolean>;
     /**
      * UUID of the group
      */

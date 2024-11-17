@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -114,12 +113,6 @@ func (i *StageDummy) ToStageDummyOutputWithContext(ctx context.Context) StageDum
 	return pulumi.ToOutputWithContext(ctx, i).(StageDummyOutput)
 }
 
-func (i *StageDummy) ToOutput(ctx context.Context) pulumix.Output[*StageDummy] {
-	return pulumix.Output[*StageDummy]{
-		OutputState: i.ToStageDummyOutputWithContext(ctx).OutputState,
-	}
-}
-
 // StageDummyArrayInput is an input type that accepts StageDummyArray and StageDummyArrayOutput values.
 // You can construct a concrete instance of `StageDummyArrayInput` via:
 //
@@ -143,12 +136,6 @@ func (i StageDummyArray) ToStageDummyArrayOutput() StageDummyArrayOutput {
 
 func (i StageDummyArray) ToStageDummyArrayOutputWithContext(ctx context.Context) StageDummyArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageDummyArrayOutput)
-}
-
-func (i StageDummyArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageDummy] {
-	return pulumix.Output[[]*StageDummy]{
-		OutputState: i.ToStageDummyArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // StageDummyMapInput is an input type that accepts StageDummyMap and StageDummyMapOutput values.
@@ -176,12 +163,6 @@ func (i StageDummyMap) ToStageDummyMapOutputWithContext(ctx context.Context) Sta
 	return pulumi.ToOutputWithContext(ctx, i).(StageDummyMapOutput)
 }
 
-func (i StageDummyMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageDummy] {
-	return pulumix.Output[map[string]*StageDummy]{
-		OutputState: i.ToStageDummyMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type StageDummyOutput struct{ *pulumi.OutputState }
 
 func (StageDummyOutput) ElementType() reflect.Type {
@@ -194,12 +175,6 @@ func (o StageDummyOutput) ToStageDummyOutput() StageDummyOutput {
 
 func (o StageDummyOutput) ToStageDummyOutputWithContext(ctx context.Context) StageDummyOutput {
 	return o
-}
-
-func (o StageDummyOutput) ToOutput(ctx context.Context) pulumix.Output[*StageDummy] {
-	return pulumix.Output[*StageDummy]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageDummyOutput) Name() pulumi.StringOutput {
@@ -220,12 +195,6 @@ func (o StageDummyArrayOutput) ToStageDummyArrayOutputWithContext(ctx context.Co
 	return o
 }
 
-func (o StageDummyArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageDummy] {
-	return pulumix.Output[[]*StageDummy]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o StageDummyArrayOutput) Index(i pulumi.IntInput) StageDummyOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StageDummy {
 		return vs[0].([]*StageDummy)[vs[1].(int)]
@@ -244,12 +213,6 @@ func (o StageDummyMapOutput) ToStageDummyMapOutput() StageDummyMapOutput {
 
 func (o StageDummyMapOutput) ToStageDummyMapOutputWithContext(ctx context.Context) StageDummyMapOutput {
 	return o
-}
-
-func (o StageDummyMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageDummy] {
-	return pulumix.Output[map[string]*StageDummy]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageDummyMapOutput) MapIndex(k pulumi.StringInput) StageDummyOutput {

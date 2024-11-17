@@ -5,21 +5,9 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * ## Example Usage
+ * Manage Scope Provider Property mappings
  *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as authentik from "@osmit-gmbh/pulumi-authentik";
- *
- * const name = new authentik.ScopeMapping("name", {
- *     expression: `return {
- *   "policy": "readwrite",
- * }
- *
- * `,
- *     scopeName: "minio",
- * });
- * ```
+ * > This resource is deprecated. Migrate to `authentik.PropertyMappingProviderScope`.
  */
 export class ScopeMapping extends pulumi.CustomResource {
     /**

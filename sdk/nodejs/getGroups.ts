@@ -23,10 +23,10 @@ import * as utilities from "./utilities";
  */
 export function getGroups(args?: GetGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupsResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("authentik:index/getGroups:getGroups", {
         "attributes": args.attributes,
+        "includeUsers": args.includeUsers,
         "isSuperuser": args.isSuperuser,
         "membersByPks": args.membersByPks,
         "membersByUsernames": args.membersByUsernames,
@@ -41,6 +41,7 @@ export function getGroups(args?: GetGroupsArgs, opts?: pulumi.InvokeOptions): Pr
  */
 export interface GetGroupsArgs {
     attributes?: string;
+    includeUsers?: boolean;
     isSuperuser?: boolean;
     membersByPks?: number[];
     membersByUsernames?: string[];
@@ -62,6 +63,7 @@ export interface GetGroupsResult {
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly includeUsers?: boolean;
     readonly isSuperuser?: boolean;
     readonly membersByPks?: number[];
     readonly membersByUsernames?: string[];
@@ -85,7 +87,18 @@ export interface GetGroupsResult {
  * ```
  */
 export function getGroupsOutput(args?: GetGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGroupsResult> {
-    return pulumi.output(args).apply((a: any) => getGroups(a, opts))
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("authentik:index/getGroups:getGroups", {
+        "attributes": args.attributes,
+        "includeUsers": args.includeUsers,
+        "isSuperuser": args.isSuperuser,
+        "membersByPks": args.membersByPks,
+        "membersByUsernames": args.membersByUsernames,
+        "name": args.name,
+        "ordering": args.ordering,
+        "search": args.search,
+    }, opts);
 }
 
 /**
@@ -93,6 +106,7 @@ export function getGroupsOutput(args?: GetGroupsOutputArgs, opts?: pulumi.Invoke
  */
 export interface GetGroupsOutputArgs {
     attributes?: pulumi.Input<string>;
+    includeUsers?: pulumi.Input<boolean>;
     isSuperuser?: pulumi.Input<boolean>;
     membersByPks?: pulumi.Input<pulumi.Input<number>[]>;
     membersByUsernames?: pulumi.Input<pulumi.Input<string>[]>;

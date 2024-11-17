@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,14 +18,29 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := authentik.NewStageAuthenticatorWebauthn(ctx, "name", nil)
+//			// Create a WebAuthn setup stage
+//			_, err := authentik.NewStageAuthenticatorWebauthn(ctx, "nameStageAuthenticatorWebauthn", nil)
+//			if err != nil {
+//				return err
+//			}
+//			yubikey, err := authentik.GetWebauthnDeviceType(ctx, &authentik.GetWebauthnDeviceTypeArgs{
+//				Description: pulumi.StringRef("YubiKey 5C"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = authentik.NewStageAuthenticatorWebauthn(ctx, "nameIndex/stageAuthenticatorWebauthnStageAuthenticatorWebauthn", &authentik.StageAuthenticatorWebauthnArgs{
+//				DeviceTypeRestrictions: pulumi.StringArray{
+//					pulumi.String(yubikey.Aaguid),
+//				},
+//			})
 //			if err != nil {
 //				return err
 //			}
@@ -38,13 +52,15 @@ import (
 type StageAuthenticatorWebauthn struct {
 	pulumi.CustomResourceState
 
-	AuthenticatorAttachment pulumi.StringPtrOutput `pulumi:"authenticatorAttachment"`
-	ConfigureFlow           pulumi.StringPtrOutput `pulumi:"configureFlow"`
-	FriendlyName            pulumi.StringPtrOutput `pulumi:"friendlyName"`
-	Name                    pulumi.StringOutput    `pulumi:"name"`
-	// Defaults to `preferred`.
+	// Allowed values: - `platform` - `cross-platform`
+	AuthenticatorAttachment pulumi.StringPtrOutput   `pulumi:"authenticatorAttachment"`
+	ConfigureFlow           pulumi.StringPtrOutput   `pulumi:"configureFlow"`
+	DeviceTypeRestrictions  pulumi.StringArrayOutput `pulumi:"deviceTypeRestrictions"`
+	FriendlyName            pulumi.StringPtrOutput   `pulumi:"friendlyName"`
+	Name                    pulumi.StringOutput      `pulumi:"name"`
+	// Allowed values: - `discouraged` - `preferred` - `required`
 	ResidentKeyRequirement pulumi.StringPtrOutput `pulumi:"residentKeyRequirement"`
-	// Defaults to `preferred`.
+	// Allowed values: - `required` - `preferred` - `discouraged`
 	UserVerification pulumi.StringPtrOutput `pulumi:"userVerification"`
 }
 
@@ -78,24 +94,28 @@ func GetStageAuthenticatorWebauthn(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering StageAuthenticatorWebauthn resources.
 type stageAuthenticatorWebauthnState struct {
-	AuthenticatorAttachment *string `pulumi:"authenticatorAttachment"`
-	ConfigureFlow           *string `pulumi:"configureFlow"`
-	FriendlyName            *string `pulumi:"friendlyName"`
-	Name                    *string `pulumi:"name"`
-	// Defaults to `preferred`.
+	// Allowed values: - `platform` - `cross-platform`
+	AuthenticatorAttachment *string  `pulumi:"authenticatorAttachment"`
+	ConfigureFlow           *string  `pulumi:"configureFlow"`
+	DeviceTypeRestrictions  []string `pulumi:"deviceTypeRestrictions"`
+	FriendlyName            *string  `pulumi:"friendlyName"`
+	Name                    *string  `pulumi:"name"`
+	// Allowed values: - `discouraged` - `preferred` - `required`
 	ResidentKeyRequirement *string `pulumi:"residentKeyRequirement"`
-	// Defaults to `preferred`.
+	// Allowed values: - `required` - `preferred` - `discouraged`
 	UserVerification *string `pulumi:"userVerification"`
 }
 
 type StageAuthenticatorWebauthnState struct {
+	// Allowed values: - `platform` - `cross-platform`
 	AuthenticatorAttachment pulumi.StringPtrInput
 	ConfigureFlow           pulumi.StringPtrInput
+	DeviceTypeRestrictions  pulumi.StringArrayInput
 	FriendlyName            pulumi.StringPtrInput
 	Name                    pulumi.StringPtrInput
-	// Defaults to `preferred`.
+	// Allowed values: - `discouraged` - `preferred` - `required`
 	ResidentKeyRequirement pulumi.StringPtrInput
-	// Defaults to `preferred`.
+	// Allowed values: - `required` - `preferred` - `discouraged`
 	UserVerification pulumi.StringPtrInput
 }
 
@@ -104,25 +124,29 @@ func (StageAuthenticatorWebauthnState) ElementType() reflect.Type {
 }
 
 type stageAuthenticatorWebauthnArgs struct {
-	AuthenticatorAttachment *string `pulumi:"authenticatorAttachment"`
-	ConfigureFlow           *string `pulumi:"configureFlow"`
-	FriendlyName            *string `pulumi:"friendlyName"`
-	Name                    *string `pulumi:"name"`
-	// Defaults to `preferred`.
+	// Allowed values: - `platform` - `cross-platform`
+	AuthenticatorAttachment *string  `pulumi:"authenticatorAttachment"`
+	ConfigureFlow           *string  `pulumi:"configureFlow"`
+	DeviceTypeRestrictions  []string `pulumi:"deviceTypeRestrictions"`
+	FriendlyName            *string  `pulumi:"friendlyName"`
+	Name                    *string  `pulumi:"name"`
+	// Allowed values: - `discouraged` - `preferred` - `required`
 	ResidentKeyRequirement *string `pulumi:"residentKeyRequirement"`
-	// Defaults to `preferred`.
+	// Allowed values: - `required` - `preferred` - `discouraged`
 	UserVerification *string `pulumi:"userVerification"`
 }
 
 // The set of arguments for constructing a StageAuthenticatorWebauthn resource.
 type StageAuthenticatorWebauthnArgs struct {
+	// Allowed values: - `platform` - `cross-platform`
 	AuthenticatorAttachment pulumi.StringPtrInput
 	ConfigureFlow           pulumi.StringPtrInput
+	DeviceTypeRestrictions  pulumi.StringArrayInput
 	FriendlyName            pulumi.StringPtrInput
 	Name                    pulumi.StringPtrInput
-	// Defaults to `preferred`.
+	// Allowed values: - `discouraged` - `preferred` - `required`
 	ResidentKeyRequirement pulumi.StringPtrInput
-	// Defaults to `preferred`.
+	// Allowed values: - `required` - `preferred` - `discouraged`
 	UserVerification pulumi.StringPtrInput
 }
 
@@ -147,12 +171,6 @@ func (i *StageAuthenticatorWebauthn) ToStageAuthenticatorWebauthnOutput() StageA
 
 func (i *StageAuthenticatorWebauthn) ToStageAuthenticatorWebauthnOutputWithContext(ctx context.Context) StageAuthenticatorWebauthnOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorWebauthnOutput)
-}
-
-func (i *StageAuthenticatorWebauthn) ToOutput(ctx context.Context) pulumix.Output[*StageAuthenticatorWebauthn] {
-	return pulumix.Output[*StageAuthenticatorWebauthn]{
-		OutputState: i.ToStageAuthenticatorWebauthnOutputWithContext(ctx).OutputState,
-	}
 }
 
 // StageAuthenticatorWebauthnArrayInput is an input type that accepts StageAuthenticatorWebauthnArray and StageAuthenticatorWebauthnArrayOutput values.
@@ -180,12 +198,6 @@ func (i StageAuthenticatorWebauthnArray) ToStageAuthenticatorWebauthnArrayOutput
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorWebauthnArrayOutput)
 }
 
-func (i StageAuthenticatorWebauthnArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageAuthenticatorWebauthn] {
-	return pulumix.Output[[]*StageAuthenticatorWebauthn]{
-		OutputState: i.ToStageAuthenticatorWebauthnArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 // StageAuthenticatorWebauthnMapInput is an input type that accepts StageAuthenticatorWebauthnMap and StageAuthenticatorWebauthnMapOutput values.
 // You can construct a concrete instance of `StageAuthenticatorWebauthnMapInput` via:
 //
@@ -211,12 +223,6 @@ func (i StageAuthenticatorWebauthnMap) ToStageAuthenticatorWebauthnMapOutputWith
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorWebauthnMapOutput)
 }
 
-func (i StageAuthenticatorWebauthnMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageAuthenticatorWebauthn] {
-	return pulumix.Output[map[string]*StageAuthenticatorWebauthn]{
-		OutputState: i.ToStageAuthenticatorWebauthnMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type StageAuthenticatorWebauthnOutput struct{ *pulumi.OutputState }
 
 func (StageAuthenticatorWebauthnOutput) ElementType() reflect.Type {
@@ -231,18 +237,17 @@ func (o StageAuthenticatorWebauthnOutput) ToStageAuthenticatorWebauthnOutputWith
 	return o
 }
 
-func (o StageAuthenticatorWebauthnOutput) ToOutput(ctx context.Context) pulumix.Output[*StageAuthenticatorWebauthn] {
-	return pulumix.Output[*StageAuthenticatorWebauthn]{
-		OutputState: o.OutputState,
-	}
-}
-
+// Allowed values: - `platform` - `cross-platform`
 func (o StageAuthenticatorWebauthnOutput) AuthenticatorAttachment() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageAuthenticatorWebauthn) pulumi.StringPtrOutput { return v.AuthenticatorAttachment }).(pulumi.StringPtrOutput)
 }
 
 func (o StageAuthenticatorWebauthnOutput) ConfigureFlow() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageAuthenticatorWebauthn) pulumi.StringPtrOutput { return v.ConfigureFlow }).(pulumi.StringPtrOutput)
+}
+
+func (o StageAuthenticatorWebauthnOutput) DeviceTypeRestrictions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *StageAuthenticatorWebauthn) pulumi.StringArrayOutput { return v.DeviceTypeRestrictions }).(pulumi.StringArrayOutput)
 }
 
 func (o StageAuthenticatorWebauthnOutput) FriendlyName() pulumi.StringPtrOutput {
@@ -253,12 +258,12 @@ func (o StageAuthenticatorWebauthnOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *StageAuthenticatorWebauthn) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Defaults to `preferred`.
+// Allowed values: - `discouraged` - `preferred` - `required`
 func (o StageAuthenticatorWebauthnOutput) ResidentKeyRequirement() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageAuthenticatorWebauthn) pulumi.StringPtrOutput { return v.ResidentKeyRequirement }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `preferred`.
+// Allowed values: - `required` - `preferred` - `discouraged`
 func (o StageAuthenticatorWebauthnOutput) UserVerification() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageAuthenticatorWebauthn) pulumi.StringPtrOutput { return v.UserVerification }).(pulumi.StringPtrOutput)
 }
@@ -275,12 +280,6 @@ func (o StageAuthenticatorWebauthnArrayOutput) ToStageAuthenticatorWebauthnArray
 
 func (o StageAuthenticatorWebauthnArrayOutput) ToStageAuthenticatorWebauthnArrayOutputWithContext(ctx context.Context) StageAuthenticatorWebauthnArrayOutput {
 	return o
-}
-
-func (o StageAuthenticatorWebauthnArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageAuthenticatorWebauthn] {
-	return pulumix.Output[[]*StageAuthenticatorWebauthn]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageAuthenticatorWebauthnArrayOutput) Index(i pulumi.IntInput) StageAuthenticatorWebauthnOutput {
@@ -301,12 +300,6 @@ func (o StageAuthenticatorWebauthnMapOutput) ToStageAuthenticatorWebauthnMapOutp
 
 func (o StageAuthenticatorWebauthnMapOutput) ToStageAuthenticatorWebauthnMapOutputWithContext(ctx context.Context) StageAuthenticatorWebauthnMapOutput {
 	return o
-}
-
-func (o StageAuthenticatorWebauthnMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageAuthenticatorWebauthn] {
-	return pulumix.Output[map[string]*StageAuthenticatorWebauthn]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageAuthenticatorWebauthnMapOutput) MapIndex(k pulumi.StringInput) StageAuthenticatorWebauthnOutput {

@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -60,11 +59,15 @@ type SourceLdap struct {
 	GroupObjectFilter pulumi.StringPtrOutput `pulumi:"groupObjectFilter"`
 	Name              pulumi.StringOutput    `pulumi:"name"`
 	// Defaults to `objectSid`.
-	ObjectUniquenessField  pulumi.StringPtrOutput   `pulumi:"objectUniquenessField"`
-	PropertyMappings       pulumi.StringArrayOutput `pulumi:"propertyMappings"`
-	PropertyMappingsGroups pulumi.StringArrayOutput `pulumi:"propertyMappingsGroups"`
-	ServerUri              pulumi.StringOutput      `pulumi:"serverUri"`
-	Slug                   pulumi.StringOutput      `pulumi:"slug"`
+	ObjectUniquenessField pulumi.StringPtrOutput `pulumi:"objectUniquenessField"`
+	// Defaults to `false`.
+	PasswordLoginUpdateInternalPassword pulumi.BoolPtrOutput     `pulumi:"passwordLoginUpdateInternalPassword"`
+	PropertyMappings                    pulumi.StringArrayOutput `pulumi:"propertyMappings"`
+	PropertyMappingsGroups              pulumi.StringArrayOutput `pulumi:"propertyMappingsGroups"`
+	ServerUri                           pulumi.StringOutput      `pulumi:"serverUri"`
+	Slug                                pulumi.StringOutput      `pulumi:"slug"`
+	// Defaults to `false`.
+	Sni pulumi.BoolPtrOutput `pulumi:"sni"`
 	// Defaults to `true`.
 	StartTls pulumi.BoolPtrOutput `pulumi:"startTls"`
 	// Defaults to `true`.
@@ -149,11 +152,15 @@ type sourceLdapState struct {
 	GroupObjectFilter *string `pulumi:"groupObjectFilter"`
 	Name              *string `pulumi:"name"`
 	// Defaults to `objectSid`.
-	ObjectUniquenessField  *string  `pulumi:"objectUniquenessField"`
-	PropertyMappings       []string `pulumi:"propertyMappings"`
-	PropertyMappingsGroups []string `pulumi:"propertyMappingsGroups"`
-	ServerUri              *string  `pulumi:"serverUri"`
-	Slug                   *string  `pulumi:"slug"`
+	ObjectUniquenessField *string `pulumi:"objectUniquenessField"`
+	// Defaults to `false`.
+	PasswordLoginUpdateInternalPassword *bool    `pulumi:"passwordLoginUpdateInternalPassword"`
+	PropertyMappings                    []string `pulumi:"propertyMappings"`
+	PropertyMappingsGroups              []string `pulumi:"propertyMappingsGroups"`
+	ServerUri                           *string  `pulumi:"serverUri"`
+	Slug                                *string  `pulumi:"slug"`
+	// Defaults to `false`.
+	Sni *bool `pulumi:"sni"`
 	// Defaults to `true`.
 	StartTls *bool `pulumi:"startTls"`
 	// Defaults to `true`.
@@ -187,11 +194,15 @@ type SourceLdapState struct {
 	GroupObjectFilter pulumi.StringPtrInput
 	Name              pulumi.StringPtrInput
 	// Defaults to `objectSid`.
-	ObjectUniquenessField  pulumi.StringPtrInput
-	PropertyMappings       pulumi.StringArrayInput
-	PropertyMappingsGroups pulumi.StringArrayInput
-	ServerUri              pulumi.StringPtrInput
-	Slug                   pulumi.StringPtrInput
+	ObjectUniquenessField pulumi.StringPtrInput
+	// Defaults to `false`.
+	PasswordLoginUpdateInternalPassword pulumi.BoolPtrInput
+	PropertyMappings                    pulumi.StringArrayInput
+	PropertyMappingsGroups              pulumi.StringArrayInput
+	ServerUri                           pulumi.StringPtrInput
+	Slug                                pulumi.StringPtrInput
+	// Defaults to `false`.
+	Sni pulumi.BoolPtrInput
 	// Defaults to `true`.
 	StartTls pulumi.BoolPtrInput
 	// Defaults to `true`.
@@ -229,11 +240,15 @@ type sourceLdapArgs struct {
 	GroupObjectFilter *string `pulumi:"groupObjectFilter"`
 	Name              *string `pulumi:"name"`
 	// Defaults to `objectSid`.
-	ObjectUniquenessField  *string  `pulumi:"objectUniquenessField"`
-	PropertyMappings       []string `pulumi:"propertyMappings"`
-	PropertyMappingsGroups []string `pulumi:"propertyMappingsGroups"`
-	ServerUri              string   `pulumi:"serverUri"`
-	Slug                   string   `pulumi:"slug"`
+	ObjectUniquenessField *string `pulumi:"objectUniquenessField"`
+	// Defaults to `false`.
+	PasswordLoginUpdateInternalPassword *bool    `pulumi:"passwordLoginUpdateInternalPassword"`
+	PropertyMappings                    []string `pulumi:"propertyMappings"`
+	PropertyMappingsGroups              []string `pulumi:"propertyMappingsGroups"`
+	ServerUri                           string   `pulumi:"serverUri"`
+	Slug                                string   `pulumi:"slug"`
+	// Defaults to `false`.
+	Sni *bool `pulumi:"sni"`
 	// Defaults to `true`.
 	StartTls *bool `pulumi:"startTls"`
 	// Defaults to `true`.
@@ -268,11 +283,15 @@ type SourceLdapArgs struct {
 	GroupObjectFilter pulumi.StringPtrInput
 	Name              pulumi.StringPtrInput
 	// Defaults to `objectSid`.
-	ObjectUniquenessField  pulumi.StringPtrInput
-	PropertyMappings       pulumi.StringArrayInput
-	PropertyMappingsGroups pulumi.StringArrayInput
-	ServerUri              pulumi.StringInput
-	Slug                   pulumi.StringInput
+	ObjectUniquenessField pulumi.StringPtrInput
+	// Defaults to `false`.
+	PasswordLoginUpdateInternalPassword pulumi.BoolPtrInput
+	PropertyMappings                    pulumi.StringArrayInput
+	PropertyMappingsGroups              pulumi.StringArrayInput
+	ServerUri                           pulumi.StringInput
+	Slug                                pulumi.StringInput
+	// Defaults to `false`.
+	Sni pulumi.BoolPtrInput
 	// Defaults to `true`.
 	StartTls pulumi.BoolPtrInput
 	// Defaults to `true`.
@@ -313,12 +332,6 @@ func (i *SourceLdap) ToSourceLdapOutputWithContext(ctx context.Context) SourceLd
 	return pulumi.ToOutputWithContext(ctx, i).(SourceLdapOutput)
 }
 
-func (i *SourceLdap) ToOutput(ctx context.Context) pulumix.Output[*SourceLdap] {
-	return pulumix.Output[*SourceLdap]{
-		OutputState: i.ToSourceLdapOutputWithContext(ctx).OutputState,
-	}
-}
-
 // SourceLdapArrayInput is an input type that accepts SourceLdapArray and SourceLdapArrayOutput values.
 // You can construct a concrete instance of `SourceLdapArrayInput` via:
 //
@@ -342,12 +355,6 @@ func (i SourceLdapArray) ToSourceLdapArrayOutput() SourceLdapArrayOutput {
 
 func (i SourceLdapArray) ToSourceLdapArrayOutputWithContext(ctx context.Context) SourceLdapArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(SourceLdapArrayOutput)
-}
-
-func (i SourceLdapArray) ToOutput(ctx context.Context) pulumix.Output[[]*SourceLdap] {
-	return pulumix.Output[[]*SourceLdap]{
-		OutputState: i.ToSourceLdapArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // SourceLdapMapInput is an input type that accepts SourceLdapMap and SourceLdapMapOutput values.
@@ -375,12 +382,6 @@ func (i SourceLdapMap) ToSourceLdapMapOutputWithContext(ctx context.Context) Sou
 	return pulumi.ToOutputWithContext(ctx, i).(SourceLdapMapOutput)
 }
 
-func (i SourceLdapMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*SourceLdap] {
-	return pulumix.Output[map[string]*SourceLdap]{
-		OutputState: i.ToSourceLdapMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SourceLdapOutput struct{ *pulumi.OutputState }
 
 func (SourceLdapOutput) ElementType() reflect.Type {
@@ -393,12 +394,6 @@ func (o SourceLdapOutput) ToSourceLdapOutput() SourceLdapOutput {
 
 func (o SourceLdapOutput) ToSourceLdapOutputWithContext(ctx context.Context) SourceLdapOutput {
 	return o
-}
-
-func (o SourceLdapOutput) ToOutput(ctx context.Context) pulumix.Output[*SourceLdap] {
-	return pulumix.Output[*SourceLdap]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Defaults to “.
@@ -447,6 +442,11 @@ func (o SourceLdapOutput) ObjectUniquenessField() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringPtrOutput { return v.ObjectUniquenessField }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `false`.
+func (o SourceLdapOutput) PasswordLoginUpdateInternalPassword() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SourceLdap) pulumi.BoolPtrOutput { return v.PasswordLoginUpdateInternalPassword }).(pulumi.BoolPtrOutput)
+}
+
 func (o SourceLdapOutput) PropertyMappings() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringArrayOutput { return v.PropertyMappings }).(pulumi.StringArrayOutput)
 }
@@ -461,6 +461,11 @@ func (o SourceLdapOutput) ServerUri() pulumi.StringOutput {
 
 func (o SourceLdapOutput) Slug() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceLdap) pulumi.StringOutput { return v.Slug }).(pulumi.StringOutput)
+}
+
+// Defaults to `false`.
+func (o SourceLdapOutput) Sni() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SourceLdap) pulumi.BoolPtrOutput { return v.Sni }).(pulumi.BoolPtrOutput)
 }
 
 // Defaults to `true`.
@@ -516,12 +521,6 @@ func (o SourceLdapArrayOutput) ToSourceLdapArrayOutputWithContext(ctx context.Co
 	return o
 }
 
-func (o SourceLdapArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*SourceLdap] {
-	return pulumix.Output[[]*SourceLdap]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o SourceLdapArrayOutput) Index(i pulumi.IntInput) SourceLdapOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *SourceLdap {
 		return vs[0].([]*SourceLdap)[vs[1].(int)]
@@ -540,12 +539,6 @@ func (o SourceLdapMapOutput) ToSourceLdapMapOutput() SourceLdapMapOutput {
 
 func (o SourceLdapMapOutput) ToSourceLdapMapOutputWithContext(ctx context.Context) SourceLdapMapOutput {
 	return o
-}
-
-func (o SourceLdapMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*SourceLdap] {
-	return pulumix.Output[map[string]*SourceLdap]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SourceLdapMapOutput) MapIndex(k pulumi.StringInput) SourceLdapOutput {

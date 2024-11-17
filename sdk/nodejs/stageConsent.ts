@@ -42,12 +42,9 @@ export class StageConsent extends pulumi.CustomResource {
         return obj['__pulumiType'] === StageConsent.__pulumiType;
     }
 
-    /**
-     * Defaults to `weeks=4`.
-     */
     public readonly consentExpireIn!: pulumi.Output<string | undefined>;
     /**
-     * Defaults to `alwaysRequire`.
+     * Allowed values: - `alwaysRequire` - `permanent` - `expiring`
      */
     public readonly mode!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
@@ -83,12 +80,9 @@ export class StageConsent extends pulumi.CustomResource {
  * Input properties used for looking up and filtering StageConsent resources.
  */
 export interface StageConsentState {
-    /**
-     * Defaults to `weeks=4`.
-     */
     consentExpireIn?: pulumi.Input<string>;
     /**
-     * Defaults to `alwaysRequire`.
+     * Allowed values: - `alwaysRequire` - `permanent` - `expiring`
      */
     mode?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
@@ -98,12 +92,9 @@ export interface StageConsentState {
  * The set of arguments for constructing a StageConsent resource.
  */
 export interface StageConsentArgs {
-    /**
-     * Defaults to `weeks=4`.
-     */
     consentExpireIn?: pulumi.Input<string>;
     /**
-     * Defaults to `alwaysRequire`.
+     * Allowed values: - `alwaysRequire` - `permanent` - `expiring`
      */
     mode?: pulumi.Input<string>;
     name?: pulumi.Input<string>;

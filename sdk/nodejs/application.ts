@@ -67,19 +67,13 @@ export class Application extends pulumi.CustomResource {
     public readonly metaLaunchUrl!: pulumi.Output<string | undefined>;
     public readonly metaPublisher!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
-    /**
-     * Defaults to `false`.
-     */
     public readonly openInNewTab!: pulumi.Output<boolean | undefined>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     public readonly policyEngineMode!: pulumi.Output<string | undefined>;
     public readonly protocolProvider!: pulumi.Output<number | undefined>;
     public readonly slug!: pulumi.Output<string>;
-    /**
-     * Generated.
-     */
     public readonly uuid!: pulumi.Output<string>;
 
     /**
@@ -141,19 +135,13 @@ export interface ApplicationState {
     metaLaunchUrl?: pulumi.Input<string>;
     metaPublisher?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
-    /**
-     * Defaults to `false`.
-     */
     openInNewTab?: pulumi.Input<boolean>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     policyEngineMode?: pulumi.Input<string>;
     protocolProvider?: pulumi.Input<number>;
     slug?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     uuid?: pulumi.Input<string>;
 }
 
@@ -168,18 +156,12 @@ export interface ApplicationArgs {
     metaLaunchUrl?: pulumi.Input<string>;
     metaPublisher?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
-    /**
-     * Defaults to `false`.
-     */
     openInNewTab?: pulumi.Input<boolean>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     policyEngineMode?: pulumi.Input<string>;
     protocolProvider?: pulumi.Input<number>;
     slug: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     uuid?: pulumi.Input<string>;
 }

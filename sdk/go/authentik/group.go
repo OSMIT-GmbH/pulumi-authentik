@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,13 +18,14 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create a super-user group with a user
 //			name, err := authentik.NewUser(ctx, "name", &authentik.UserArgs{
 //				Username: pulumi.String("user"),
 //			})
@@ -52,9 +52,10 @@ type Group struct {
 	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Attributes pulumi.StringPtrOutput `pulumi:"attributes"`
 	// Defaults to `false`.
-	IsSuperuser pulumi.BoolPtrOutput   `pulumi:"isSuperuser"`
-	Name        pulumi.StringOutput    `pulumi:"name"`
-	Parent      pulumi.StringPtrOutput `pulumi:"parent"`
+	IsSuperuser pulumi.BoolPtrOutput     `pulumi:"isSuperuser"`
+	Name        pulumi.StringOutput      `pulumi:"name"`
+	Parent      pulumi.StringPtrOutput   `pulumi:"parent"`
+	Roles       pulumi.StringArrayOutput `pulumi:"roles"`
 	// Generated.
 	Users pulumi.IntArrayOutput `pulumi:"users"`
 }
@@ -92,9 +93,10 @@ type groupState struct {
 	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Attributes *string `pulumi:"attributes"`
 	// Defaults to `false`.
-	IsSuperuser *bool   `pulumi:"isSuperuser"`
-	Name        *string `pulumi:"name"`
-	Parent      *string `pulumi:"parent"`
+	IsSuperuser *bool    `pulumi:"isSuperuser"`
+	Name        *string  `pulumi:"name"`
+	Parent      *string  `pulumi:"parent"`
+	Roles       []string `pulumi:"roles"`
 	// Generated.
 	Users []int `pulumi:"users"`
 }
@@ -106,6 +108,7 @@ type GroupState struct {
 	IsSuperuser pulumi.BoolPtrInput
 	Name        pulumi.StringPtrInput
 	Parent      pulumi.StringPtrInput
+	Roles       pulumi.StringArrayInput
 	// Generated.
 	Users pulumi.IntArrayInput
 }
@@ -118,9 +121,10 @@ type groupArgs struct {
 	// JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
 	Attributes *string `pulumi:"attributes"`
 	// Defaults to `false`.
-	IsSuperuser *bool   `pulumi:"isSuperuser"`
-	Name        *string `pulumi:"name"`
-	Parent      *string `pulumi:"parent"`
+	IsSuperuser *bool    `pulumi:"isSuperuser"`
+	Name        *string  `pulumi:"name"`
+	Parent      *string  `pulumi:"parent"`
+	Roles       []string `pulumi:"roles"`
 	// Generated.
 	Users []int `pulumi:"users"`
 }
@@ -133,6 +137,7 @@ type GroupArgs struct {
 	IsSuperuser pulumi.BoolPtrInput
 	Name        pulumi.StringPtrInput
 	Parent      pulumi.StringPtrInput
+	Roles       pulumi.StringArrayInput
 	// Generated.
 	Users pulumi.IntArrayInput
 }
@@ -160,12 +165,6 @@ func (i *Group) ToGroupOutputWithContext(ctx context.Context) GroupOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(GroupOutput)
 }
 
-func (i *Group) ToOutput(ctx context.Context) pulumix.Output[*Group] {
-	return pulumix.Output[*Group]{
-		OutputState: i.ToGroupOutputWithContext(ctx).OutputState,
-	}
-}
-
 // GroupArrayInput is an input type that accepts GroupArray and GroupArrayOutput values.
 // You can construct a concrete instance of `GroupArrayInput` via:
 //
@@ -189,12 +188,6 @@ func (i GroupArray) ToGroupArrayOutput() GroupArrayOutput {
 
 func (i GroupArray) ToGroupArrayOutputWithContext(ctx context.Context) GroupArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(GroupArrayOutput)
-}
-
-func (i GroupArray) ToOutput(ctx context.Context) pulumix.Output[[]*Group] {
-	return pulumix.Output[[]*Group]{
-		OutputState: i.ToGroupArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // GroupMapInput is an input type that accepts GroupMap and GroupMapOutput values.
@@ -222,12 +215,6 @@ func (i GroupMap) ToGroupMapOutputWithContext(ctx context.Context) GroupMapOutpu
 	return pulumi.ToOutputWithContext(ctx, i).(GroupMapOutput)
 }
 
-func (i GroupMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*Group] {
-	return pulumix.Output[map[string]*Group]{
-		OutputState: i.ToGroupMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type GroupOutput struct{ *pulumi.OutputState }
 
 func (GroupOutput) ElementType() reflect.Type {
@@ -240,12 +227,6 @@ func (o GroupOutput) ToGroupOutput() GroupOutput {
 
 func (o GroupOutput) ToGroupOutputWithContext(ctx context.Context) GroupOutput {
 	return o
-}
-
-func (o GroupOutput) ToOutput(ctx context.Context) pulumix.Output[*Group] {
-	return pulumix.Output[*Group]{
-		OutputState: o.OutputState,
-	}
 }
 
 // JSON format expected. Use jsonencode() to pass objects. Defaults to `{}`.
@@ -264,6 +245,10 @@ func (o GroupOutput) Name() pulumi.StringOutput {
 
 func (o GroupOutput) Parent() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Group) pulumi.StringPtrOutput { return v.Parent }).(pulumi.StringPtrOutput)
+}
+
+func (o GroupOutput) Roles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Group) pulumi.StringArrayOutput { return v.Roles }).(pulumi.StringArrayOutput)
 }
 
 // Generated.
@@ -285,12 +270,6 @@ func (o GroupArrayOutput) ToGroupArrayOutputWithContext(ctx context.Context) Gro
 	return o
 }
 
-func (o GroupArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*Group] {
-	return pulumix.Output[[]*Group]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o GroupArrayOutput) Index(i pulumi.IntInput) GroupOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *Group {
 		return vs[0].([]*Group)[vs[1].(int)]
@@ -309,12 +288,6 @@ func (o GroupMapOutput) ToGroupMapOutput() GroupMapOutput {
 
 func (o GroupMapOutput) ToGroupMapOutputWithContext(ctx context.Context) GroupMapOutput {
 	return o
-}
-
-func (o GroupMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*Group] {
-	return pulumix.Output[map[string]*Group]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o GroupMapOutput) MapIndex(k pulumi.StringInput) GroupOutput {

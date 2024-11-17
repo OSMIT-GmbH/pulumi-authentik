@@ -51,6 +51,7 @@ export class Provider extends pulumi.ProviderResource {
             if ((!args || args.url === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'url'");
             }
+            resourceInputs["headers"] = pulumi.output(args?.headers ? pulumi.secret(args.headers) : undefined).apply(JSON.stringify);
             resourceInputs["insecure"] = pulumi.output(args ? args.insecure : undefined).apply(JSON.stringify);
             resourceInputs["token"] = args?.token ? pulumi.secret(args.token) : undefined;
             resourceInputs["url"] = args ? args.url : undefined;
@@ -66,6 +67,10 @@ export class Provider extends pulumi.ProviderResource {
  * The set of arguments for constructing a Provider resource.
  */
 export interface ProviderArgs {
+    /**
+     * Optional HTTP headers sent with every request
+     */
+    headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * Whether to skip TLS verification, can optionally be passed as `AUTHENTIK_INSECURE` environmental variable
      */

@@ -12,13 +12,16 @@ import * as utilities from "./utilities";
  * import * as authentik from "@osmit-gmbh/pulumi-authentik";
  * import * as authentik from "@pulumi/authentik";
  *
- * const default-authorization-flow = authentik.getFlow({
- *     slug: "default-provider-authorization-implicit-consent",
+ * const default-source-authentication = authentik.getFlow({
+ *     slug: "default-source-authentication",
+ * });
+ * const default-source-enrollment = authentik.getFlow({
+ *     slug: "default-source-enrollment",
  * });
  * const name = new authentik.SourceOauth("name", {
  *     slug: "discord",
- *     authenticationFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
- *     enrollmentFlow: default_authorization_flow.then(default_authorization_flow => default_authorization_flow.id),
+ *     authenticationFlow: default_source_authentication.then(default_source_authentication => default_source_authentication.id),
+ *     enrollmentFlow: default_source_enrollment.then(default_source_enrollment => default_source_enrollment.id),
  *     providerType: "discord",
  *     consumerKey: "foo",
  *     consumerSecret: "bar",
@@ -58,25 +61,24 @@ export class SourceOauth extends pulumi.CustomResource {
      */
     public readonly accessTokenUrl!: pulumi.Output<string | undefined>;
     public readonly additionalScopes!: pulumi.Output<string | undefined>;
-    public readonly authenticationFlow!: pulumi.Output<string>;
+    public readonly authenticationFlow!: pulumi.Output<string | undefined>;
     /**
      * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     public readonly authorizationUrl!: pulumi.Output<string | undefined>;
-    /**
-     * Generated.
-     */
     public /*out*/ readonly callbackUri!: pulumi.Output<string>;
     public readonly consumerKey!: pulumi.Output<string>;
     public readonly consumerSecret!: pulumi.Output<string>;
-    /**
-     * Defaults to `true`.
-     */
     public readonly enabled!: pulumi.Output<boolean | undefined>;
-    public readonly enrollmentFlow!: pulumi.Output<string>;
+    public readonly enrollmentFlow!: pulumi.Output<string | undefined>;
+    /**
+     * Allowed values: - `identifier` - `nameLink` - `nameDeny`
+     */
+    public readonly groupMatchingMode!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     /**
-     * Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to pass objects. Generated.
+     * Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to
+     * pass objects.
      */
     public readonly oidcJwks!: pulumi.Output<string>;
     /**
@@ -84,17 +86,22 @@ export class SourceOauth extends pulumi.CustomResource {
      */
     public readonly oidcJwksUrl!: pulumi.Output<string | undefined>;
     /**
-     * Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with `.well-known/openid-configuration`.
+     * Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with
+     * `.well-known/openid-configuration`.
      */
     public readonly oidcWellKnownUrl!: pulumi.Output<string | undefined>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     public readonly policyEngineMode!: pulumi.Output<string | undefined>;
     /**
      * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     public readonly profileUrl!: pulumi.Output<string | undefined>;
+    /**
+     * Allowed values: - `apple` - `openidconnect` - `azuread` - `discord` - `facebook` - `github` - `gitlab` - `google` -
+     * `mailcow` - `okta` - `patreon` - `reddit` - `twitch` - `twitter`
+     */
     public readonly providerType!: pulumi.Output<string>;
     /**
      * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
@@ -102,16 +109,10 @@ export class SourceOauth extends pulumi.CustomResource {
     public readonly requestTokenUrl!: pulumi.Output<string | undefined>;
     public readonly slug!: pulumi.Output<string>;
     /**
-     * Defaults to `identifier`.
+     * Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
      */
     public readonly userMatchingMode!: pulumi.Output<string | undefined>;
-    /**
-     * Defaults to `goauthentik.io/sources/%(slug)s`.
-     */
     public readonly userPathTemplate!: pulumi.Output<string | undefined>;
-    /**
-     * Generated.
-     */
     public readonly uuid!: pulumi.Output<string>;
 
     /**
@@ -136,6 +137,7 @@ export class SourceOauth extends pulumi.CustomResource {
             resourceInputs["consumerSecret"] = state ? state.consumerSecret : undefined;
             resourceInputs["enabled"] = state ? state.enabled : undefined;
             resourceInputs["enrollmentFlow"] = state ? state.enrollmentFlow : undefined;
+            resourceInputs["groupMatchingMode"] = state ? state.groupMatchingMode : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["oidcJwks"] = state ? state.oidcJwks : undefined;
             resourceInputs["oidcJwksUrl"] = state ? state.oidcJwksUrl : undefined;
@@ -150,17 +152,11 @@ export class SourceOauth extends pulumi.CustomResource {
             resourceInputs["uuid"] = state ? state.uuid : undefined;
         } else {
             const args = argsOrState as SourceOauthArgs | undefined;
-            if ((!args || args.authenticationFlow === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'authenticationFlow'");
-            }
             if ((!args || args.consumerKey === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'consumerKey'");
             }
             if ((!args || args.consumerSecret === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'consumerSecret'");
-            }
-            if ((!args || args.enrollmentFlow === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'enrollmentFlow'");
             }
             if ((!args || args.providerType === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'providerType'");
@@ -176,6 +172,7 @@ export class SourceOauth extends pulumi.CustomResource {
             resourceInputs["consumerSecret"] = args?.consumerSecret ? pulumi.secret(args.consumerSecret) : undefined;
             resourceInputs["enabled"] = args ? args.enabled : undefined;
             resourceInputs["enrollmentFlow"] = args ? args.enrollmentFlow : undefined;
+            resourceInputs["groupMatchingMode"] = args ? args.groupMatchingMode : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["oidcJwks"] = args ? args.oidcJwks : undefined;
             resourceInputs["oidcJwksUrl"] = args ? args.oidcJwksUrl : undefined;
@@ -211,20 +208,19 @@ export interface SourceOauthState {
      * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     authorizationUrl?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     callbackUri?: pulumi.Input<string>;
     consumerKey?: pulumi.Input<string>;
     consumerSecret?: pulumi.Input<string>;
-    /**
-     * Defaults to `true`.
-     */
     enabled?: pulumi.Input<boolean>;
     enrollmentFlow?: pulumi.Input<string>;
+    /**
+     * Allowed values: - `identifier` - `nameLink` - `nameDeny`
+     */
+    groupMatchingMode?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     /**
-     * Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to pass objects. Generated.
+     * Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to
+     * pass objects.
      */
     oidcJwks?: pulumi.Input<string>;
     /**
@@ -232,17 +228,22 @@ export interface SourceOauthState {
      */
     oidcJwksUrl?: pulumi.Input<string>;
     /**
-     * Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with `.well-known/openid-configuration`.
+     * Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with
+     * `.well-known/openid-configuration`.
      */
     oidcWellKnownUrl?: pulumi.Input<string>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     policyEngineMode?: pulumi.Input<string>;
     /**
      * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     profileUrl?: pulumi.Input<string>;
+    /**
+     * Allowed values: - `apple` - `openidconnect` - `azuread` - `discord` - `facebook` - `github` - `gitlab` - `google` -
+     * `mailcow` - `okta` - `patreon` - `reddit` - `twitch` - `twitter`
+     */
     providerType?: pulumi.Input<string>;
     /**
      * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
@@ -250,16 +251,10 @@ export interface SourceOauthState {
     requestTokenUrl?: pulumi.Input<string>;
     slug?: pulumi.Input<string>;
     /**
-     * Defaults to `identifier`.
+     * Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
      */
     userMatchingMode?: pulumi.Input<string>;
-    /**
-     * Defaults to `goauthentik.io/sources/%(slug)s`.
-     */
     userPathTemplate?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     uuid?: pulumi.Input<string>;
 }
 
@@ -272,21 +267,23 @@ export interface SourceOauthArgs {
      */
     accessTokenUrl?: pulumi.Input<string>;
     additionalScopes?: pulumi.Input<string>;
-    authenticationFlow: pulumi.Input<string>;
+    authenticationFlow?: pulumi.Input<string>;
     /**
      * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     authorizationUrl?: pulumi.Input<string>;
     consumerKey: pulumi.Input<string>;
     consumerSecret: pulumi.Input<string>;
-    /**
-     * Defaults to `true`.
-     */
     enabled?: pulumi.Input<boolean>;
-    enrollmentFlow: pulumi.Input<string>;
+    enrollmentFlow?: pulumi.Input<string>;
+    /**
+     * Allowed values: - `identifier` - `nameLink` - `nameDeny`
+     */
+    groupMatchingMode?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     /**
-     * Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to pass objects. Generated.
+     * Manually configure JWKS keys for use with machine-to-machine authentication. JSON format expected. Use jsonencode() to
+     * pass objects.
      */
     oidcJwks?: pulumi.Input<string>;
     /**
@@ -294,17 +291,22 @@ export interface SourceOauthArgs {
      */
     oidcJwksUrl?: pulumi.Input<string>;
     /**
-     * Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with `.well-known/openid-configuration`.
+     * Automatically configure source from OIDC well-known endpoint. URL is taken as is, and should end with
+     * `.well-known/openid-configuration`.
      */
     oidcWellKnownUrl?: pulumi.Input<string>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     policyEngineMode?: pulumi.Input<string>;
     /**
      * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
      */
     profileUrl?: pulumi.Input<string>;
+    /**
+     * Allowed values: - `apple` - `openidconnect` - `azuread` - `discord` - `facebook` - `github` - `gitlab` - `google` -
+     * `mailcow` - `okta` - `patreon` - `reddit` - `twitch` - `twitter`
+     */
     providerType: pulumi.Input<string>;
     /**
      * Manually configure OAuth2 URLs when `oidcWellKnownUrl` is not set.
@@ -312,15 +314,9 @@ export interface SourceOauthArgs {
     requestTokenUrl?: pulumi.Input<string>;
     slug: pulumi.Input<string>;
     /**
-     * Defaults to `identifier`.
+     * Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
      */
     userMatchingMode?: pulumi.Input<string>;
-    /**
-     * Defaults to `goauthentik.io/sources/%(slug)s`.
-     */
     userPathTemplate?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     uuid?: pulumi.Input<string>;
 }

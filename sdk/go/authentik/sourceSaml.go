@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -47,9 +46,9 @@ import (
 //			}
 //			_, err = authentik.NewSourceSaml(ctx, "name", &authentik.SourceSamlArgs{
 //				Slug:                  pulumi.String("test-source"),
-//				AuthenticationFlow:    *pulumi.String(default_source_authentication.Id),
-//				EnrollmentFlow:        *pulumi.String(default_source_enrollment.Id),
-//				PreAuthenticationFlow: *pulumi.String(default_source_pre_authentication.Id),
+//				AuthenticationFlow:    pulumi.String(default_source_authentication.Id),
+//				EnrollmentFlow:        pulumi.String(default_source_enrollment.Id),
+//				PreAuthenticationFlow: pulumi.String(default_source_pre_authentication.Id),
 //				SsoUrl:                pulumi.String("http://localhost"),
 //			})
 //			if err != nil {
@@ -63,39 +62,45 @@ import (
 type SourceSaml struct {
 	pulumi.CustomResourceState
 
-	// Defaults to `false`.
-	AllowIdpInitiated  pulumi.BoolPtrOutput `pulumi:"allowIdpInitiated"`
-	AuthenticationFlow pulumi.StringOutput  `pulumi:"authenticationFlow"`
-	// Defaults to `REDIRECT`.
+	AllowIdpInitiated  pulumi.BoolPtrOutput   `pulumi:"allowIdpInitiated"`
+	AuthenticationFlow pulumi.StringPtrOutput `pulumi:"authenticationFlow"`
+	// Allowed values: - `REDIRECT` - `POST` - `POST_AUTO`
 	BindingType pulumi.StringPtrOutput `pulumi:"bindingType"`
-	// Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+	// Allowed values: - `http://www.w3.org/2000/09/xmldsig#sha1` - `http://www.w3.org/2001/04/xmlenc#sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#sha384` - `http://www.w3.org/2001/04/xmlenc#sha512`
 	DigestAlgorithm pulumi.StringPtrOutput `pulumi:"digestAlgorithm"`
-	// Defaults to `true`.
-	Enabled        pulumi.BoolPtrOutput   `pulumi:"enabled"`
-	EnrollmentFlow pulumi.StringOutput    `pulumi:"enrollmentFlow"`
-	Issuer         pulumi.StringPtrOutput `pulumi:"issuer"`
-	// SAML Metadata Generated.
+	Enabled         pulumi.BoolPtrOutput   `pulumi:"enabled"`
+	EncryptionKp    pulumi.StringPtrOutput `pulumi:"encryptionKp"`
+	EnrollmentFlow  pulumi.StringPtrOutput `pulumi:"enrollmentFlow"`
+	// Allowed values: - `identifier` - `nameLink` - `nameDeny`
+	GroupMatchingMode pulumi.StringPtrOutput `pulumi:"groupMatchingMode"`
+	Issuer            pulumi.StringPtrOutput `pulumi:"issuer"`
+	// SAML Metadata
 	Metadata pulumi.StringOutput `pulumi:"metadata"`
 	Name     pulumi.StringOutput `pulumi:"name"`
-	// Defaults to `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`.
+	// Allowed values: - `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` - `urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:WindowsDomainQualifiedName` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`
 	NameIdPolicy pulumi.StringPtrOutput `pulumi:"nameIdPolicy"`
-	// Defaults to `any`.
+	// Allowed values: - `all` - `any`
 	PolicyEngineMode      pulumi.StringPtrOutput `pulumi:"policyEngineMode"`
 	PreAuthenticationFlow pulumi.StringOutput    `pulumi:"preAuthenticationFlow"`
-	// Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
-	SignatureAlgorithm pulumi.StringPtrOutput `pulumi:"signatureAlgorithm"`
-	SigningKp          pulumi.StringPtrOutput `pulumi:"signingKp"`
-	SloUrl             pulumi.StringPtrOutput `pulumi:"sloUrl"`
-	Slug               pulumi.StringOutput    `pulumi:"slug"`
-	SsoUrl             pulumi.StringOutput    `pulumi:"ssoUrl"`
-	// Defaults to `days=1`.
+	// Allowed values: - `http://www.w3.org/2000/09/xmldsig#rsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512` -
+	// `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512` -
+	// `http://www.w3.org/2000/09/xmldsig#dsa-sha1`
+	SignatureAlgorithm       pulumi.StringPtrOutput `pulumi:"signatureAlgorithm"`
+	SigningKp                pulumi.StringPtrOutput `pulumi:"signingKp"`
+	SloUrl                   pulumi.StringPtrOutput `pulumi:"sloUrl"`
+	Slug                     pulumi.StringOutput    `pulumi:"slug"`
+	SsoUrl                   pulumi.StringOutput    `pulumi:"ssoUrl"`
 	TemporaryUserDeleteAfter pulumi.StringPtrOutput `pulumi:"temporaryUserDeleteAfter"`
-	// Defaults to `identifier`.
+	// Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
 	UserMatchingMode pulumi.StringPtrOutput `pulumi:"userMatchingMode"`
-	// Defaults to `goauthentik.io/sources/%(slug)s`.
 	UserPathTemplate pulumi.StringPtrOutput `pulumi:"userPathTemplate"`
-	// Generated.
-	Uuid pulumi.StringOutput `pulumi:"uuid"`
+	Uuid             pulumi.StringOutput    `pulumi:"uuid"`
 }
 
 // NewSourceSaml registers a new resource with the given unique name, arguments, and options.
@@ -105,12 +110,6 @@ func NewSourceSaml(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.AuthenticationFlow == nil {
-		return nil, errors.New("invalid value for required argument 'AuthenticationFlow'")
-	}
-	if args.EnrollmentFlow == nil {
-		return nil, errors.New("invalid value for required argument 'EnrollmentFlow'")
-	}
 	if args.PreAuthenticationFlow == nil {
 		return nil, errors.New("invalid value for required argument 'PreAuthenticationFlow'")
 	}
@@ -143,75 +142,87 @@ func GetSourceSaml(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering SourceSaml resources.
 type sourceSamlState struct {
-	// Defaults to `false`.
 	AllowIdpInitiated  *bool   `pulumi:"allowIdpInitiated"`
 	AuthenticationFlow *string `pulumi:"authenticationFlow"`
-	// Defaults to `REDIRECT`.
+	// Allowed values: - `REDIRECT` - `POST` - `POST_AUTO`
 	BindingType *string `pulumi:"bindingType"`
-	// Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+	// Allowed values: - `http://www.w3.org/2000/09/xmldsig#sha1` - `http://www.w3.org/2001/04/xmlenc#sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#sha384` - `http://www.w3.org/2001/04/xmlenc#sha512`
 	DigestAlgorithm *string `pulumi:"digestAlgorithm"`
-	// Defaults to `true`.
-	Enabled        *bool   `pulumi:"enabled"`
-	EnrollmentFlow *string `pulumi:"enrollmentFlow"`
-	Issuer         *string `pulumi:"issuer"`
-	// SAML Metadata Generated.
+	Enabled         *bool   `pulumi:"enabled"`
+	EncryptionKp    *string `pulumi:"encryptionKp"`
+	EnrollmentFlow  *string `pulumi:"enrollmentFlow"`
+	// Allowed values: - `identifier` - `nameLink` - `nameDeny`
+	GroupMatchingMode *string `pulumi:"groupMatchingMode"`
+	Issuer            *string `pulumi:"issuer"`
+	// SAML Metadata
 	Metadata *string `pulumi:"metadata"`
 	Name     *string `pulumi:"name"`
-	// Defaults to `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`.
+	// Allowed values: - `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` - `urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:WindowsDomainQualifiedName` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`
 	NameIdPolicy *string `pulumi:"nameIdPolicy"`
-	// Defaults to `any`.
+	// Allowed values: - `all` - `any`
 	PolicyEngineMode      *string `pulumi:"policyEngineMode"`
 	PreAuthenticationFlow *string `pulumi:"preAuthenticationFlow"`
-	// Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
-	SignatureAlgorithm *string `pulumi:"signatureAlgorithm"`
-	SigningKp          *string `pulumi:"signingKp"`
-	SloUrl             *string `pulumi:"sloUrl"`
-	Slug               *string `pulumi:"slug"`
-	SsoUrl             *string `pulumi:"ssoUrl"`
-	// Defaults to `days=1`.
+	// Allowed values: - `http://www.w3.org/2000/09/xmldsig#rsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512` -
+	// `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512` -
+	// `http://www.w3.org/2000/09/xmldsig#dsa-sha1`
+	SignatureAlgorithm       *string `pulumi:"signatureAlgorithm"`
+	SigningKp                *string `pulumi:"signingKp"`
+	SloUrl                   *string `pulumi:"sloUrl"`
+	Slug                     *string `pulumi:"slug"`
+	SsoUrl                   *string `pulumi:"ssoUrl"`
 	TemporaryUserDeleteAfter *string `pulumi:"temporaryUserDeleteAfter"`
-	// Defaults to `identifier`.
+	// Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
 	UserMatchingMode *string `pulumi:"userMatchingMode"`
-	// Defaults to `goauthentik.io/sources/%(slug)s`.
 	UserPathTemplate *string `pulumi:"userPathTemplate"`
-	// Generated.
-	Uuid *string `pulumi:"uuid"`
+	Uuid             *string `pulumi:"uuid"`
 }
 
 type SourceSamlState struct {
-	// Defaults to `false`.
 	AllowIdpInitiated  pulumi.BoolPtrInput
 	AuthenticationFlow pulumi.StringPtrInput
-	// Defaults to `REDIRECT`.
+	// Allowed values: - `REDIRECT` - `POST` - `POST_AUTO`
 	BindingType pulumi.StringPtrInput
-	// Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+	// Allowed values: - `http://www.w3.org/2000/09/xmldsig#sha1` - `http://www.w3.org/2001/04/xmlenc#sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#sha384` - `http://www.w3.org/2001/04/xmlenc#sha512`
 	DigestAlgorithm pulumi.StringPtrInput
-	// Defaults to `true`.
-	Enabled        pulumi.BoolPtrInput
-	EnrollmentFlow pulumi.StringPtrInput
-	Issuer         pulumi.StringPtrInput
-	// SAML Metadata Generated.
+	Enabled         pulumi.BoolPtrInput
+	EncryptionKp    pulumi.StringPtrInput
+	EnrollmentFlow  pulumi.StringPtrInput
+	// Allowed values: - `identifier` - `nameLink` - `nameDeny`
+	GroupMatchingMode pulumi.StringPtrInput
+	Issuer            pulumi.StringPtrInput
+	// SAML Metadata
 	Metadata pulumi.StringPtrInput
 	Name     pulumi.StringPtrInput
-	// Defaults to `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`.
+	// Allowed values: - `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` - `urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:WindowsDomainQualifiedName` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`
 	NameIdPolicy pulumi.StringPtrInput
-	// Defaults to `any`.
+	// Allowed values: - `all` - `any`
 	PolicyEngineMode      pulumi.StringPtrInput
 	PreAuthenticationFlow pulumi.StringPtrInput
-	// Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
-	SignatureAlgorithm pulumi.StringPtrInput
-	SigningKp          pulumi.StringPtrInput
-	SloUrl             pulumi.StringPtrInput
-	Slug               pulumi.StringPtrInput
-	SsoUrl             pulumi.StringPtrInput
-	// Defaults to `days=1`.
+	// Allowed values: - `http://www.w3.org/2000/09/xmldsig#rsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512` -
+	// `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512` -
+	// `http://www.w3.org/2000/09/xmldsig#dsa-sha1`
+	SignatureAlgorithm       pulumi.StringPtrInput
+	SigningKp                pulumi.StringPtrInput
+	SloUrl                   pulumi.StringPtrInput
+	Slug                     pulumi.StringPtrInput
+	SsoUrl                   pulumi.StringPtrInput
 	TemporaryUserDeleteAfter pulumi.StringPtrInput
-	// Defaults to `identifier`.
+	// Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
 	UserMatchingMode pulumi.StringPtrInput
-	// Defaults to `goauthentik.io/sources/%(slug)s`.
 	UserPathTemplate pulumi.StringPtrInput
-	// Generated.
-	Uuid pulumi.StringPtrInput
+	Uuid             pulumi.StringPtrInput
 }
 
 func (SourceSamlState) ElementType() reflect.Type {
@@ -219,72 +230,84 @@ func (SourceSamlState) ElementType() reflect.Type {
 }
 
 type sourceSamlArgs struct {
-	// Defaults to `false`.
-	AllowIdpInitiated  *bool  `pulumi:"allowIdpInitiated"`
-	AuthenticationFlow string `pulumi:"authenticationFlow"`
-	// Defaults to `REDIRECT`.
+	AllowIdpInitiated  *bool   `pulumi:"allowIdpInitiated"`
+	AuthenticationFlow *string `pulumi:"authenticationFlow"`
+	// Allowed values: - `REDIRECT` - `POST` - `POST_AUTO`
 	BindingType *string `pulumi:"bindingType"`
-	// Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+	// Allowed values: - `http://www.w3.org/2000/09/xmldsig#sha1` - `http://www.w3.org/2001/04/xmlenc#sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#sha384` - `http://www.w3.org/2001/04/xmlenc#sha512`
 	DigestAlgorithm *string `pulumi:"digestAlgorithm"`
-	// Defaults to `true`.
-	Enabled        *bool   `pulumi:"enabled"`
-	EnrollmentFlow string  `pulumi:"enrollmentFlow"`
-	Issuer         *string `pulumi:"issuer"`
-	Name           *string `pulumi:"name"`
-	// Defaults to `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`.
+	Enabled         *bool   `pulumi:"enabled"`
+	EncryptionKp    *string `pulumi:"encryptionKp"`
+	EnrollmentFlow  *string `pulumi:"enrollmentFlow"`
+	// Allowed values: - `identifier` - `nameLink` - `nameDeny`
+	GroupMatchingMode *string `pulumi:"groupMatchingMode"`
+	Issuer            *string `pulumi:"issuer"`
+	Name              *string `pulumi:"name"`
+	// Allowed values: - `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` - `urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:WindowsDomainQualifiedName` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`
 	NameIdPolicy *string `pulumi:"nameIdPolicy"`
-	// Defaults to `any`.
+	// Allowed values: - `all` - `any`
 	PolicyEngineMode      *string `pulumi:"policyEngineMode"`
 	PreAuthenticationFlow string  `pulumi:"preAuthenticationFlow"`
-	// Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
-	SignatureAlgorithm *string `pulumi:"signatureAlgorithm"`
-	SigningKp          *string `pulumi:"signingKp"`
-	SloUrl             *string `pulumi:"sloUrl"`
-	Slug               string  `pulumi:"slug"`
-	SsoUrl             string  `pulumi:"ssoUrl"`
-	// Defaults to `days=1`.
+	// Allowed values: - `http://www.w3.org/2000/09/xmldsig#rsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512` -
+	// `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512` -
+	// `http://www.w3.org/2000/09/xmldsig#dsa-sha1`
+	SignatureAlgorithm       *string `pulumi:"signatureAlgorithm"`
+	SigningKp                *string `pulumi:"signingKp"`
+	SloUrl                   *string `pulumi:"sloUrl"`
+	Slug                     string  `pulumi:"slug"`
+	SsoUrl                   string  `pulumi:"ssoUrl"`
 	TemporaryUserDeleteAfter *string `pulumi:"temporaryUserDeleteAfter"`
-	// Defaults to `identifier`.
+	// Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
 	UserMatchingMode *string `pulumi:"userMatchingMode"`
-	// Defaults to `goauthentik.io/sources/%(slug)s`.
 	UserPathTemplate *string `pulumi:"userPathTemplate"`
-	// Generated.
-	Uuid *string `pulumi:"uuid"`
+	Uuid             *string `pulumi:"uuid"`
 }
 
 // The set of arguments for constructing a SourceSaml resource.
 type SourceSamlArgs struct {
-	// Defaults to `false`.
 	AllowIdpInitiated  pulumi.BoolPtrInput
-	AuthenticationFlow pulumi.StringInput
-	// Defaults to `REDIRECT`.
+	AuthenticationFlow pulumi.StringPtrInput
+	// Allowed values: - `REDIRECT` - `POST` - `POST_AUTO`
 	BindingType pulumi.StringPtrInput
-	// Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+	// Allowed values: - `http://www.w3.org/2000/09/xmldsig#sha1` - `http://www.w3.org/2001/04/xmlenc#sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#sha384` - `http://www.w3.org/2001/04/xmlenc#sha512`
 	DigestAlgorithm pulumi.StringPtrInput
-	// Defaults to `true`.
-	Enabled        pulumi.BoolPtrInput
-	EnrollmentFlow pulumi.StringInput
-	Issuer         pulumi.StringPtrInput
-	Name           pulumi.StringPtrInput
-	// Defaults to `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`.
+	Enabled         pulumi.BoolPtrInput
+	EncryptionKp    pulumi.StringPtrInput
+	EnrollmentFlow  pulumi.StringPtrInput
+	// Allowed values: - `identifier` - `nameLink` - `nameDeny`
+	GroupMatchingMode pulumi.StringPtrInput
+	Issuer            pulumi.StringPtrInput
+	Name              pulumi.StringPtrInput
+	// Allowed values: - `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` - `urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:WindowsDomainQualifiedName` -
+	// `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`
 	NameIdPolicy pulumi.StringPtrInput
-	// Defaults to `any`.
+	// Allowed values: - `all` - `any`
 	PolicyEngineMode      pulumi.StringPtrInput
 	PreAuthenticationFlow pulumi.StringInput
-	// Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
-	SignatureAlgorithm pulumi.StringPtrInput
-	SigningKp          pulumi.StringPtrInput
-	SloUrl             pulumi.StringPtrInput
-	Slug               pulumi.StringInput
-	SsoUrl             pulumi.StringInput
-	// Defaults to `days=1`.
+	// Allowed values: - `http://www.w3.org/2000/09/xmldsig#rsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512` -
+	// `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256` -
+	// `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512` -
+	// `http://www.w3.org/2000/09/xmldsig#dsa-sha1`
+	SignatureAlgorithm       pulumi.StringPtrInput
+	SigningKp                pulumi.StringPtrInput
+	SloUrl                   pulumi.StringPtrInput
+	Slug                     pulumi.StringInput
+	SsoUrl                   pulumi.StringInput
 	TemporaryUserDeleteAfter pulumi.StringPtrInput
-	// Defaults to `identifier`.
+	// Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
 	UserMatchingMode pulumi.StringPtrInput
-	// Defaults to `goauthentik.io/sources/%(slug)s`.
 	UserPathTemplate pulumi.StringPtrInput
-	// Generated.
-	Uuid pulumi.StringPtrInput
+	Uuid             pulumi.StringPtrInput
 }
 
 func (SourceSamlArgs) ElementType() reflect.Type {
@@ -308,12 +331,6 @@ func (i *SourceSaml) ToSourceSamlOutput() SourceSamlOutput {
 
 func (i *SourceSaml) ToSourceSamlOutputWithContext(ctx context.Context) SourceSamlOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(SourceSamlOutput)
-}
-
-func (i *SourceSaml) ToOutput(ctx context.Context) pulumix.Output[*SourceSaml] {
-	return pulumix.Output[*SourceSaml]{
-		OutputState: i.ToSourceSamlOutputWithContext(ctx).OutputState,
-	}
 }
 
 // SourceSamlArrayInput is an input type that accepts SourceSamlArray and SourceSamlArrayOutput values.
@@ -341,12 +358,6 @@ func (i SourceSamlArray) ToSourceSamlArrayOutputWithContext(ctx context.Context)
 	return pulumi.ToOutputWithContext(ctx, i).(SourceSamlArrayOutput)
 }
 
-func (i SourceSamlArray) ToOutput(ctx context.Context) pulumix.Output[[]*SourceSaml] {
-	return pulumix.Output[[]*SourceSaml]{
-		OutputState: i.ToSourceSamlArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 // SourceSamlMapInput is an input type that accepts SourceSamlMap and SourceSamlMapOutput values.
 // You can construct a concrete instance of `SourceSamlMapInput` via:
 //
@@ -372,12 +383,6 @@ func (i SourceSamlMap) ToSourceSamlMapOutputWithContext(ctx context.Context) Sou
 	return pulumi.ToOutputWithContext(ctx, i).(SourceSamlMapOutput)
 }
 
-func (i SourceSamlMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*SourceSaml] {
-	return pulumix.Output[map[string]*SourceSaml]{
-		OutputState: i.ToSourceSamlMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type SourceSamlOutput struct{ *pulumi.OutputState }
 
 func (SourceSamlOutput) ElementType() reflect.Type {
@@ -392,45 +397,47 @@ func (o SourceSamlOutput) ToSourceSamlOutputWithContext(ctx context.Context) Sou
 	return o
 }
 
-func (o SourceSamlOutput) ToOutput(ctx context.Context) pulumix.Output[*SourceSaml] {
-	return pulumix.Output[*SourceSaml]{
-		OutputState: o.OutputState,
-	}
-}
-
-// Defaults to `false`.
 func (o SourceSamlOutput) AllowIdpInitiated() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.BoolPtrOutput { return v.AllowIdpInitiated }).(pulumi.BoolPtrOutput)
 }
 
-func (o SourceSamlOutput) AuthenticationFlow() pulumi.StringOutput {
-	return o.ApplyT(func(v *SourceSaml) pulumi.StringOutput { return v.AuthenticationFlow }).(pulumi.StringOutput)
+func (o SourceSamlOutput) AuthenticationFlow() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SourceSaml) pulumi.StringPtrOutput { return v.AuthenticationFlow }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `REDIRECT`.
+// Allowed values: - `REDIRECT` - `POST` - `POST_AUTO`
 func (o SourceSamlOutput) BindingType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.StringPtrOutput { return v.BindingType }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+// Allowed values: - `http://www.w3.org/2000/09/xmldsig#sha1` - `http://www.w3.org/2001/04/xmlenc#sha256` -
+// `http://www.w3.org/2001/04/xmldsig-more#sha384` - `http://www.w3.org/2001/04/xmlenc#sha512`
 func (o SourceSamlOutput) DigestAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.StringPtrOutput { return v.DigestAlgorithm }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `true`.
 func (o SourceSamlOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.BoolPtrOutput { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
-func (o SourceSamlOutput) EnrollmentFlow() pulumi.StringOutput {
-	return o.ApplyT(func(v *SourceSaml) pulumi.StringOutput { return v.EnrollmentFlow }).(pulumi.StringOutput)
+func (o SourceSamlOutput) EncryptionKp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SourceSaml) pulumi.StringPtrOutput { return v.EncryptionKp }).(pulumi.StringPtrOutput)
+}
+
+func (o SourceSamlOutput) EnrollmentFlow() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SourceSaml) pulumi.StringPtrOutput { return v.EnrollmentFlow }).(pulumi.StringPtrOutput)
+}
+
+// Allowed values: - `identifier` - `nameLink` - `nameDeny`
+func (o SourceSamlOutput) GroupMatchingMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SourceSaml) pulumi.StringPtrOutput { return v.GroupMatchingMode }).(pulumi.StringPtrOutput)
 }
 
 func (o SourceSamlOutput) Issuer() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.StringPtrOutput { return v.Issuer }).(pulumi.StringPtrOutput)
 }
 
-// SAML Metadata Generated.
+// SAML Metadata
 func (o SourceSamlOutput) Metadata() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.StringOutput { return v.Metadata }).(pulumi.StringOutput)
 }
@@ -439,12 +446,15 @@ func (o SourceSamlOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Defaults to `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`.
+// Allowed values: - `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` -
+// `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` - `urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName` -
+// `urn:oasis:names:tc:SAML:2.0:nameid-format:WindowsDomainQualifiedName` -
+// `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`
 func (o SourceSamlOutput) NameIdPolicy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.StringPtrOutput { return v.NameIdPolicy }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `any`.
+// Allowed values: - `all` - `any`
 func (o SourceSamlOutput) PolicyEngineMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.StringPtrOutput { return v.PolicyEngineMode }).(pulumi.StringPtrOutput)
 }
@@ -453,7 +463,11 @@ func (o SourceSamlOutput) PreAuthenticationFlow() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.StringOutput { return v.PreAuthenticationFlow }).(pulumi.StringOutput)
 }
 
-// Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+// Allowed values: - `http://www.w3.org/2000/09/xmldsig#rsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256` -
+// `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512` -
+// `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256` -
+// `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512` -
+// `http://www.w3.org/2000/09/xmldsig#dsa-sha1`
 func (o SourceSamlOutput) SignatureAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.StringPtrOutput { return v.SignatureAlgorithm }).(pulumi.StringPtrOutput)
 }
@@ -474,22 +488,19 @@ func (o SourceSamlOutput) SsoUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.StringOutput { return v.SsoUrl }).(pulumi.StringOutput)
 }
 
-// Defaults to `days=1`.
 func (o SourceSamlOutput) TemporaryUserDeleteAfter() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.StringPtrOutput { return v.TemporaryUserDeleteAfter }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `identifier`.
+// Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
 func (o SourceSamlOutput) UserMatchingMode() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.StringPtrOutput { return v.UserMatchingMode }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `goauthentik.io/sources/%(slug)s`.
 func (o SourceSamlOutput) UserPathTemplate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.StringPtrOutput { return v.UserPathTemplate }).(pulumi.StringPtrOutput)
 }
 
-// Generated.
 func (o SourceSamlOutput) Uuid() pulumi.StringOutput {
 	return o.ApplyT(func(v *SourceSaml) pulumi.StringOutput { return v.Uuid }).(pulumi.StringOutput)
 }
@@ -506,12 +517,6 @@ func (o SourceSamlArrayOutput) ToSourceSamlArrayOutput() SourceSamlArrayOutput {
 
 func (o SourceSamlArrayOutput) ToSourceSamlArrayOutputWithContext(ctx context.Context) SourceSamlArrayOutput {
 	return o
-}
-
-func (o SourceSamlArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*SourceSaml] {
-	return pulumix.Output[[]*SourceSaml]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SourceSamlArrayOutput) Index(i pulumi.IntInput) SourceSamlOutput {
@@ -532,12 +537,6 @@ func (o SourceSamlMapOutput) ToSourceSamlMapOutput() SourceSamlMapOutput {
 
 func (o SourceSamlMapOutput) ToSourceSamlMapOutputWithContext(ctx context.Context) SourceSamlMapOutput {
 	return o
-}
-
-func (o SourceSamlMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*SourceSaml] {
-	return pulumix.Output[map[string]*SourceSaml]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o SourceSamlMapOutput) MapIndex(k pulumi.StringInput) SourceSamlOutput {

@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Get stages by name
@@ -21,7 +20,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -65,14 +64,20 @@ type GetStageResult struct {
 
 func GetStageOutput(ctx *pulumi.Context, args GetStageOutputArgs, opts ...pulumi.InvokeOption) GetStageResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetStageResult, error) {
+		ApplyT(func(v interface{}) (GetStageResultOutput, error) {
 			args := v.(GetStageArgs)
-			r, err := GetStage(ctx, &args, opts...)
-			var s GetStageResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv GetStageResult
+			secret, err := ctx.InvokePackageRaw("authentik:index/getStage:getStage", args, &rv, "", opts...)
+			if err != nil {
+				return GetStageResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(GetStageResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(GetStageResultOutput), nil
+			}
+			return output, nil
 		}).(GetStageResultOutput)
 }
 
@@ -99,12 +104,6 @@ func (o GetStageResultOutput) ToGetStageResultOutput() GetStageResultOutput {
 
 func (o GetStageResultOutput) ToGetStageResultOutputWithContext(ctx context.Context) GetStageResultOutput {
 	return o
-}
-
-func (o GetStageResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetStageResult] {
-	return pulumix.Output[GetStageResult]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The provider-assigned unique ID for this managed resource.

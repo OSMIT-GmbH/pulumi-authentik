@@ -69,7 +69,6 @@ export class ProviderLdap extends pulumi.CustomResource {
      */
     public readonly mfaSupport!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
-    public readonly searchGroup!: pulumi.Output<string | undefined>;
     /**
      * Defaults to `direct`.
      */
@@ -79,6 +78,7 @@ export class ProviderLdap extends pulumi.CustomResource {
      * Defaults to `2000`.
      */
     public readonly uidStartNumber!: pulumi.Output<number | undefined>;
+    public readonly unbindFlow!: pulumi.Output<string>;
 
     /**
      * Create a ProviderLdap resource with the given unique name, arguments, and options.
@@ -100,10 +100,10 @@ export class ProviderLdap extends pulumi.CustomResource {
             resourceInputs["gidStartNumber"] = state ? state.gidStartNumber : undefined;
             resourceInputs["mfaSupport"] = state ? state.mfaSupport : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["searchGroup"] = state ? state.searchGroup : undefined;
             resourceInputs["searchMode"] = state ? state.searchMode : undefined;
             resourceInputs["tlsServerName"] = state ? state.tlsServerName : undefined;
             resourceInputs["uidStartNumber"] = state ? state.uidStartNumber : undefined;
+            resourceInputs["unbindFlow"] = state ? state.unbindFlow : undefined;
         } else {
             const args = argsOrState as ProviderLdapArgs | undefined;
             if ((!args || args.baseDn === undefined) && !opts.urn) {
@@ -112,6 +112,9 @@ export class ProviderLdap extends pulumi.CustomResource {
             if ((!args || args.bindFlow === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'bindFlow'");
             }
+            if ((!args || args.unbindFlow === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'unbindFlow'");
+            }
             resourceInputs["baseDn"] = args ? args.baseDn : undefined;
             resourceInputs["bindFlow"] = args ? args.bindFlow : undefined;
             resourceInputs["bindMode"] = args ? args.bindMode : undefined;
@@ -119,10 +122,10 @@ export class ProviderLdap extends pulumi.CustomResource {
             resourceInputs["gidStartNumber"] = args ? args.gidStartNumber : undefined;
             resourceInputs["mfaSupport"] = args ? args.mfaSupport : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["searchGroup"] = args ? args.searchGroup : undefined;
             resourceInputs["searchMode"] = args ? args.searchMode : undefined;
             resourceInputs["tlsServerName"] = args ? args.tlsServerName : undefined;
             resourceInputs["uidStartNumber"] = args ? args.uidStartNumber : undefined;
+            resourceInputs["unbindFlow"] = args ? args.unbindFlow : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ProviderLdap.__pulumiType, name, resourceInputs, opts);
@@ -149,7 +152,6 @@ export interface ProviderLdapState {
      */
     mfaSupport?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
-    searchGroup?: pulumi.Input<string>;
     /**
      * Defaults to `direct`.
      */
@@ -159,6 +161,7 @@ export interface ProviderLdapState {
      * Defaults to `2000`.
      */
     uidStartNumber?: pulumi.Input<number>;
+    unbindFlow?: pulumi.Input<string>;
 }
 
 /**
@@ -181,7 +184,6 @@ export interface ProviderLdapArgs {
      */
     mfaSupport?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
-    searchGroup?: pulumi.Input<string>;
     /**
      * Defaults to `direct`.
      */
@@ -191,4 +193,5 @@ export interface ProviderLdapArgs {
      * Defaults to `2000`.
      */
     uidStartNumber?: pulumi.Input<number>;
+    unbindFlow: pulumi.Input<string>;
 }

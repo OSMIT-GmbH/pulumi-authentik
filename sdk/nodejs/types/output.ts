@@ -53,5 +53,6 @@ export interface GetUsersUser {
     type: string;
     uid: string;
     username: string;
+    uuid: string;
 }
 

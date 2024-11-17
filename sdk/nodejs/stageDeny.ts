@@ -42,6 +42,7 @@ export class StageDeny extends pulumi.CustomResource {
         return obj['__pulumiType'] === StageDeny.__pulumiType;
     }
 
+    public readonly denyMessage!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
 
     /**
@@ -57,9 +58,11 @@ export class StageDeny extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as StageDenyState | undefined;
+            resourceInputs["denyMessage"] = state ? state.denyMessage : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
         } else {
             const args = argsOrState as StageDenyArgs | undefined;
+            resourceInputs["denyMessage"] = args ? args.denyMessage : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -71,6 +74,7 @@ export class StageDeny extends pulumi.CustomResource {
  * Input properties used for looking up and filtering StageDeny resources.
  */
 export interface StageDenyState {
+    denyMessage?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
 }
 
@@ -78,5 +82,6 @@ export interface StageDenyState {
  * The set of arguments for constructing a StageDeny resource.
  */
 export interface StageDenyArgs {
+    denyMessage?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
 }

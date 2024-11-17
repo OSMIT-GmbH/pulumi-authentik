@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -42,13 +41,74 @@ import (
 type PolicyEventMatcher struct {
 	pulumi.CustomResourceState
 
-	Action   pulumi.StringPtrOutput `pulumi:"action"`
-	App      pulumi.StringPtrOutput `pulumi:"app"`
-	ClientIp pulumi.StringPtrOutput `pulumi:"clientIp"`
-	// Defaults to `false`.
+	Action pulumi.StringPtrOutput `pulumi:"action"`
+	// Allowed values: - `authentik.tenants` - `authentik.admin` - `authentik.api` - `authentik.crypto` - `authentik.flows` -
+	// `authentik.outposts` - `authentik.policies.dummy` - `authentik.policies.event_matcher` - `authentik.policies.expiry` -
+	// `authentik.policies.expression` - `authentik.policies.geoip` - `authentik.policies.password` -
+	// `authentik.policies.reputation` - `authentik.policies` - `authentik.providers.ldap` - `authentik.providers.oauth2` -
+	// `authentik.providers.proxy` - `authentik.providers.radius` - `authentik.providers.saml` - `authentik.providers.scim` -
+	// `authentik.rbac` - `authentik.recovery` - `authentik.sources.kerberos` - `authentik.sources.ldap` -
+	// `authentik.sources.oauth` - `authentik.sources.plex` - `authentik.sources.saml` - `authentik.sources.scim` -
+	// `authentik.stages.authenticator` - `authentik.stages.authenticator_duo` - `authentik.stages.authenticator_sms` -
+	// `authentik.stages.authenticator_static` - `authentik.stages.authenticator_totp` -
+	// `authentik.stages.authenticator_validate` - `authentik.stages.authenticator_webauthn` - `authentik.stages.captcha` -
+	// `authentik.stages.consent` - `authentik.stages.deny` - `authentik.stages.dummy` - `authentik.stages.email` -
+	// `authentik.stages.identification` - `authentik.stages.invitation` - `authentik.stages.password` -
+	// `authentik.stages.prompt` - `authentik.stages.user_delete` - `authentik.stages.user_login` -
+	// `authentik.stages.user_logout` - `authentik.stages.user_write` - `authentik.brands` - `authentik.blueprints` -
+	// `authentik.core` - `authentik.enterprise` - `authentik.enterprise.audit` -
+	// `authentik.enterprise.providers.google_workspace` - `authentik.enterprise.providers.microsoft_entra` -
+	// `authentik.enterprise.providers.rac` - `authentik.enterprise.stages.authenticator_endpoint_gdtc` -
+	// `authentik.enterprise.stages.source` - `authentik.events`
+	App              pulumi.StringPtrOutput `pulumi:"app"`
+	ClientIp         pulumi.StringPtrOutput `pulumi:"clientIp"`
 	ExecutionLogging pulumi.BoolPtrOutput   `pulumi:"executionLogging"`
-	Model            pulumi.StringPtrOutput `pulumi:"model"`
-	Name             pulumi.StringOutput    `pulumi:"name"`
+	// Allowed values: - `authentik_tenants.domain` - `authentik_crypto.certificatekeypair` - `authentik_flows.flow` -
+	// `authentik_flows.flowstagebinding` - `authentik_outposts.dockerserviceconnection` -
+	// `authentik_outposts.kubernetesserviceconnection` - `authentik_outposts.outpost` - `authentik_policies_dummy.dummypolicy`
+	// - `authentik_policies_event_matcher.eventmatcherpolicy` - `authentik_policies_expiry.passwordexpirypolicy` -
+	//   `authentik_policies_expression.expressionpolicy` - `authentik_policies_geoip.geoippolicy` -
+	//   `authentik_policies_password.passwordpolicy` - `authentik_policies_reputation.reputationpolicy` -
+	//   `authentik_policies.policybinding` - `authentik_providers_ldap.ldapprovider` - `authentik_providers_oauth2.scopemapping`
+	// - `authentik_providers_oauth2.oauth2provider` - `authentik_providers_proxy.proxyprovider` -
+	//   `authentik_providers_radius.radiusprovider` - `authentik_providers_radius.radiusproviderpropertymapping` -
+	//   `authentik_providers_saml.samlprovider` - `authentik_providers_saml.samlpropertymapping` -
+	//   `authentik_providers_scim.scimprovider` - `authentik_providers_scim.scimmapping` - `authentik_rbac.role` -
+	//   `authentik_sources_kerberos.kerberossource` - `authentik_sources_kerberos.kerberossourcepropertymapping` -
+	//   `authentik_sources_kerberos.userkerberossourceconnection` - `authentik_sources_kerberos.groupkerberossourceconnection` -
+	//   `authentik_sources_ldap.ldapsource` - `authentik_sources_ldap.ldapsourcepropertymapping` -
+	//   `authentik_sources_oauth.oauthsource` - `authentik_sources_oauth.oauthsourcepropertymapping` -
+	//   `authentik_sources_oauth.useroauthsourceconnection` - `authentik_sources_oauth.groupoauthsourceconnection` -
+	//   `authentik_sources_plex.plexsource` - `authentik_sources_plex.plexsourcepropertymapping` -
+	//   `authentik_sources_plex.userplexsourceconnection` - `authentik_sources_plex.groupplexsourceconnection` -
+	//   `authentik_sources_saml.samlsource` - `authentik_sources_saml.samlsourcepropertymapping` -
+	//   `authentik_sources_saml.usersamlsourceconnection` - `authentik_sources_saml.groupsamlsourceconnection` -
+	//   `authentik_sources_scim.scimsource` - `authentik_sources_scim.scimsourcepropertymapping` -
+	//   `authentik_stages_authenticator_duo.authenticatorduostage` - `authentik_stages_authenticator_duo.duodevice` -
+	//   `authentik_stages_authenticator_sms.authenticatorsmsstage` - `authentik_stages_authenticator_sms.smsdevice` -
+	//   `authentik_stages_authenticator_static.authenticatorstaticstage` - `authentik_stages_authenticator_static.staticdevice`
+	// - `authentik_stages_authenticator_totp.authenticatortotpstage` - `authentik_stages_authenticator_totp.totpdevice` -
+	//   `authentik_stages_authenticator_validate.authenticatorvalidatestage` -
+	//   `authentik_stages_authenticator_webauthn.authenticatorwebauthnstage` -
+	//   `authentik_stages_authenticator_webauthn.webauthndevice` - `authentik_stages_captcha.captchastage` -
+	//   `authentik_stages_consent.consentstage` - `authentik_stages_consent.userconsent` - `authentik_stages_deny.denystage` -
+	//   `authentik_stages_dummy.dummystage` - `authentik_stages_email.emailstage` -
+	//   `authentik_stages_identification.identificationstage` - `authentik_stages_invitation.invitationstage` -
+	//   `authentik_stages_invitation.invitation` - `authentik_stages_password.passwordstage` - `authentik_stages_prompt.prompt`
+	// - `authentik_stages_prompt.promptstage` - `authentik_stages_user_delete.userdeletestage` -
+	//   `authentik_stages_user_login.userloginstage` - `authentik_stages_user_logout.userlogoutstage` -
+	//   `authentik_stages_user_write.userwritestage` - `authentik_brands.brand` - `authentik_blueprints.blueprintinstance` -
+	//   `authentik_core.group` - `authentik_core.user` - `authentik_core.application` - `authentik_core.token` -
+	//   `authentik_enterprise.license` - `authentik_providers_google_workspace.googleworkspaceprovider` -
+	//   `authentik_providers_google_workspace.googleworkspaceprovidermapping` -
+	//   `authentik_providers_microsoft_entra.microsoftentraprovider` -
+	//   `authentik_providers_microsoft_entra.microsoftentraprovidermapping` - `authentik_providers_rac.racprovider` -
+	//   `authentik_providers_rac.endpoint` - `authentik_providers_rac.racpropertymapping` -
+	//   `authentik_stages_authenticator_endpoint_gdtc.authenticatorendpointgdtcstage` - `authentik_stages_source.sourcestage` -
+	//   `authentik_events.event` - `authentik_events.notificationtransport` - `authentik_events.notification` -
+	//   `authentik_events.notificationrule` - `authentik_events.notificationwebhookmapping`
+	Model pulumi.StringPtrOutput `pulumi:"model"`
+	Name  pulumi.StringOutput    `pulumi:"name"`
 }
 
 // NewPolicyEventMatcher registers a new resource with the given unique name, arguments, and options.
@@ -81,23 +141,145 @@ func GetPolicyEventMatcher(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering PolicyEventMatcher resources.
 type policyEventMatcherState struct {
-	Action   *string `pulumi:"action"`
-	App      *string `pulumi:"app"`
-	ClientIp *string `pulumi:"clientIp"`
-	// Defaults to `false`.
+	Action *string `pulumi:"action"`
+	// Allowed values: - `authentik.tenants` - `authentik.admin` - `authentik.api` - `authentik.crypto` - `authentik.flows` -
+	// `authentik.outposts` - `authentik.policies.dummy` - `authentik.policies.event_matcher` - `authentik.policies.expiry` -
+	// `authentik.policies.expression` - `authentik.policies.geoip` - `authentik.policies.password` -
+	// `authentik.policies.reputation` - `authentik.policies` - `authentik.providers.ldap` - `authentik.providers.oauth2` -
+	// `authentik.providers.proxy` - `authentik.providers.radius` - `authentik.providers.saml` - `authentik.providers.scim` -
+	// `authentik.rbac` - `authentik.recovery` - `authentik.sources.kerberos` - `authentik.sources.ldap` -
+	// `authentik.sources.oauth` - `authentik.sources.plex` - `authentik.sources.saml` - `authentik.sources.scim` -
+	// `authentik.stages.authenticator` - `authentik.stages.authenticator_duo` - `authentik.stages.authenticator_sms` -
+	// `authentik.stages.authenticator_static` - `authentik.stages.authenticator_totp` -
+	// `authentik.stages.authenticator_validate` - `authentik.stages.authenticator_webauthn` - `authentik.stages.captcha` -
+	// `authentik.stages.consent` - `authentik.stages.deny` - `authentik.stages.dummy` - `authentik.stages.email` -
+	// `authentik.stages.identification` - `authentik.stages.invitation` - `authentik.stages.password` -
+	// `authentik.stages.prompt` - `authentik.stages.user_delete` - `authentik.stages.user_login` -
+	// `authentik.stages.user_logout` - `authentik.stages.user_write` - `authentik.brands` - `authentik.blueprints` -
+	// `authentik.core` - `authentik.enterprise` - `authentik.enterprise.audit` -
+	// `authentik.enterprise.providers.google_workspace` - `authentik.enterprise.providers.microsoft_entra` -
+	// `authentik.enterprise.providers.rac` - `authentik.enterprise.stages.authenticator_endpoint_gdtc` -
+	// `authentik.enterprise.stages.source` - `authentik.events`
+	App              *string `pulumi:"app"`
+	ClientIp         *string `pulumi:"clientIp"`
 	ExecutionLogging *bool   `pulumi:"executionLogging"`
-	Model            *string `pulumi:"model"`
-	Name             *string `pulumi:"name"`
+	// Allowed values: - `authentik_tenants.domain` - `authentik_crypto.certificatekeypair` - `authentik_flows.flow` -
+	// `authentik_flows.flowstagebinding` - `authentik_outposts.dockerserviceconnection` -
+	// `authentik_outposts.kubernetesserviceconnection` - `authentik_outposts.outpost` - `authentik_policies_dummy.dummypolicy`
+	// - `authentik_policies_event_matcher.eventmatcherpolicy` - `authentik_policies_expiry.passwordexpirypolicy` -
+	//   `authentik_policies_expression.expressionpolicy` - `authentik_policies_geoip.geoippolicy` -
+	//   `authentik_policies_password.passwordpolicy` - `authentik_policies_reputation.reputationpolicy` -
+	//   `authentik_policies.policybinding` - `authentik_providers_ldap.ldapprovider` - `authentik_providers_oauth2.scopemapping`
+	// - `authentik_providers_oauth2.oauth2provider` - `authentik_providers_proxy.proxyprovider` -
+	//   `authentik_providers_radius.radiusprovider` - `authentik_providers_radius.radiusproviderpropertymapping` -
+	//   `authentik_providers_saml.samlprovider` - `authentik_providers_saml.samlpropertymapping` -
+	//   `authentik_providers_scim.scimprovider` - `authentik_providers_scim.scimmapping` - `authentik_rbac.role` -
+	//   `authentik_sources_kerberos.kerberossource` - `authentik_sources_kerberos.kerberossourcepropertymapping` -
+	//   `authentik_sources_kerberos.userkerberossourceconnection` - `authentik_sources_kerberos.groupkerberossourceconnection` -
+	//   `authentik_sources_ldap.ldapsource` - `authentik_sources_ldap.ldapsourcepropertymapping` -
+	//   `authentik_sources_oauth.oauthsource` - `authentik_sources_oauth.oauthsourcepropertymapping` -
+	//   `authentik_sources_oauth.useroauthsourceconnection` - `authentik_sources_oauth.groupoauthsourceconnection` -
+	//   `authentik_sources_plex.plexsource` - `authentik_sources_plex.plexsourcepropertymapping` -
+	//   `authentik_sources_plex.userplexsourceconnection` - `authentik_sources_plex.groupplexsourceconnection` -
+	//   `authentik_sources_saml.samlsource` - `authentik_sources_saml.samlsourcepropertymapping` -
+	//   `authentik_sources_saml.usersamlsourceconnection` - `authentik_sources_saml.groupsamlsourceconnection` -
+	//   `authentik_sources_scim.scimsource` - `authentik_sources_scim.scimsourcepropertymapping` -
+	//   `authentik_stages_authenticator_duo.authenticatorduostage` - `authentik_stages_authenticator_duo.duodevice` -
+	//   `authentik_stages_authenticator_sms.authenticatorsmsstage` - `authentik_stages_authenticator_sms.smsdevice` -
+	//   `authentik_stages_authenticator_static.authenticatorstaticstage` - `authentik_stages_authenticator_static.staticdevice`
+	// - `authentik_stages_authenticator_totp.authenticatortotpstage` - `authentik_stages_authenticator_totp.totpdevice` -
+	//   `authentik_stages_authenticator_validate.authenticatorvalidatestage` -
+	//   `authentik_stages_authenticator_webauthn.authenticatorwebauthnstage` -
+	//   `authentik_stages_authenticator_webauthn.webauthndevice` - `authentik_stages_captcha.captchastage` -
+	//   `authentik_stages_consent.consentstage` - `authentik_stages_consent.userconsent` - `authentik_stages_deny.denystage` -
+	//   `authentik_stages_dummy.dummystage` - `authentik_stages_email.emailstage` -
+	//   `authentik_stages_identification.identificationstage` - `authentik_stages_invitation.invitationstage` -
+	//   `authentik_stages_invitation.invitation` - `authentik_stages_password.passwordstage` - `authentik_stages_prompt.prompt`
+	// - `authentik_stages_prompt.promptstage` - `authentik_stages_user_delete.userdeletestage` -
+	//   `authentik_stages_user_login.userloginstage` - `authentik_stages_user_logout.userlogoutstage` -
+	//   `authentik_stages_user_write.userwritestage` - `authentik_brands.brand` - `authentik_blueprints.blueprintinstance` -
+	//   `authentik_core.group` - `authentik_core.user` - `authentik_core.application` - `authentik_core.token` -
+	//   `authentik_enterprise.license` - `authentik_providers_google_workspace.googleworkspaceprovider` -
+	//   `authentik_providers_google_workspace.googleworkspaceprovidermapping` -
+	//   `authentik_providers_microsoft_entra.microsoftentraprovider` -
+	//   `authentik_providers_microsoft_entra.microsoftentraprovidermapping` - `authentik_providers_rac.racprovider` -
+	//   `authentik_providers_rac.endpoint` - `authentik_providers_rac.racpropertymapping` -
+	//   `authentik_stages_authenticator_endpoint_gdtc.authenticatorendpointgdtcstage` - `authentik_stages_source.sourcestage` -
+	//   `authentik_events.event` - `authentik_events.notificationtransport` - `authentik_events.notification` -
+	//   `authentik_events.notificationrule` - `authentik_events.notificationwebhookmapping`
+	Model *string `pulumi:"model"`
+	Name  *string `pulumi:"name"`
 }
 
 type PolicyEventMatcherState struct {
-	Action   pulumi.StringPtrInput
-	App      pulumi.StringPtrInput
-	ClientIp pulumi.StringPtrInput
-	// Defaults to `false`.
+	Action pulumi.StringPtrInput
+	// Allowed values: - `authentik.tenants` - `authentik.admin` - `authentik.api` - `authentik.crypto` - `authentik.flows` -
+	// `authentik.outposts` - `authentik.policies.dummy` - `authentik.policies.event_matcher` - `authentik.policies.expiry` -
+	// `authentik.policies.expression` - `authentik.policies.geoip` - `authentik.policies.password` -
+	// `authentik.policies.reputation` - `authentik.policies` - `authentik.providers.ldap` - `authentik.providers.oauth2` -
+	// `authentik.providers.proxy` - `authentik.providers.radius` - `authentik.providers.saml` - `authentik.providers.scim` -
+	// `authentik.rbac` - `authentik.recovery` - `authentik.sources.kerberos` - `authentik.sources.ldap` -
+	// `authentik.sources.oauth` - `authentik.sources.plex` - `authentik.sources.saml` - `authentik.sources.scim` -
+	// `authentik.stages.authenticator` - `authentik.stages.authenticator_duo` - `authentik.stages.authenticator_sms` -
+	// `authentik.stages.authenticator_static` - `authentik.stages.authenticator_totp` -
+	// `authentik.stages.authenticator_validate` - `authentik.stages.authenticator_webauthn` - `authentik.stages.captcha` -
+	// `authentik.stages.consent` - `authentik.stages.deny` - `authentik.stages.dummy` - `authentik.stages.email` -
+	// `authentik.stages.identification` - `authentik.stages.invitation` - `authentik.stages.password` -
+	// `authentik.stages.prompt` - `authentik.stages.user_delete` - `authentik.stages.user_login` -
+	// `authentik.stages.user_logout` - `authentik.stages.user_write` - `authentik.brands` - `authentik.blueprints` -
+	// `authentik.core` - `authentik.enterprise` - `authentik.enterprise.audit` -
+	// `authentik.enterprise.providers.google_workspace` - `authentik.enterprise.providers.microsoft_entra` -
+	// `authentik.enterprise.providers.rac` - `authentik.enterprise.stages.authenticator_endpoint_gdtc` -
+	// `authentik.enterprise.stages.source` - `authentik.events`
+	App              pulumi.StringPtrInput
+	ClientIp         pulumi.StringPtrInput
 	ExecutionLogging pulumi.BoolPtrInput
-	Model            pulumi.StringPtrInput
-	Name             pulumi.StringPtrInput
+	// Allowed values: - `authentik_tenants.domain` - `authentik_crypto.certificatekeypair` - `authentik_flows.flow` -
+	// `authentik_flows.flowstagebinding` - `authentik_outposts.dockerserviceconnection` -
+	// `authentik_outposts.kubernetesserviceconnection` - `authentik_outposts.outpost` - `authentik_policies_dummy.dummypolicy`
+	// - `authentik_policies_event_matcher.eventmatcherpolicy` - `authentik_policies_expiry.passwordexpirypolicy` -
+	//   `authentik_policies_expression.expressionpolicy` - `authentik_policies_geoip.geoippolicy` -
+	//   `authentik_policies_password.passwordpolicy` - `authentik_policies_reputation.reputationpolicy` -
+	//   `authentik_policies.policybinding` - `authentik_providers_ldap.ldapprovider` - `authentik_providers_oauth2.scopemapping`
+	// - `authentik_providers_oauth2.oauth2provider` - `authentik_providers_proxy.proxyprovider` -
+	//   `authentik_providers_radius.radiusprovider` - `authentik_providers_radius.radiusproviderpropertymapping` -
+	//   `authentik_providers_saml.samlprovider` - `authentik_providers_saml.samlpropertymapping` -
+	//   `authentik_providers_scim.scimprovider` - `authentik_providers_scim.scimmapping` - `authentik_rbac.role` -
+	//   `authentik_sources_kerberos.kerberossource` - `authentik_sources_kerberos.kerberossourcepropertymapping` -
+	//   `authentik_sources_kerberos.userkerberossourceconnection` - `authentik_sources_kerberos.groupkerberossourceconnection` -
+	//   `authentik_sources_ldap.ldapsource` - `authentik_sources_ldap.ldapsourcepropertymapping` -
+	//   `authentik_sources_oauth.oauthsource` - `authentik_sources_oauth.oauthsourcepropertymapping` -
+	//   `authentik_sources_oauth.useroauthsourceconnection` - `authentik_sources_oauth.groupoauthsourceconnection` -
+	//   `authentik_sources_plex.plexsource` - `authentik_sources_plex.plexsourcepropertymapping` -
+	//   `authentik_sources_plex.userplexsourceconnection` - `authentik_sources_plex.groupplexsourceconnection` -
+	//   `authentik_sources_saml.samlsource` - `authentik_sources_saml.samlsourcepropertymapping` -
+	//   `authentik_sources_saml.usersamlsourceconnection` - `authentik_sources_saml.groupsamlsourceconnection` -
+	//   `authentik_sources_scim.scimsource` - `authentik_sources_scim.scimsourcepropertymapping` -
+	//   `authentik_stages_authenticator_duo.authenticatorduostage` - `authentik_stages_authenticator_duo.duodevice` -
+	//   `authentik_stages_authenticator_sms.authenticatorsmsstage` - `authentik_stages_authenticator_sms.smsdevice` -
+	//   `authentik_stages_authenticator_static.authenticatorstaticstage` - `authentik_stages_authenticator_static.staticdevice`
+	// - `authentik_stages_authenticator_totp.authenticatortotpstage` - `authentik_stages_authenticator_totp.totpdevice` -
+	//   `authentik_stages_authenticator_validate.authenticatorvalidatestage` -
+	//   `authentik_stages_authenticator_webauthn.authenticatorwebauthnstage` -
+	//   `authentik_stages_authenticator_webauthn.webauthndevice` - `authentik_stages_captcha.captchastage` -
+	//   `authentik_stages_consent.consentstage` - `authentik_stages_consent.userconsent` - `authentik_stages_deny.denystage` -
+	//   `authentik_stages_dummy.dummystage` - `authentik_stages_email.emailstage` -
+	//   `authentik_stages_identification.identificationstage` - `authentik_stages_invitation.invitationstage` -
+	//   `authentik_stages_invitation.invitation` - `authentik_stages_password.passwordstage` - `authentik_stages_prompt.prompt`
+	// - `authentik_stages_prompt.promptstage` - `authentik_stages_user_delete.userdeletestage` -
+	//   `authentik_stages_user_login.userloginstage` - `authentik_stages_user_logout.userlogoutstage` -
+	//   `authentik_stages_user_write.userwritestage` - `authentik_brands.brand` - `authentik_blueprints.blueprintinstance` -
+	//   `authentik_core.group` - `authentik_core.user` - `authentik_core.application` - `authentik_core.token` -
+	//   `authentik_enterprise.license` - `authentik_providers_google_workspace.googleworkspaceprovider` -
+	//   `authentik_providers_google_workspace.googleworkspaceprovidermapping` -
+	//   `authentik_providers_microsoft_entra.microsoftentraprovider` -
+	//   `authentik_providers_microsoft_entra.microsoftentraprovidermapping` - `authentik_providers_rac.racprovider` -
+	//   `authentik_providers_rac.endpoint` - `authentik_providers_rac.racpropertymapping` -
+	//   `authentik_stages_authenticator_endpoint_gdtc.authenticatorendpointgdtcstage` - `authentik_stages_source.sourcestage` -
+	//   `authentik_events.event` - `authentik_events.notificationtransport` - `authentik_events.notification` -
+	//   `authentik_events.notificationrule` - `authentik_events.notificationwebhookmapping`
+	Model pulumi.StringPtrInput
+	Name  pulumi.StringPtrInput
 }
 
 func (PolicyEventMatcherState) ElementType() reflect.Type {
@@ -105,24 +287,146 @@ func (PolicyEventMatcherState) ElementType() reflect.Type {
 }
 
 type policyEventMatcherArgs struct {
-	Action   *string `pulumi:"action"`
-	App      *string `pulumi:"app"`
-	ClientIp *string `pulumi:"clientIp"`
-	// Defaults to `false`.
+	Action *string `pulumi:"action"`
+	// Allowed values: - `authentik.tenants` - `authentik.admin` - `authentik.api` - `authentik.crypto` - `authentik.flows` -
+	// `authentik.outposts` - `authentik.policies.dummy` - `authentik.policies.event_matcher` - `authentik.policies.expiry` -
+	// `authentik.policies.expression` - `authentik.policies.geoip` - `authentik.policies.password` -
+	// `authentik.policies.reputation` - `authentik.policies` - `authentik.providers.ldap` - `authentik.providers.oauth2` -
+	// `authentik.providers.proxy` - `authentik.providers.radius` - `authentik.providers.saml` - `authentik.providers.scim` -
+	// `authentik.rbac` - `authentik.recovery` - `authentik.sources.kerberos` - `authentik.sources.ldap` -
+	// `authentik.sources.oauth` - `authentik.sources.plex` - `authentik.sources.saml` - `authentik.sources.scim` -
+	// `authentik.stages.authenticator` - `authentik.stages.authenticator_duo` - `authentik.stages.authenticator_sms` -
+	// `authentik.stages.authenticator_static` - `authentik.stages.authenticator_totp` -
+	// `authentik.stages.authenticator_validate` - `authentik.stages.authenticator_webauthn` - `authentik.stages.captcha` -
+	// `authentik.stages.consent` - `authentik.stages.deny` - `authentik.stages.dummy` - `authentik.stages.email` -
+	// `authentik.stages.identification` - `authentik.stages.invitation` - `authentik.stages.password` -
+	// `authentik.stages.prompt` - `authentik.stages.user_delete` - `authentik.stages.user_login` -
+	// `authentik.stages.user_logout` - `authentik.stages.user_write` - `authentik.brands` - `authentik.blueprints` -
+	// `authentik.core` - `authentik.enterprise` - `authentik.enterprise.audit` -
+	// `authentik.enterprise.providers.google_workspace` - `authentik.enterprise.providers.microsoft_entra` -
+	// `authentik.enterprise.providers.rac` - `authentik.enterprise.stages.authenticator_endpoint_gdtc` -
+	// `authentik.enterprise.stages.source` - `authentik.events`
+	App              *string `pulumi:"app"`
+	ClientIp         *string `pulumi:"clientIp"`
 	ExecutionLogging *bool   `pulumi:"executionLogging"`
-	Model            *string `pulumi:"model"`
-	Name             *string `pulumi:"name"`
+	// Allowed values: - `authentik_tenants.domain` - `authentik_crypto.certificatekeypair` - `authentik_flows.flow` -
+	// `authentik_flows.flowstagebinding` - `authentik_outposts.dockerserviceconnection` -
+	// `authentik_outposts.kubernetesserviceconnection` - `authentik_outposts.outpost` - `authentik_policies_dummy.dummypolicy`
+	// - `authentik_policies_event_matcher.eventmatcherpolicy` - `authentik_policies_expiry.passwordexpirypolicy` -
+	//   `authentik_policies_expression.expressionpolicy` - `authentik_policies_geoip.geoippolicy` -
+	//   `authentik_policies_password.passwordpolicy` - `authentik_policies_reputation.reputationpolicy` -
+	//   `authentik_policies.policybinding` - `authentik_providers_ldap.ldapprovider` - `authentik_providers_oauth2.scopemapping`
+	// - `authentik_providers_oauth2.oauth2provider` - `authentik_providers_proxy.proxyprovider` -
+	//   `authentik_providers_radius.radiusprovider` - `authentik_providers_radius.radiusproviderpropertymapping` -
+	//   `authentik_providers_saml.samlprovider` - `authentik_providers_saml.samlpropertymapping` -
+	//   `authentik_providers_scim.scimprovider` - `authentik_providers_scim.scimmapping` - `authentik_rbac.role` -
+	//   `authentik_sources_kerberos.kerberossource` - `authentik_sources_kerberos.kerberossourcepropertymapping` -
+	//   `authentik_sources_kerberos.userkerberossourceconnection` - `authentik_sources_kerberos.groupkerberossourceconnection` -
+	//   `authentik_sources_ldap.ldapsource` - `authentik_sources_ldap.ldapsourcepropertymapping` -
+	//   `authentik_sources_oauth.oauthsource` - `authentik_sources_oauth.oauthsourcepropertymapping` -
+	//   `authentik_sources_oauth.useroauthsourceconnection` - `authentik_sources_oauth.groupoauthsourceconnection` -
+	//   `authentik_sources_plex.plexsource` - `authentik_sources_plex.plexsourcepropertymapping` -
+	//   `authentik_sources_plex.userplexsourceconnection` - `authentik_sources_plex.groupplexsourceconnection` -
+	//   `authentik_sources_saml.samlsource` - `authentik_sources_saml.samlsourcepropertymapping` -
+	//   `authentik_sources_saml.usersamlsourceconnection` - `authentik_sources_saml.groupsamlsourceconnection` -
+	//   `authentik_sources_scim.scimsource` - `authentik_sources_scim.scimsourcepropertymapping` -
+	//   `authentik_stages_authenticator_duo.authenticatorduostage` - `authentik_stages_authenticator_duo.duodevice` -
+	//   `authentik_stages_authenticator_sms.authenticatorsmsstage` - `authentik_stages_authenticator_sms.smsdevice` -
+	//   `authentik_stages_authenticator_static.authenticatorstaticstage` - `authentik_stages_authenticator_static.staticdevice`
+	// - `authentik_stages_authenticator_totp.authenticatortotpstage` - `authentik_stages_authenticator_totp.totpdevice` -
+	//   `authentik_stages_authenticator_validate.authenticatorvalidatestage` -
+	//   `authentik_stages_authenticator_webauthn.authenticatorwebauthnstage` -
+	//   `authentik_stages_authenticator_webauthn.webauthndevice` - `authentik_stages_captcha.captchastage` -
+	//   `authentik_stages_consent.consentstage` - `authentik_stages_consent.userconsent` - `authentik_stages_deny.denystage` -
+	//   `authentik_stages_dummy.dummystage` - `authentik_stages_email.emailstage` -
+	//   `authentik_stages_identification.identificationstage` - `authentik_stages_invitation.invitationstage` -
+	//   `authentik_stages_invitation.invitation` - `authentik_stages_password.passwordstage` - `authentik_stages_prompt.prompt`
+	// - `authentik_stages_prompt.promptstage` - `authentik_stages_user_delete.userdeletestage` -
+	//   `authentik_stages_user_login.userloginstage` - `authentik_stages_user_logout.userlogoutstage` -
+	//   `authentik_stages_user_write.userwritestage` - `authentik_brands.brand` - `authentik_blueprints.blueprintinstance` -
+	//   `authentik_core.group` - `authentik_core.user` - `authentik_core.application` - `authentik_core.token` -
+	//   `authentik_enterprise.license` - `authentik_providers_google_workspace.googleworkspaceprovider` -
+	//   `authentik_providers_google_workspace.googleworkspaceprovidermapping` -
+	//   `authentik_providers_microsoft_entra.microsoftentraprovider` -
+	//   `authentik_providers_microsoft_entra.microsoftentraprovidermapping` - `authentik_providers_rac.racprovider` -
+	//   `authentik_providers_rac.endpoint` - `authentik_providers_rac.racpropertymapping` -
+	//   `authentik_stages_authenticator_endpoint_gdtc.authenticatorendpointgdtcstage` - `authentik_stages_source.sourcestage` -
+	//   `authentik_events.event` - `authentik_events.notificationtransport` - `authentik_events.notification` -
+	//   `authentik_events.notificationrule` - `authentik_events.notificationwebhookmapping`
+	Model *string `pulumi:"model"`
+	Name  *string `pulumi:"name"`
 }
 
 // The set of arguments for constructing a PolicyEventMatcher resource.
 type PolicyEventMatcherArgs struct {
-	Action   pulumi.StringPtrInput
-	App      pulumi.StringPtrInput
-	ClientIp pulumi.StringPtrInput
-	// Defaults to `false`.
+	Action pulumi.StringPtrInput
+	// Allowed values: - `authentik.tenants` - `authentik.admin` - `authentik.api` - `authentik.crypto` - `authentik.flows` -
+	// `authentik.outposts` - `authentik.policies.dummy` - `authentik.policies.event_matcher` - `authentik.policies.expiry` -
+	// `authentik.policies.expression` - `authentik.policies.geoip` - `authentik.policies.password` -
+	// `authentik.policies.reputation` - `authentik.policies` - `authentik.providers.ldap` - `authentik.providers.oauth2` -
+	// `authentik.providers.proxy` - `authentik.providers.radius` - `authentik.providers.saml` - `authentik.providers.scim` -
+	// `authentik.rbac` - `authentik.recovery` - `authentik.sources.kerberos` - `authentik.sources.ldap` -
+	// `authentik.sources.oauth` - `authentik.sources.plex` - `authentik.sources.saml` - `authentik.sources.scim` -
+	// `authentik.stages.authenticator` - `authentik.stages.authenticator_duo` - `authentik.stages.authenticator_sms` -
+	// `authentik.stages.authenticator_static` - `authentik.stages.authenticator_totp` -
+	// `authentik.stages.authenticator_validate` - `authentik.stages.authenticator_webauthn` - `authentik.stages.captcha` -
+	// `authentik.stages.consent` - `authentik.stages.deny` - `authentik.stages.dummy` - `authentik.stages.email` -
+	// `authentik.stages.identification` - `authentik.stages.invitation` - `authentik.stages.password` -
+	// `authentik.stages.prompt` - `authentik.stages.user_delete` - `authentik.stages.user_login` -
+	// `authentik.stages.user_logout` - `authentik.stages.user_write` - `authentik.brands` - `authentik.blueprints` -
+	// `authentik.core` - `authentik.enterprise` - `authentik.enterprise.audit` -
+	// `authentik.enterprise.providers.google_workspace` - `authentik.enterprise.providers.microsoft_entra` -
+	// `authentik.enterprise.providers.rac` - `authentik.enterprise.stages.authenticator_endpoint_gdtc` -
+	// `authentik.enterprise.stages.source` - `authentik.events`
+	App              pulumi.StringPtrInput
+	ClientIp         pulumi.StringPtrInput
 	ExecutionLogging pulumi.BoolPtrInput
-	Model            pulumi.StringPtrInput
-	Name             pulumi.StringPtrInput
+	// Allowed values: - `authentik_tenants.domain` - `authentik_crypto.certificatekeypair` - `authentik_flows.flow` -
+	// `authentik_flows.flowstagebinding` - `authentik_outposts.dockerserviceconnection` -
+	// `authentik_outposts.kubernetesserviceconnection` - `authentik_outposts.outpost` - `authentik_policies_dummy.dummypolicy`
+	// - `authentik_policies_event_matcher.eventmatcherpolicy` - `authentik_policies_expiry.passwordexpirypolicy` -
+	//   `authentik_policies_expression.expressionpolicy` - `authentik_policies_geoip.geoippolicy` -
+	//   `authentik_policies_password.passwordpolicy` - `authentik_policies_reputation.reputationpolicy` -
+	//   `authentik_policies.policybinding` - `authentik_providers_ldap.ldapprovider` - `authentik_providers_oauth2.scopemapping`
+	// - `authentik_providers_oauth2.oauth2provider` - `authentik_providers_proxy.proxyprovider` -
+	//   `authentik_providers_radius.radiusprovider` - `authentik_providers_radius.radiusproviderpropertymapping` -
+	//   `authentik_providers_saml.samlprovider` - `authentik_providers_saml.samlpropertymapping` -
+	//   `authentik_providers_scim.scimprovider` - `authentik_providers_scim.scimmapping` - `authentik_rbac.role` -
+	//   `authentik_sources_kerberos.kerberossource` - `authentik_sources_kerberos.kerberossourcepropertymapping` -
+	//   `authentik_sources_kerberos.userkerberossourceconnection` - `authentik_sources_kerberos.groupkerberossourceconnection` -
+	//   `authentik_sources_ldap.ldapsource` - `authentik_sources_ldap.ldapsourcepropertymapping` -
+	//   `authentik_sources_oauth.oauthsource` - `authentik_sources_oauth.oauthsourcepropertymapping` -
+	//   `authentik_sources_oauth.useroauthsourceconnection` - `authentik_sources_oauth.groupoauthsourceconnection` -
+	//   `authentik_sources_plex.plexsource` - `authentik_sources_plex.plexsourcepropertymapping` -
+	//   `authentik_sources_plex.userplexsourceconnection` - `authentik_sources_plex.groupplexsourceconnection` -
+	//   `authentik_sources_saml.samlsource` - `authentik_sources_saml.samlsourcepropertymapping` -
+	//   `authentik_sources_saml.usersamlsourceconnection` - `authentik_sources_saml.groupsamlsourceconnection` -
+	//   `authentik_sources_scim.scimsource` - `authentik_sources_scim.scimsourcepropertymapping` -
+	//   `authentik_stages_authenticator_duo.authenticatorduostage` - `authentik_stages_authenticator_duo.duodevice` -
+	//   `authentik_stages_authenticator_sms.authenticatorsmsstage` - `authentik_stages_authenticator_sms.smsdevice` -
+	//   `authentik_stages_authenticator_static.authenticatorstaticstage` - `authentik_stages_authenticator_static.staticdevice`
+	// - `authentik_stages_authenticator_totp.authenticatortotpstage` - `authentik_stages_authenticator_totp.totpdevice` -
+	//   `authentik_stages_authenticator_validate.authenticatorvalidatestage` -
+	//   `authentik_stages_authenticator_webauthn.authenticatorwebauthnstage` -
+	//   `authentik_stages_authenticator_webauthn.webauthndevice` - `authentik_stages_captcha.captchastage` -
+	//   `authentik_stages_consent.consentstage` - `authentik_stages_consent.userconsent` - `authentik_stages_deny.denystage` -
+	//   `authentik_stages_dummy.dummystage` - `authentik_stages_email.emailstage` -
+	//   `authentik_stages_identification.identificationstage` - `authentik_stages_invitation.invitationstage` -
+	//   `authentik_stages_invitation.invitation` - `authentik_stages_password.passwordstage` - `authentik_stages_prompt.prompt`
+	// - `authentik_stages_prompt.promptstage` - `authentik_stages_user_delete.userdeletestage` -
+	//   `authentik_stages_user_login.userloginstage` - `authentik_stages_user_logout.userlogoutstage` -
+	//   `authentik_stages_user_write.userwritestage` - `authentik_brands.brand` - `authentik_blueprints.blueprintinstance` -
+	//   `authentik_core.group` - `authentik_core.user` - `authentik_core.application` - `authentik_core.token` -
+	//   `authentik_enterprise.license` - `authentik_providers_google_workspace.googleworkspaceprovider` -
+	//   `authentik_providers_google_workspace.googleworkspaceprovidermapping` -
+	//   `authentik_providers_microsoft_entra.microsoftentraprovider` -
+	//   `authentik_providers_microsoft_entra.microsoftentraprovidermapping` - `authentik_providers_rac.racprovider` -
+	//   `authentik_providers_rac.endpoint` - `authentik_providers_rac.racpropertymapping` -
+	//   `authentik_stages_authenticator_endpoint_gdtc.authenticatorendpointgdtcstage` - `authentik_stages_source.sourcestage` -
+	//   `authentik_events.event` - `authentik_events.notificationtransport` - `authentik_events.notification` -
+	//   `authentik_events.notificationrule` - `authentik_events.notificationwebhookmapping`
+	Model pulumi.StringPtrInput
+	Name  pulumi.StringPtrInput
 }
 
 func (PolicyEventMatcherArgs) ElementType() reflect.Type {
@@ -146,12 +450,6 @@ func (i *PolicyEventMatcher) ToPolicyEventMatcherOutput() PolicyEventMatcherOutp
 
 func (i *PolicyEventMatcher) ToPolicyEventMatcherOutputWithContext(ctx context.Context) PolicyEventMatcherOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyEventMatcherOutput)
-}
-
-func (i *PolicyEventMatcher) ToOutput(ctx context.Context) pulumix.Output[*PolicyEventMatcher] {
-	return pulumix.Output[*PolicyEventMatcher]{
-		OutputState: i.ToPolicyEventMatcherOutputWithContext(ctx).OutputState,
-	}
 }
 
 // PolicyEventMatcherArrayInput is an input type that accepts PolicyEventMatcherArray and PolicyEventMatcherArrayOutput values.
@@ -179,12 +477,6 @@ func (i PolicyEventMatcherArray) ToPolicyEventMatcherArrayOutputWithContext(ctx 
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyEventMatcherArrayOutput)
 }
 
-func (i PolicyEventMatcherArray) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyEventMatcher] {
-	return pulumix.Output[[]*PolicyEventMatcher]{
-		OutputState: i.ToPolicyEventMatcherArrayOutputWithContext(ctx).OutputState,
-	}
-}
-
 // PolicyEventMatcherMapInput is an input type that accepts PolicyEventMatcherMap and PolicyEventMatcherMapOutput values.
 // You can construct a concrete instance of `PolicyEventMatcherMapInput` via:
 //
@@ -210,12 +502,6 @@ func (i PolicyEventMatcherMap) ToPolicyEventMatcherMapOutputWithContext(ctx cont
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyEventMatcherMapOutput)
 }
 
-func (i PolicyEventMatcherMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyEventMatcher] {
-	return pulumix.Output[map[string]*PolicyEventMatcher]{
-		OutputState: i.ToPolicyEventMatcherMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type PolicyEventMatcherOutput struct{ *pulumi.OutputState }
 
 func (PolicyEventMatcherOutput) ElementType() reflect.Type {
@@ -230,16 +516,28 @@ func (o PolicyEventMatcherOutput) ToPolicyEventMatcherOutputWithContext(ctx cont
 	return o
 }
 
-func (o PolicyEventMatcherOutput) ToOutput(ctx context.Context) pulumix.Output[*PolicyEventMatcher] {
-	return pulumix.Output[*PolicyEventMatcher]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o PolicyEventMatcherOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PolicyEventMatcher) pulumi.StringPtrOutput { return v.Action }).(pulumi.StringPtrOutput)
 }
 
+// Allowed values: - `authentik.tenants` - `authentik.admin` - `authentik.api` - `authentik.crypto` - `authentik.flows` -
+// `authentik.outposts` - `authentik.policies.dummy` - `authentik.policies.event_matcher` - `authentik.policies.expiry` -
+// `authentik.policies.expression` - `authentik.policies.geoip` - `authentik.policies.password` -
+// `authentik.policies.reputation` - `authentik.policies` - `authentik.providers.ldap` - `authentik.providers.oauth2` -
+// `authentik.providers.proxy` - `authentik.providers.radius` - `authentik.providers.saml` - `authentik.providers.scim` -
+// `authentik.rbac` - `authentik.recovery` - `authentik.sources.kerberos` - `authentik.sources.ldap` -
+// `authentik.sources.oauth` - `authentik.sources.plex` - `authentik.sources.saml` - `authentik.sources.scim` -
+// `authentik.stages.authenticator` - `authentik.stages.authenticator_duo` - `authentik.stages.authenticator_sms` -
+// `authentik.stages.authenticator_static` - `authentik.stages.authenticator_totp` -
+// `authentik.stages.authenticator_validate` - `authentik.stages.authenticator_webauthn` - `authentik.stages.captcha` -
+// `authentik.stages.consent` - `authentik.stages.deny` - `authentik.stages.dummy` - `authentik.stages.email` -
+// `authentik.stages.identification` - `authentik.stages.invitation` - `authentik.stages.password` -
+// `authentik.stages.prompt` - `authentik.stages.user_delete` - `authentik.stages.user_login` -
+// `authentik.stages.user_logout` - `authentik.stages.user_write` - `authentik.brands` - `authentik.blueprints` -
+// `authentik.core` - `authentik.enterprise` - `authentik.enterprise.audit` -
+// `authentik.enterprise.providers.google_workspace` - `authentik.enterprise.providers.microsoft_entra` -
+// `authentik.enterprise.providers.rac` - `authentik.enterprise.stages.authenticator_endpoint_gdtc` -
+// `authentik.enterprise.stages.source` - `authentik.events`
 func (o PolicyEventMatcherOutput) App() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PolicyEventMatcher) pulumi.StringPtrOutput { return v.App }).(pulumi.StringPtrOutput)
 }
@@ -248,11 +546,54 @@ func (o PolicyEventMatcherOutput) ClientIp() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PolicyEventMatcher) pulumi.StringPtrOutput { return v.ClientIp }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `false`.
 func (o PolicyEventMatcherOutput) ExecutionLogging() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PolicyEventMatcher) pulumi.BoolPtrOutput { return v.ExecutionLogging }).(pulumi.BoolPtrOutput)
 }
 
+// Allowed values: - `authentik_tenants.domain` - `authentik_crypto.certificatekeypair` - `authentik_flows.flow` -
+// `authentik_flows.flowstagebinding` - `authentik_outposts.dockerserviceconnection` -
+// `authentik_outposts.kubernetesserviceconnection` - `authentik_outposts.outpost` - `authentik_policies_dummy.dummypolicy`
+//   - `authentik_policies_event_matcher.eventmatcherpolicy` - `authentik_policies_expiry.passwordexpirypolicy` -
+//     `authentik_policies_expression.expressionpolicy` - `authentik_policies_geoip.geoippolicy` -
+//     `authentik_policies_password.passwordpolicy` - `authentik_policies_reputation.reputationpolicy` -
+//     `authentik_policies.policybinding` - `authentik_providers_ldap.ldapprovider` - `authentik_providers_oauth2.scopemapping`
+//   - `authentik_providers_oauth2.oauth2provider` - `authentik_providers_proxy.proxyprovider` -
+//     `authentik_providers_radius.radiusprovider` - `authentik_providers_radius.radiusproviderpropertymapping` -
+//     `authentik_providers_saml.samlprovider` - `authentik_providers_saml.samlpropertymapping` -
+//     `authentik_providers_scim.scimprovider` - `authentik_providers_scim.scimmapping` - `authentik_rbac.role` -
+//     `authentik_sources_kerberos.kerberossource` - `authentik_sources_kerberos.kerberossourcepropertymapping` -
+//     `authentik_sources_kerberos.userkerberossourceconnection` - `authentik_sources_kerberos.groupkerberossourceconnection` -
+//     `authentik_sources_ldap.ldapsource` - `authentik_sources_ldap.ldapsourcepropertymapping` -
+//     `authentik_sources_oauth.oauthsource` - `authentik_sources_oauth.oauthsourcepropertymapping` -
+//     `authentik_sources_oauth.useroauthsourceconnection` - `authentik_sources_oauth.groupoauthsourceconnection` -
+//     `authentik_sources_plex.plexsource` - `authentik_sources_plex.plexsourcepropertymapping` -
+//     `authentik_sources_plex.userplexsourceconnection` - `authentik_sources_plex.groupplexsourceconnection` -
+//     `authentik_sources_saml.samlsource` - `authentik_sources_saml.samlsourcepropertymapping` -
+//     `authentik_sources_saml.usersamlsourceconnection` - `authentik_sources_saml.groupsamlsourceconnection` -
+//     `authentik_sources_scim.scimsource` - `authentik_sources_scim.scimsourcepropertymapping` -
+//     `authentik_stages_authenticator_duo.authenticatorduostage` - `authentik_stages_authenticator_duo.duodevice` -
+//     `authentik_stages_authenticator_sms.authenticatorsmsstage` - `authentik_stages_authenticator_sms.smsdevice` -
+//     `authentik_stages_authenticator_static.authenticatorstaticstage` - `authentik_stages_authenticator_static.staticdevice`
+//   - `authentik_stages_authenticator_totp.authenticatortotpstage` - `authentik_stages_authenticator_totp.totpdevice` -
+//     `authentik_stages_authenticator_validate.authenticatorvalidatestage` -
+//     `authentik_stages_authenticator_webauthn.authenticatorwebauthnstage` -
+//     `authentik_stages_authenticator_webauthn.webauthndevice` - `authentik_stages_captcha.captchastage` -
+//     `authentik_stages_consent.consentstage` - `authentik_stages_consent.userconsent` - `authentik_stages_deny.denystage` -
+//     `authentik_stages_dummy.dummystage` - `authentik_stages_email.emailstage` -
+//     `authentik_stages_identification.identificationstage` - `authentik_stages_invitation.invitationstage` -
+//     `authentik_stages_invitation.invitation` - `authentik_stages_password.passwordstage` - `authentik_stages_prompt.prompt`
+//   - `authentik_stages_prompt.promptstage` - `authentik_stages_user_delete.userdeletestage` -
+//     `authentik_stages_user_login.userloginstage` - `authentik_stages_user_logout.userlogoutstage` -
+//     `authentik_stages_user_write.userwritestage` - `authentik_brands.brand` - `authentik_blueprints.blueprintinstance` -
+//     `authentik_core.group` - `authentik_core.user` - `authentik_core.application` - `authentik_core.token` -
+//     `authentik_enterprise.license` - `authentik_providers_google_workspace.googleworkspaceprovider` -
+//     `authentik_providers_google_workspace.googleworkspaceprovidermapping` -
+//     `authentik_providers_microsoft_entra.microsoftentraprovider` -
+//     `authentik_providers_microsoft_entra.microsoftentraprovidermapping` - `authentik_providers_rac.racprovider` -
+//     `authentik_providers_rac.endpoint` - `authentik_providers_rac.racpropertymapping` -
+//     `authentik_stages_authenticator_endpoint_gdtc.authenticatorendpointgdtcstage` - `authentik_stages_source.sourcestage` -
+//     `authentik_events.event` - `authentik_events.notificationtransport` - `authentik_events.notification` -
+//     `authentik_events.notificationrule` - `authentik_events.notificationwebhookmapping`
 func (o PolicyEventMatcherOutput) Model() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PolicyEventMatcher) pulumi.StringPtrOutput { return v.Model }).(pulumi.StringPtrOutput)
 }
@@ -275,12 +616,6 @@ func (o PolicyEventMatcherArrayOutput) ToPolicyEventMatcherArrayOutputWithContex
 	return o
 }
 
-func (o PolicyEventMatcherArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyEventMatcher] {
-	return pulumix.Output[[]*PolicyEventMatcher]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o PolicyEventMatcherArrayOutput) Index(i pulumi.IntInput) PolicyEventMatcherOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PolicyEventMatcher {
 		return vs[0].([]*PolicyEventMatcher)[vs[1].(int)]
@@ -299,12 +634,6 @@ func (o PolicyEventMatcherMapOutput) ToPolicyEventMatcherMapOutput() PolicyEvent
 
 func (o PolicyEventMatcherMapOutput) ToPolicyEventMatcherMapOutputWithContext(ctx context.Context) PolicyEventMatcherMapOutput {
 	return o
-}
-
-func (o PolicyEventMatcherMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyEventMatcher] {
-	return pulumix.Output[map[string]*PolicyEventMatcher]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o PolicyEventMatcherMapOutput) MapIndex(k pulumi.StringInput) PolicyEventMatcherOutput {

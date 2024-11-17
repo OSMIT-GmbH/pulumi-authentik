@@ -52,14 +52,14 @@ export class Outpost extends pulumi.CustomResource {
     }
 
     /**
-     * JSON format expected. Use jsonencode() to pass objects. Generated.
+     * JSON format expected. Use jsonencode() to pass objects.
      */
     public readonly config!: pulumi.Output<string>;
     public readonly name!: pulumi.Output<string>;
     public readonly protocolProviders!: pulumi.Output<number[]>;
     public readonly serviceConnection!: pulumi.Output<string | undefined>;
     /**
-     * Defaults to `proxy`.
+     * Allowed values: - `proxy` - `ldap` - `radius` - `rac`
      */
     public readonly type!: pulumi.Output<string | undefined>;
 
@@ -102,14 +102,14 @@ export class Outpost extends pulumi.CustomResource {
  */
 export interface OutpostState {
     /**
-     * JSON format expected. Use jsonencode() to pass objects. Generated.
+     * JSON format expected. Use jsonencode() to pass objects.
      */
     config?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     protocolProviders?: pulumi.Input<pulumi.Input<number>[]>;
     serviceConnection?: pulumi.Input<string>;
     /**
-     * Defaults to `proxy`.
+     * Allowed values: - `proxy` - `ldap` - `radius` - `rac`
      */
     type?: pulumi.Input<string>;
 }
@@ -119,14 +119,14 @@ export interface OutpostState {
  */
 export interface OutpostArgs {
     /**
-     * JSON format expected. Use jsonencode() to pass objects. Generated.
+     * JSON format expected. Use jsonencode() to pass objects.
      */
     config?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     protocolProviders: pulumi.Input<pulumi.Input<number>[]>;
     serviceConnection?: pulumi.Input<string>;
     /**
-     * Defaults to `proxy`.
+     * Allowed values: - `proxy` - `ldap` - `radius` - `rac`
      */
     type?: pulumi.Input<string>;
 }

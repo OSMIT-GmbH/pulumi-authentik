@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -39,8 +38,8 @@ type StageAuthenticatorTotp struct {
 	pulumi.CustomResourceState
 
 	ConfigureFlow pulumi.StringPtrOutput `pulumi:"configureFlow"`
-	// Defaults to `6`.
-	Digits       pulumi.IntPtrOutput    `pulumi:"digits"`
+	// Allowed values: - `6` - `8`
+	Digits       pulumi.StringPtrOutput `pulumi:"digits"`
 	FriendlyName pulumi.StringPtrOutput `pulumi:"friendlyName"`
 	Name         pulumi.StringOutput    `pulumi:"name"`
 }
@@ -76,16 +75,16 @@ func GetStageAuthenticatorTotp(ctx *pulumi.Context,
 // Input properties used for looking up and filtering StageAuthenticatorTotp resources.
 type stageAuthenticatorTotpState struct {
 	ConfigureFlow *string `pulumi:"configureFlow"`
-	// Defaults to `6`.
-	Digits       *int    `pulumi:"digits"`
+	// Allowed values: - `6` - `8`
+	Digits       *string `pulumi:"digits"`
 	FriendlyName *string `pulumi:"friendlyName"`
 	Name         *string `pulumi:"name"`
 }
 
 type StageAuthenticatorTotpState struct {
 	ConfigureFlow pulumi.StringPtrInput
-	// Defaults to `6`.
-	Digits       pulumi.IntPtrInput
+	// Allowed values: - `6` - `8`
+	Digits       pulumi.StringPtrInput
 	FriendlyName pulumi.StringPtrInput
 	Name         pulumi.StringPtrInput
 }
@@ -96,8 +95,8 @@ func (StageAuthenticatorTotpState) ElementType() reflect.Type {
 
 type stageAuthenticatorTotpArgs struct {
 	ConfigureFlow *string `pulumi:"configureFlow"`
-	// Defaults to `6`.
-	Digits       *int    `pulumi:"digits"`
+	// Allowed values: - `6` - `8`
+	Digits       *string `pulumi:"digits"`
 	FriendlyName *string `pulumi:"friendlyName"`
 	Name         *string `pulumi:"name"`
 }
@@ -105,8 +104,8 @@ type stageAuthenticatorTotpArgs struct {
 // The set of arguments for constructing a StageAuthenticatorTotp resource.
 type StageAuthenticatorTotpArgs struct {
 	ConfigureFlow pulumi.StringPtrInput
-	// Defaults to `6`.
-	Digits       pulumi.IntPtrInput
+	// Allowed values: - `6` - `8`
+	Digits       pulumi.StringPtrInput
 	FriendlyName pulumi.StringPtrInput
 	Name         pulumi.StringPtrInput
 }
@@ -134,12 +133,6 @@ func (i *StageAuthenticatorTotp) ToStageAuthenticatorTotpOutputWithContext(ctx c
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorTotpOutput)
 }
 
-func (i *StageAuthenticatorTotp) ToOutput(ctx context.Context) pulumix.Output[*StageAuthenticatorTotp] {
-	return pulumix.Output[*StageAuthenticatorTotp]{
-		OutputState: i.ToStageAuthenticatorTotpOutputWithContext(ctx).OutputState,
-	}
-}
-
 // StageAuthenticatorTotpArrayInput is an input type that accepts StageAuthenticatorTotpArray and StageAuthenticatorTotpArrayOutput values.
 // You can construct a concrete instance of `StageAuthenticatorTotpArrayInput` via:
 //
@@ -163,12 +156,6 @@ func (i StageAuthenticatorTotpArray) ToStageAuthenticatorTotpArrayOutput() Stage
 
 func (i StageAuthenticatorTotpArray) ToStageAuthenticatorTotpArrayOutputWithContext(ctx context.Context) StageAuthenticatorTotpArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorTotpArrayOutput)
-}
-
-func (i StageAuthenticatorTotpArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageAuthenticatorTotp] {
-	return pulumix.Output[[]*StageAuthenticatorTotp]{
-		OutputState: i.ToStageAuthenticatorTotpArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // StageAuthenticatorTotpMapInput is an input type that accepts StageAuthenticatorTotpMap and StageAuthenticatorTotpMapOutput values.
@@ -196,12 +183,6 @@ func (i StageAuthenticatorTotpMap) ToStageAuthenticatorTotpMapOutputWithContext(
 	return pulumi.ToOutputWithContext(ctx, i).(StageAuthenticatorTotpMapOutput)
 }
 
-func (i StageAuthenticatorTotpMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageAuthenticatorTotp] {
-	return pulumix.Output[map[string]*StageAuthenticatorTotp]{
-		OutputState: i.ToStageAuthenticatorTotpMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type StageAuthenticatorTotpOutput struct{ *pulumi.OutputState }
 
 func (StageAuthenticatorTotpOutput) ElementType() reflect.Type {
@@ -216,19 +197,13 @@ func (o StageAuthenticatorTotpOutput) ToStageAuthenticatorTotpOutputWithContext(
 	return o
 }
 
-func (o StageAuthenticatorTotpOutput) ToOutput(ctx context.Context) pulumix.Output[*StageAuthenticatorTotp] {
-	return pulumix.Output[*StageAuthenticatorTotp]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o StageAuthenticatorTotpOutput) ConfigureFlow() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageAuthenticatorTotp) pulumi.StringPtrOutput { return v.ConfigureFlow }).(pulumi.StringPtrOutput)
 }
 
-// Defaults to `6`.
-func (o StageAuthenticatorTotpOutput) Digits() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *StageAuthenticatorTotp) pulumi.IntPtrOutput { return v.Digits }).(pulumi.IntPtrOutput)
+// Allowed values: - `6` - `8`
+func (o StageAuthenticatorTotpOutput) Digits() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *StageAuthenticatorTotp) pulumi.StringPtrOutput { return v.Digits }).(pulumi.StringPtrOutput)
 }
 
 func (o StageAuthenticatorTotpOutput) FriendlyName() pulumi.StringPtrOutput {
@@ -253,12 +228,6 @@ func (o StageAuthenticatorTotpArrayOutput) ToStageAuthenticatorTotpArrayOutputWi
 	return o
 }
 
-func (o StageAuthenticatorTotpArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageAuthenticatorTotp] {
-	return pulumix.Output[[]*StageAuthenticatorTotp]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o StageAuthenticatorTotpArrayOutput) Index(i pulumi.IntInput) StageAuthenticatorTotpOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StageAuthenticatorTotp {
 		return vs[0].([]*StageAuthenticatorTotp)[vs[1].(int)]
@@ -277,12 +246,6 @@ func (o StageAuthenticatorTotpMapOutput) ToStageAuthenticatorTotpMapOutput() Sta
 
 func (o StageAuthenticatorTotpMapOutput) ToStageAuthenticatorTotpMapOutputWithContext(ctx context.Context) StageAuthenticatorTotpMapOutput {
 	return o
-}
-
-func (o StageAuthenticatorTotpMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageAuthenticatorTotp] {
-	return pulumix.Output[map[string]*StageAuthenticatorTotp]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageAuthenticatorTotpMapOutput) MapIndex(k pulumi.StringInput) StageAuthenticatorTotpOutput {

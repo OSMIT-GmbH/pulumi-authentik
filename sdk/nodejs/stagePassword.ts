@@ -42,6 +42,10 @@ export class StagePassword extends pulumi.CustomResource {
         return obj['__pulumiType'] === StagePassword.__pulumiType;
     }
 
+    /**
+     * Defaults to `false`.
+     */
+    public readonly allowShowPassword!: pulumi.Output<boolean | undefined>;
     public readonly backends!: pulumi.Output<string[]>;
     public readonly configureFlow!: pulumi.Output<string | undefined>;
     /**
@@ -63,6 +67,7 @@ export class StagePassword extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as StagePasswordState | undefined;
+            resourceInputs["allowShowPassword"] = state ? state.allowShowPassword : undefined;
             resourceInputs["backends"] = state ? state.backends : undefined;
             resourceInputs["configureFlow"] = state ? state.configureFlow : undefined;
             resourceInputs["failedAttemptsBeforeCancel"] = state ? state.failedAttemptsBeforeCancel : undefined;
@@ -72,6 +77,7 @@ export class StagePassword extends pulumi.CustomResource {
             if ((!args || args.backends === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'backends'");
             }
+            resourceInputs["allowShowPassword"] = args ? args.allowShowPassword : undefined;
             resourceInputs["backends"] = args ? args.backends : undefined;
             resourceInputs["configureFlow"] = args ? args.configureFlow : undefined;
             resourceInputs["failedAttemptsBeforeCancel"] = args ? args.failedAttemptsBeforeCancel : undefined;
@@ -86,6 +92,10 @@ export class StagePassword extends pulumi.CustomResource {
  * Input properties used for looking up and filtering StagePassword resources.
  */
 export interface StagePasswordState {
+    /**
+     * Defaults to `false`.
+     */
+    allowShowPassword?: pulumi.Input<boolean>;
     backends?: pulumi.Input<pulumi.Input<string>[]>;
     configureFlow?: pulumi.Input<string>;
     /**
@@ -99,6 +109,10 @@ export interface StagePasswordState {
  * The set of arguments for constructing a StagePassword resource.
  */
 export interface StagePasswordArgs {
+    /**
+     * Defaults to `false`.
+     */
+    allowShowPassword?: pulumi.Input<boolean>;
     backends: pulumi.Input<pulumi.Input<string>[]>;
     configureFlow?: pulumi.Input<string>;
     /**

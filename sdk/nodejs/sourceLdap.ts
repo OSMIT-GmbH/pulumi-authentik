@@ -76,10 +76,18 @@ export class SourceLdap extends pulumi.CustomResource {
      * Defaults to `objectSid`.
      */
     public readonly objectUniquenessField!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `false`.
+     */
+    public readonly passwordLoginUpdateInternalPassword!: pulumi.Output<boolean | undefined>;
     public readonly propertyMappings!: pulumi.Output<string[] | undefined>;
     public readonly propertyMappingsGroups!: pulumi.Output<string[] | undefined>;
     public readonly serverUri!: pulumi.Output<string>;
     public readonly slug!: pulumi.Output<string>;
+    /**
+     * Defaults to `false`.
+     */
+    public readonly sni!: pulumi.Output<boolean | undefined>;
     /**
      * Defaults to `true`.
      */
@@ -133,10 +141,12 @@ export class SourceLdap extends pulumi.CustomResource {
             resourceInputs["groupObjectFilter"] = state ? state.groupObjectFilter : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["objectUniquenessField"] = state ? state.objectUniquenessField : undefined;
+            resourceInputs["passwordLoginUpdateInternalPassword"] = state ? state.passwordLoginUpdateInternalPassword : undefined;
             resourceInputs["propertyMappings"] = state ? state.propertyMappings : undefined;
             resourceInputs["propertyMappingsGroups"] = state ? state.propertyMappingsGroups : undefined;
             resourceInputs["serverUri"] = state ? state.serverUri : undefined;
             resourceInputs["slug"] = state ? state.slug : undefined;
+            resourceInputs["sni"] = state ? state.sni : undefined;
             resourceInputs["startTls"] = state ? state.startTls : undefined;
             resourceInputs["syncGroups"] = state ? state.syncGroups : undefined;
             resourceInputs["syncParentGroup"] = state ? state.syncParentGroup : undefined;
@@ -172,10 +182,12 @@ export class SourceLdap extends pulumi.CustomResource {
             resourceInputs["groupObjectFilter"] = args ? args.groupObjectFilter : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["objectUniquenessField"] = args ? args.objectUniquenessField : undefined;
+            resourceInputs["passwordLoginUpdateInternalPassword"] = args ? args.passwordLoginUpdateInternalPassword : undefined;
             resourceInputs["propertyMappings"] = args ? args.propertyMappings : undefined;
             resourceInputs["propertyMappingsGroups"] = args ? args.propertyMappingsGroups : undefined;
             resourceInputs["serverUri"] = args ? args.serverUri : undefined;
             resourceInputs["slug"] = args ? args.slug : undefined;
+            resourceInputs["sni"] = args ? args.sni : undefined;
             resourceInputs["startTls"] = args ? args.startTls : undefined;
             resourceInputs["syncGroups"] = args ? args.syncGroups : undefined;
             resourceInputs["syncParentGroup"] = args ? args.syncParentGroup : undefined;
@@ -224,10 +236,18 @@ export interface SourceLdapState {
      * Defaults to `objectSid`.
      */
     objectUniquenessField?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
+    passwordLoginUpdateInternalPassword?: pulumi.Input<boolean>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
     propertyMappingsGroups?: pulumi.Input<pulumi.Input<string>[]>;
     serverUri?: pulumi.Input<string>;
     slug?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
+    sni?: pulumi.Input<boolean>;
     /**
      * Defaults to `true`.
      */
@@ -291,10 +311,18 @@ export interface SourceLdapArgs {
      * Defaults to `objectSid`.
      */
     objectUniquenessField?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
+    passwordLoginUpdateInternalPassword?: pulumi.Input<boolean>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
     propertyMappingsGroups?: pulumi.Input<pulumi.Input<string>[]>;
     serverUri: pulumi.Input<string>;
     slug: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
+    sni?: pulumi.Input<boolean>;
     /**
      * Defaults to `true`.
      */

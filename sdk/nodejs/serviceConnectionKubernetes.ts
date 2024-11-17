@@ -55,6 +55,10 @@ export class ServiceConnectionKubernetes extends pulumi.CustomResource {
      */
     public readonly local!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
+    /**
+     * Defaults to `true`.
+     */
+    public readonly verifySsl!: pulumi.Output<boolean | undefined>;
 
     /**
      * Create a ServiceConnectionKubernetes resource with the given unique name, arguments, and options.
@@ -72,11 +76,13 @@ export class ServiceConnectionKubernetes extends pulumi.CustomResource {
             resourceInputs["kubeconfig"] = state ? state.kubeconfig : undefined;
             resourceInputs["local"] = state ? state.local : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["verifySsl"] = state ? state.verifySsl : undefined;
         } else {
             const args = argsOrState as ServiceConnectionKubernetesArgs | undefined;
             resourceInputs["kubeconfig"] = args?.kubeconfig ? pulumi.secret(args.kubeconfig) : undefined;
             resourceInputs["local"] = args ? args.local : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["verifySsl"] = args ? args.verifySsl : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["kubeconfig"] };
@@ -98,6 +104,10 @@ export interface ServiceConnectionKubernetesState {
      */
     local?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
+    verifySsl?: pulumi.Input<boolean>;
 }
 
 /**
@@ -113,4 +123,8 @@ export interface ServiceConnectionKubernetesArgs {
      */
     local?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
+    verifySsl?: pulumi.Input<boolean>;
 }

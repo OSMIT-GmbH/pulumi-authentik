@@ -54,36 +54,31 @@ export class Flow extends pulumi.CustomResource {
     }
 
     /**
-     * Defaults to `none`.
+     * Allowed values: - `none` - `requireAuthenticated` - `requireUnauthenticated` - `requireSuperuser` - `requireOutpost`
      */
     public readonly authentication!: pulumi.Output<string | undefined>;
     /**
      * Optional URL to an image which will be used as the background during the flow.
      */
     public readonly background!: pulumi.Output<string | undefined>;
-    /**
-     * Defaults to `true`.
-     */
     public readonly compatibilityMode!: pulumi.Output<boolean | undefined>;
-    /**
-     * Defaults to `messageContinue`.
-     */
     public readonly deniedAction!: pulumi.Output<string | undefined>;
+    /**
+     * Allowed values: - `authentication` - `authorization` - `invalidation` - `enrollment` - `unenrollment` - `recovery` -
+     * `stageConfiguration`
+     */
     public readonly designation!: pulumi.Output<string>;
     /**
-     * Defaults to `stacked`.
+     * Allowed values: - `stacked` - `contentLeft` - `contentRight` - `sidebarLeft` - `sidebarRight`
      */
     public readonly layout!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     public readonly policyEngineMode!: pulumi.Output<string | undefined>;
     public readonly slug!: pulumi.Output<string>;
     public readonly title!: pulumi.Output<string>;
-    /**
-     * Generated.
-     */
     public /*out*/ readonly uuid!: pulumi.Output<string>;
 
     /**
@@ -143,36 +138,31 @@ export class Flow extends pulumi.CustomResource {
  */
 export interface FlowState {
     /**
-     * Defaults to `none`.
+     * Allowed values: - `none` - `requireAuthenticated` - `requireUnauthenticated` - `requireSuperuser` - `requireOutpost`
      */
     authentication?: pulumi.Input<string>;
     /**
      * Optional URL to an image which will be used as the background during the flow.
      */
     background?: pulumi.Input<string>;
-    /**
-     * Defaults to `true`.
-     */
     compatibilityMode?: pulumi.Input<boolean>;
-    /**
-     * Defaults to `messageContinue`.
-     */
     deniedAction?: pulumi.Input<string>;
+    /**
+     * Allowed values: - `authentication` - `authorization` - `invalidation` - `enrollment` - `unenrollment` - `recovery` -
+     * `stageConfiguration`
+     */
     designation?: pulumi.Input<string>;
     /**
-     * Defaults to `stacked`.
+     * Allowed values: - `stacked` - `contentLeft` - `contentRight` - `sidebarLeft` - `sidebarRight`
      */
     layout?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     policyEngineMode?: pulumi.Input<string>;
     slug?: pulumi.Input<string>;
     title?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     uuid?: pulumi.Input<string>;
 }
 
@@ -181,29 +171,27 @@ export interface FlowState {
  */
 export interface FlowArgs {
     /**
-     * Defaults to `none`.
+     * Allowed values: - `none` - `requireAuthenticated` - `requireUnauthenticated` - `requireSuperuser` - `requireOutpost`
      */
     authentication?: pulumi.Input<string>;
     /**
      * Optional URL to an image which will be used as the background during the flow.
      */
     background?: pulumi.Input<string>;
-    /**
-     * Defaults to `true`.
-     */
     compatibilityMode?: pulumi.Input<boolean>;
-    /**
-     * Defaults to `messageContinue`.
-     */
     deniedAction?: pulumi.Input<string>;
+    /**
+     * Allowed values: - `authentication` - `authorization` - `invalidation` - `enrollment` - `unenrollment` - `recovery` -
+     * `stageConfiguration`
+     */
     designation: pulumi.Input<string>;
     /**
-     * Defaults to `stacked`.
+     * Allowed values: - `stacked` - `contentLeft` - `contentRight` - `sidebarLeft` - `sidebarRight`
      */
     layout?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     policyEngineMode?: pulumi.Input<string>;
     slug: pulumi.Input<string>;

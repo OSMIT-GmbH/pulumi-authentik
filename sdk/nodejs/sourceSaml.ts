@@ -58,62 +58,60 @@ export class SourceSaml extends pulumi.CustomResource {
         return obj['__pulumiType'] === SourceSaml.__pulumiType;
     }
 
-    /**
-     * Defaults to `false`.
-     */
     public readonly allowIdpInitiated!: pulumi.Output<boolean | undefined>;
-    public readonly authenticationFlow!: pulumi.Output<string>;
+    public readonly authenticationFlow!: pulumi.Output<string | undefined>;
     /**
-     * Defaults to `REDIRECT`.
+     * Allowed values: - `REDIRECT` - `POST` - `POST_AUTO`
      */
     public readonly bindingType!: pulumi.Output<string | undefined>;
     /**
-     * Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+     * Allowed values: - `http://www.w3.org/2000/09/xmldsig#sha1` - `http://www.w3.org/2001/04/xmlenc#sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#sha384` - `http://www.w3.org/2001/04/xmlenc#sha512`
      */
     public readonly digestAlgorithm!: pulumi.Output<string | undefined>;
-    /**
-     * Defaults to `true`.
-     */
     public readonly enabled!: pulumi.Output<boolean | undefined>;
-    public readonly enrollmentFlow!: pulumi.Output<string>;
+    public readonly encryptionKp!: pulumi.Output<string | undefined>;
+    public readonly enrollmentFlow!: pulumi.Output<string | undefined>;
+    /**
+     * Allowed values: - `identifier` - `nameLink` - `nameDeny`
+     */
+    public readonly groupMatchingMode!: pulumi.Output<string | undefined>;
     public readonly issuer!: pulumi.Output<string | undefined>;
     /**
-     * SAML Metadata Generated.
+     * SAML Metadata
      */
     public /*out*/ readonly metadata!: pulumi.Output<string>;
     public readonly name!: pulumi.Output<string>;
     /**
-     * Defaults to `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`.
+     * Allowed values: - `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` -
+     * `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` - `urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName` -
+     * `urn:oasis:names:tc:SAML:2.0:nameid-format:WindowsDomainQualifiedName` -
+     * `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`
      */
     public readonly nameIdPolicy!: pulumi.Output<string | undefined>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     public readonly policyEngineMode!: pulumi.Output<string | undefined>;
     public readonly preAuthenticationFlow!: pulumi.Output<string>;
     /**
-     * Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+     * Allowed values: - `http://www.w3.org/2000/09/xmldsig#rsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512` -
+     * `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512` -
+     * `http://www.w3.org/2000/09/xmldsig#dsa-sha1`
      */
     public readonly signatureAlgorithm!: pulumi.Output<string | undefined>;
     public readonly signingKp!: pulumi.Output<string | undefined>;
     public readonly sloUrl!: pulumi.Output<string | undefined>;
     public readonly slug!: pulumi.Output<string>;
     public readonly ssoUrl!: pulumi.Output<string>;
-    /**
-     * Defaults to `days=1`.
-     */
     public readonly temporaryUserDeleteAfter!: pulumi.Output<string | undefined>;
     /**
-     * Defaults to `identifier`.
+     * Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
      */
     public readonly userMatchingMode!: pulumi.Output<string | undefined>;
-    /**
-     * Defaults to `goauthentik.io/sources/%(slug)s`.
-     */
     public readonly userPathTemplate!: pulumi.Output<string | undefined>;
-    /**
-     * Generated.
-     */
     public readonly uuid!: pulumi.Output<string>;
 
     /**
@@ -134,7 +132,9 @@ export class SourceSaml extends pulumi.CustomResource {
             resourceInputs["bindingType"] = state ? state.bindingType : undefined;
             resourceInputs["digestAlgorithm"] = state ? state.digestAlgorithm : undefined;
             resourceInputs["enabled"] = state ? state.enabled : undefined;
+            resourceInputs["encryptionKp"] = state ? state.encryptionKp : undefined;
             resourceInputs["enrollmentFlow"] = state ? state.enrollmentFlow : undefined;
+            resourceInputs["groupMatchingMode"] = state ? state.groupMatchingMode : undefined;
             resourceInputs["issuer"] = state ? state.issuer : undefined;
             resourceInputs["metadata"] = state ? state.metadata : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
@@ -152,12 +152,6 @@ export class SourceSaml extends pulumi.CustomResource {
             resourceInputs["uuid"] = state ? state.uuid : undefined;
         } else {
             const args = argsOrState as SourceSamlArgs | undefined;
-            if ((!args || args.authenticationFlow === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'authenticationFlow'");
-            }
-            if ((!args || args.enrollmentFlow === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'enrollmentFlow'");
-            }
             if ((!args || args.preAuthenticationFlow === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'preAuthenticationFlow'");
             }
@@ -172,7 +166,9 @@ export class SourceSaml extends pulumi.CustomResource {
             resourceInputs["bindingType"] = args ? args.bindingType : undefined;
             resourceInputs["digestAlgorithm"] = args ? args.digestAlgorithm : undefined;
             resourceInputs["enabled"] = args ? args.enabled : undefined;
+            resourceInputs["encryptionKp"] = args ? args.encryptionKp : undefined;
             resourceInputs["enrollmentFlow"] = args ? args.enrollmentFlow : undefined;
+            resourceInputs["groupMatchingMode"] = args ? args.groupMatchingMode : undefined;
             resourceInputs["issuer"] = args ? args.issuer : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["nameIdPolicy"] = args ? args.nameIdPolicy : undefined;
@@ -198,62 +194,60 @@ export class SourceSaml extends pulumi.CustomResource {
  * Input properties used for looking up and filtering SourceSaml resources.
  */
 export interface SourceSamlState {
-    /**
-     * Defaults to `false`.
-     */
     allowIdpInitiated?: pulumi.Input<boolean>;
     authenticationFlow?: pulumi.Input<string>;
     /**
-     * Defaults to `REDIRECT`.
+     * Allowed values: - `REDIRECT` - `POST` - `POST_AUTO`
      */
     bindingType?: pulumi.Input<string>;
     /**
-     * Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+     * Allowed values: - `http://www.w3.org/2000/09/xmldsig#sha1` - `http://www.w3.org/2001/04/xmlenc#sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#sha384` - `http://www.w3.org/2001/04/xmlenc#sha512`
      */
     digestAlgorithm?: pulumi.Input<string>;
-    /**
-     * Defaults to `true`.
-     */
     enabled?: pulumi.Input<boolean>;
+    encryptionKp?: pulumi.Input<string>;
     enrollmentFlow?: pulumi.Input<string>;
+    /**
+     * Allowed values: - `identifier` - `nameLink` - `nameDeny`
+     */
+    groupMatchingMode?: pulumi.Input<string>;
     issuer?: pulumi.Input<string>;
     /**
-     * SAML Metadata Generated.
+     * SAML Metadata
      */
     metadata?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     /**
-     * Defaults to `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`.
+     * Allowed values: - `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` -
+     * `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` - `urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName` -
+     * `urn:oasis:names:tc:SAML:2.0:nameid-format:WindowsDomainQualifiedName` -
+     * `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`
      */
     nameIdPolicy?: pulumi.Input<string>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     policyEngineMode?: pulumi.Input<string>;
     preAuthenticationFlow?: pulumi.Input<string>;
     /**
-     * Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+     * Allowed values: - `http://www.w3.org/2000/09/xmldsig#rsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512` -
+     * `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512` -
+     * `http://www.w3.org/2000/09/xmldsig#dsa-sha1`
      */
     signatureAlgorithm?: pulumi.Input<string>;
     signingKp?: pulumi.Input<string>;
     sloUrl?: pulumi.Input<string>;
     slug?: pulumi.Input<string>;
     ssoUrl?: pulumi.Input<string>;
-    /**
-     * Defaults to `days=1`.
-     */
     temporaryUserDeleteAfter?: pulumi.Input<string>;
     /**
-     * Defaults to `identifier`.
+     * Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
      */
     userMatchingMode?: pulumi.Input<string>;
-    /**
-     * Defaults to `goauthentik.io/sources/%(slug)s`.
-     */
     userPathTemplate?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     uuid?: pulumi.Input<string>;
 }
 
@@ -261,57 +255,55 @@ export interface SourceSamlState {
  * The set of arguments for constructing a SourceSaml resource.
  */
 export interface SourceSamlArgs {
-    /**
-     * Defaults to `false`.
-     */
     allowIdpInitiated?: pulumi.Input<boolean>;
-    authenticationFlow: pulumi.Input<string>;
+    authenticationFlow?: pulumi.Input<string>;
     /**
-     * Defaults to `REDIRECT`.
+     * Allowed values: - `REDIRECT` - `POST` - `POST_AUTO`
      */
     bindingType?: pulumi.Input<string>;
     /**
-     * Defaults to `http://www.w3.org/2001/04/xmlenc#sha256`.
+     * Allowed values: - `http://www.w3.org/2000/09/xmldsig#sha1` - `http://www.w3.org/2001/04/xmlenc#sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#sha384` - `http://www.w3.org/2001/04/xmlenc#sha512`
      */
     digestAlgorithm?: pulumi.Input<string>;
-    /**
-     * Defaults to `true`.
-     */
     enabled?: pulumi.Input<boolean>;
-    enrollmentFlow: pulumi.Input<string>;
+    encryptionKp?: pulumi.Input<string>;
+    enrollmentFlow?: pulumi.Input<string>;
+    /**
+     * Allowed values: - `identifier` - `nameLink` - `nameDeny`
+     */
+    groupMatchingMode?: pulumi.Input<string>;
     issuer?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     /**
-     * Defaults to `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`.
+     * Allowed values: - `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` -
+     * `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` - `urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName` -
+     * `urn:oasis:names:tc:SAML:2.0:nameid-format:WindowsDomainQualifiedName` -
+     * `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`
      */
     nameIdPolicy?: pulumi.Input<string>;
     /**
-     * Defaults to `any`.
+     * Allowed values: - `all` - `any`
      */
     policyEngineMode?: pulumi.Input<string>;
     preAuthenticationFlow: pulumi.Input<string>;
     /**
-     * Defaults to `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`.
+     * Allowed values: - `http://www.w3.org/2000/09/xmldsig#rsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512` -
+     * `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256` -
+     * `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384` - `http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512` -
+     * `http://www.w3.org/2000/09/xmldsig#dsa-sha1`
      */
     signatureAlgorithm?: pulumi.Input<string>;
     signingKp?: pulumi.Input<string>;
     sloUrl?: pulumi.Input<string>;
     slug: pulumi.Input<string>;
     ssoUrl: pulumi.Input<string>;
-    /**
-     * Defaults to `days=1`.
-     */
     temporaryUserDeleteAfter?: pulumi.Input<string>;
     /**
-     * Defaults to `identifier`.
+     * Allowed values: - `identifier` - `emailLink` - `emailDeny` - `usernameLink` - `usernameDeny`
      */
     userMatchingMode?: pulumi.Input<string>;
-    /**
-     * Defaults to `goauthentik.io/sources/%(slug)s`.
-     */
     userPathTemplate?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     uuid?: pulumi.Input<string>;
 }

@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Get Source by name, slug or managed
@@ -21,7 +20,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -73,14 +72,20 @@ type GetSourceResult struct {
 
 func GetSourceOutput(ctx *pulumi.Context, args GetSourceOutputArgs, opts ...pulumi.InvokeOption) GetSourceResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetSourceResult, error) {
+		ApplyT(func(v interface{}) (GetSourceResultOutput, error) {
 			args := v.(GetSourceArgs)
-			r, err := GetSource(ctx, &args, opts...)
-			var s GetSourceResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv GetSourceResult
+			secret, err := ctx.InvokePackageRaw("authentik:index/getSource:getSource", args, &rv, "", opts...)
+			if err != nil {
+				return GetSourceResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(GetSourceResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(GetSourceResultOutput), nil
+			}
+			return output, nil
 		}).(GetSourceResultOutput)
 }
 
@@ -109,12 +114,6 @@ func (o GetSourceResultOutput) ToGetSourceResultOutput() GetSourceResultOutput {
 
 func (o GetSourceResultOutput) ToGetSourceResultOutputWithContext(ctx context.Context) GetSourceResultOutput {
 	return o
-}
-
-func (o GetSourceResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetSourceResult] {
-	return pulumix.Output[GetSourceResult]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The provider-assigned unique ID for this managed resource.

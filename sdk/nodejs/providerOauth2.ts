@@ -47,31 +47,21 @@ export class ProviderOauth2 extends pulumi.CustomResource {
         return obj['__pulumiType'] === ProviderOauth2.__pulumiType;
     }
 
-    /**
-     * Defaults to `minutes=1`.
-     */
     public readonly accessCodeValidity!: pulumi.Output<string | undefined>;
-    /**
-     * Defaults to `minutes=10`.
-     */
     public readonly accessTokenValidity!: pulumi.Output<string | undefined>;
     public readonly authenticationFlow!: pulumi.Output<string | undefined>;
     public readonly authorizationFlow!: pulumi.Output<string>;
     public readonly clientId!: pulumi.Output<string>;
-    /**
-     * Generated.
-     */
     public readonly clientSecret!: pulumi.Output<string>;
     /**
-     * Defaults to `confidential`.
+     * Allowed values: - `confidential` - `public`
      */
     public readonly clientType!: pulumi.Output<string | undefined>;
-    /**
-     * Defaults to `true`.
-     */
+    public readonly encryptionKey!: pulumi.Output<string | undefined>;
     public readonly includeClaimsInIdToken!: pulumi.Output<boolean | undefined>;
+    public readonly invalidationFlow!: pulumi.Output<string>;
     /**
-     * Defaults to `perProvider`.
+     * Allowed values: - `global` - `perProvider`
      */
     public readonly issuerMode!: pulumi.Output<string | undefined>;
     /**
@@ -81,13 +71,10 @@ export class ProviderOauth2 extends pulumi.CustomResource {
     public readonly name!: pulumi.Output<string>;
     public readonly propertyMappings!: pulumi.Output<string[] | undefined>;
     public readonly redirectUris!: pulumi.Output<string[] | undefined>;
-    /**
-     * Defaults to `days=30`.
-     */
     public readonly refreshTokenValidity!: pulumi.Output<string | undefined>;
     public readonly signingKey!: pulumi.Output<string | undefined>;
     /**
-     * Defaults to `hashedUserId`.
+     * Allowed values: - `hashedUserId` - `userId` - `userUuid` - `userUsername` - `userEmail` - `userUpn`
      */
     public readonly subMode!: pulumi.Output<string | undefined>;
 
@@ -111,7 +98,9 @@ export class ProviderOauth2 extends pulumi.CustomResource {
             resourceInputs["clientId"] = state ? state.clientId : undefined;
             resourceInputs["clientSecret"] = state ? state.clientSecret : undefined;
             resourceInputs["clientType"] = state ? state.clientType : undefined;
+            resourceInputs["encryptionKey"] = state ? state.encryptionKey : undefined;
             resourceInputs["includeClaimsInIdToken"] = state ? state.includeClaimsInIdToken : undefined;
+            resourceInputs["invalidationFlow"] = state ? state.invalidationFlow : undefined;
             resourceInputs["issuerMode"] = state ? state.issuerMode : undefined;
             resourceInputs["jwksSources"] = state ? state.jwksSources : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
@@ -128,6 +117,9 @@ export class ProviderOauth2 extends pulumi.CustomResource {
             if ((!args || args.clientId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'clientId'");
             }
+            if ((!args || args.invalidationFlow === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'invalidationFlow'");
+            }
             resourceInputs["accessCodeValidity"] = args ? args.accessCodeValidity : undefined;
             resourceInputs["accessTokenValidity"] = args ? args.accessTokenValidity : undefined;
             resourceInputs["authenticationFlow"] = args ? args.authenticationFlow : undefined;
@@ -135,7 +127,9 @@ export class ProviderOauth2 extends pulumi.CustomResource {
             resourceInputs["clientId"] = args ? args.clientId : undefined;
             resourceInputs["clientSecret"] = args?.clientSecret ? pulumi.secret(args.clientSecret) : undefined;
             resourceInputs["clientType"] = args ? args.clientType : undefined;
+            resourceInputs["encryptionKey"] = args ? args.encryptionKey : undefined;
             resourceInputs["includeClaimsInIdToken"] = args ? args.includeClaimsInIdToken : undefined;
+            resourceInputs["invalidationFlow"] = args ? args.invalidationFlow : undefined;
             resourceInputs["issuerMode"] = args ? args.issuerMode : undefined;
             resourceInputs["jwksSources"] = args ? args.jwksSources : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
@@ -156,31 +150,21 @@ export class ProviderOauth2 extends pulumi.CustomResource {
  * Input properties used for looking up and filtering ProviderOauth2 resources.
  */
 export interface ProviderOauth2State {
-    /**
-     * Defaults to `minutes=1`.
-     */
     accessCodeValidity?: pulumi.Input<string>;
-    /**
-     * Defaults to `minutes=10`.
-     */
     accessTokenValidity?: pulumi.Input<string>;
     authenticationFlow?: pulumi.Input<string>;
     authorizationFlow?: pulumi.Input<string>;
     clientId?: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     clientSecret?: pulumi.Input<string>;
     /**
-     * Defaults to `confidential`.
+     * Allowed values: - `confidential` - `public`
      */
     clientType?: pulumi.Input<string>;
-    /**
-     * Defaults to `true`.
-     */
+    encryptionKey?: pulumi.Input<string>;
     includeClaimsInIdToken?: pulumi.Input<boolean>;
+    invalidationFlow?: pulumi.Input<string>;
     /**
-     * Defaults to `perProvider`.
+     * Allowed values: - `global` - `perProvider`
      */
     issuerMode?: pulumi.Input<string>;
     /**
@@ -190,13 +174,10 @@ export interface ProviderOauth2State {
     name?: pulumi.Input<string>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
     redirectUris?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * Defaults to `days=30`.
-     */
     refreshTokenValidity?: pulumi.Input<string>;
     signingKey?: pulumi.Input<string>;
     /**
-     * Defaults to `hashedUserId`.
+     * Allowed values: - `hashedUserId` - `userId` - `userUuid` - `userUsername` - `userEmail` - `userUpn`
      */
     subMode?: pulumi.Input<string>;
 }
@@ -205,31 +186,21 @@ export interface ProviderOauth2State {
  * The set of arguments for constructing a ProviderOauth2 resource.
  */
 export interface ProviderOauth2Args {
-    /**
-     * Defaults to `minutes=1`.
-     */
     accessCodeValidity?: pulumi.Input<string>;
-    /**
-     * Defaults to `minutes=10`.
-     */
     accessTokenValidity?: pulumi.Input<string>;
     authenticationFlow?: pulumi.Input<string>;
     authorizationFlow: pulumi.Input<string>;
     clientId: pulumi.Input<string>;
-    /**
-     * Generated.
-     */
     clientSecret?: pulumi.Input<string>;
     /**
-     * Defaults to `confidential`.
+     * Allowed values: - `confidential` - `public`
      */
     clientType?: pulumi.Input<string>;
-    /**
-     * Defaults to `true`.
-     */
+    encryptionKey?: pulumi.Input<string>;
     includeClaimsInIdToken?: pulumi.Input<boolean>;
+    invalidationFlow: pulumi.Input<string>;
     /**
-     * Defaults to `perProvider`.
+     * Allowed values: - `global` - `perProvider`
      */
     issuerMode?: pulumi.Input<string>;
     /**
@@ -239,13 +210,10 @@ export interface ProviderOauth2Args {
     name?: pulumi.Input<string>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
     redirectUris?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
-     * Defaults to `days=30`.
-     */
     refreshTokenValidity?: pulumi.Input<string>;
     signingKey?: pulumi.Input<string>;
     /**
-     * Defaults to `hashedUserId`.
+     * Allowed values: - `hashedUserId` - `userId` - `userUuid` - `userUsername` - `userEmail` - `userUpn`
      */
     subMode?: pulumi.Input<string>;
 }

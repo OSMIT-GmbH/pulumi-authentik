@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Get SAML Provider metadata
@@ -45,14 +44,20 @@ type GetProviderSamlMetadataResult struct {
 
 func GetProviderSamlMetadataOutput(ctx *pulumi.Context, args GetProviderSamlMetadataOutputArgs, opts ...pulumi.InvokeOption) GetProviderSamlMetadataResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetProviderSamlMetadataResult, error) {
+		ApplyT(func(v interface{}) (GetProviderSamlMetadataResultOutput, error) {
 			args := v.(GetProviderSamlMetadataArgs)
-			r, err := GetProviderSamlMetadata(ctx, &args, opts...)
-			var s GetProviderSamlMetadataResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv GetProviderSamlMetadataResult
+			secret, err := ctx.InvokePackageRaw("authentik:index/getProviderSamlMetadata:getProviderSamlMetadata", args, &rv, "", opts...)
+			if err != nil {
+				return GetProviderSamlMetadataResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(GetProviderSamlMetadataResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(GetProviderSamlMetadataResultOutput), nil
+			}
+			return output, nil
 		}).(GetProviderSamlMetadataResultOutput)
 }
 
@@ -81,12 +86,6 @@ func (o GetProviderSamlMetadataResultOutput) ToGetProviderSamlMetadataResultOutp
 
 func (o GetProviderSamlMetadataResultOutput) ToGetProviderSamlMetadataResultOutputWithContext(ctx context.Context) GetProviderSamlMetadataResultOutput {
 	return o
-}
-
-func (o GetProviderSamlMetadataResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetProviderSamlMetadataResult] {
-	return pulumix.Output[GetProviderSamlMetadataResult]{
-		OutputState: o.OutputState,
-	}
 }
 
 // The provider-assigned unique ID for this managed resource.

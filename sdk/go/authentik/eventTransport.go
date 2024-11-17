@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,13 +19,14 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create a notification transport to slack/discord
 //			_, err := authentik.NewEventTransport(ctx, "transport", &authentik.EventTransportArgs{
 //				Mode:       pulumi.String("webhook_slack"),
 //				SendOnce:   pulumi.Bool(true),
@@ -43,9 +43,9 @@ import (
 type EventTransport struct {
 	pulumi.CustomResourceState
 
-	Mode pulumi.StringOutput `pulumi:"mode"`
-	Name pulumi.StringOutput `pulumi:"name"`
-	// Defaults to `true`.
+	// Allowed values: - `local` - `webhook` - `webhookSlack` - `email`
+	Mode           pulumi.StringOutput    `pulumi:"mode"`
+	Name           pulumi.StringOutput    `pulumi:"name"`
 	SendOnce       pulumi.BoolPtrOutput   `pulumi:"sendOnce"`
 	WebhookMapping pulumi.StringPtrOutput `pulumi:"webhookMapping"`
 	WebhookUrl     pulumi.StringPtrOutput `pulumi:"webhookUrl"`
@@ -84,18 +84,18 @@ func GetEventTransport(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering EventTransport resources.
 type eventTransportState struct {
-	Mode *string `pulumi:"mode"`
-	Name *string `pulumi:"name"`
-	// Defaults to `true`.
+	// Allowed values: - `local` - `webhook` - `webhookSlack` - `email`
+	Mode           *string `pulumi:"mode"`
+	Name           *string `pulumi:"name"`
 	SendOnce       *bool   `pulumi:"sendOnce"`
 	WebhookMapping *string `pulumi:"webhookMapping"`
 	WebhookUrl     *string `pulumi:"webhookUrl"`
 }
 
 type EventTransportState struct {
-	Mode pulumi.StringPtrInput
-	Name pulumi.StringPtrInput
-	// Defaults to `true`.
+	// Allowed values: - `local` - `webhook` - `webhookSlack` - `email`
+	Mode           pulumi.StringPtrInput
+	Name           pulumi.StringPtrInput
 	SendOnce       pulumi.BoolPtrInput
 	WebhookMapping pulumi.StringPtrInput
 	WebhookUrl     pulumi.StringPtrInput
@@ -106,9 +106,9 @@ func (EventTransportState) ElementType() reflect.Type {
 }
 
 type eventTransportArgs struct {
-	Mode string  `pulumi:"mode"`
-	Name *string `pulumi:"name"`
-	// Defaults to `true`.
+	// Allowed values: - `local` - `webhook` - `webhookSlack` - `email`
+	Mode           string  `pulumi:"mode"`
+	Name           *string `pulumi:"name"`
 	SendOnce       *bool   `pulumi:"sendOnce"`
 	WebhookMapping *string `pulumi:"webhookMapping"`
 	WebhookUrl     *string `pulumi:"webhookUrl"`
@@ -116,9 +116,9 @@ type eventTransportArgs struct {
 
 // The set of arguments for constructing a EventTransport resource.
 type EventTransportArgs struct {
-	Mode pulumi.StringInput
-	Name pulumi.StringPtrInput
-	// Defaults to `true`.
+	// Allowed values: - `local` - `webhook` - `webhookSlack` - `email`
+	Mode           pulumi.StringInput
+	Name           pulumi.StringPtrInput
 	SendOnce       pulumi.BoolPtrInput
 	WebhookMapping pulumi.StringPtrInput
 	WebhookUrl     pulumi.StringPtrInput
@@ -147,12 +147,6 @@ func (i *EventTransport) ToEventTransportOutputWithContext(ctx context.Context) 
 	return pulumi.ToOutputWithContext(ctx, i).(EventTransportOutput)
 }
 
-func (i *EventTransport) ToOutput(ctx context.Context) pulumix.Output[*EventTransport] {
-	return pulumix.Output[*EventTransport]{
-		OutputState: i.ToEventTransportOutputWithContext(ctx).OutputState,
-	}
-}
-
 // EventTransportArrayInput is an input type that accepts EventTransportArray and EventTransportArrayOutput values.
 // You can construct a concrete instance of `EventTransportArrayInput` via:
 //
@@ -176,12 +170,6 @@ func (i EventTransportArray) ToEventTransportArrayOutput() EventTransportArrayOu
 
 func (i EventTransportArray) ToEventTransportArrayOutputWithContext(ctx context.Context) EventTransportArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(EventTransportArrayOutput)
-}
-
-func (i EventTransportArray) ToOutput(ctx context.Context) pulumix.Output[[]*EventTransport] {
-	return pulumix.Output[[]*EventTransport]{
-		OutputState: i.ToEventTransportArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // EventTransportMapInput is an input type that accepts EventTransportMap and EventTransportMapOutput values.
@@ -209,12 +197,6 @@ func (i EventTransportMap) ToEventTransportMapOutputWithContext(ctx context.Cont
 	return pulumi.ToOutputWithContext(ctx, i).(EventTransportMapOutput)
 }
 
-func (i EventTransportMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*EventTransport] {
-	return pulumix.Output[map[string]*EventTransport]{
-		OutputState: i.ToEventTransportMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type EventTransportOutput struct{ *pulumi.OutputState }
 
 func (EventTransportOutput) ElementType() reflect.Type {
@@ -229,12 +211,7 @@ func (o EventTransportOutput) ToEventTransportOutputWithContext(ctx context.Cont
 	return o
 }
 
-func (o EventTransportOutput) ToOutput(ctx context.Context) pulumix.Output[*EventTransport] {
-	return pulumix.Output[*EventTransport]{
-		OutputState: o.OutputState,
-	}
-}
-
+// Allowed values: - `local` - `webhook` - `webhookSlack` - `email`
 func (o EventTransportOutput) Mode() pulumi.StringOutput {
 	return o.ApplyT(func(v *EventTransport) pulumi.StringOutput { return v.Mode }).(pulumi.StringOutput)
 }
@@ -243,7 +220,6 @@ func (o EventTransportOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *EventTransport) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Defaults to `true`.
 func (o EventTransportOutput) SendOnce() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *EventTransport) pulumi.BoolPtrOutput { return v.SendOnce }).(pulumi.BoolPtrOutput)
 }
@@ -270,12 +246,6 @@ func (o EventTransportArrayOutput) ToEventTransportArrayOutputWithContext(ctx co
 	return o
 }
 
-func (o EventTransportArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*EventTransport] {
-	return pulumix.Output[[]*EventTransport]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o EventTransportArrayOutput) Index(i pulumi.IntInput) EventTransportOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *EventTransport {
 		return vs[0].([]*EventTransport)[vs[1].(int)]
@@ -294,12 +264,6 @@ func (o EventTransportMapOutput) ToEventTransportMapOutput() EventTransportMapOu
 
 func (o EventTransportMapOutput) ToEventTransportMapOutputWithContext(ctx context.Context) EventTransportMapOutput {
 	return o
-}
-
-func (o EventTransportMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*EventTransport] {
-	return pulumix.Output[map[string]*EventTransport]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o EventTransportMapOutput) MapIndex(k pulumi.StringInput) EventTransportOutput {

@@ -44,9 +44,9 @@ export class StageAuthenticatorTotp extends pulumi.CustomResource {
 
     public readonly configureFlow!: pulumi.Output<string | undefined>;
     /**
-     * Defaults to `6`.
+     * Allowed values: - `6` - `8`
      */
-    public readonly digits!: pulumi.Output<number | undefined>;
+    public readonly digits!: pulumi.Output<string | undefined>;
     public readonly friendlyName!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
 
@@ -85,9 +85,9 @@ export class StageAuthenticatorTotp extends pulumi.CustomResource {
 export interface StageAuthenticatorTotpState {
     configureFlow?: pulumi.Input<string>;
     /**
-     * Defaults to `6`.
+     * Allowed values: - `6` - `8`
      */
-    digits?: pulumi.Input<number>;
+    digits?: pulumi.Input<string>;
     friendlyName?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
 }
@@ -98,9 +98,9 @@ export interface StageAuthenticatorTotpState {
 export interface StageAuthenticatorTotpArgs {
     configureFlow?: pulumi.Input<string>;
     /**
-     * Defaults to `6`.
+     * Allowed values: - `6` - `8`
      */
-    digits?: pulumi.Input<number>;
+    digits?: pulumi.Input<string>;
     friendlyName?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
 }

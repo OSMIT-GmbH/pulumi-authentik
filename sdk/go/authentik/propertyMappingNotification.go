@@ -8,11 +8,12 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
+// Manage Notification Property mappings
+//
 // ## Example Usage
 //
 // ```go
@@ -20,7 +21,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -125,12 +126,6 @@ func (i *PropertyMappingNotification) ToPropertyMappingNotificationOutputWithCon
 	return pulumi.ToOutputWithContext(ctx, i).(PropertyMappingNotificationOutput)
 }
 
-func (i *PropertyMappingNotification) ToOutput(ctx context.Context) pulumix.Output[*PropertyMappingNotification] {
-	return pulumix.Output[*PropertyMappingNotification]{
-		OutputState: i.ToPropertyMappingNotificationOutputWithContext(ctx).OutputState,
-	}
-}
-
 // PropertyMappingNotificationArrayInput is an input type that accepts PropertyMappingNotificationArray and PropertyMappingNotificationArrayOutput values.
 // You can construct a concrete instance of `PropertyMappingNotificationArrayInput` via:
 //
@@ -154,12 +149,6 @@ func (i PropertyMappingNotificationArray) ToPropertyMappingNotificationArrayOutp
 
 func (i PropertyMappingNotificationArray) ToPropertyMappingNotificationArrayOutputWithContext(ctx context.Context) PropertyMappingNotificationArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PropertyMappingNotificationArrayOutput)
-}
-
-func (i PropertyMappingNotificationArray) ToOutput(ctx context.Context) pulumix.Output[[]*PropertyMappingNotification] {
-	return pulumix.Output[[]*PropertyMappingNotification]{
-		OutputState: i.ToPropertyMappingNotificationArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // PropertyMappingNotificationMapInput is an input type that accepts PropertyMappingNotificationMap and PropertyMappingNotificationMapOutput values.
@@ -187,12 +176,6 @@ func (i PropertyMappingNotificationMap) ToPropertyMappingNotificationMapOutputWi
 	return pulumi.ToOutputWithContext(ctx, i).(PropertyMappingNotificationMapOutput)
 }
 
-func (i PropertyMappingNotificationMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PropertyMappingNotification] {
-	return pulumix.Output[map[string]*PropertyMappingNotification]{
-		OutputState: i.ToPropertyMappingNotificationMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type PropertyMappingNotificationOutput struct{ *pulumi.OutputState }
 
 func (PropertyMappingNotificationOutput) ElementType() reflect.Type {
@@ -205,12 +188,6 @@ func (o PropertyMappingNotificationOutput) ToPropertyMappingNotificationOutput()
 
 func (o PropertyMappingNotificationOutput) ToPropertyMappingNotificationOutputWithContext(ctx context.Context) PropertyMappingNotificationOutput {
 	return o
-}
-
-func (o PropertyMappingNotificationOutput) ToOutput(ctx context.Context) pulumix.Output[*PropertyMappingNotification] {
-	return pulumix.Output[*PropertyMappingNotification]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o PropertyMappingNotificationOutput) Expression() pulumi.StringOutput {
@@ -235,12 +212,6 @@ func (o PropertyMappingNotificationArrayOutput) ToPropertyMappingNotificationArr
 	return o
 }
 
-func (o PropertyMappingNotificationArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PropertyMappingNotification] {
-	return pulumix.Output[[]*PropertyMappingNotification]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o PropertyMappingNotificationArrayOutput) Index(i pulumi.IntInput) PropertyMappingNotificationOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PropertyMappingNotification {
 		return vs[0].([]*PropertyMappingNotification)[vs[1].(int)]
@@ -259,12 +230,6 @@ func (o PropertyMappingNotificationMapOutput) ToPropertyMappingNotificationMapOu
 
 func (o PropertyMappingNotificationMapOutput) ToPropertyMappingNotificationMapOutputWithContext(ctx context.Context) PropertyMappingNotificationMapOutput {
 	return o
-}
-
-func (o PropertyMappingNotificationMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PropertyMappingNotification] {
-	return pulumix.Output[map[string]*PropertyMappingNotification]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o PropertyMappingNotificationMapOutput) MapIndex(k pulumi.StringInput) PropertyMappingNotificationOutput {

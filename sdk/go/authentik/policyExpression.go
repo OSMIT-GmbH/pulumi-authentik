@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -135,12 +134,6 @@ func (i *PolicyExpression) ToPolicyExpressionOutputWithContext(ctx context.Conte
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyExpressionOutput)
 }
 
-func (i *PolicyExpression) ToOutput(ctx context.Context) pulumix.Output[*PolicyExpression] {
-	return pulumix.Output[*PolicyExpression]{
-		OutputState: i.ToPolicyExpressionOutputWithContext(ctx).OutputState,
-	}
-}
-
 // PolicyExpressionArrayInput is an input type that accepts PolicyExpressionArray and PolicyExpressionArrayOutput values.
 // You can construct a concrete instance of `PolicyExpressionArrayInput` via:
 //
@@ -164,12 +157,6 @@ func (i PolicyExpressionArray) ToPolicyExpressionArrayOutput() PolicyExpressionA
 
 func (i PolicyExpressionArray) ToPolicyExpressionArrayOutputWithContext(ctx context.Context) PolicyExpressionArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyExpressionArrayOutput)
-}
-
-func (i PolicyExpressionArray) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyExpression] {
-	return pulumix.Output[[]*PolicyExpression]{
-		OutputState: i.ToPolicyExpressionArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // PolicyExpressionMapInput is an input type that accepts PolicyExpressionMap and PolicyExpressionMapOutput values.
@@ -197,12 +184,6 @@ func (i PolicyExpressionMap) ToPolicyExpressionMapOutputWithContext(ctx context.
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyExpressionMapOutput)
 }
 
-func (i PolicyExpressionMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyExpression] {
-	return pulumix.Output[map[string]*PolicyExpression]{
-		OutputState: i.ToPolicyExpressionMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type PolicyExpressionOutput struct{ *pulumi.OutputState }
 
 func (PolicyExpressionOutput) ElementType() reflect.Type {
@@ -215,12 +196,6 @@ func (o PolicyExpressionOutput) ToPolicyExpressionOutput() PolicyExpressionOutpu
 
 func (o PolicyExpressionOutput) ToPolicyExpressionOutputWithContext(ctx context.Context) PolicyExpressionOutput {
 	return o
-}
-
-func (o PolicyExpressionOutput) ToOutput(ctx context.Context) pulumix.Output[*PolicyExpression] {
-	return pulumix.Output[*PolicyExpression]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Defaults to `false`.
@@ -250,12 +225,6 @@ func (o PolicyExpressionArrayOutput) ToPolicyExpressionArrayOutputWithContext(ct
 	return o
 }
 
-func (o PolicyExpressionArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyExpression] {
-	return pulumix.Output[[]*PolicyExpression]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o PolicyExpressionArrayOutput) Index(i pulumi.IntInput) PolicyExpressionOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PolicyExpression {
 		return vs[0].([]*PolicyExpression)[vs[1].(int)]
@@ -274,12 +243,6 @@ func (o PolicyExpressionMapOutput) ToPolicyExpressionMapOutput() PolicyExpressio
 
 func (o PolicyExpressionMapOutput) ToPolicyExpressionMapOutputWithContext(ctx context.Context) PolicyExpressionMapOutput {
 	return o
-}
-
-func (o PolicyExpressionMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyExpression] {
-	return pulumix.Output[map[string]*PolicyExpression]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o PolicyExpressionMapOutput) MapIndex(k pulumi.StringInput) PolicyExpressionOutput {

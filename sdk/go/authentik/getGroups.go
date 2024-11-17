@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Get groups list
@@ -21,14 +20,14 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := authentik.GetGroups(ctx, nil, nil)
+//			_, err := authentik.GetGroups(ctx, &authentik.GetGroupsArgs{}, nil)
 //			if err != nil {
 //				return err
 //			}
@@ -56,6 +55,7 @@ func GetGroups(ctx *pulumi.Context, args *GetGroupsArgs, opts ...pulumi.InvokeOp
 // A collection of arguments for invoking getGroups.
 type GetGroupsArgs struct {
 	Attributes         *string  `pulumi:"attributes"`
+	IncludeUsers       *bool    `pulumi:"includeUsers"`
 	IsSuperuser        *bool    `pulumi:"isSuperuser"`
 	MembersByPks       []int    `pulumi:"membersByPks"`
 	MembersByUsernames []string `pulumi:"membersByUsernames"`
@@ -71,6 +71,7 @@ type GetGroupsResult struct {
 	Groups []GetGroupsGroup `pulumi:"groups"`
 	// The provider-assigned unique ID for this managed resource.
 	Id                 string   `pulumi:"id"`
+	IncludeUsers       *bool    `pulumi:"includeUsers"`
 	IsSuperuser        *bool    `pulumi:"isSuperuser"`
 	MembersByPks       []int    `pulumi:"membersByPks"`
 	MembersByUsernames []string `pulumi:"membersByUsernames"`
@@ -81,20 +82,27 @@ type GetGroupsResult struct {
 
 func GetGroupsOutput(ctx *pulumi.Context, args GetGroupsOutputArgs, opts ...pulumi.InvokeOption) GetGroupsResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetGroupsResult, error) {
+		ApplyT(func(v interface{}) (GetGroupsResultOutput, error) {
 			args := v.(GetGroupsArgs)
-			r, err := GetGroups(ctx, &args, opts...)
-			var s GetGroupsResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv GetGroupsResult
+			secret, err := ctx.InvokePackageRaw("authentik:index/getGroups:getGroups", args, &rv, "", opts...)
+			if err != nil {
+				return GetGroupsResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(GetGroupsResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(GetGroupsResultOutput), nil
+			}
+			return output, nil
 		}).(GetGroupsResultOutput)
 }
 
 // A collection of arguments for invoking getGroups.
 type GetGroupsOutputArgs struct {
 	Attributes         pulumi.StringPtrInput   `pulumi:"attributes"`
+	IncludeUsers       pulumi.BoolPtrInput     `pulumi:"includeUsers"`
 	IsSuperuser        pulumi.BoolPtrInput     `pulumi:"isSuperuser"`
 	MembersByPks       pulumi.IntArrayInput    `pulumi:"membersByPks"`
 	MembersByUsernames pulumi.StringArrayInput `pulumi:"membersByUsernames"`
@@ -122,12 +130,6 @@ func (o GetGroupsResultOutput) ToGetGroupsResultOutputWithContext(ctx context.Co
 	return o
 }
 
-func (o GetGroupsResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetGroupsResult] {
-	return pulumix.Output[GetGroupsResult]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o GetGroupsResultOutput) Attributes() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetGroupsResult) *string { return v.Attributes }).(pulumi.StringPtrOutput)
 }
@@ -140,6 +142,10 @@ func (o GetGroupsResultOutput) Groups() GetGroupsGroupArrayOutput {
 // The provider-assigned unique ID for this managed resource.
 func (o GetGroupsResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetGroupsResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+func (o GetGroupsResultOutput) IncludeUsers() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v GetGroupsResult) *bool { return v.IncludeUsers }).(pulumi.BoolPtrOutput)
 }
 
 func (o GetGroupsResultOutput) IsSuperuser() pulumi.BoolPtrOutput {

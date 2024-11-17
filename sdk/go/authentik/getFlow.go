@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Get flows by Slug and/or designation
@@ -21,7 +20,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -77,14 +76,20 @@ type LookupFlowResult struct {
 
 func LookupFlowOutput(ctx *pulumi.Context, args LookupFlowOutputArgs, opts ...pulumi.InvokeOption) LookupFlowResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupFlowResult, error) {
+		ApplyT(func(v interface{}) (LookupFlowResultOutput, error) {
 			args := v.(LookupFlowArgs)
-			r, err := LookupFlow(ctx, &args, opts...)
-			var s LookupFlowResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv LookupFlowResult
+			secret, err := ctx.InvokePackageRaw("authentik:index/getFlow:getFlow", args, &rv, "", opts...)
+			if err != nil {
+				return LookupFlowResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(LookupFlowResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(LookupFlowResultOutput), nil
+			}
+			return output, nil
 		}).(LookupFlowResultOutput)
 }
 
@@ -115,12 +120,6 @@ func (o LookupFlowResultOutput) ToLookupFlowResultOutput() LookupFlowResultOutpu
 
 func (o LookupFlowResultOutput) ToLookupFlowResultOutputWithContext(ctx context.Context) LookupFlowResultOutput {
 	return o
-}
-
-func (o LookupFlowResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupFlowResult] {
-	return pulumix.Output[LookupFlowResult]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Generated.

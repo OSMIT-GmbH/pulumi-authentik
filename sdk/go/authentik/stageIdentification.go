@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -19,7 +18,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -34,8 +33,8 @@ import (
 //			}
 //			nameSourceOauth, err := authentik.NewSourceOauth(ctx, "nameSourceOauth", &authentik.SourceOauthArgs{
 //				Slug:               pulumi.String("test"),
-//				AuthenticationFlow: *pulumi.String(default_authorization_flow.Id),
-//				EnrollmentFlow:     *pulumi.String(default_authorization_flow.Id),
+//				AuthenticationFlow: pulumi.String(default_authorization_flow.Id),
+//				EnrollmentFlow:     pulumi.String(default_authorization_flow.Id),
 //				ProviderType:       pulumi.String("discord"),
 //				ConsumerKey:        pulumi.String("foo"),
 //				ConsumerSecret:     pulumi.String("bar"),
@@ -71,12 +70,15 @@ import (
 type StageIdentification struct {
 	pulumi.CustomResourceState
 
+	CaptchaStage            pulumi.StringPtrOutput `pulumi:"captchaStage"`
 	CaseInsensitiveMatching pulumi.BoolPtrOutput   `pulumi:"caseInsensitiveMatching"`
 	EnrollmentFlow          pulumi.StringPtrOutput `pulumi:"enrollmentFlow"`
 	Name                    pulumi.StringOutput    `pulumi:"name"`
 	PasswordStage           pulumi.StringPtrOutput `pulumi:"passwordStage"`
 	PasswordlessFlow        pulumi.StringPtrOutput `pulumi:"passwordlessFlow"`
-	RecoveryFlow            pulumi.StringPtrOutput `pulumi:"recoveryFlow"`
+	// Defaults to `true`.
+	PretendUserExists pulumi.BoolPtrOutput   `pulumi:"pretendUserExists"`
+	RecoveryFlow      pulumi.StringPtrOutput `pulumi:"recoveryFlow"`
 	// Defaults to `true`.
 	ShowMatchedUser pulumi.BoolPtrOutput `pulumi:"showMatchedUser"`
 	// Defaults to `false`.
@@ -115,12 +117,15 @@ func GetStageIdentification(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering StageIdentification resources.
 type stageIdentificationState struct {
+	CaptchaStage            *string `pulumi:"captchaStage"`
 	CaseInsensitiveMatching *bool   `pulumi:"caseInsensitiveMatching"`
 	EnrollmentFlow          *string `pulumi:"enrollmentFlow"`
 	Name                    *string `pulumi:"name"`
 	PasswordStage           *string `pulumi:"passwordStage"`
 	PasswordlessFlow        *string `pulumi:"passwordlessFlow"`
-	RecoveryFlow            *string `pulumi:"recoveryFlow"`
+	// Defaults to `true`.
+	PretendUserExists *bool   `pulumi:"pretendUserExists"`
+	RecoveryFlow      *string `pulumi:"recoveryFlow"`
 	// Defaults to `true`.
 	ShowMatchedUser *bool `pulumi:"showMatchedUser"`
 	// Defaults to `false`.
@@ -130,12 +135,15 @@ type stageIdentificationState struct {
 }
 
 type StageIdentificationState struct {
+	CaptchaStage            pulumi.StringPtrInput
 	CaseInsensitiveMatching pulumi.BoolPtrInput
 	EnrollmentFlow          pulumi.StringPtrInput
 	Name                    pulumi.StringPtrInput
 	PasswordStage           pulumi.StringPtrInput
 	PasswordlessFlow        pulumi.StringPtrInput
-	RecoveryFlow            pulumi.StringPtrInput
+	// Defaults to `true`.
+	PretendUserExists pulumi.BoolPtrInput
+	RecoveryFlow      pulumi.StringPtrInput
 	// Defaults to `true`.
 	ShowMatchedUser pulumi.BoolPtrInput
 	// Defaults to `false`.
@@ -149,12 +157,15 @@ func (StageIdentificationState) ElementType() reflect.Type {
 }
 
 type stageIdentificationArgs struct {
+	CaptchaStage            *string `pulumi:"captchaStage"`
 	CaseInsensitiveMatching *bool   `pulumi:"caseInsensitiveMatching"`
 	EnrollmentFlow          *string `pulumi:"enrollmentFlow"`
 	Name                    *string `pulumi:"name"`
 	PasswordStage           *string `pulumi:"passwordStage"`
 	PasswordlessFlow        *string `pulumi:"passwordlessFlow"`
-	RecoveryFlow            *string `pulumi:"recoveryFlow"`
+	// Defaults to `true`.
+	PretendUserExists *bool   `pulumi:"pretendUserExists"`
+	RecoveryFlow      *string `pulumi:"recoveryFlow"`
 	// Defaults to `true`.
 	ShowMatchedUser *bool `pulumi:"showMatchedUser"`
 	// Defaults to `false`.
@@ -165,12 +176,15 @@ type stageIdentificationArgs struct {
 
 // The set of arguments for constructing a StageIdentification resource.
 type StageIdentificationArgs struct {
+	CaptchaStage            pulumi.StringPtrInput
 	CaseInsensitiveMatching pulumi.BoolPtrInput
 	EnrollmentFlow          pulumi.StringPtrInput
 	Name                    pulumi.StringPtrInput
 	PasswordStage           pulumi.StringPtrInput
 	PasswordlessFlow        pulumi.StringPtrInput
-	RecoveryFlow            pulumi.StringPtrInput
+	// Defaults to `true`.
+	PretendUserExists pulumi.BoolPtrInput
+	RecoveryFlow      pulumi.StringPtrInput
 	// Defaults to `true`.
 	ShowMatchedUser pulumi.BoolPtrInput
 	// Defaults to `false`.
@@ -202,12 +216,6 @@ func (i *StageIdentification) ToStageIdentificationOutputWithContext(ctx context
 	return pulumi.ToOutputWithContext(ctx, i).(StageIdentificationOutput)
 }
 
-func (i *StageIdentification) ToOutput(ctx context.Context) pulumix.Output[*StageIdentification] {
-	return pulumix.Output[*StageIdentification]{
-		OutputState: i.ToStageIdentificationOutputWithContext(ctx).OutputState,
-	}
-}
-
 // StageIdentificationArrayInput is an input type that accepts StageIdentificationArray and StageIdentificationArrayOutput values.
 // You can construct a concrete instance of `StageIdentificationArrayInput` via:
 //
@@ -231,12 +239,6 @@ func (i StageIdentificationArray) ToStageIdentificationArrayOutput() StageIdenti
 
 func (i StageIdentificationArray) ToStageIdentificationArrayOutputWithContext(ctx context.Context) StageIdentificationArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(StageIdentificationArrayOutput)
-}
-
-func (i StageIdentificationArray) ToOutput(ctx context.Context) pulumix.Output[[]*StageIdentification] {
-	return pulumix.Output[[]*StageIdentification]{
-		OutputState: i.ToStageIdentificationArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // StageIdentificationMapInput is an input type that accepts StageIdentificationMap and StageIdentificationMapOutput values.
@@ -264,12 +266,6 @@ func (i StageIdentificationMap) ToStageIdentificationMapOutputWithContext(ctx co
 	return pulumi.ToOutputWithContext(ctx, i).(StageIdentificationMapOutput)
 }
 
-func (i StageIdentificationMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageIdentification] {
-	return pulumix.Output[map[string]*StageIdentification]{
-		OutputState: i.ToStageIdentificationMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type StageIdentificationOutput struct{ *pulumi.OutputState }
 
 func (StageIdentificationOutput) ElementType() reflect.Type {
@@ -284,10 +280,8 @@ func (o StageIdentificationOutput) ToStageIdentificationOutputWithContext(ctx co
 	return o
 }
 
-func (o StageIdentificationOutput) ToOutput(ctx context.Context) pulumix.Output[*StageIdentification] {
-	return pulumix.Output[*StageIdentification]{
-		OutputState: o.OutputState,
-	}
+func (o StageIdentificationOutput) CaptchaStage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *StageIdentification) pulumi.StringPtrOutput { return v.CaptchaStage }).(pulumi.StringPtrOutput)
 }
 
 func (o StageIdentificationOutput) CaseInsensitiveMatching() pulumi.BoolPtrOutput {
@@ -308,6 +302,11 @@ func (o StageIdentificationOutput) PasswordStage() pulumi.StringPtrOutput {
 
 func (o StageIdentificationOutput) PasswordlessFlow() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StageIdentification) pulumi.StringPtrOutput { return v.PasswordlessFlow }).(pulumi.StringPtrOutput)
+}
+
+// Defaults to `true`.
+func (o StageIdentificationOutput) PretendUserExists() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *StageIdentification) pulumi.BoolPtrOutput { return v.PretendUserExists }).(pulumi.BoolPtrOutput)
 }
 
 func (o StageIdentificationOutput) RecoveryFlow() pulumi.StringPtrOutput {
@@ -346,12 +345,6 @@ func (o StageIdentificationArrayOutput) ToStageIdentificationArrayOutputWithCont
 	return o
 }
 
-func (o StageIdentificationArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*StageIdentification] {
-	return pulumix.Output[[]*StageIdentification]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o StageIdentificationArrayOutput) Index(i pulumi.IntInput) StageIdentificationOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *StageIdentification {
 		return vs[0].([]*StageIdentification)[vs[1].(int)]
@@ -370,12 +363,6 @@ func (o StageIdentificationMapOutput) ToStageIdentificationMapOutput() StageIden
 
 func (o StageIdentificationMapOutput) ToStageIdentificationMapOutputWithContext(ctx context.Context) StageIdentificationMapOutput {
 	return o
-}
-
-func (o StageIdentificationMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*StageIdentification] {
-	return pulumix.Output[map[string]*StageIdentification]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o StageIdentificationMapOutput) MapIndex(k pulumi.StringInput) StageIdentificationOutput {

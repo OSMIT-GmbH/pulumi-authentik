@@ -9,7 +9,6 @@ import * as utilities from "./utilities";
  */
 export function getProviderSamlMetadata(args?: GetProviderSamlMetadataArgs, opts?: pulumi.InvokeOptions): Promise<GetProviderSamlMetadataResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("authentik:index/getProviderSamlMetadata:getProviderSamlMetadata", {
         "name": args.name,
@@ -56,7 +55,12 @@ export interface GetProviderSamlMetadataResult {
  * Get SAML Provider metadata
  */
 export function getProviderSamlMetadataOutput(args?: GetProviderSamlMetadataOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProviderSamlMetadataResult> {
-    return pulumi.output(args).apply((a: any) => getProviderSamlMetadata(a, opts))
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("authentik:index/getProviderSamlMetadata:getProviderSamlMetadata", {
+        "name": args.name,
+        "providerId": args.providerId,
+    }, opts);
 }
 
 /**

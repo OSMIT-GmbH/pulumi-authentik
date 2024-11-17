@@ -20,7 +20,6 @@ import * as utilities from "./utilities";
  */
 export function getFlow(args?: GetFlowArgs, opts?: pulumi.InvokeOptions): Promise<GetFlowResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("authentik:index/getFlow:getFlow", {
         "authentication": args.authentication,
@@ -91,7 +90,13 @@ export interface GetFlowResult {
  * ```
  */
 export function getFlowOutput(args?: GetFlowOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetFlowResult> {
-    return pulumi.output(args).apply((a: any) => getFlow(a, opts))
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("authentik:index/getFlow:getFlow", {
+        "authentication": args.authentication,
+        "designation": args.designation,
+        "slug": args.slug,
+    }, opts);
 }
 
 /**

@@ -22,9 +22,9 @@ import * as utilities from "./utilities";
  */
 export function getGroup(args?: GetGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("authentik:index/getGroup:getGroup", {
+        "includeUsers": args.includeUsers,
         "name": args.name,
         "pk": args.pk,
     }, opts);
@@ -34,6 +34,7 @@ export function getGroup(args?: GetGroupArgs, opts?: pulumi.InvokeOptions): Prom
  * A collection of arguments for invoking getGroup.
  */
 export interface GetGroupArgs {
+    includeUsers?: boolean;
     name?: string;
     pk?: string;
 }
@@ -50,6 +51,7 @@ export interface GetGroupResult {
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly includeUsers?: boolean;
     /**
      * Generated.
      */
@@ -92,13 +94,20 @@ export interface GetGroupResult {
  * ```
  */
 export function getGroupOutput(args?: GetGroupOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGroupResult> {
-    return pulumi.output(args).apply((a: any) => getGroup(a, opts))
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("authentik:index/getGroup:getGroup", {
+        "includeUsers": args.includeUsers,
+        "name": args.name,
+        "pk": args.pk,
+    }, opts);
 }
 
 /**
  * A collection of arguments for invoking getGroup.
  */
 export interface GetGroupOutputArgs {
+    includeUsers?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
     pk?: pulumi.Input<string>;
 }

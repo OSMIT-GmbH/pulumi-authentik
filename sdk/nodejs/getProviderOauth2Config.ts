@@ -9,7 +9,6 @@ import * as utilities from "./utilities";
  */
 export function getProviderOauth2Config(args?: GetProviderOauth2ConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetProviderOauth2ConfigResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("authentik:index/getProviderOauth2Config:getProviderOauth2Config", {
         "name": args.name,
@@ -80,7 +79,12 @@ export interface GetProviderOauth2ConfigResult {
  * Get OAuth2 provider config
  */
 export function getProviderOauth2ConfigOutput(args?: GetProviderOauth2ConfigOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProviderOauth2ConfigResult> {
-    return pulumi.output(args).apply((a: any) => getProviderOauth2Config(a, opts))
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("authentik:index/getProviderOauth2Config:getProviderOauth2Config", {
+        "name": args.name,
+        "providerId": args.providerId,
+    }, opts);
 }
 
 /**

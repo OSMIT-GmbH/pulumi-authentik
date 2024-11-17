@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Get certificate-key pairs by name
@@ -21,7 +20,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -85,14 +84,20 @@ type LookupCertificateKeyPairResult struct {
 
 func LookupCertificateKeyPairOutput(ctx *pulumi.Context, args LookupCertificateKeyPairOutputArgs, opts ...pulumi.InvokeOption) LookupCertificateKeyPairResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupCertificateKeyPairResult, error) {
+		ApplyT(func(v interface{}) (LookupCertificateKeyPairResultOutput, error) {
 			args := v.(LookupCertificateKeyPairArgs)
-			r, err := LookupCertificateKeyPair(ctx, &args, opts...)
-			var s LookupCertificateKeyPairResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv LookupCertificateKeyPairResult
+			secret, err := ctx.InvokePackageRaw("authentik:index/getCertificateKeyPair:getCertificateKeyPair", args, &rv, "", opts...)
+			if err != nil {
+				return LookupCertificateKeyPairResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(LookupCertificateKeyPairResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(LookupCertificateKeyPairResultOutput), nil
+			}
+			return output, nil
 		}).(LookupCertificateKeyPairResultOutput)
 }
 
@@ -124,12 +129,6 @@ func (o LookupCertificateKeyPairResultOutput) ToLookupCertificateKeyPairResultOu
 
 func (o LookupCertificateKeyPairResultOutput) ToLookupCertificateKeyPairResultOutputWithContext(ctx context.Context) LookupCertificateKeyPairResultOutput {
 	return o
-}
-
-func (o LookupCertificateKeyPairResultOutput) ToOutput(ctx context.Context) pulumix.Output[LookupCertificateKeyPairResult] {
-	return pulumix.Output[LookupCertificateKeyPairResult]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Generated.

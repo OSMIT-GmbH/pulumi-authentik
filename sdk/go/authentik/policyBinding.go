@@ -8,9 +8,8 @@ import (
 	"reflect"
 
 	"errors"
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // ## Example Usage
@@ -20,13 +19,14 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Create a policy binding for a resource
 //			policy, err := authentik.NewPolicyExpression(ctx, "policy", &authentik.PolicyExpressionArgs{
 //				Expression: pulumi.String("return True"),
 //			})
@@ -61,7 +61,7 @@ import (
 //			}
 //			_, err = authentik.NewPolicyBinding(ctx, "app-accessIndex/policyBindingPolicyBinding", &authentik.PolicyBindingArgs{
 //				Target: nameApplication.Uuid,
-//				Group:  *pulumi.String(admins.Id),
+//				Group:  pulumi.String(admins.Id),
 //				Order:  pulumi.Int(0),
 //			})
 //			if err != nil {
@@ -77,6 +77,8 @@ type PolicyBinding struct {
 
 	// Defaults to `true`.
 	Enabled pulumi.BoolPtrOutput `pulumi:"enabled"`
+	// Defaults to `false`.
+	FailureResult pulumi.BoolPtrOutput `pulumi:"failureResult"`
 	// UUID of the group
 	Group pulumi.StringPtrOutput `pulumi:"group"`
 	// Defaults to `false`.
@@ -130,6 +132,8 @@ func GetPolicyBinding(ctx *pulumi.Context,
 type policyBindingState struct {
 	// Defaults to `true`.
 	Enabled *bool `pulumi:"enabled"`
+	// Defaults to `false`.
+	FailureResult *bool `pulumi:"failureResult"`
 	// UUID of the group
 	Group *string `pulumi:"group"`
 	// Defaults to `false`.
@@ -148,6 +152,8 @@ type policyBindingState struct {
 type PolicyBindingState struct {
 	// Defaults to `true`.
 	Enabled pulumi.BoolPtrInput
+	// Defaults to `false`.
+	FailureResult pulumi.BoolPtrInput
 	// UUID of the group
 	Group pulumi.StringPtrInput
 	// Defaults to `false`.
@@ -170,6 +176,8 @@ func (PolicyBindingState) ElementType() reflect.Type {
 type policyBindingArgs struct {
 	// Defaults to `true`.
 	Enabled *bool `pulumi:"enabled"`
+	// Defaults to `false`.
+	FailureResult *bool `pulumi:"failureResult"`
 	// UUID of the group
 	Group *string `pulumi:"group"`
 	// Defaults to `false`.
@@ -189,6 +197,8 @@ type policyBindingArgs struct {
 type PolicyBindingArgs struct {
 	// Defaults to `true`.
 	Enabled pulumi.BoolPtrInput
+	// Defaults to `false`.
+	FailureResult pulumi.BoolPtrInput
 	// UUID of the group
 	Group pulumi.StringPtrInput
 	// Defaults to `false`.
@@ -227,12 +237,6 @@ func (i *PolicyBinding) ToPolicyBindingOutputWithContext(ctx context.Context) Po
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyBindingOutput)
 }
 
-func (i *PolicyBinding) ToOutput(ctx context.Context) pulumix.Output[*PolicyBinding] {
-	return pulumix.Output[*PolicyBinding]{
-		OutputState: i.ToPolicyBindingOutputWithContext(ctx).OutputState,
-	}
-}
-
 // PolicyBindingArrayInput is an input type that accepts PolicyBindingArray and PolicyBindingArrayOutput values.
 // You can construct a concrete instance of `PolicyBindingArrayInput` via:
 //
@@ -256,12 +260,6 @@ func (i PolicyBindingArray) ToPolicyBindingArrayOutput() PolicyBindingArrayOutpu
 
 func (i PolicyBindingArray) ToPolicyBindingArrayOutputWithContext(ctx context.Context) PolicyBindingArrayOutput {
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyBindingArrayOutput)
-}
-
-func (i PolicyBindingArray) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyBinding] {
-	return pulumix.Output[[]*PolicyBinding]{
-		OutputState: i.ToPolicyBindingArrayOutputWithContext(ctx).OutputState,
-	}
 }
 
 // PolicyBindingMapInput is an input type that accepts PolicyBindingMap and PolicyBindingMapOutput values.
@@ -289,12 +287,6 @@ func (i PolicyBindingMap) ToPolicyBindingMapOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, i).(PolicyBindingMapOutput)
 }
 
-func (i PolicyBindingMap) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyBinding] {
-	return pulumix.Output[map[string]*PolicyBinding]{
-		OutputState: i.ToPolicyBindingMapOutputWithContext(ctx).OutputState,
-	}
-}
-
 type PolicyBindingOutput struct{ *pulumi.OutputState }
 
 func (PolicyBindingOutput) ElementType() reflect.Type {
@@ -309,15 +301,14 @@ func (o PolicyBindingOutput) ToPolicyBindingOutputWithContext(ctx context.Contex
 	return o
 }
 
-func (o PolicyBindingOutput) ToOutput(ctx context.Context) pulumix.Output[*PolicyBinding] {
-	return pulumix.Output[*PolicyBinding]{
-		OutputState: o.OutputState,
-	}
-}
-
 // Defaults to `true`.
 func (o PolicyBindingOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *PolicyBinding) pulumi.BoolPtrOutput { return v.Enabled }).(pulumi.BoolPtrOutput)
+}
+
+// Defaults to `false`.
+func (o PolicyBindingOutput) FailureResult() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *PolicyBinding) pulumi.BoolPtrOutput { return v.FailureResult }).(pulumi.BoolPtrOutput)
 }
 
 // UUID of the group
@@ -368,12 +359,6 @@ func (o PolicyBindingArrayOutput) ToPolicyBindingArrayOutputWithContext(ctx cont
 	return o
 }
 
-func (o PolicyBindingArrayOutput) ToOutput(ctx context.Context) pulumix.Output[[]*PolicyBinding] {
-	return pulumix.Output[[]*PolicyBinding]{
-		OutputState: o.OutputState,
-	}
-}
-
 func (o PolicyBindingArrayOutput) Index(i pulumi.IntInput) PolicyBindingOutput {
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) *PolicyBinding {
 		return vs[0].([]*PolicyBinding)[vs[1].(int)]
@@ -392,12 +377,6 @@ func (o PolicyBindingMapOutput) ToPolicyBindingMapOutput() PolicyBindingMapOutpu
 
 func (o PolicyBindingMapOutput) ToPolicyBindingMapOutputWithContext(ctx context.Context) PolicyBindingMapOutput {
 	return o
-}
-
-func (o PolicyBindingMapOutput) ToOutput(ctx context.Context) pulumix.Output[map[string]*PolicyBinding] {
-	return pulumix.Output[map[string]*PolicyBinding]{
-		OutputState: o.OutputState,
-	}
 }
 
 func (o PolicyBindingMapOutput) MapIndex(k pulumi.StringInput) PolicyBindingOutput {

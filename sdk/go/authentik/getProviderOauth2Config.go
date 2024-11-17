@@ -7,9 +7,8 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik/internal"
+	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/pulumi/pulumi/sdk/v3/go/pulumix"
 )
 
 // Get OAuth2 provider config
@@ -57,14 +56,20 @@ type GetProviderOauth2ConfigResult struct {
 
 func GetProviderOauth2ConfigOutput(ctx *pulumi.Context, args GetProviderOauth2ConfigOutputArgs, opts ...pulumi.InvokeOption) GetProviderOauth2ConfigResultOutput {
 	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetProviderOauth2ConfigResult, error) {
+		ApplyT(func(v interface{}) (GetProviderOauth2ConfigResultOutput, error) {
 			args := v.(GetProviderOauth2ConfigArgs)
-			r, err := GetProviderOauth2Config(ctx, &args, opts...)
-			var s GetProviderOauth2ConfigResult
-			if r != nil {
-				s = *r
+			opts = internal.PkgInvokeDefaultOpts(opts)
+			var rv GetProviderOauth2ConfigResult
+			secret, err := ctx.InvokePackageRaw("authentik:index/getProviderOauth2Config:getProviderOauth2Config", args, &rv, "", opts...)
+			if err != nil {
+				return GetProviderOauth2ConfigResultOutput{}, err
 			}
-			return s, err
+
+			output := pulumi.ToOutput(rv).(GetProviderOauth2ConfigResultOutput)
+			if secret {
+				return pulumi.ToSecret(output).(GetProviderOauth2ConfigResultOutput), nil
+			}
+			return output, nil
 		}).(GetProviderOauth2ConfigResultOutput)
 }
 
@@ -93,12 +98,6 @@ func (o GetProviderOauth2ConfigResultOutput) ToGetProviderOauth2ConfigResultOutp
 
 func (o GetProviderOauth2ConfigResultOutput) ToGetProviderOauth2ConfigResultOutputWithContext(ctx context.Context) GetProviderOauth2ConfigResultOutput {
 	return o
-}
-
-func (o GetProviderOauth2ConfigResultOutput) ToOutput(ctx context.Context) pulumix.Output[GetProviderOauth2ConfigResult] {
-	return pulumix.Output[GetProviderOauth2ConfigResult]{
-		OutputState: o.OutputState,
-	}
 }
 
 // Generated.
