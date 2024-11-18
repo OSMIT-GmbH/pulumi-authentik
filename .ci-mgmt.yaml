@@ -39,7 +39,8 @@ languages:
 
 # Disable Java publishing and pushing the provider binary to the CDN as these only work internally within Pulumi.
 publish:
-  sdk: "all,!java"
+  # sdk: "all,!java"
+  sdk: "nodejs,go"
   cdn: false
 
 # Enables automatic generation of basic docs pages for the registry.

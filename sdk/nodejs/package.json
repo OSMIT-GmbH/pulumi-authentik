@@ -1,6 +1,6 @@
 {
     "name": "@osmit-gmbh/pulumi-authentik",
-    "version": "2024.10.1",
+    "version": "2024.0.0-alpha.0+dev",
     "description": "A Pulumi package for creating and managing authentik cloud resources.",
     "keywords": [
         "pulumi",
@@ -24,7 +24,7 @@
     "pulumi": {
         "resource": true,
         "name": "authentik",
-        "version": "2024.10.1",
+        "version": "2024.0.0-alpha.0+dev",
         "server": "https://github.com/OSMIT-GmbH/pulumi-authentik/releases/download/v${VERSION}"
     }
 }

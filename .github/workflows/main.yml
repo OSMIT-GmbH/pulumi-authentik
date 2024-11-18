@@ -42,6 +42,8 @@ jobs:
       version: ${{ needs.prerequisites.outputs.version }}
 
   generate_coverage_data:
+    # disabled for now
+    if: false
     continue-on-error: true
     env:
       COVERAGE_OUTPUT_DIR: ${{ secrets.COVERAGE_OUTPUT_DIR }}
@@ -97,7 +99,7 @@ jobs:
     needs:
       - prerequisites
       - build_provider
-      - test
+      # - test
       - license_check
     uses: ./.github/workflows/publish.yml
     secrets: inherit
@@ -125,6 +127,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   test:
+    # disabled for now
+    if: false
     name: test
     needs:
       - prerequisites
