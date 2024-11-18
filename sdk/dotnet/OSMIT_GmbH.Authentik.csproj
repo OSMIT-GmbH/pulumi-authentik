@@ -5,7 +5,7 @@
     <Authors>OSMIT-GmbH</Authors>
     <Company>OSMIT-GmbH</Company>
     <Description>A Pulumi package for creating and managing authentik cloud resources.</Description>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <PackageProjectUrl>https://www.pulumi.com</PackageProjectUrl>
     <RepositoryUrl>https://github.com/OSMIT-GmbH/pulumi-authentik</RepositoryUrl>
     <PackageIcon>logo.png</PackageIcon>

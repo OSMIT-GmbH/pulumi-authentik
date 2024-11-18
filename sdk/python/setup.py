@@ -28,7 +28,7 @@ setup(name='osmit_gmbh_pulumi_authentik',
       project_urls={
           'Repository': 'https://github.com/OSMIT-GmbH/pulumi-authentik'
       },
-      license='Apache-2.0',
+      license='GPL-3.0-or-later',
       packages=find_packages(),
       package_data={
           'osmit_gmbh_pulumi_authentik': [

@@ -66,8 +66,9 @@ func Provider() tfbridge.ProviderInfo {
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
 		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
-		Keywords:   []string{"pulumi", "authentik", "category/cloud"},
-		License:    "Apache-2.0",
+		Keywords: []string{"pulumi", "authentik", "category/cloud"},
+		License:  "GPL-3.0-or-later",
+		//TFProviderLicense: &"GPL-3.0-or-later", // TODO no choice
 		Homepage:   "https://www.pulumi.com",
 		Repository: "https://github.com/OSMIT-GmbH/pulumi-authentik",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this

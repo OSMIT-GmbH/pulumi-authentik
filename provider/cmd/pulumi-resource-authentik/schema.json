@@ -8,7 +8,7 @@
         "category/cloud"
     ],
     "homepage": "https://www.pulumi.com",
-    "license": "Apache-2.0",
+    "license": "GPL-3.0-or-later",
     "attribution": "This Pulumi package is based on the [`authentik` Terraform Provider](https://github.com/OSMIT-GmbH/terraform-provider-authentik).",
     "repository": "https://github.com/OSMIT-GmbH/pulumi-authentik",
     "pluginDownloadURL": "https://github.com/OSMIT-GmbH/pulumi-authentik/releases/download/v${VERSION}",
