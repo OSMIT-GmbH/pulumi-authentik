@@ -18,8 +18,9 @@ on:
 env:
   IS_PRERELEASE: ${{ inputs.isPrerelease }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  NPM_REGISTRY_URL: https://npm.pkg.github.com
   NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
   PUBLISH_REPO_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
   PUBLISH_REPO_USERNAME: ${{ secrets.OSSRH_USERNAME }}
@@ -58,23 +59,23 @@ jobs:
     - name: Download provider assets
       uses: actions/download-artifact@v4
       with:
-        pattern: pulumi-resource-xyz-v${{ inputs.version }}-*
+        pattern: pulumi-resource-authentik-v${{ inputs.version }}-*
         path: dist
         # Don't create a directory for each artifact
         merge-multiple: true
     - name: Calculate checksums
       working-directory: dist
-      run: shasum ./*.tar.gz > "pulumi-xyz_${{ inputs.version }}_checksums.txt"
+      run: shasum ./*.tar.gz > "pulumi-authentik_${{ inputs.version }}_checksums.txt"
     - name: Get Schema Change Summary
       id: schema-summary
       shell: bash
       run: |
         # Get latest stable release. Return only first column from result (tag).
-        LAST_VERSION=$(gh release view --repo pulumi/pulumi-xyz --json tagName -q .tagName || echo "No stable release" )
+        LAST_VERSION=$(gh release view --repo pulumi/pulumi-authentik --json tagName -q .tagName || echo "No stable release" )
         {
           echo 'summary<<EOF'
           if [[ "$LAST_VERSION" != "No stable release" ]]; then
-            schema-tools compare --provider="xyz" --old-commit="$LAST_VERSION" --repository="github://api.github.com/pulumi" --new-commit="--local-path=provider/cmd/pulumi-resource-xyz/schema.json"
+            schema-tools compare --provider="authentik" --old-commit="$LAST_VERSION" --repository="github://api.github.com/pulumi" --new-commit="--local-path=provider/cmd/pulumi-resource-authentik/schema.json"
           fi
           echo 'EOF'
         } >> "$GITHUB_OUTPUT"
@@ -109,7 +110,9 @@ jobs:
     - name: Publish SDKs
       uses: pulumi/pulumi-package-publisher@v0.0.20
       with:
-        sdk: all,!java
+        # sdk: all,!java
+        # only nodejs for now
+        sdk: nodejs,go
         version: ${{ inputs.version }}
     - name: Download Go SDK
       uses: ./.github/actions/download-sdk

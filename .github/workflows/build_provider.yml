@@ -44,7 +44,7 @@ jobs:
           pattern: schema-embed.*
           # Avoid creating directories for each artifact
           merge-multiple: true
-          path: provider/cmd/pulumi-resource-xyz/schema-embed.json
+          path: provider/cmd/pulumi-resource-authentik/schema-embed.json
       - name: Prepare for build
         # This installs plugins and prepares upstream
         run: make upstream
@@ -53,6 +53,6 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: pulumi-resource-xyz-v${{ inputs.version }}-${{ matrix.platform.os }}-${{ matrix.platform.arch }}.tar.gz
-          path: bin/pulumi-resource-xyz-v${{ inputs.version }}-${{ matrix.platform.os }}-${{ matrix.platform.arch }}.tar.gz
+          name: pulumi-resource-authentik-v${{ inputs.version }}-${{ matrix.platform.os }}-${{ matrix.platform.arch }}.tar.gz
+          path: bin/pulumi-resource-authentik-v${{ inputs.version }}-${{ matrix.platform.os }}-${{ matrix.platform.arch }}.tar.gz
           retention-days: 30
