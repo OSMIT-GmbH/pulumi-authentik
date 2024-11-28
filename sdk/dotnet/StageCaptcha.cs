@@ -48,6 +48,12 @@ namespace OSMIT_GmbH.Authentik
         public Output<bool?> ErrorOnInvalidScore { get; private set; } = null!;
 
         /// <summary>
+        /// Defaults to `false`.
+        /// </summary>
+        [Output("interactive")]
+        public Output<bool?> Interactive { get; private set; } = null!;
+
+        /// <summary>
         /// Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
         /// </summary>
         [Output("jsUrl")]
@@ -138,6 +144,12 @@ namespace OSMIT_GmbH.Authentik
         public Input<bool>? ErrorOnInvalidScore { get; set; }
 
         /// <summary>
+        /// Defaults to `false`.
+        /// </summary>
+        [Input("interactive")]
+        public Input<bool>? Interactive { get; set; }
+
+        /// <summary>
         /// Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
         /// </summary>
         [Input("jsUrl")]
@@ -192,6 +204,12 @@ namespace OSMIT_GmbH.Authentik
         /// </summary>
         [Input("errorOnInvalidScore")]
         public Input<bool>? ErrorOnInvalidScore { get; set; }
+
+        /// <summary>
+        /// Defaults to `false`.
+        /// </summary>
+        [Input("interactive")]
+        public Input<bool>? Interactive { get; set; }
 
         /// <summary>
         /// Defaults to `https://www.recaptcha.net/recaptcha/api.js`.

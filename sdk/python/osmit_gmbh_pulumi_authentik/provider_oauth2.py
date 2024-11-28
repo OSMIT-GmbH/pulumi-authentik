@@ -24,6 +24,7 @@ class ProviderOauth2Args:
                  invalidation_flow: pulumi.Input[str],
                  access_code_validity: Optional[pulumi.Input[str]] = None,
                  access_token_validity: Optional[pulumi.Input[str]] = None,
+                 allowed_redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
                  authentication_flow: Optional[pulumi.Input[str]] = None,
                  client_secret: Optional[pulumi.Input[str]] = None,
                  client_type: Optional[pulumi.Input[str]] = None,
@@ -33,7 +34,6 @@ class ProviderOauth2Args:
                  jwks_sources: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  property_mappings: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  refresh_token_validity: Optional[pulumi.Input[str]] = None,
                  signing_key: Optional[pulumi.Input[str]] = None,
                  sub_mode: Optional[pulumi.Input[str]] = None):
@@ -51,6 +51,8 @@ class ProviderOauth2Args:
             pulumi.set(__self__, "access_code_validity", access_code_validity)
         if access_token_validity is not None:
             pulumi.set(__self__, "access_token_validity", access_token_validity)
+        if allowed_redirect_uris is not None:
+            pulumi.set(__self__, "allowed_redirect_uris", allowed_redirect_uris)
         if authentication_flow is not None:
             pulumi.set(__self__, "authentication_flow", authentication_flow)
         if client_secret is not None:
@@ -69,8 +71,6 @@ class ProviderOauth2Args:
             pulumi.set(__self__, "name", name)
         if property_mappings is not None:
             pulumi.set(__self__, "property_mappings", property_mappings)
-        if redirect_uris is not None:
-            pulumi.set(__self__, "redirect_uris", redirect_uris)
         if refresh_token_validity is not None:
             pulumi.set(__self__, "refresh_token_validity", refresh_token_validity)
         if signing_key is not None:
@@ -122,6 +122,15 @@ class ProviderOauth2Args:
     @access_token_validity.setter
     def access_token_validity(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "access_token_validity", value)
+
+    @property
+    @pulumi.getter(name="allowedRedirectUris")
+    def allowed_redirect_uris(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+        return pulumi.get(self, "allowed_redirect_uris")
+
+    @allowed_redirect_uris.setter
+    def allowed_redirect_uris(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+        pulumi.set(self, "allowed_redirect_uris", value)
 
     @property
     @pulumi.getter(name="authenticationFlow")
@@ -214,15 +223,6 @@ class ProviderOauth2Args:
         pulumi.set(self, "property_mappings", value)
 
     @property
-    @pulumi.getter(name="redirectUris")
-    def redirect_uris(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
-        return pulumi.get(self, "redirect_uris")
-
-    @redirect_uris.setter
-    def redirect_uris(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
-        pulumi.set(self, "redirect_uris", value)
-
-    @property
     @pulumi.getter(name="refreshTokenValidity")
     def refresh_token_validity(self) -> Optional[pulumi.Input[str]]:
         return pulumi.get(self, "refresh_token_validity")
@@ -258,6 +258,7 @@ class _ProviderOauth2State:
     def __init__(__self__, *,
                  access_code_validity: Optional[pulumi.Input[str]] = None,
                  access_token_validity: Optional[pulumi.Input[str]] = None,
+                 allowed_redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
                  authentication_flow: Optional[pulumi.Input[str]] = None,
                  authorization_flow: Optional[pulumi.Input[str]] = None,
                  client_id: Optional[pulumi.Input[str]] = None,
@@ -270,7 +271,6 @@ class _ProviderOauth2State:
                  jwks_sources: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  property_mappings: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  refresh_token_validity: Optional[pulumi.Input[str]] = None,
                  signing_key: Optional[pulumi.Input[str]] = None,
                  sub_mode: Optional[pulumi.Input[str]] = None):
@@ -285,6 +285,8 @@ class _ProviderOauth2State:
             pulumi.set(__self__, "access_code_validity", access_code_validity)
         if access_token_validity is not None:
             pulumi.set(__self__, "access_token_validity", access_token_validity)
+        if allowed_redirect_uris is not None:
+            pulumi.set(__self__, "allowed_redirect_uris", allowed_redirect_uris)
         if authentication_flow is not None:
             pulumi.set(__self__, "authentication_flow", authentication_flow)
         if authorization_flow is not None:
@@ -309,8 +311,6 @@ class _ProviderOauth2State:
             pulumi.set(__self__, "name", name)
         if property_mappings is not None:
             pulumi.set(__self__, "property_mappings", property_mappings)
-        if redirect_uris is not None:
-            pulumi.set(__self__, "redirect_uris", redirect_uris)
         if refresh_token_validity is not None:
             pulumi.set(__self__, "refresh_token_validity", refresh_token_validity)
         if signing_key is not None:
@@ -335,6 +335,15 @@ class _ProviderOauth2State:
     @access_token_validity.setter
     def access_token_validity(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "access_token_validity", value)
+
+    @property
+    @pulumi.getter(name="allowedRedirectUris")
+    def allowed_redirect_uris(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]:
+        return pulumi.get(self, "allowed_redirect_uris")
+
+    @allowed_redirect_uris.setter
+    def allowed_redirect_uris(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[str]]]]]]):
+        pulumi.set(self, "allowed_redirect_uris", value)
 
     @property
     @pulumi.getter(name="authenticationFlow")
@@ -454,15 +463,6 @@ class _ProviderOauth2State:
         pulumi.set(self, "property_mappings", value)
 
     @property
-    @pulumi.getter(name="redirectUris")
-    def redirect_uris(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
-        return pulumi.get(self, "redirect_uris")
-
-    @redirect_uris.setter
-    def redirect_uris(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
-        pulumi.set(self, "redirect_uris", value)
-
-    @property
     @pulumi.getter(name="refreshTokenValidity")
     def refresh_token_validity(self) -> Optional[pulumi.Input[str]]:
         return pulumi.get(self, "refresh_token_validity")
@@ -500,6 +500,7 @@ class ProviderOauth2(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  access_code_validity: Optional[pulumi.Input[str]] = None,
                  access_token_validity: Optional[pulumi.Input[str]] = None,
+                 allowed_redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
                  authentication_flow: Optional[pulumi.Input[str]] = None,
                  authorization_flow: Optional[pulumi.Input[str]] = None,
                  client_id: Optional[pulumi.Input[str]] = None,
@@ -512,7 +513,6 @@ class ProviderOauth2(pulumi.CustomResource):
                  jwks_sources: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  property_mappings: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  refresh_token_validity: Optional[pulumi.Input[str]] = None,
                  signing_key: Optional[pulumi.Input[str]] = None,
                  sub_mode: Optional[pulumi.Input[str]] = None,
@@ -527,7 +527,11 @@ class ProviderOauth2(pulumi.CustomResource):
         # Create an OAuth2 Provider
         name = authentik.ProviderOauth2("name",
             name="grafana",
-            client_id="grafana")
+            client_id="grafana",
+            allowed_redirect_uris=[{
+                "matching_mode": "strict",
+                "url": "http://localhost",
+            }])
         name_application = authentik.Application("name",
             name="test app",
             slug="test-app",
@@ -557,7 +561,11 @@ class ProviderOauth2(pulumi.CustomResource):
         # Create an OAuth2 Provider
         name = authentik.ProviderOauth2("name",
             name="grafana",
-            client_id="grafana")
+            client_id="grafana",
+            allowed_redirect_uris=[{
+                "matching_mode": "strict",
+                "url": "http://localhost",
+            }])
         name_application = authentik.Application("name",
             name="test app",
             slug="test-app",
@@ -581,6 +589,7 @@ class ProviderOauth2(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  access_code_validity: Optional[pulumi.Input[str]] = None,
                  access_token_validity: Optional[pulumi.Input[str]] = None,
+                 allowed_redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
                  authentication_flow: Optional[pulumi.Input[str]] = None,
                  authorization_flow: Optional[pulumi.Input[str]] = None,
                  client_id: Optional[pulumi.Input[str]] = None,
@@ -593,7 +602,6 @@ class ProviderOauth2(pulumi.CustomResource):
                  jwks_sources: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  property_mappings: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  refresh_token_validity: Optional[pulumi.Input[str]] = None,
                  signing_key: Optional[pulumi.Input[str]] = None,
                  sub_mode: Optional[pulumi.Input[str]] = None,
@@ -608,6 +616,7 @@ class ProviderOauth2(pulumi.CustomResource):
 
             __props__.__dict__["access_code_validity"] = access_code_validity
             __props__.__dict__["access_token_validity"] = access_token_validity
+            __props__.__dict__["allowed_redirect_uris"] = allowed_redirect_uris
             __props__.__dict__["authentication_flow"] = authentication_flow
             if authorization_flow is None and not opts.urn:
                 raise TypeError("Missing required property 'authorization_flow'")
@@ -626,7 +635,6 @@ class ProviderOauth2(pulumi.CustomResource):
             __props__.__dict__["jwks_sources"] = jwks_sources
             __props__.__dict__["name"] = name
             __props__.__dict__["property_mappings"] = property_mappings
-            __props__.__dict__["redirect_uris"] = redirect_uris
             __props__.__dict__["refresh_token_validity"] = refresh_token_validity
             __props__.__dict__["signing_key"] = signing_key
             __props__.__dict__["sub_mode"] = sub_mode
@@ -644,6 +652,7 @@ class ProviderOauth2(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             access_code_validity: Optional[pulumi.Input[str]] = None,
             access_token_validity: Optional[pulumi.Input[str]] = None,
+            allowed_redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[str]]]]]] = None,
             authentication_flow: Optional[pulumi.Input[str]] = None,
             authorization_flow: Optional[pulumi.Input[str]] = None,
             client_id: Optional[pulumi.Input[str]] = None,
@@ -656,7 +665,6 @@ class ProviderOauth2(pulumi.CustomResource):
             jwks_sources: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             name: Optional[pulumi.Input[str]] = None,
             property_mappings: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-            redirect_uris: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             refresh_token_validity: Optional[pulumi.Input[str]] = None,
             signing_key: Optional[pulumi.Input[str]] = None,
             sub_mode: Optional[pulumi.Input[str]] = None) -> 'ProviderOauth2':
@@ -678,6 +686,7 @@ class ProviderOauth2(pulumi.CustomResource):
 
         __props__.__dict__["access_code_validity"] = access_code_validity
         __props__.__dict__["access_token_validity"] = access_token_validity
+        __props__.__dict__["allowed_redirect_uris"] = allowed_redirect_uris
         __props__.__dict__["authentication_flow"] = authentication_flow
         __props__.__dict__["authorization_flow"] = authorization_flow
         __props__.__dict__["client_id"] = client_id
@@ -690,7 +699,6 @@ class ProviderOauth2(pulumi.CustomResource):
         __props__.__dict__["jwks_sources"] = jwks_sources
         __props__.__dict__["name"] = name
         __props__.__dict__["property_mappings"] = property_mappings
-        __props__.__dict__["redirect_uris"] = redirect_uris
         __props__.__dict__["refresh_token_validity"] = refresh_token_validity
         __props__.__dict__["signing_key"] = signing_key
         __props__.__dict__["sub_mode"] = sub_mode
@@ -705,6 +713,11 @@ class ProviderOauth2(pulumi.CustomResource):
     @pulumi.getter(name="accessTokenValidity")
     def access_token_validity(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "access_token_validity")
+
+    @property
+    @pulumi.getter(name="allowedRedirectUris")
+    def allowed_redirect_uris(self) -> pulumi.Output[Optional[Sequence[Mapping[str, str]]]]:
+        return pulumi.get(self, "allowed_redirect_uris")
 
     @property
     @pulumi.getter(name="authenticationFlow")
@@ -774,11 +787,6 @@ class ProviderOauth2(pulumi.CustomResource):
     @pulumi.getter(name="propertyMappings")
     def property_mappings(self) -> pulumi.Output[Optional[Sequence[str]]]:
         return pulumi.get(self, "property_mappings")
-
-    @property
-    @pulumi.getter(name="redirectUris")
-    def redirect_uris(self) -> pulumi.Output[Optional[Sequence[str]]]:
-        return pulumi.get(self, "redirect_uris")
 
     @property
     @pulumi.getter(name="refreshTokenValidity")

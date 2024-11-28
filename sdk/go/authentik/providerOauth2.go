@@ -19,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -30,6 +30,12 @@ import (
 //			name, err := authentik.NewProviderOauth2(ctx, "name", &authentik.ProviderOauth2Args{
 //				Name:     pulumi.String("grafana"),
 //				ClientId: pulumi.String("grafana"),
+//				AllowedRedirectUris: pulumi.StringMapArray{
+//					pulumi.StringMap{
+//						"matching_mode": pulumi.String("strict"),
+//						"url":           pulumi.String("http://localhost"),
+//					},
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -50,12 +56,13 @@ import (
 type ProviderOauth2 struct {
 	pulumi.CustomResourceState
 
-	AccessCodeValidity  pulumi.StringPtrOutput `pulumi:"accessCodeValidity"`
-	AccessTokenValidity pulumi.StringPtrOutput `pulumi:"accessTokenValidity"`
-	AuthenticationFlow  pulumi.StringPtrOutput `pulumi:"authenticationFlow"`
-	AuthorizationFlow   pulumi.StringOutput    `pulumi:"authorizationFlow"`
-	ClientId            pulumi.StringOutput    `pulumi:"clientId"`
-	ClientSecret        pulumi.StringOutput    `pulumi:"clientSecret"`
+	AccessCodeValidity  pulumi.StringPtrOutput      `pulumi:"accessCodeValidity"`
+	AccessTokenValidity pulumi.StringPtrOutput      `pulumi:"accessTokenValidity"`
+	AllowedRedirectUris pulumi.StringMapArrayOutput `pulumi:"allowedRedirectUris"`
+	AuthenticationFlow  pulumi.StringPtrOutput      `pulumi:"authenticationFlow"`
+	AuthorizationFlow   pulumi.StringOutput         `pulumi:"authorizationFlow"`
+	ClientId            pulumi.StringOutput         `pulumi:"clientId"`
+	ClientSecret        pulumi.StringOutput         `pulumi:"clientSecret"`
 	// Allowed values: - `confidential` - `public`
 	ClientType             pulumi.StringPtrOutput `pulumi:"clientType"`
 	EncryptionKey          pulumi.StringPtrOutput `pulumi:"encryptionKey"`
@@ -67,7 +74,6 @@ type ProviderOauth2 struct {
 	JwksSources          pulumi.StringArrayOutput `pulumi:"jwksSources"`
 	Name                 pulumi.StringOutput      `pulumi:"name"`
 	PropertyMappings     pulumi.StringArrayOutput `pulumi:"propertyMappings"`
-	RedirectUris         pulumi.StringArrayOutput `pulumi:"redirectUris"`
 	RefreshTokenValidity pulumi.StringPtrOutput   `pulumi:"refreshTokenValidity"`
 	SigningKey           pulumi.StringPtrOutput   `pulumi:"signingKey"`
 	// Allowed values: - `hashedUserId` - `userId` - `userUuid` - `userUsername` - `userEmail` - `userUpn`
@@ -120,12 +126,13 @@ func GetProviderOauth2(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ProviderOauth2 resources.
 type providerOauth2State struct {
-	AccessCodeValidity  *string `pulumi:"accessCodeValidity"`
-	AccessTokenValidity *string `pulumi:"accessTokenValidity"`
-	AuthenticationFlow  *string `pulumi:"authenticationFlow"`
-	AuthorizationFlow   *string `pulumi:"authorizationFlow"`
-	ClientId            *string `pulumi:"clientId"`
-	ClientSecret        *string `pulumi:"clientSecret"`
+	AccessCodeValidity  *string             `pulumi:"accessCodeValidity"`
+	AccessTokenValidity *string             `pulumi:"accessTokenValidity"`
+	AllowedRedirectUris []map[string]string `pulumi:"allowedRedirectUris"`
+	AuthenticationFlow  *string             `pulumi:"authenticationFlow"`
+	AuthorizationFlow   *string             `pulumi:"authorizationFlow"`
+	ClientId            *string             `pulumi:"clientId"`
+	ClientSecret        *string             `pulumi:"clientSecret"`
 	// Allowed values: - `confidential` - `public`
 	ClientType             *string `pulumi:"clientType"`
 	EncryptionKey          *string `pulumi:"encryptionKey"`
@@ -137,7 +144,6 @@ type providerOauth2State struct {
 	JwksSources          []string `pulumi:"jwksSources"`
 	Name                 *string  `pulumi:"name"`
 	PropertyMappings     []string `pulumi:"propertyMappings"`
-	RedirectUris         []string `pulumi:"redirectUris"`
 	RefreshTokenValidity *string  `pulumi:"refreshTokenValidity"`
 	SigningKey           *string  `pulumi:"signingKey"`
 	// Allowed values: - `hashedUserId` - `userId` - `userUuid` - `userUsername` - `userEmail` - `userUpn`
@@ -147,6 +153,7 @@ type providerOauth2State struct {
 type ProviderOauth2State struct {
 	AccessCodeValidity  pulumi.StringPtrInput
 	AccessTokenValidity pulumi.StringPtrInput
+	AllowedRedirectUris pulumi.StringMapArrayInput
 	AuthenticationFlow  pulumi.StringPtrInput
 	AuthorizationFlow   pulumi.StringPtrInput
 	ClientId            pulumi.StringPtrInput
@@ -162,7 +169,6 @@ type ProviderOauth2State struct {
 	JwksSources          pulumi.StringArrayInput
 	Name                 pulumi.StringPtrInput
 	PropertyMappings     pulumi.StringArrayInput
-	RedirectUris         pulumi.StringArrayInput
 	RefreshTokenValidity pulumi.StringPtrInput
 	SigningKey           pulumi.StringPtrInput
 	// Allowed values: - `hashedUserId` - `userId` - `userUuid` - `userUsername` - `userEmail` - `userUpn`
@@ -174,12 +180,13 @@ func (ProviderOauth2State) ElementType() reflect.Type {
 }
 
 type providerOauth2Args struct {
-	AccessCodeValidity  *string `pulumi:"accessCodeValidity"`
-	AccessTokenValidity *string `pulumi:"accessTokenValidity"`
-	AuthenticationFlow  *string `pulumi:"authenticationFlow"`
-	AuthorizationFlow   string  `pulumi:"authorizationFlow"`
-	ClientId            string  `pulumi:"clientId"`
-	ClientSecret        *string `pulumi:"clientSecret"`
+	AccessCodeValidity  *string             `pulumi:"accessCodeValidity"`
+	AccessTokenValidity *string             `pulumi:"accessTokenValidity"`
+	AllowedRedirectUris []map[string]string `pulumi:"allowedRedirectUris"`
+	AuthenticationFlow  *string             `pulumi:"authenticationFlow"`
+	AuthorizationFlow   string              `pulumi:"authorizationFlow"`
+	ClientId            string              `pulumi:"clientId"`
+	ClientSecret        *string             `pulumi:"clientSecret"`
 	// Allowed values: - `confidential` - `public`
 	ClientType             *string `pulumi:"clientType"`
 	EncryptionKey          *string `pulumi:"encryptionKey"`
@@ -191,7 +198,6 @@ type providerOauth2Args struct {
 	JwksSources          []string `pulumi:"jwksSources"`
 	Name                 *string  `pulumi:"name"`
 	PropertyMappings     []string `pulumi:"propertyMappings"`
-	RedirectUris         []string `pulumi:"redirectUris"`
 	RefreshTokenValidity *string  `pulumi:"refreshTokenValidity"`
 	SigningKey           *string  `pulumi:"signingKey"`
 	// Allowed values: - `hashedUserId` - `userId` - `userUuid` - `userUsername` - `userEmail` - `userUpn`
@@ -202,6 +208,7 @@ type providerOauth2Args struct {
 type ProviderOauth2Args struct {
 	AccessCodeValidity  pulumi.StringPtrInput
 	AccessTokenValidity pulumi.StringPtrInput
+	AllowedRedirectUris pulumi.StringMapArrayInput
 	AuthenticationFlow  pulumi.StringPtrInput
 	AuthorizationFlow   pulumi.StringInput
 	ClientId            pulumi.StringInput
@@ -217,7 +224,6 @@ type ProviderOauth2Args struct {
 	JwksSources          pulumi.StringArrayInput
 	Name                 pulumi.StringPtrInput
 	PropertyMappings     pulumi.StringArrayInput
-	RedirectUris         pulumi.StringArrayInput
 	RefreshTokenValidity pulumi.StringPtrInput
 	SigningKey           pulumi.StringPtrInput
 	// Allowed values: - `hashedUserId` - `userId` - `userUuid` - `userUsername` - `userEmail` - `userUpn`
@@ -319,6 +325,10 @@ func (o ProviderOauth2Output) AccessTokenValidity() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringPtrOutput { return v.AccessTokenValidity }).(pulumi.StringPtrOutput)
 }
 
+func (o ProviderOauth2Output) AllowedRedirectUris() pulumi.StringMapArrayOutput {
+	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringMapArrayOutput { return v.AllowedRedirectUris }).(pulumi.StringMapArrayOutput)
+}
+
 func (o ProviderOauth2Output) AuthenticationFlow() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringPtrOutput { return v.AuthenticationFlow }).(pulumi.StringPtrOutput)
 }
@@ -368,10 +378,6 @@ func (o ProviderOauth2Output) Name() pulumi.StringOutput {
 
 func (o ProviderOauth2Output) PropertyMappings() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringArrayOutput { return v.PropertyMappings }).(pulumi.StringArrayOutput)
-}
-
-func (o ProviderOauth2Output) RedirectUris() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *ProviderOauth2) pulumi.StringArrayOutput { return v.RedirectUris }).(pulumi.StringArrayOutput)
 }
 
 func (o ProviderOauth2Output) RefreshTokenValidity() pulumi.StringPtrOutput {

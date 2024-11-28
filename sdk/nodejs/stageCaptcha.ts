@@ -56,6 +56,10 @@ export class StageCaptcha extends pulumi.CustomResource {
      */
     public readonly errorOnInvalidScore!: pulumi.Output<boolean | undefined>;
     /**
+     * Defaults to `false`.
+     */
+    public readonly interactive!: pulumi.Output<boolean | undefined>;
+    /**
      * Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
      */
     public readonly jsUrl!: pulumi.Output<string | undefined>;
@@ -86,6 +90,7 @@ export class StageCaptcha extends pulumi.CustomResource {
             const state = argsOrState as StageCaptchaState | undefined;
             resourceInputs["apiUrl"] = state ? state.apiUrl : undefined;
             resourceInputs["errorOnInvalidScore"] = state ? state.errorOnInvalidScore : undefined;
+            resourceInputs["interactive"] = state ? state.interactive : undefined;
             resourceInputs["jsUrl"] = state ? state.jsUrl : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["privateKey"] = state ? state.privateKey : undefined;
@@ -102,6 +107,7 @@ export class StageCaptcha extends pulumi.CustomResource {
             }
             resourceInputs["apiUrl"] = args ? args.apiUrl : undefined;
             resourceInputs["errorOnInvalidScore"] = args ? args.errorOnInvalidScore : undefined;
+            resourceInputs["interactive"] = args ? args.interactive : undefined;
             resourceInputs["jsUrl"] = args ? args.jsUrl : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["privateKey"] = args?.privateKey ? pulumi.secret(args.privateKey) : undefined;
@@ -128,6 +134,10 @@ export interface StageCaptchaState {
      * Defaults to `true`.
      */
     errorOnInvalidScore?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `false`.
+     */
+    interactive?: pulumi.Input<boolean>;
     /**
      * Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
      */
@@ -157,6 +167,10 @@ export interface StageCaptchaArgs {
      * Defaults to `true`.
      */
     errorOnInvalidScore?: pulumi.Input<boolean>;
+    /**
+     * Defaults to `false`.
+     */
+    interactive?: pulumi.Input<boolean>;
     /**
      * Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
      */

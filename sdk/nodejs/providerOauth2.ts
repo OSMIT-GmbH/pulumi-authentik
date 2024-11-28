@@ -15,6 +15,10 @@ import * as utilities from "./utilities";
  * const name = new authentik.ProviderOauth2("name", {
  *     name: "grafana",
  *     clientId: "grafana",
+ *     allowedRedirectUris: [{
+ *         matching_mode: "strict",
+ *         url: "http://localhost",
+ *     }],
  * });
  * const nameApplication = new authentik.Application("name", {
  *     name: "test app",
@@ -53,6 +57,7 @@ export class ProviderOauth2 extends pulumi.CustomResource {
 
     public readonly accessCodeValidity!: pulumi.Output<string | undefined>;
     public readonly accessTokenValidity!: pulumi.Output<string | undefined>;
+    public readonly allowedRedirectUris!: pulumi.Output<{[key: string]: string}[] | undefined>;
     public readonly authenticationFlow!: pulumi.Output<string | undefined>;
     public readonly authorizationFlow!: pulumi.Output<string>;
     public readonly clientId!: pulumi.Output<string>;
@@ -74,7 +79,6 @@ export class ProviderOauth2 extends pulumi.CustomResource {
     public readonly jwksSources!: pulumi.Output<string[] | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly propertyMappings!: pulumi.Output<string[] | undefined>;
-    public readonly redirectUris!: pulumi.Output<string[] | undefined>;
     public readonly refreshTokenValidity!: pulumi.Output<string | undefined>;
     public readonly signingKey!: pulumi.Output<string | undefined>;
     /**
@@ -97,6 +101,7 @@ export class ProviderOauth2 extends pulumi.CustomResource {
             const state = argsOrState as ProviderOauth2State | undefined;
             resourceInputs["accessCodeValidity"] = state ? state.accessCodeValidity : undefined;
             resourceInputs["accessTokenValidity"] = state ? state.accessTokenValidity : undefined;
+            resourceInputs["allowedRedirectUris"] = state ? state.allowedRedirectUris : undefined;
             resourceInputs["authenticationFlow"] = state ? state.authenticationFlow : undefined;
             resourceInputs["authorizationFlow"] = state ? state.authorizationFlow : undefined;
             resourceInputs["clientId"] = state ? state.clientId : undefined;
@@ -109,7 +114,6 @@ export class ProviderOauth2 extends pulumi.CustomResource {
             resourceInputs["jwksSources"] = state ? state.jwksSources : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["propertyMappings"] = state ? state.propertyMappings : undefined;
-            resourceInputs["redirectUris"] = state ? state.redirectUris : undefined;
             resourceInputs["refreshTokenValidity"] = state ? state.refreshTokenValidity : undefined;
             resourceInputs["signingKey"] = state ? state.signingKey : undefined;
             resourceInputs["subMode"] = state ? state.subMode : undefined;
@@ -126,6 +130,7 @@ export class ProviderOauth2 extends pulumi.CustomResource {
             }
             resourceInputs["accessCodeValidity"] = args ? args.accessCodeValidity : undefined;
             resourceInputs["accessTokenValidity"] = args ? args.accessTokenValidity : undefined;
+            resourceInputs["allowedRedirectUris"] = args ? args.allowedRedirectUris : undefined;
             resourceInputs["authenticationFlow"] = args ? args.authenticationFlow : undefined;
             resourceInputs["authorizationFlow"] = args ? args.authorizationFlow : undefined;
             resourceInputs["clientId"] = args ? args.clientId : undefined;
@@ -138,7 +143,6 @@ export class ProviderOauth2 extends pulumi.CustomResource {
             resourceInputs["jwksSources"] = args ? args.jwksSources : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["propertyMappings"] = args ? args.propertyMappings : undefined;
-            resourceInputs["redirectUris"] = args ? args.redirectUris : undefined;
             resourceInputs["refreshTokenValidity"] = args ? args.refreshTokenValidity : undefined;
             resourceInputs["signingKey"] = args ? args.signingKey : undefined;
             resourceInputs["subMode"] = args ? args.subMode : undefined;
@@ -156,6 +160,7 @@ export class ProviderOauth2 extends pulumi.CustomResource {
 export interface ProviderOauth2State {
     accessCodeValidity?: pulumi.Input<string>;
     accessTokenValidity?: pulumi.Input<string>;
+    allowedRedirectUris?: pulumi.Input<pulumi.Input<{[key: string]: pulumi.Input<string>}>[]>;
     authenticationFlow?: pulumi.Input<string>;
     authorizationFlow?: pulumi.Input<string>;
     clientId?: pulumi.Input<string>;
@@ -177,7 +182,6 @@ export interface ProviderOauth2State {
     jwksSources?: pulumi.Input<pulumi.Input<string>[]>;
     name?: pulumi.Input<string>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
-    redirectUris?: pulumi.Input<pulumi.Input<string>[]>;
     refreshTokenValidity?: pulumi.Input<string>;
     signingKey?: pulumi.Input<string>;
     /**
@@ -192,6 +196,7 @@ export interface ProviderOauth2State {
 export interface ProviderOauth2Args {
     accessCodeValidity?: pulumi.Input<string>;
     accessTokenValidity?: pulumi.Input<string>;
+    allowedRedirectUris?: pulumi.Input<pulumi.Input<{[key: string]: pulumi.Input<string>}>[]>;
     authenticationFlow?: pulumi.Input<string>;
     authorizationFlow: pulumi.Input<string>;
     clientId: pulumi.Input<string>;
@@ -213,7 +218,6 @@ export interface ProviderOauth2Args {
     jwksSources?: pulumi.Input<pulumi.Input<string>[]>;
     name?: pulumi.Input<string>;
     propertyMappings?: pulumi.Input<pulumi.Input<string>[]>;
-    redirectUris?: pulumi.Input<pulumi.Input<string>[]>;
     refreshTokenValidity?: pulumi.Input<string>;
     signingKey?: pulumi.Input<string>;
     /**

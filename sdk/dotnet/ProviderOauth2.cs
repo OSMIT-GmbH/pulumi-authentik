@@ -26,6 +26,14 @@ namespace OSMIT_GmbH.Authentik
     ///     {
     ///         Name = "grafana",
     ///         ClientId = "grafana",
+    ///         AllowedRedirectUris = new[]
+    ///         {
+    ///             
+    ///             {
+    ///                 { "matching_mode", "strict" },
+    ///                 { "url", "http://localhost" },
+    ///             },
+    ///         },
     ///     });
     /// 
     ///     var nameApplication = new Authentik.Application("name", new()
@@ -46,6 +54,9 @@ namespace OSMIT_GmbH.Authentik
 
         [Output("accessTokenValidity")]
         public Output<string?> AccessTokenValidity { get; private set; } = null!;
+
+        [Output("allowedRedirectUris")]
+        public Output<ImmutableArray<ImmutableDictionary<string, string>>> AllowedRedirectUris { get; private set; } = null!;
 
         [Output("authenticationFlow")]
         public Output<string?> AuthenticationFlow { get; private set; } = null!;
@@ -91,9 +102,6 @@ namespace OSMIT_GmbH.Authentik
 
         [Output("propertyMappings")]
         public Output<ImmutableArray<string>> PropertyMappings { get; private set; } = null!;
-
-        [Output("redirectUris")]
-        public Output<ImmutableArray<string>> RedirectUris { get; private set; } = null!;
 
         [Output("refreshTokenValidity")]
         public Output<string?> RefreshTokenValidity { get; private set; } = null!;
@@ -164,6 +172,14 @@ namespace OSMIT_GmbH.Authentik
         [Input("accessTokenValidity")]
         public Input<string>? AccessTokenValidity { get; set; }
 
+        [Input("allowedRedirectUris")]
+        private InputList<ImmutableDictionary<string, string>>? _allowedRedirectUris;
+        public InputList<ImmutableDictionary<string, string>> AllowedRedirectUris
+        {
+            get => _allowedRedirectUris ?? (_allowedRedirectUris = new InputList<ImmutableDictionary<string, string>>());
+            set => _allowedRedirectUris = value;
+        }
+
         [Input("authenticationFlow")]
         public Input<string>? AuthenticationFlow { get; set; }
 
@@ -229,14 +245,6 @@ namespace OSMIT_GmbH.Authentik
             set => _propertyMappings = value;
         }
 
-        [Input("redirectUris")]
-        private InputList<string>? _redirectUris;
-        public InputList<string> RedirectUris
-        {
-            get => _redirectUris ?? (_redirectUris = new InputList<string>());
-            set => _redirectUris = value;
-        }
-
         [Input("refreshTokenValidity")]
         public Input<string>? RefreshTokenValidity { get; set; }
 
@@ -262,6 +270,14 @@ namespace OSMIT_GmbH.Authentik
 
         [Input("accessTokenValidity")]
         public Input<string>? AccessTokenValidity { get; set; }
+
+        [Input("allowedRedirectUris")]
+        private InputList<ImmutableDictionary<string, string>>? _allowedRedirectUris;
+        public InputList<ImmutableDictionary<string, string>> AllowedRedirectUris
+        {
+            get => _allowedRedirectUris ?? (_allowedRedirectUris = new InputList<ImmutableDictionary<string, string>>());
+            set => _allowedRedirectUris = value;
+        }
 
         [Input("authenticationFlow")]
         public Input<string>? AuthenticationFlow { get; set; }
@@ -326,14 +342,6 @@ namespace OSMIT_GmbH.Authentik
         {
             get => _propertyMappings ?? (_propertyMappings = new InputList<string>());
             set => _propertyMappings = value;
-        }
-
-        [Input("redirectUris")]
-        private InputList<string>? _redirectUris;
-        public InputList<string> RedirectUris
-        {
-            get => _redirectUris ?? (_redirectUris = new InputList<string>());
-            set => _redirectUris = value;
         }
 
         [Input("refreshTokenValidity")]

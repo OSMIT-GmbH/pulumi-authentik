@@ -19,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi-tls/sdk/go/tls"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //

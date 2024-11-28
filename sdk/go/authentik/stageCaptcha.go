@@ -19,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/go/authentik"
+//	"github.com/OSMIT-GmbH/pulumi-authentik/sdk/v2024/go/authentik"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -47,6 +47,8 @@ type StageCaptcha struct {
 	ApiUrl pulumi.StringPtrOutput `pulumi:"apiUrl"`
 	// Defaults to `true`.
 	ErrorOnInvalidScore pulumi.BoolPtrOutput `pulumi:"errorOnInvalidScore"`
+	// Defaults to `false`.
+	Interactive pulumi.BoolPtrOutput `pulumi:"interactive"`
 	// Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
 	JsUrl      pulumi.StringPtrOutput `pulumi:"jsUrl"`
 	Name       pulumi.StringOutput    `pulumi:"name"`
@@ -105,6 +107,8 @@ type stageCaptchaState struct {
 	ApiUrl *string `pulumi:"apiUrl"`
 	// Defaults to `true`.
 	ErrorOnInvalidScore *bool `pulumi:"errorOnInvalidScore"`
+	// Defaults to `false`.
+	Interactive *bool `pulumi:"interactive"`
 	// Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
 	JsUrl      *string `pulumi:"jsUrl"`
 	Name       *string `pulumi:"name"`
@@ -121,6 +125,8 @@ type StageCaptchaState struct {
 	ApiUrl pulumi.StringPtrInput
 	// Defaults to `true`.
 	ErrorOnInvalidScore pulumi.BoolPtrInput
+	// Defaults to `false`.
+	Interactive pulumi.BoolPtrInput
 	// Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
 	JsUrl      pulumi.StringPtrInput
 	Name       pulumi.StringPtrInput
@@ -141,6 +147,8 @@ type stageCaptchaArgs struct {
 	ApiUrl *string `pulumi:"apiUrl"`
 	// Defaults to `true`.
 	ErrorOnInvalidScore *bool `pulumi:"errorOnInvalidScore"`
+	// Defaults to `false`.
+	Interactive *bool `pulumi:"interactive"`
 	// Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
 	JsUrl      *string `pulumi:"jsUrl"`
 	Name       *string `pulumi:"name"`
@@ -158,6 +166,8 @@ type StageCaptchaArgs struct {
 	ApiUrl pulumi.StringPtrInput
 	// Defaults to `true`.
 	ErrorOnInvalidScore pulumi.BoolPtrInput
+	// Defaults to `false`.
+	Interactive pulumi.BoolPtrInput
 	// Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
 	JsUrl      pulumi.StringPtrInput
 	Name       pulumi.StringPtrInput
@@ -264,6 +274,11 @@ func (o StageCaptchaOutput) ApiUrl() pulumi.StringPtrOutput {
 // Defaults to `true`.
 func (o StageCaptchaOutput) ErrorOnInvalidScore() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *StageCaptcha) pulumi.BoolPtrOutput { return v.ErrorOnInvalidScore }).(pulumi.BoolPtrOutput)
+}
+
+// Defaults to `false`.
+func (o StageCaptchaOutput) Interactive() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *StageCaptcha) pulumi.BoolPtrOutput { return v.Interactive }).(pulumi.BoolPtrOutput)
 }
 
 // Defaults to `https://www.recaptcha.net/recaptcha/api.js`.

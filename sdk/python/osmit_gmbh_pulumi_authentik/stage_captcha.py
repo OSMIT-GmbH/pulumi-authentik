@@ -23,6 +23,7 @@ class StageCaptchaArgs:
                  public_key: pulumi.Input[str],
                  api_url: Optional[pulumi.Input[str]] = None,
                  error_on_invalid_score: Optional[pulumi.Input[bool]] = None,
+                 interactive: Optional[pulumi.Input[bool]] = None,
                  js_url: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  score_max_threshold: Optional[pulumi.Input[float]] = None,
@@ -31,6 +32,7 @@ class StageCaptchaArgs:
         The set of arguments for constructing a StageCaptcha resource.
         :param pulumi.Input[str] api_url: Defaults to `https://www.recaptcha.net/recaptcha/api/siteverify`.
         :param pulumi.Input[bool] error_on_invalid_score: Defaults to `true`.
+        :param pulumi.Input[bool] interactive: Defaults to `false`.
         :param pulumi.Input[str] js_url: Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
         :param pulumi.Input[float] score_max_threshold: Defaults to `0.5`.
         :param pulumi.Input[float] score_min_threshold: Defaults to `1`.
@@ -41,6 +43,8 @@ class StageCaptchaArgs:
             pulumi.set(__self__, "api_url", api_url)
         if error_on_invalid_score is not None:
             pulumi.set(__self__, "error_on_invalid_score", error_on_invalid_score)
+        if interactive is not None:
+            pulumi.set(__self__, "interactive", interactive)
         if js_url is not None:
             pulumi.set(__self__, "js_url", js_url)
         if name is not None:
@@ -93,6 +97,18 @@ class StageCaptchaArgs:
         pulumi.set(self, "error_on_invalid_score", value)
 
     @property
+    @pulumi.getter
+    def interactive(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Defaults to `false`.
+        """
+        return pulumi.get(self, "interactive")
+
+    @interactive.setter
+    def interactive(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "interactive", value)
+
+    @property
     @pulumi.getter(name="jsUrl")
     def js_url(self) -> Optional[pulumi.Input[str]]:
         """
@@ -143,6 +159,7 @@ class _StageCaptchaState:
     def __init__(__self__, *,
                  api_url: Optional[pulumi.Input[str]] = None,
                  error_on_invalid_score: Optional[pulumi.Input[bool]] = None,
+                 interactive: Optional[pulumi.Input[bool]] = None,
                  js_url: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  private_key: Optional[pulumi.Input[str]] = None,
@@ -153,6 +170,7 @@ class _StageCaptchaState:
         Input properties used for looking up and filtering StageCaptcha resources.
         :param pulumi.Input[str] api_url: Defaults to `https://www.recaptcha.net/recaptcha/api/siteverify`.
         :param pulumi.Input[bool] error_on_invalid_score: Defaults to `true`.
+        :param pulumi.Input[bool] interactive: Defaults to `false`.
         :param pulumi.Input[str] js_url: Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
         :param pulumi.Input[float] score_max_threshold: Defaults to `0.5`.
         :param pulumi.Input[float] score_min_threshold: Defaults to `1`.
@@ -161,6 +179,8 @@ class _StageCaptchaState:
             pulumi.set(__self__, "api_url", api_url)
         if error_on_invalid_score is not None:
             pulumi.set(__self__, "error_on_invalid_score", error_on_invalid_score)
+        if interactive is not None:
+            pulumi.set(__self__, "interactive", interactive)
         if js_url is not None:
             pulumi.set(__self__, "js_url", js_url)
         if name is not None:
@@ -197,6 +217,18 @@ class _StageCaptchaState:
     @error_on_invalid_score.setter
     def error_on_invalid_score(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "error_on_invalid_score", value)
+
+    @property
+    @pulumi.getter
+    def interactive(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Defaults to `false`.
+        """
+        return pulumi.get(self, "interactive")
+
+    @interactive.setter
+    def interactive(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "interactive", value)
 
     @property
     @pulumi.getter(name="jsUrl")
@@ -269,6 +301,7 @@ class StageCaptcha(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_url: Optional[pulumi.Input[str]] = None,
                  error_on_invalid_score: Optional[pulumi.Input[bool]] = None,
+                 interactive: Optional[pulumi.Input[bool]] = None,
                  js_url: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  private_key: Optional[pulumi.Input[str]] = None,
@@ -294,6 +327,7 @@ class StageCaptcha(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] api_url: Defaults to `https://www.recaptcha.net/recaptcha/api/siteverify`.
         :param pulumi.Input[bool] error_on_invalid_score: Defaults to `true`.
+        :param pulumi.Input[bool] interactive: Defaults to `false`.
         :param pulumi.Input[str] js_url: Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
         :param pulumi.Input[float] score_max_threshold: Defaults to `0.5`.
         :param pulumi.Input[float] score_min_threshold: Defaults to `1`.
@@ -335,6 +369,7 @@ class StageCaptcha(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_url: Optional[pulumi.Input[str]] = None,
                  error_on_invalid_score: Optional[pulumi.Input[bool]] = None,
+                 interactive: Optional[pulumi.Input[bool]] = None,
                  js_url: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  private_key: Optional[pulumi.Input[str]] = None,
@@ -352,6 +387,7 @@ class StageCaptcha(pulumi.CustomResource):
 
             __props__.__dict__["api_url"] = api_url
             __props__.__dict__["error_on_invalid_score"] = error_on_invalid_score
+            __props__.__dict__["interactive"] = interactive
             __props__.__dict__["js_url"] = js_url
             __props__.__dict__["name"] = name
             if private_key is None and not opts.urn:
@@ -376,6 +412,7 @@ class StageCaptcha(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             api_url: Optional[pulumi.Input[str]] = None,
             error_on_invalid_score: Optional[pulumi.Input[bool]] = None,
+            interactive: Optional[pulumi.Input[bool]] = None,
             js_url: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
             private_key: Optional[pulumi.Input[str]] = None,
@@ -391,6 +428,7 @@ class StageCaptcha(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] api_url: Defaults to `https://www.recaptcha.net/recaptcha/api/siteverify`.
         :param pulumi.Input[bool] error_on_invalid_score: Defaults to `true`.
+        :param pulumi.Input[bool] interactive: Defaults to `false`.
         :param pulumi.Input[str] js_url: Defaults to `https://www.recaptcha.net/recaptcha/api.js`.
         :param pulumi.Input[float] score_max_threshold: Defaults to `0.5`.
         :param pulumi.Input[float] score_min_threshold: Defaults to `1`.
@@ -401,6 +439,7 @@ class StageCaptcha(pulumi.CustomResource):
 
         __props__.__dict__["api_url"] = api_url
         __props__.__dict__["error_on_invalid_score"] = error_on_invalid_score
+        __props__.__dict__["interactive"] = interactive
         __props__.__dict__["js_url"] = js_url
         __props__.__dict__["name"] = name
         __props__.__dict__["private_key"] = private_key
@@ -424,6 +463,14 @@ class StageCaptcha(pulumi.CustomResource):
         Defaults to `true`.
         """
         return pulumi.get(self, "error_on_invalid_score")
+
+    @property
+    @pulumi.getter
+    def interactive(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Defaults to `false`.
+        """
+        return pulumi.get(self, "interactive")
 
     @property
     @pulumi.getter(name="jsUrl")
